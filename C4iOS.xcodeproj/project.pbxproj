@@ -12,6 +12,7 @@
 		BE4F5182175553D900DA971A /* C4_LaunchImage_iPhone-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4F5181175553D800DA971A /* C4_LaunchImage_iPhone-568h@2x.png */; };
 		BE4F5184175553E500DA971A /* C4_LaunchImage_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4F5183175553E500DA971A /* C4_LaunchImage_iPhone@2x.png */; };
 		BE4F5186175553EB00DA971A /* C4_LaunchImage_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4F5185175553EB00DA971A /* C4_LaunchImage_iPhone.png */; };
+		BE796D6D17EF833C00E04752 /* readme.md in Resources */ = {isa = PBXBuildFile; fileRef = BE796D6C17EF833C00E04752 /* readme.md */; };
 		BE9E52C5175552B80057A391 /* C4_AppIcon_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9E52B1175552B80057A391 /* C4_AppIcon_iPad.png */; };
 		BE9E52C6175552B80057A391 /* C4_AppIcon_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9E52B2175552B80057A391 /* C4_AppIcon_iPad@2x.png */; };
 		BE9E52C7175552B80057A391 /* C4_AppIcon_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = BE9E52B3175552B80057A391 /* C4_AppIcon_iPhone.png */; };
@@ -141,6 +142,7 @@
 		BE4F5181175553D800DA971A /* C4_LaunchImage_iPhone-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone-568h@2x.png"; path = "../C4_LaunchImage_iPhone-568h@2x.png"; sourceTree = "<group>"; };
 		BE4F5183175553E500DA971A /* C4_LaunchImage_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "C4_LaunchImage_iPhone@2x.png"; path = "../C4_LaunchImage_iPhone@2x.png"; sourceTree = "<group>"; };
 		BE4F5185175553EB00DA971A /* C4_LaunchImage_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = C4_LaunchImage_iPhone.png; path = ../C4_LaunchImage_iPhone.png; sourceTree = "<group>"; };
+		BE796D6C17EF833C00E04752 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.md; sourceTree = "<group>"; };
 		BE9E52B1175552B80057A391 /* C4_AppIcon_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_AppIcon_iPad.png; sourceTree = "<group>"; };
 		BE9E52B2175552B80057A391 /* C4_AppIcon_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C4_AppIcon_iPad@2x.png"; sourceTree = "<group>"; };
 		BE9E52B3175552B80057A391 /* C4_AppIcon_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C4_AppIcon_iPhone.png; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				EDF65449150DEF3300194671 /* C4WorkSpace.m */,
 				ED50C8D314EACA0E0040D844 /* Source */,
 				EDCE425C156401F000C7356E /* Media */,
+				BE796D6C17EF833C00E04752 /* readme.md */,
 			);
 			path = C4iOS;
 			sourceTree = "<group>";
@@ -760,6 +763,7 @@
 				BE4F5182175553D900DA971A /* C4_LaunchImage_iPhone-568h@2x.png in Resources */,
 				BE4F5184175553E500DA971A /* C4_LaunchImage_iPhone@2x.png in Resources */,
 				BE4F5186175553EB00DA971A /* C4_LaunchImage_iPhone.png in Resources */,
+				BE796D6D17EF833C00E04752 /* readme.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
