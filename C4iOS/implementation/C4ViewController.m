@@ -19,10 +19,6 @@
 
 #import "C4ViewController.h"
 
-@interface C4ViewController ()
-
-@end
-
 @implementation C4ViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

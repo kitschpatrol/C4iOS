@@ -22,7 +22,7 @@
 
 static C4Foundation *sharedC4Foundation = nil;
 
-@interface C4Foundation (private)
+@interface C4Foundation ()
 NSInteger numSort(id num1, id num2, void *context);
 NSInteger strSort(id str1, id str2, void *context);
 NSInteger floatSort(id obj1, id obj2, void *context);	

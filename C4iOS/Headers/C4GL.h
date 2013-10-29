@@ -31,8 +31,7 @@
  - You cannot specify the background color of a C4GL object, instead you should do this in your rendering object by calling glClearColor() with the specific background color you wish to use
  */
 
-@interface C4GL : C4Control {    
-}
+@interface C4GL : C4Control 
 #pragma mark - Creating C4GL Objects
 ///@name Creating C4GL Objects
 /**Creates and returns a new C4GL object with a specified frame.

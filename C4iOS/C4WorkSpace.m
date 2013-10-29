@@ -1,5 +1,6 @@
 //
 //  C4WorkSpace.m
+//  C4iOS
 //
 //  Copyright © 2010-2013 Travis Kirton
 //  Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -20,8 +21,8 @@
 
 @implementation C4WorkSpace
 
-- (void)setup {
-
+-(void)setup {
+    
 }
 
 @end

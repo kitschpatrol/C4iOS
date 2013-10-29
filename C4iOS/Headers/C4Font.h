@@ -26,9 +26,7 @@
  You do not create C4Font objects using the alloc and init methods. Instead, you use class methods of C4Font to look up and retrieve the desired font object.
  */
 
-@interface C4Font : C4Object {
-@private
-}
+@interface C4Font : C4Object 
 
 #pragma mark Creating Fonts
 ///@name Creating Fonts

@@ -29,8 +29,7 @@
  
  @warning You should never have to use this object directly. Instead, you should work with your own subclasses of [C4GL1Renderer](C4GL1Renderer) which hides some of the more complicated setup and teardown functionality available in this class.
  */
-@interface C4EAGLES1Renderer : C4Object <C4EAGLESRenderer> {
-}
+@interface C4EAGLES1Renderer : C4Object <C4EAGLESRenderer> 
 
 #pragma mark - Setup & Render
 ///@name Setup & Render

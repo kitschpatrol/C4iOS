@@ -19,9 +19,6 @@
 
 #import "C4Layer.h"
 
-@interface C4Layer ()
-@end
-
 @implementation C4Layer
 @synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing,
 repeatCount = _repeatCount, animationDuration = _animationDuration,
