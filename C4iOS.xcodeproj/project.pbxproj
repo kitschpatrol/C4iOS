@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE6BD2981820573A00C22E64 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6BD2971820573A00C22E64 /* Test.m */; };
 		BED79E1C17F2435400F0F82E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1B17F2435400F0F82E /* Accelerate.framework */; };
 		BED79E1E17F2435400F0F82E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1D17F2435400F0F82E /* AVFoundation.framework */; };
 		BED79E2017F2435400F0F82E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1F17F2435400F0F82E /* CoreFoundation.framework */; };
@@ -82,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE6BD2961820573A00C22E64 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		BE6BD2971820573A00C22E64 /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		BED79E1817F2435400F0F82E /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED79E1B17F2435400F0F82E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		BED79E1D17F2435400F0F82E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -269,6 +272,8 @@
 			children = (
 				BED79EBB17F2435500F0F82E /* C4WorkSpace.h */,
 				BED79EBC17F2435500F0F82E /* C4WorkSpace.m */,
+				BE6BD2961820573A00C22E64 /* Test.h */,
+				BE6BD2971820573A00C22E64 /* Test.m */,
 				BED79EBE17F2435500F0F82E /* Images.xcassets */,
 				BED79EC017F2435500F0F82E /* Media.xcassets */,
 				BED79EB517F2435500F0F82E /* Main_iPhone.storyboard */,
@@ -536,6 +541,7 @@
 				BED79E7417F2435400F0F82E /* C4CameraLayer.m in Sources */,
 				BED79E8217F2435500F0F82E /* C4Font.m in Sources */,
 				BED79E9C17F2435500F0F82E /* C4ScrollView.m in Sources */,
+				BE6BD2981820573A00C22E64 /* Test.m in Sources */,
 				BED79E8617F2435500F0F82E /* C4GL.m in Sources */,
 				BED79EAC17F2435500F0F82E /* C4Vector.m in Sources */,
 			);
