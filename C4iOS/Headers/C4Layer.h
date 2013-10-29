@@ -29,8 +29,7 @@
  @warning *Note:* At the time of this documentation, the C4Layer class is only used as the backing layer for a C4Window. This provides access to changing the window's background color, and other simple things.
  */
 
-@interface C4Layer : CALayer <C4LayerAnimation> {
-}
+@interface C4Layer : CALayer <C4LayerAnimation> 
 
 /**Specifies the perspective distance for x and y axis rotations.
  
