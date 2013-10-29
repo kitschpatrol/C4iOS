@@ -25,7 +25,10 @@
 		glGenRenderbuffersOES(1, &_renderBuffer);
 		glBindFramebufferOES(GL_FRAMEBUFFER_OES, _frameBuffer);
 		glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderBuffer);
-		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, _renderBuffer);
+		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES,
+                                     GL_COLOR_ATTACHMENT0_OES,
+                                     GL_RENDERBUFFER_OES,
+                                     _renderBuffer);
         [self setup];
 	}
 	return self;
@@ -46,7 +49,8 @@
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &_height);
 	
     if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
-		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
+		NSLog(@"Failed to make complete framebuffer object %x",
+              glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
         return NO;
     }
     

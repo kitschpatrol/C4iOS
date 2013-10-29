@@ -9,7 +9,9 @@
 #import "C4Font.h"
 
 @implementation C4Font
-@synthesize UIFont = _UIFont, CTFont = _CTFont, CGFont = _CGFont, familyName = _familyName, fontName = _fontName, pointSize = _pointSize, ascender = _ascender, descender = _descender, capHeight = _capHeight, xHeight = _xHeight, lineHeight = _lineHeight;
+@synthesize UIFont = _UIFont, CTFont = _CTFont, CGFont = _CGFont, familyName = _familyName,
+fontName = _fontName, pointSize = _pointSize, ascender = _ascender, descender = _descender,
+capHeight = _capHeight, xHeight = _xHeight, lineHeight = _lineHeight;
 
 - (id)init {
     self = [super init];

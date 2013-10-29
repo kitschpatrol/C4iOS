@@ -114,7 +114,8 @@
 }
 
 - (void)removeObject:(id)visualObject {
-    C4Assert(self != visualObject, @"You tried to remove %@ from itself, don't be silly", visualObject);
+    C4Assert(self != visualObject,
+             @"You tried to remove %@ from itself, don't be silly", visualObject);
     if([visualObject isKindOfClass:[UIView class]] ||
        [visualObject isKindOfClass:[C4Control class]])
         [visualObject removeFromSuperview];
@@ -132,7 +133,9 @@
     [self listenFor:notification fromObject:nil andRunMethod:methodName];
 }
 
-- (void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
+- (void)listenFor:(NSString *)notification
+       fromObject:(id)object
+     andRunMethod:(NSString *)methodName {
     if([methodName isEqualToString:@"swipedUp"] ||
        [methodName isEqualToString:@"swipedDown"] ||
        [methodName isEqualToString:@"swipedLeft"] ||
@@ -140,10 +143,14 @@
        [methodName isEqualToString:@"tapped"]) {
         methodName = [methodName stringByAppendingString:@":"];
     }
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName)
+                                                 name:notification
+                                               object:object];
 }
 
-- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
+- (void)listenFor:(NSString *)notification
+      fromObjects:(NSArray *)objectArray
+     andRunMethod:(NSString *)methodName {
     for (id object in objectArray) {
         [self listenFor:notification fromObject:object andRunMethod:methodName];
     }
@@ -189,32 +196,41 @@
 
     if(containsGesture == NO) {
         UIGestureRecognizer *recognizer;
+        SEL selector = NSSelectorFromString(methodName);
+        if(type == LONGPRESS) selector = @selector(pressedLong:);
         switch (type) {
             case TAP:
-                recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
+                recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                     action:selector];
                 break;
             case PAN:
-                recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
+                recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                     action:selector];
                 break;
             case SWIPERIGHT:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
+                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                       action:selector];
                 ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRRIGHT;
                 break;
             case SWIPELEFT:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
+                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                       action:selector];
                 ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRLEFT;
                 break;
             case SWIPEUP:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
+                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                       action:selector];
                 ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRUP;
                 break;
             case SWIPEDOWN:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
+                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                                                       action:selector];
                 ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRDOWN;
                 break;
             case LONGPRESS:
                 self.longPressMethodName = methodName;
-                recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
+                recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                           action:selector];
                 break;
             default:
                 C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
@@ -357,8 +373,11 @@
 - (void)pressedLong:(id)sender {
     if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan
        && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]]) {
-        if([self.longPressMethodName rangeOfString:@":"].location == NSNotFound) objc_msgSend(self, NSSelectorFromString(self.longPressMethodName));
-        else objc_msgSend(self, NSSelectorFromString(self.longPressMethodName),sender);
+        if([self.longPressMethodName rangeOfString:@":"].location == NSNotFound) {
+            objc_msgSend(self, NSSelectorFromString(self.longPressMethodName));
+        } else {
+            objc_msgSend(self, NSSelectorFromString(self.longPressMethodName),sender);
+        }
     }
 }
 

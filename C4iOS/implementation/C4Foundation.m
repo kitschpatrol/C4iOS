@@ -124,17 +124,38 @@ CGRect CGRectMakeFromPointArray(CGPoint *pointArray, int pointCount) {
     return pathRect;
 }
 
-CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise) {
+CGRect CGRectMakeFromArcComponents(CGPoint centerPoint,
+                                   CGFloat radius,
+                                   CGFloat startAngle,
+                                   CGFloat endAngle,
+                                   BOOL clockwise) {
     CGMutablePathRef arcPath = CGPathCreateMutable();
-    CGPathAddArc(arcPath, nil, centerPoint.x, centerPoint.y, radius, startAngle, endAngle, clockwise);
+    CGPathAddArc(arcPath,
+                 nil,
+                 centerPoint.x,
+                 centerPoint.y,
+                 radius,
+                 startAngle,
+                 endAngle,
+                 clockwise);
     CGRect arcRect = CGPathGetBoundingBox(arcPath);
     CGPathRelease(arcPath);
     return arcRect;
 }
 
-CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise) {
+CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint,
+                                     CGFloat radius,
+                                     CGFloat startAngle,
+                                     CGFloat endAngle,
+                                     BOOL clockwise) {
     CGMutablePathRef arcPath = CGPathCreateMutable();
-    CGPathAddArc(arcPath, nil, centerPoint.x, centerPoint.y, radius, startAngle, endAngle, !clockwise);
+    CGPathAddArc(arcPath, nil,
+                 centerPoint.x,
+                 centerPoint.y,
+                 radius,
+                 startAngle,
+                 endAngle,
+                 !clockwise);
     CGPathAddLineToPoint(arcPath, nil, centerPoint.x, centerPoint.y);
     CGRect arcRect = CGPathGetBoundingBox(arcPath);
     CGPathRelease(arcPath);

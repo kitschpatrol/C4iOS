@@ -81,7 +81,8 @@
     
     NSDictionary *controlStyle = [super style];
     
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+    NSMutableDictionary *localAndControlStyle;
+    localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
     [localAndControlStyle addEntriesFromDictionary:controlStyle];
     
     localStyle = nil;
@@ -105,9 +106,16 @@
 #pragma mark isEqual
 
 - (BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[UIActivityIndicatorView class]]) return [self.UIActivityIndicatorView isEqual:object];
-    else if([object isKindOfClass:[self class]]) return [self.UIActivityIndicatorView isEqual:((C4ActivityIndicator *)object).UIActivityIndicatorView];
-    return NO;
+    BOOL equalValue = NO;
+    if([object isKindOfClass:[UIActivityIndicatorView class]]) {
+        equalValue = [self.UIActivityIndicatorView isEqual:object];
+    }
+    else if([object isKindOfClass:[self class]]) {
+        equalValue = [self.UIActivityIndicatorView
+                      isEqual:((C4ActivityIndicator *)object).UIActivityIndicatorView];
+        
+    }
+    return equalValue;
 }
 
 - (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{

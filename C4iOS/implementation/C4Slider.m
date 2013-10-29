@@ -11,7 +11,8 @@
 @implementation C4Slider
 
 #pragma mark style methods
-@synthesize maximumTrackTintColor = _maximumTrackTintColor, minimumTrackTintColor = _minimumTrackTintColor, thumbTintColor = _thumbTintColor;
+@synthesize maximumTrackTintColor = _maximumTrackTintColor,
+minimumTrackTintColor = _minimumTrackTintColor, thumbTintColor = _thumbTintColor;
 
 - (id)init {
     return [self initWithFrame:CGRectZero];
@@ -56,12 +57,12 @@
 
 - (NSDictionary *)style {
     //mutable local styles
-    NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [localStyle addEntriesFromDictionary:@{@"slider":self.UISlider}];
+    NSMutableDictionary *localStyle = [@{@"slider":self.UISlider} mutableCopy];
 
     NSDictionary *controlStyle = [super style];
     
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary
+                                                 dictionaryWithDictionary:localStyle];
     [localAndControlStyle addEntriesFromDictionary:controlStyle];
     
     localStyle = nil;
@@ -77,27 +78,20 @@
     UISlider *s = [newStyle objectForKey:@"slider"];
     if(s != nil) {
         
-        UIControlState state[4] = {UIControlStateDisabled, UIControlStateHighlighted, UIControlStateNormal, UIControlStateSelected};
+        UIControlState state[4] = {
+            UIControlStateDisabled,
+            UIControlStateHighlighted,
+            UIControlStateNormal,
+            UIControlStateSelected
+        };
         for(int i = 0; i < 4; i++) {
-            [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:state[i]] forState:state[i]];
-            [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:state[i]] forState:state[i]];
-            [self.UISlider setThumbImage:[s thumbImageForState:state[i]] forState:state[i]];
+            [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:state[i]]
+                                       forState:state[i]];
+            [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:state[i]]
+                                       forState:state[i]];
+            [self.UISlider setThumbImage:[s thumbImageForState:state[i]]
+                                forState:state[i]];
         }
-
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UISlider setMaximumTrackImage:[s maximumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UISlider setMinimumTrackImage:[s minimumTrackImageForState:UIControlStateSelected] forState:UIControlStateSelected];
-
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateDisabled] forState:UIControlStateDisabled];
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateNormal] forState:UIControlStateNormal];
-//        [self.UISlider setThumbImage:[s thumbImageForState:UIControlStateSelected] forState:UIControlStateSelected];
 
         [self.UISlider setMaximumValueImage:[s maximumValueImage]];
         [self.UISlider setMinimumValueImage:[s minimumValueImage]];
@@ -191,11 +185,13 @@
 
 #pragma mark C4UIElement (target:action)
 - (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISlider addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UISlider addTarget:object action:NSSelectorFromString(methodName)
+            forControlEvents:(UIControlEvents)event];
 }
 
 - (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISlider removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UISlider removeTarget:object action:NSSelectorFromString(methodName)
+               forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark Tracking
@@ -309,20 +305,23 @@
     return self.UISlider.selected;
 }
 
-- (void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)contentVerticalAlignment {
-    self.UISlider.contentVerticalAlignment = contentVerticalAlignment;
+- (void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)alignment {
+    self.UISlider.contentVerticalAlignment = alignment;
 }
 
-- (void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
-    self.UISlider.contentVerticalAlignment = contentHorizontalAlignment;
+- (void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)alignment {
+    self.UISlider.contentVerticalAlignment = alignment;
 }
 
 #pragma mark isEqual
 
 - (BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[UISlider class]]) return [self.UISlider isEqual:object];
-    else if([object isKindOfClass:[self class]]) return [self.UISlider isEqual:((C4Slider *)object).UISlider];
-    return NO;
+    BOOL equalValue = NO;
+    if([object isKindOfClass:[UISlider class]])
+        equalValue = [self.UISlider isEqual:object];
+    else if([object isKindOfClass:[self class]])
+        equalValue = [self.UISlider isEqual:((C4Slider *)object).UISlider];
+    return equalValue;
 }
 
 @end

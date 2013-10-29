@@ -13,7 +13,9 @@
 @end
 
 @implementation C4CameraLayer
-@synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing, repeatCount = _repeatCount, animationDuration = _animationDuration, allowsInteraction = _allowsInteraction, repeats = _repeats;
+@synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing,
+repeatCount = _repeatCount, animationDuration = _animationDuration,
+allowsInteraction = _allowsInteraction, repeats = _repeats;
 @synthesize perspectiveDistance = _perspectiveDistance;
 
 - (id)init {
@@ -46,7 +48,8 @@
 - (void)setup {}
 - (void)test {}
 
-#pragma mark C4Layer Animation Methods //code from this line forward should be common amongst all C4Layer variations
+//code from this line forward should be common amongst all C4Layer variations
+#pragma mark C4Layer Animation Methods
 - (CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.duration = self.animationDuration;
@@ -236,7 +239,11 @@
     animation.toValue = @(newRotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
-            self.transform = CATransform3DRotate(self.transform, newRotationAngle - self.rotationAngleX, 1, 0, 0);
+            self.transform = CATransform3DRotate(self.transform,
+                                                 newRotationAngle - self.rotationAngleX,
+                                                 1,
+                                                 0,
+                                                 0);
             self.rotationAngleX = newRotationAngle;
             [self removeAnimationForKey:@"animateRotationX"];
         }];
@@ -252,7 +259,11 @@
     animation.toValue = @(newRotationAngle);
     if (animation.repeatCount != FOREVER && !self.autoreverses) {
         [CATransaction setCompletionBlock:^ {
-            self.transform =    CATransform3DRotate(self.transform, newRotationAngle - self.rotationAngleY, 0, 1, 0);
+            self.transform =    CATransform3DRotate(self.transform,
+                                                    newRotationAngle - self.rotationAngleY,
+                                                    0,
+                                                    1,
+                                                    0);
             self.rotationAngleY = newRotationAngle;
             [self removeAnimationForKey:@"animateRotationY"];
         }];

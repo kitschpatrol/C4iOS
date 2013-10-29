@@ -173,7 +173,9 @@
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
-        value = (CGFloat)sqrt(pow(vec3[0]- (aVec.vec)[0], 2)+pow(vec3[1]- (aVec.vec)[1], 2)+pow(vec3[2]- (aVec.vec)[2], 2));
+        value = (CGFloat)sqrt(pow(vec3[0]- (aVec.vec)[0], 2) +
+                              pow(vec3[1]- (aVec.vec)[1], 2) +
+                              pow(vec3[2]- (aVec.vec)[2], 2));
     });
     return value;
 }

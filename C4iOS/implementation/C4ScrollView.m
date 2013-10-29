@@ -257,7 +257,9 @@
 // override points for subclasses to control delivery of touch events to subviews of the scroll view
 // called before touches are delivered to a subview of the scroll view. if it returns NO the touches will not be delivered to the subview
 // default returns YES
-- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view {
+- (BOOL)touchesShouldBegin:(NSSet *)touches
+                 withEvent:(UIEvent *)event
+             inContentView:(UIView *)view {
     touches = touches;
     event = event;
     view = view;

@@ -102,7 +102,8 @@
     [self.UIStepper setTintColor:tintColor];
 }
 
-//FIXME: these UI_APPEARANCE_SELECTORS might be confusing because they refer to an object, but I don't want to have objects for all of them...
+//FIXME: these UI_APPEARANCE_SELECTORS might be confusing because they refer to an object,
+//but I don't want to have objects for all of them...
 - (void)setBackgroundImage:(C4Image*)image forState:(C4ControlState)state {
     [self.UIStepper setBackgroundImage:image.UIImage forState:(UIControlState)state];
 }
@@ -111,12 +112,21 @@
     return [C4Image imageWithUIImage:[self.UIStepper backgroundImageForState:(UIControlState)state]];
 }
 
-- (void)setDividerImage:(C4Image*)image forLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState {
-    [self.UIStepper setDividerImage:image.UIImage forLeftSegmentState:(UIControlState)leftState rightSegmentState:(UIControlState)rightState];
+- (void)setDividerImage:(C4Image*)image
+    forLeftSegmentState:(C4ControlState)leftState
+      rightSegmentState:(C4ControlState)rightState {
+    [self.UIStepper setDividerImage:image.UIImage
+                forLeftSegmentState:(UIControlState)leftState
+                  rightSegmentState:(UIControlState)rightState];
 }
 
-- (C4Image*)dividerImageForLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState {
-    return [C4Image imageWithUIImage:[self.UIStepper dividerImageForLeftSegmentState:(UIControlState)leftState rightSegmentState:(UIControlState)rightState]];
+- (C4Image*)dividerImageForLeftSegmentState:(C4ControlState)leftState
+                          rightSegmentState:(C4ControlState)rightState {
+    @autoreleasepool {
+        UIImage *img = [self.UIStepper dividerImageForLeftSegmentState:(UIControlState)leftState
+                                                     rightSegmentState:(UIControlState)rightState];
+        return [C4Image imageWithUIImage:img];
+    }
 }
 
 - (void)setIncrementImage:(C4Image *)image forState:(C4ControlState)state {
@@ -135,19 +145,24 @@
 
 #pragma mark C4UIElement (target:action)
 - (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UIStepper addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UIStepper addTarget:object action:NSSelectorFromString(methodName)
+             forControlEvents:(UIControlEvents)event];
 }
 
 - (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UIStepper removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UIStepper removeTarget:object action:NSSelectorFromString(methodName)
+                forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark isEqual
 
 - (BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[UIStepper class]]) return [self.UIStepper isEqual:object];
-    else if([object isKindOfClass:[self class]]) return [self.UIStepper isEqual:((C4Stepper *)object).UIStepper];
-    return NO;
+    BOOL equalValue = NO;
+    if([object isKindOfClass:[UIStepper class]])
+        equalValue = [self.UIStepper isEqual:object];
+    else if([object isKindOfClass:[self class]])
+        equalValue = [self.UIStepper isEqual:((C4Stepper *)object).UIStepper];
+    return equalValue;
 }
 
 #pragma mark Style

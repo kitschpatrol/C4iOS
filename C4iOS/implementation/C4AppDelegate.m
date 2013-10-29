@@ -17,13 +17,12 @@
     [C4View class];
     
     C4AssertionHandler* customAssertionHandler = [[C4AssertionHandler alloc] init];
-	[[[NSThread currentThread] threadDictionary] setValue:customAssertionHandler forKey:NSAssertionHandlerKey];
-	// NB: your windowing code goes here - e.g. self.window.rootViewController = self.viewController;
+	[[[NSThread currentThread] threadDictionary] setValue:customAssertionHandler
+                                                   forKey:NSAssertionHandlerKey];
     
     application.statusBarHidden = YES;
     self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.workspace = [[C4WorkSpace alloc] init];
-//    self.workspace = [[C4WorkSpace alloc] initWithNibName:@"C4Canvas" bundle:nil];
     
     _window.rootViewController = self.workspace;
     /* don't ever do the following !
@@ -32,7 +31,8 @@
     
     [self.window makeKeyAndVisible];
     
-    //strangely, if the following call to set the background color isn't made, then the view doesn't receive touch events...
+    //strangely, if the following call to set the background color isn't made
+    //then the view doesn't receive touch events...
     self.workspace.view.backgroundColor = [UIColor whiteColor];
     
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
@@ -100,10 +100,14 @@
     
     [C4Stepper defaultStyle].style = basicStyle;
     [C4Stepper defaultStyle].tintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightGrayPattern"]];
-    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementDisabled"] forState:DISABLED];
-    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementNormal"] forState:NORMAL];
-    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementDisabled"] forState:DISABLED];
-    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementNormal"] forState:NORMAL];
+    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementDisabled"]
+                                       forState:DISABLED];
+    [[C4Stepper defaultStyle] setDecrementImage:[C4Image imageNamed:@"decrementNormal"]
+                                       forState:NORMAL];
+    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementDisabled"]
+                                       forState:DISABLED];
+    [[C4Stepper defaultStyle] setIncrementImage:[C4Image imageNamed:@"incrementNormal"]
+                                       forState:NORMAL];
     
     [C4Switch defaultStyle].style = basicStyle;
     [C4Switch defaultStyle].onTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"lightBluePattern"]];

@@ -40,7 +40,8 @@
     self = [super init];
     if (self != nil) {        
         _eaglLayer = (C4EAGLLayer *)self.layer;
-        _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO, kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
+        _eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking: @NO,
+                                          kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8};
 
 		if (nil == _renderer) {
 			_renderer = renderer;
@@ -98,8 +99,9 @@
 - (void)startAnimation {
 	if (!self.isAnimating) {
 		if (self.isDisplayLinkSupported) {
+            SEL selector = @selector(render);
 			self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self 
-                                                                            selector:@selector(render)];
+                                                                            selector:selector];
 			[self.displayLink setFrameInterval:_animationFrameInterval];
 			[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] 
                               forMode:NSDefaultRunLoopMode];

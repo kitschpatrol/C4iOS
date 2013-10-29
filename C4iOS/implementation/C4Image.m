@@ -42,7 +42,15 @@
     @autoreleasepool {
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         NSUInteger bitsPerComponent = 8;
-        CGContextRef context = CGBitmapContextCreate(data, width, height, bitsPerComponent, 4*width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+        
+        CGBitmapInfo info = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
+        CGContextRef context = CGBitmapContextCreate(data,
+                                                     width,
+                                                     height,
+                                                     bitsPerComponent,
+                                                     4*width,
+                                                     colorSpace,
+                                                     info);
         CGImageRef image = CGBitmapContextCreateImage(context);
         UIImage *uiimg = [UIImage imageWithCGImage:image];
         CFRelease(colorSpace);
@@ -78,7 +86,8 @@
         _filterQueue = nil;
         _output = nil;
         _imageView = [[C4ImageView alloc] initWithImage:_originalImage];
-        _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight |
+                                      UIViewAutoresizingFlexibleWidth;
         [self addSubview:_imageView];
         self.autoresizesSubviews = YES;
         self.showsActivityIndicator = YES;
@@ -100,12 +109,15 @@
 
 - (id)initWithURL:(NSURL *)imageURL {
     NSError *error;
-    NSData *data = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingMappedIfSafe error:&error];
+    NSData *data = [NSData dataWithContentsOfURL:imageURL
+                                         options:NSDataReadingMappedIfSafe
+                                           error:&error];
     if(data) {
         self = [self initWithData:data];
         return self;
     }
-    C4Log(@"There was an error downloading the content from the url you provided.\n%@",[error description]);
+    C4Log(@"There was an error downloading the content from the url you provided.\n%@",
+          [error description]);
     return nil;
 }
 
@@ -172,7 +184,9 @@
 #pragma mark Contents
 - (UIImage *)UIImage {
     CGImageRef cg = self.contents;
-    UIImage *image = [UIImage imageWithCGImage:cg scale:CGImageGetWidth(cg)/self.width orientation:self.originalImage.imageOrientation ];
+    UIImage *image = [UIImage imageWithCGImage:cg
+                                         scale:CGImageGetWidth(cg)/self.width
+                                   orientation:self.originalImage.imageOrientation ];
     return image;
 }
 
@@ -224,7 +238,10 @@
     if(self.showsActivityIndicator) [_filterIndicator startAnimating];
     dispatch_async(self.filterQueue, ^{
         //applies create the image based on its original size, contents will automatically scale
-        CGImageRef filteredImage = [self.filterContext createCGImage:_output fromRect:(CGRect){CGPointZero,self.originalSize}];
+        CGRect fromRect = (CGRect){CGPointZero,self.originalSize};
+        
+        CGImageRef filteredImage = [self.filterContext createCGImage:_output
+                                                            fromRect:fromRect];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setContents:filteredImage];
@@ -281,7 +298,9 @@
     }
 }
 
-- (void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast {
+- (void)colorControlSaturation:(CGFloat)saturation
+                    brightness:(CGFloat)brightness
+                      contrast:(CGFloat)contrast {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorControls"];
         [filter setValue:@(saturation) forKey:@"inputSaturation"];
@@ -336,7 +355,8 @@
         CIFilter *filter = [self prepareFilterWithName:@"CIColorMonochrome"];
         CGFloat rgba[4];
         [color getRed:&rgba[0] green:&rgba[1] blue:&rgba[2] alpha:&rgba[3]];
-        [filter setValue:[CIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]] forKey:@"inputColor"];
+        CIColor *color = [CIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
+        [filter setValue:color forKey:@"inputColor"];
         [filter setValue:@(intensity) forKey:@"inputIntensity"];
         _output = filter.outputImage;
         if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
@@ -609,8 +629,10 @@
 - (void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITemperatureAndTint"];
-        [filter setValue:[CIVector vectorWithX:neutral.width Y:neutral.height] forKey:@"inputNeutral"];
-        [filter setValue:[CIVector vectorWithX:targetNeutral.width Y:targetNeutral.height] forKey:@"inputTargetNeutral"];
+        CIVector *vector = [CIVector vectorWithX:neutral.width Y:neutral.height];
+        [filter setValue:vector forKey:@"inputNeutral"];
+        vector = [CIVector vectorWithX:targetNeutral.width Y:targetNeutral.height];
+        [filter setValue:vector forKey:@"inputTargetNeutral"];
         _output = filter.outputImage;
         if(_multipleFilterEnabled == NO) [self renderImageWithFilterName:filter.name];
         filter = nil;
@@ -797,7 +819,10 @@
     }
 }
 
-- (void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)scale {
+- (void)bumpDistortionLinear:(CGPoint)center
+                      radius:(CGFloat)radius
+                       angle:(CGFloat)angle
+                       scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIBumpDistortionLinear"];
         center.y = self.height - center.y;
@@ -848,7 +873,12 @@
         filter = nil;
     }
 }
-- (void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr {
+- (void)halftoneCMYK:(CGPoint)center
+              radius:(CGFloat)radius
+               angle:(CGFloat)angle
+           sharpness:(CGFloat)sharpness
+                 gcr:(CGFloat)gcr
+                 ucr:(CGFloat)ucr {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CICMYKHalftone"];
         center.y = self.height - center.y;
@@ -936,7 +966,12 @@
     }
 }
 
-- (void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius {
+- (void)depthOfField:(CGPoint)point1
+              point2:(CGPoint)point2
+          saturation:(CGFloat)saturation
+          maskRadius:(CGFloat)maskRadius
+       maskIntensity:(CGFloat)maskIntensity
+          blurRadius:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDepthOfField"];
         point1.y = self.height - point1.y;
@@ -974,7 +1009,10 @@
     }
 }
 
-- (void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
+- (void)dotScreen:(CGPoint)center
+            angle:(CGFloat)angle
+            width:(CGFloat)width
+        sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDotScreen"];
         center.y = self.height - center.y;
@@ -988,7 +1026,12 @@
     }
 }
 
-- (void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom {
+- (void)droste:(CGPoint)inset1
+        inset2:(CGPoint)inset2
+  strandRadius:(CGFloat)radius
+   periodicity:(CGFloat)periodicity
+      rotation:(CGFloat)rotation
+          zoom:(CGFloat)zoom {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDroste"];
         inset1.y = self.height - inset1.y;
@@ -1037,7 +1080,10 @@
     }
 }
 
-- (void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+- (void)fourFoldReflectedTile:(CGPoint)center
+                        angle:(CGFloat)angle
+                   acuteAngle:(CGFloat)acuteAngle
+                        width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldReflectedTile"];
         center.y = self.height - center.y;
@@ -1064,7 +1110,10 @@
     }
 }
 
-- (void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+- (void)fourFoldTranslatedTile:(CGPoint)center
+                         angle:(CGFloat)angle
+                    acuteAngle:(CGFloat)acuteAngle
+                         width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldTranslatedTile"];
         center.y = self.height - center.y;
@@ -1101,7 +1150,10 @@
     }
 }
 
-- (void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction {
+- (void)glassLozenge:(CGPoint)point1
+              point2:(CGPoint)point2
+              radius:(CGFloat)radius
+          refraction:(CGFloat)refraction {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGlassLozenge"];
         point1.y = self.height - point1.y;
@@ -1140,7 +1192,10 @@
     }
 }
 
-- (void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
+- (void)hatchedScreen:(CGPoint)center
+                angle:(CGFloat)angle
+                width:(CGFloat)width
+            sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHatchedScreen"];
         center.y = self.height - center.y;
@@ -1225,7 +1280,11 @@
     }
 }
 
-- (void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast {
+- (void)lineOverlay:(CGFloat)noiseLevel
+          sharpness:(CGFloat)sharpness
+      edgeIntensity:(CGFloat)edgeIntensity
+          threshold:(CGFloat)threshold
+           contrast:(CGFloat)contrast {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILightTunnel"];
         [filter setValue:@(noiseLevel) forKey:@"inputRotation"];
@@ -1239,7 +1298,10 @@
     }
 }
 
-- (void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness{
+- (void)lineScreen:(CGPoint)center
+             angle:(CGFloat)angle
+             width:(CGFloat)width
+         sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILineScreen"];
         center.y = self.height - center.y;
@@ -1325,7 +1387,10 @@
     }
 }
 
-- (void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+- (void)parallelogramTile:(CGPoint)center
+                    angle:(CGFloat)angle
+               acuteAngle:(CGFloat)acuteAngle
+                    width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIParallelogramTile"];
         center.y = self.height - center.y;
@@ -1481,7 +1546,11 @@
         filter = nil;
     }
 }
-- (void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color {
+- (void)spotLight:(C4Vector *)position
+    lightPointsAt:(C4Vector *)spot
+       brightness:(CGFloat)brightness
+    concentration:(CGFloat)concentration
+            color:(UIColor *)color {
     CIFilter *filter = [self prepareFilterWithName:@"CISpotLight"];
     [filter setValue:[CIVector vectorWithX:position.x Y:position.y Z:position.z] forKey:@"inputLightPosition"];
     [filter setValue:[CIVector vectorWithX:spot.x Y:spot.y Z:spot.z] forKey:@"inputLightPointsAt"];
@@ -1503,7 +1572,10 @@
     filter = nil;
 }
 
-- (void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction {
+- (void)torusLensDistortion:(CGPoint)center
+                     radius:(CGFloat)radius
+                      width:(CGFloat)width
+                 refraction:(CGFloat)refraction {
     CIFilter *filter = [self prepareFilterWithName:@"CITorusLensDistortion"];
     [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
     [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1514,7 +1586,10 @@
     filter = nil;
 }
 
-- (void)triangleKaleidescope:(CGPoint)point size:(CGFloat)size rotation:(CGFloat)rotation decay:(CGFloat)decay {
+- (void)triangleKaleidescope:(CGPoint)point
+                        size:(CGFloat)size
+                    rotation:(CGFloat)rotation
+                       decay:(CGFloat)decay {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITriangleKaleidoscope"];
         point.y = self.height - point.y;
@@ -1528,7 +1603,10 @@
     }
 }
 
-- (void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width {
+- (void)triangleTile:(CGPoint)center
+               scale:(CGFloat)scale
+               angle:(CGFloat)angle
+               width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITriangleTile"];
         center.y = self.height - center.y;
@@ -1606,7 +1684,12 @@
 }
 
 #pragma mark Generators
-+ (C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness {
++ (C4Image *)checkerboard:(CGSize)size
+                   center:(CGPoint)center
+                   color1:(UIColor *)color1
+                   color2:(UIColor *)color2
+              squareWidth:(CGFloat)width
+                sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CICheckerboardGenerator"];
@@ -1640,7 +1723,15 @@
     }
 };
 
-+ (C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time{
++ (C4Image *)lenticularHalo:(CGSize)size
+                     center:(CGPoint)center
+                      color:(UIColor *)color
+                 haloRadius:(CGFloat)radius
+                  haloWidth:(CGFloat)haloWidth
+                haloOverlap:(CGFloat)overlap
+          striationStrength:(CGFloat)strength
+          striationContrast:(CGFloat)contrast
+                       time:(CGFloat)time{
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CILenticularHaloGenerator"];
@@ -1696,7 +1787,11 @@
     return nil;
 }
 
-+ (C4Image *)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor {
++ (C4Image *)linearGradient:(CGSize)size
+                 startPoint:(CGPoint)startPoint
+                   endPoint:(CGPoint)endPoint
+                 startColor:(UIColor *)startColor
+                   endColor:(UIColor *)endColor {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CILinearGradient"];
@@ -1717,7 +1812,12 @@
     return nil;
 }
 
-+ (C4Image *)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor {
++ (C4Image *)radialGradient:(CGSize)size
+                     center:(CGPoint)center
+                innerRadius:(CGFloat)innerRadius
+                outerRadius:(CGFloat)outerRadius
+                 innerColor:(UIColor *)innerColor
+                 outerColor:(UIColor *)outerColor {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIRadialGradient"];
@@ -1763,8 +1863,12 @@
     
     NSMutableSet *allFilters = [[NSMutableSet alloc] initWithCapacity:0];
     
-    for(NSString *s in filterCategories) [allFilters addObjectsFromArray:[CIFilter filterNamesInCategory:s]];
-    NSArray *sortedFilterList = [[allFilters allObjects] sortedArrayUsingFunction:basicSort context:NULL];
+    for(NSString *s in filterCategories) {
+        [allFilters addObjectsFromArray:[CIFilter filterNamesInCategory:s]];
+    }
+    
+    NSArray *sortedFilterList = [[allFilters allObjects] sortedArrayUsingFunction:basicSort
+                                                                          context:NULL];
     return sortedFilterList;
 }
 
@@ -1861,7 +1965,8 @@
 #pragma mark Pixels
 - (void)loadPixelData {
     const char *queueName = [@"pixelDataQueue" UTF8String];
-    __block dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,  DISPATCH_QUEUE_CONCURRENT);
+    __block dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,
+                                                                    DISPATCH_QUEUE_CONCURRENT);
     
     dispatch_async(pixelDataQueue, ^{
         NSUInteger width = CGImageGetWidth(self.CGImage);
@@ -1874,7 +1979,14 @@
         _rawData = malloc(height * _bytesPerRow);
         
         NSUInteger bitsPerComponent = 8;
-        CGContextRef context = CGBitmapContextCreate(_rawData, width, height, bitsPerComponent, _bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+        CGBitmapInfo info = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
+        CGContextRef context = CGBitmapContextCreate(_rawData,
+                                                     width,
+                                                     height,
+                                                     bitsPerComponent,
+                                                     _bytesPerRow,
+                                                     colorSpace,
+                                                     info);
         CGColorSpaceRelease(colorSpace);
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), self.CGImage);
         CGContextRelease(context);
@@ -1898,7 +2010,10 @@
         b = _rawData[byteIndex + 2];
         a = _rawData[byteIndex + 3];
         
-        return [UIColor colorWithRed:RGBToFloat(r) green:RGBToFloat(g) blue:RGBToFloat(b) alpha:RGBToFloat(a)];
+        return [UIColor colorWithRed:RGBToFloat(r)
+                               green:RGBToFloat(g)
+                                blue:RGBToFloat(b)
+                               alpha:RGBToFloat(a)];
     }
     return [UIColor clearColor];
 }

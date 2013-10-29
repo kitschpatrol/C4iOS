@@ -9,9 +9,22 @@
 #import "C4Timer.h"
 
 @interface C4Timer ()
-- (id)initScheduledTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
-- (id)initWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats;
-- (id)initWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)target method:(NSString *)methodName userInfo:(id)userInfo repeats:(BOOL)repeats;
+- (id)initScheduledTimerWithInterval:(CGFloat)seconds
+                              target:(id)object
+                              method:(NSString *)methodName
+                            userInfo:(id)infoObject
+                             repeats:(BOOL)repeats;
+- (id)initWithInterval:(CGFloat)seconds
+                target:(id)object
+                method:(NSString *)methodName
+              userInfo:(id)infoObject
+               repeats:(BOOL)repeats;
+- (id)initWithFireDate:(NSDate *)date
+              interval:(CGFloat)seconds
+                target:(id)target
+                method:(NSString *)methodName
+              userInfo:(id)userInfo
+               repeats:(BOOL)repeats;
 
 @property (readwrite, atomic, strong) NSTimer *timer;
 @property (readwrite, nonatomic) BOOL timerCanStart;
@@ -20,7 +33,10 @@
 
 @implementation C4Timer
 
-+ (C4Timer *)automaticTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats {
++ (C4Timer *)automaticTimerWithInterval:(CGFloat)seconds
+                                 target:(id)object
+                                 method:(NSString *)methodName
+                                repeats:(BOOL)repeats {
     return [C4Timer automaticTimerWithInterval:seconds 
                                         target:object 
                                         method:methodName 
@@ -28,7 +44,11 @@
                                        repeats:repeats];
 }
 
-+ (C4Timer *)automaticTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
++ (C4Timer *)automaticTimerWithInterval:(CGFloat)seconds
+                                 target:(id)object
+                                 method:(NSString *)methodName
+                               userInfo:(id)infoObject
+                                repeats:(BOOL)repeats {
     C4Timer *timer = [[C4Timer alloc] initScheduledTimerWithInterval:seconds
                                                               target:object 
                                                               method:methodName 
@@ -36,7 +56,11 @@
                                                              repeats:repeats];
     return timer;
 }
-- (id)initScheduledTimerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
+- (id)initScheduledTimerWithInterval:(CGFloat)seconds
+                              target:(id)object
+                              method:(NSString *)methodName
+                            userInfo:(id)infoObject
+                             repeats:(BOOL)repeats {
     self = [super init];
     if(self != nil) {
         _timer = [NSTimer scheduledTimerWithTimeInterval:seconds 
@@ -66,7 +90,10 @@
     return self;
 }
 
-+ (C4Timer *)timerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats {
++ (C4Timer *)timerWithInterval:(CGFloat)seconds
+                        target:(id)object
+                        method:(NSString *)methodName
+                       repeats:(BOOL)repeats {
     return [C4Timer timerWithInterval:seconds
                                target:object 
                                method:methodName
@@ -74,7 +101,11 @@
                               repeats:repeats];
 }
 
-+ (C4Timer *)timerWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
++ (C4Timer *)timerWithInterval:(CGFloat)seconds
+                        target:(id)object
+                        method:(NSString *)methodName
+                      userInfo:(id)infoObject
+                       repeats:(BOOL)repeats {
     C4Timer *timer = [[C4Timer alloc] initWithInterval:seconds 
                                                 target:object 
                                                 method:methodName 
@@ -83,7 +114,11 @@
     return timer;
 }
 
-- (id)initWithInterval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
+- (id)initWithInterval:(CGFloat)seconds
+                target:(id)object
+                method:(NSString *)methodName
+              userInfo:(id)infoObject
+               repeats:(BOOL)repeats {
     self = [super init];
     if(self != nil) {
         if([_timer isValid]) 
@@ -116,7 +151,11 @@
     return self;
 }
 
-+ (C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats {
++ (C4Timer *)timerWithFireDate:(NSDate *)date
+                      interval:(CGFloat)seconds
+                        target:(id)object
+                        method:(NSString *)methodName
+                       repeats:(BOOL)repeats {
     C4Timer *timer = [[C4Timer alloc] initWithFireDate:date
                                               interval:seconds
                                                 target:object
@@ -125,7 +164,12 @@
                                                repeats:repeats];
     return timer;
 }
-+ (C4Timer *)timerWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
++ (C4Timer *)timerWithFireDate:(NSDate *)date
+                      interval:(CGFloat)seconds
+                        target:(id)object
+                        method:(NSString *)methodName
+                      userInfo:(id)infoObject
+                       repeats:(BOOL)repeats {
     C4Timer *timer = [[C4Timer alloc] initWithFireDate:date
                                               interval:seconds
                                                 target:object
@@ -135,7 +179,11 @@
     return timer;
 }
 
-- (id)initWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName repeats:(BOOL)repeats {
+- (id)initWithFireDate:(NSDate *)date
+              interval:(CGFloat)seconds
+                target:(id)object
+                method:(NSString *)methodName
+               repeats:(BOOL)repeats {
     return [self initWithFireDate:date
                          interval:seconds
                            target:object 
@@ -143,7 +191,12 @@
                          userInfo:nil 
                           repeats:repeats];
 }
-- (id)initWithFireDate:(NSDate *)date interval:(CGFloat)seconds target:(id)object method:(NSString *)methodName userInfo:(id)infoObject repeats:(BOOL)repeats {
+- (id)initWithFireDate:(NSDate *)date
+              interval:(CGFloat)seconds
+                target:(id)object
+                method:(NSString *)methodName
+              userInfo:(id)infoObject
+               repeats:(BOOL)repeats {
     self = [super init];
     if(self != nil) {
         _timer = [[NSTimer  alloc] initWithFireDate:date

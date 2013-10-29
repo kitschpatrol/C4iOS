@@ -86,7 +86,8 @@
 - (CGPoint)center {
     CGPoint currentCenter = super.center;
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+    if(orientation == UIDeviceOrientationLandscapeLeft ||
+       orientation == UIDeviceOrientationLandscapeRight) {
         currentCenter.x = super.center.y;
         currentCenter.y = super.center.x;
     }
@@ -219,7 +220,9 @@
 
 - (void)setRotation:(CGFloat)rotation {
     if(self.animationDelay == 0.0f) [self _setRotation:@(rotation)];
-    else [self performSelector:@selector(_setRotation:) withObject:@(rotation) afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setRotation:)
+                    withObject:@(rotation)
+                    afterDelay:self.animationDelay];
 }
 
 - (void)_setRotation:(NSNumber *)rotation {
@@ -229,7 +232,9 @@
 
 - (void)setRotationX:(CGFloat)rotation {
     if(self.animationDelay == 0.0f) [self _setRotationX:@(rotation)];
-    else [self performSelector:@selector(_setRotationX:) withObject:@(rotation) afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setRotationX:)
+                    withObject:@(rotation)
+                    afterDelay:self.animationDelay];
 }
 
 - (void)_setRotationX:(NSNumber *)rotation {
@@ -239,7 +244,9 @@
 
 - (void)setRotationY:(CGFloat)rotation {
     if(self.animationDelay == 0.0f) [self _setRotationY:@(rotation)];
-    else [self performSelector:@selector(_setRotationY:) withObject:@(rotation) afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setRotationY:)
+                    withObject:@(rotation)
+                    afterDelay:self.animationDelay];
 }
 
 - (void)_setRotationY:(NSNumber *)rotation {
@@ -275,8 +282,11 @@
 
 - (void)animateWithBlock:(void (^)(void))animationBlock completion:(void (^)(BOOL))completionBlock {
     C4AnimationOptions autoReverseOptions = self.animationOptions;
+    
     //we insert the autoreverse options here, only if it should repeat and autoreverse
-    if(self.shouldAutoreverse && (self.animationOptions & REPEAT) == REPEAT) autoReverseOptions |= AUTOREVERSE;
+    if(self.shouldAutoreverse && (self.animationOptions & REPEAT) == REPEAT) {
+        autoReverseOptions |= AUTOREVERSE;
+    }
     
     [UIView animateWithDuration:self.animationDuration
                           delay:(NSTimeInterval)self.animationDelay
@@ -345,7 +355,7 @@
 #pragma mark Gesture Methods
 
 - (void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {
-    if(self.gestureDictionary == nil) self.gestureDictionary = [[NSMutableDictionary alloc] initWithCapacity:0];
+    if(self.gestureDictionary == nil) self.gestureDictionary = [@{} mutableCopy];
     BOOL containsGesture = ((self.gestureDictionary)[gestureName] != nil);
     if(containsGesture == NO) {
         UIGestureRecognizer *recognizer;
@@ -400,7 +410,8 @@
     
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
              [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
+             [recognizer class],NSStringFromSelector(_cmd));
     
     ((UILongPressGestureRecognizer *) recognizer).numberOfTapsRequired = tapCount;
 }
@@ -411,7 +422,8 @@
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
              [recognizer isKindOfClass:[UISwipeGestureRecognizer class]] ||
              [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
+             [recognizer class],NSStringFromSelector(_cmd));
     
     ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
 }
@@ -420,7 +432,8 @@
     UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
     C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method %@",[recognizer class],NSStringFromSelector(_cmd));
+             @"The gesture type(%@) you tried to configure does not respond to the method %@",
+             [recognizer class],NSStringFromSelector(_cmd));
     
     ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
 }
@@ -429,7 +442,8 @@
     UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
     C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
+             [recognizer class],NSStringFromSelector(_cmd));
     
     ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
 }
@@ -438,7 +452,8 @@
     UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
     C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
+             [recognizer class],NSStringFromSelector(_cmd));
     
     ((UIPanGestureRecognizer *) recognizer).maximumNumberOfTouches = touchCount;
 }
@@ -447,7 +462,8 @@
     UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
     
     C4Assert([recognizer isKindOfClass:[UISwipeGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",[recognizer class],NSStringFromSelector(_cmd));
+             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
+             [recognizer class],NSStringFromSelector(_cmd));
     
     ((UISwipeGestureRecognizer *) recognizer).direction = direction;
 }
@@ -538,16 +554,29 @@
 
 #pragma mark Notification Methods
 - (void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:NSSelectorFromString(methodName)
+                                                 name:notification
+                                               object:nil];
 }
 
-- (void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+- (void)listenFor:(NSString *)notification
+       fromObject:(id)object
+     andRunMethod:(NSString *)methodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:NSSelectorFromString(methodName)
+                                                 name:notification
+                                               object:object];
 }
 
-- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
+- (void)listenFor:(NSString *)notification
+      fromObjects:(NSArray *)objectArray
+     andRunMethod:(NSString *)methodName {
     for (id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:NSSelectorFromString(methodName)
+                                                     name:notification
+                                                   object:object];
     }
 }
 
@@ -651,7 +680,8 @@
 }
 
 - (void)removeObject:(id)visualObject {
-    C4Assert(self != visualObject, @"You tried to remove %@ from itself, don't be silly", visualObject);
+    C4Assert(self != visualObject, @"You tried to remove %@ from itself, don't be silly",
+             visualObject);
     if([visualObject isKindOfClass:[UIView class]] ||
        [visualObject isKindOfClass:[C4Control class]])
         [visualObject removeFromSuperview];
@@ -679,7 +709,9 @@
 #pragma mark Shadow
 - (void)setShadowColor:(UIColor *)_shadowColor {
     if(self.animationDelay == 0) [self _setShadowColor:_shadowColor];
-    else [self performSelector:@selector(_setShadowColor:) withObject:_shadowColor afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setShadowColor:)
+                    withObject:_shadowColor
+                    afterDelay:self.animationDelay];
 }
 - (void)_setShadowColor:(UIColor *)_shadowColor {
     [(id <C4LayerAnimation>)self.layer animateShadowColor:_shadowColor.CGColor];
@@ -690,7 +722,9 @@
 
 - (void)setShadowOffset:(CGSize)_shadowOffset {
     if(self.animationDelay == 0) [self _setShadowOffSet:[NSValue valueWithCGSize:_shadowOffset]];
-    else [self performSelector:@selector(_setShadowOffSet:) withObject:[NSValue valueWithCGSize:_shadowOffset] afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setShadowOffSet:)
+                    withObject:[NSValue valueWithCGSize:_shadowOffset]
+                    afterDelay:self.animationDelay];
 }
 - (void)_setShadowOffSet:(NSValue *)_shadowOffset {
     [(id <C4LayerAnimation>)self.layer animateShadowOffset:[_shadowOffset CGSizeValue]];
@@ -702,7 +736,9 @@
 
 - (void)setShadowOpacity:(CGFloat)_shadowOpacity {
     if(self.animationDelay == 0) [self _setShadowOpacity:@(_shadowOpacity)];
-    else [self performSelector:@selector(_setShadowOpacity:) withObject:@(_shadowOpacity) afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setShadowOpacity:)
+                    withObject:@(_shadowOpacity)
+                    afterDelay:self.animationDelay];
 }
 - (void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
     [(id <C4LayerAnimation>)self.layer animateShadowOpacity:[_shadowOpacity floatValue]];
@@ -714,7 +750,9 @@
 
 - (void)setShadowPath:(CGPathRef)_shadowPath {
     if(self.animationDelay == 0) [self _setShadowPath:(__bridge id)_shadowPath];
-    else [self performSelector:@selector(_setShadowPath:) withObject:(__bridge id)_shadowPath afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setShadowPath:)
+                    withObject:(__bridge id)_shadowPath
+                    afterDelay:self.animationDelay];
 }
 - (void)_setShadowPath:(id)_shadowPath {
     [(id <C4LayerAnimation>)self.layer animateShadowPath:(__bridge CGPathRef)_shadowPath];
@@ -725,7 +763,9 @@
 
 - (void)setShadowRadius:(CGFloat)_shadowRadius {
     if(self.animationDelay == 0) [self _setShadowRadius:@(_shadowRadius)];
-    [self performSelector:@selector(_setShadowRadius:) withObject:@(_shadowRadius) afterDelay:self.animationDelay];
+    [self performSelector:@selector(_setShadowRadius:)
+               withObject:@(_shadowRadius)
+               afterDelay:self.animationDelay];
 }
 - (void)_setShadowRadius:(NSNumber *)_shadowRadius {
     [(id <C4LayerAnimation>)self.layer animateShadowRadius:[_shadowRadius floatValue]];
@@ -781,7 +821,10 @@
 - (void)renderInContext:(CGContextRef)context {
     if(self.backgroundColor != nil || self.backgroundColor != [UIColor clearColor]) {
         CGFloat components[4];
-        [self.backgroundColor getRed:&components[0] green:&components[1] blue:&components[2] alpha:&components[3]];
+        [self.backgroundColor getRed:&components[0]
+                               green:&components[1]
+                                blue:&components[2]
+                               alpha:&components[3]];
         CGContextSetFillColor(context, components);
         CGContextFillRect(context, self.frame);
     }

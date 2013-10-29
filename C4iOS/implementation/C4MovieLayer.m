@@ -14,7 +14,9 @@
 
 @implementation C4MovieLayer
 
-@synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing, repeatCount = _repeatCount, animationDuration = _animationDuration, allowsInteraction = _allowsInteraction, repeats = _repeats;
+@synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing,
+repeatCount = _repeatCount, animationDuration = _animationDuration,
+allowsInteraction = _allowsInteraction, repeats = _repeats;
 @synthesize perspectiveDistance = _perspectiveDistance;
 
 - (id)init {
@@ -51,7 +53,8 @@
 - (void)setup {}
 - (void)test {}
 
-#pragma mark C4Layer Animation Methods //code from this line forward should be common amongst all C4Layer variations
+#pragma mark C4Layer Animation Methods 
+//code from this line forward should be common amongst all C4Layer variations
 - (CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.duration = self.animationDuration;

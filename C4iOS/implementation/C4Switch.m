@@ -9,7 +9,8 @@
 #import "C4Switch.h"
 
 @implementation C4Switch
-@synthesize on = _on, onImage = _onImage, onTintColor = _onTintColor, offImage = _offImage, tintColor = _tintColor, thumbTintColor = _thumbTintColor;
+@synthesize on = _on, onImage = _onImage, onTintColor = _onTintColor, offImage = _offImage,
+tintColor = _tintColor, thumbTintColor = _thumbTintColor;
 
 + (C4Switch *)switch:(CGRect)frame {
     C4Switch *s = [[C4Switch alloc] initWithFrame:frame];
@@ -24,7 +25,9 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
-        _UISwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 63, 23)];//not sure if i really need this
+        //not sure if i really need this
+        _UISwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 63, 23)];
+
         self.frame = _UISwitch.frame;
         [self setupFromDefaults];
         [self addSubview:_UISwitch];
@@ -121,7 +124,8 @@
     
     NSDictionary *controlStyle = [super style];
     
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary
+                                                 dictionaryWithDictionary:localStyle];
     [localAndControlStyle addEntriesFromDictionary:controlStyle];
     
     localStyle = nil;
@@ -157,19 +161,24 @@
 
 #pragma mark other C4UIElement (target:action)
 - (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISwitch addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UISwitch addTarget:object action:NSSelectorFromString(methodName)
+            forControlEvents:(UIControlEvents)event];
 }
 
 - (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UISwitch removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UISwitch removeTarget:object action:NSSelectorFromString(methodName)
+               forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark isEqual
 
 - (BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[UISwitch class]]) return [self.UISwitch isEqual:object];
-    else if([object isKindOfClass:[self class]]) return [self.UISwitch isEqual:((C4Switch *)object).UISwitch];
-    return NO;
+    BOOL equalValue = NO;
+    if([object isKindOfClass:[UISwitch class]])
+        equalValue = [self.UISwitch isEqual:object];
+    else if([object isKindOfClass:[self class]])
+        equalValue = [self.UISwitch isEqual:((C4Switch *)object).UISwitch];
+    return equalValue;
 }
 
 @end

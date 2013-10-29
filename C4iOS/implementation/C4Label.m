@@ -49,7 +49,7 @@
 - (id)initWithText:(NSString *)text font:(C4Font *)font frame:(CGRect)frame {
     self = [self initWithFrame:frame];
     if(self != nil) {
-        self.text = text; 
+        self.text = text;
         self.font = font;
     }
     return self;
@@ -74,7 +74,7 @@
         _label.highlightedTextColor = self.highlightedTextColor;
         _label.backgroundColor = [UIColor clearColor];
         _label.shadowColor = [UIColor clearColor];
-
+        
         [self addSubview:(UILabel *)_label];
         [self setup];
     }
@@ -93,7 +93,10 @@
 
 - (void)_sizeToFit {
     [self.label sizeToFit];
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.label.frame.size.width, self.label.frame.size.height);
+    self.frame = CGRectMake(self.frame.origin.x,
+                            self.frame.origin.y,
+                            self.label.frame.size.width,
+                            self.label.frame.size.height);
 }
 
 #pragma mark C4Label Methods
@@ -120,7 +123,9 @@
 
 - (void)setTextShadowColor:(UIColor *)shadowColor {
     if(self.animationDelay == 0.0f) self.label.shadowColor = shadowColor;
-    else [self performSelector:@selector(_setTextShadowColor:) withObject:shadowColor afterDelay:self.animationDelay];
+    else [self performSelector:@selector(_setTextShadowColor:)
+                    withObject:shadowColor
+                    afterDelay:self.animationDelay];
 }
 - (void)_setTextShadowColor:(UIColor *)shadowColor {
     _textShadowColor = shadowColor;
@@ -128,17 +133,28 @@
 }
 
 - (void)setTextShadowOffset:(CGSize)shadowOffset {
-    if (self.animationDelay == 0.0f) [self _setTextShadowOffset:[NSValue valueWithCGSize:shadowOffset]];
-    else [self performSelector:@selector(_setTextShadowOffset:) withObject:[NSValue valueWithCGSize:shadowOffset] afterDelay:self.animationDelay];
+    if (self.animationDelay == 0.0f) {
+        [self _setTextShadowOffset:[NSValue valueWithCGSize:shadowOffset]];
+    } else {
+        [self performSelector:@selector(_setTextShadowOffset:)
+                   withObject:[NSValue valueWithCGSize:shadowOffset]
+                   afterDelay:self.animationDelay];
+    }
 }
+
 - (void)_setTextShadowOffset:(NSValue *)shadowOffset {
     _textShadowOffset = [shadowOffset CGSizeValue];
     self.label.shadowOffset = [shadowOffset CGSizeValue];
 }
 
 - (void)setEnabled:(BOOL)enabled {
-    if(self.animationDelay == 0.0f) [self _setEnabled:@(enabled)];
-    else [self performSelector:@selector(_setEnabled:) withObject:@(enabled) afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) {
+        [self _setEnabled:@(enabled)];
+    } else {
+        [self performSelector:@selector(_setEnabled:)
+                   withObject:@(enabled)
+                   afterDelay:self.animationDelay];
+    }
 }
 
 - (void)_setEnabled:(NSNumber *)enabled {
@@ -167,9 +183,13 @@
 }
 
 - (void)setTextColor:(UIColor *)textColor {
-    if(self.animationDelay == 0.0f) [self _setTextColor:textColor];
-    else [self performSelector:@selector(_setTextColor:) withObject:textColor afterDelay:self.animationDelay];
-
+    if(self.animationDelay == 0.0f) {
+        [self _setTextColor:textColor];
+    } else {
+        [self performSelector:@selector(_setTextColor:)
+                   withObject:textColor
+                   afterDelay:self.animationDelay];
+    }
 }
 - (void)_setTextColor:(UIColor *)textColor {
     self.label.textColor = textColor;
@@ -188,10 +208,13 @@
 }
 
 - (void)setAdjustsFontSizeToFitWidth:(BOOL)adjustsFontSizeToFitWidth {
-    if(self.animationDelay == 0.0f) [self _setAdjustsFontSizeToFitWidth:@(adjustsFontSizeToFitWidth)];
-    else [self performSelector:@selector(_setAdjustsFontSizeToFitWidth:)
-                    withObject:@(adjustsFontSizeToFitWidth)
-                    afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) {
+        [self _setAdjustsFontSizeToFitWidth:@(adjustsFontSizeToFitWidth)];
+    } else {
+        [self performSelector:@selector(_setAdjustsFontSizeToFitWidth:)
+                   withObject:@(adjustsFontSizeToFitWidth)
+                   afterDelay:self.animationDelay];
+    }
 }
 - (void)_setAdjustsFontSizeToFitWidth:(NSNumber *)adjustsFontSizeToFitWidth {
     self.label.adjustsFontSizeToFitWidth = [adjustsFontSizeToFitWidth boolValue];
@@ -216,8 +239,13 @@
 }
 
 - (void)setTextAlignment:(C4TextAlignment)textAlignment {
-    if(self.animationDelay == 0.0f) [self _setTextAlignment:@(textAlignment)];
-    else [self performSelector:@selector(_setTextAlignment:) withObject:@(textAlignment) afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) {
+        [self _setTextAlignment:@(textAlignment)];
+    } else {
+        [self performSelector:@selector(_setTextAlignment:)
+                   withObject:@(textAlignment)
+                   afterDelay:self.animationDelay];
+    }
 }
 - (void)_setTextAlignment:(NSNumber *)textAlignment {
     self.label.textAlignment = (UITextAlignment)[textAlignment intValue];
@@ -228,8 +256,13 @@
 }
 
 - (void)setLineBreakMode:(C4LineBreakMode)lineBreakMode {
-    if(self.animationDelay == 0.0f) [self _setLineBreakMode:@(lineBreakMode)];
-    else [self performSelector:@selector(_setLineBreakMode:) withObject:@(lineBreakMode) afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f){
+        [self _setLineBreakMode:@(lineBreakMode)];
+    } else {
+        [self performSelector:@selector(_setLineBreakMode:)
+                   withObject:@(lineBreakMode)
+                   afterDelay:self.animationDelay];
+    }
 }
 - (void)_setLineBreakMode:(NSNumber *)lineBreakMode {
     self.label.lineBreakMode = (UILineBreakMode)[lineBreakMode integerValue];
@@ -255,9 +288,15 @@
 //}
 
 - (void)setNumberOfLines:(NSUInteger)numberOfLines {
-    if(self.animationDelay == 0.0f) [self _setNumberOfLines:@(numberOfLines)];
-    else [self performSelector:@selector(_setNumberOfLines:) withObject:@(numberOfLines) afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) {
+        [self _setNumberOfLines:@(numberOfLines)];
+    } else {
+        [self performSelector:@selector(_setNumberOfLines:)
+                   withObject:@(numberOfLines)
+                   afterDelay:self.animationDelay];
+    }
 }
+
 - (void)_setNumberOfLines:(NSNumber *)numberOfLines {
     self.label.numberOfLines = [numberOfLines intValue];
 }
@@ -267,9 +306,15 @@
 }
 
 - (void)setHighlightedTextColor:(UIColor *)highlightedTextColor {
-    if(self.animationDelay == 0.0f) [self _setHighlightedTextColor:highlightedTextColor];
-    else [self performSelector:@selector(_setHighlightedTextColor:) withObject:highlightedTextColor afterDelay:self.animationDelay];
+    if(self.animationDelay == 0.0f) {
+        [self _setHighlightedTextColor:highlightedTextColor];
+    } else {
+        [self performSelector:@selector(_setHighlightedTextColor:)
+                   withObject:highlightedTextColor
+                   afterDelay:self.animationDelay];
+    }
 }
+
 - (void)_setHighlightedTextColor:(UIColor *)highlightedTextColor {
     self.label.highlightedTextColor = highlightedTextColor;
 }
@@ -342,22 +387,28 @@
 }
 
 - (NSDictionary *)style {
-    NSMutableDictionary *localStyle = [NSMutableDictionary dictionaryWithDictionary:
-                                       @{
-                                       @"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
-                                       @"baselineAdjustment":@(self.baselineAdjustment),
-                                       @"highlighted":@(self.highlighted),
-                                       @"lineBreakMode":@(self.lineBreakMode),
-                                       @"numberOfLines":@(self.numberOfLines),
-                                       @"textAlignment":@(self.textAlignment),
-                                       @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
-                                       }];
-    if (self.font != nil) [localStyle setObject:self.font forKey:@"font"];
-    if (self.highlightedTextColor != nil) [localStyle setObject:self.highlightedTextColor forKey:@"highlightedTextColor"];
-    if (self.textColor != nil) [localStyle setObject:self.textColor forKey:@"textColor"];
-    if (self.textShadowColor != nil) [localStyle setObject:self.textShadowColor forKey:@"textShadowColor"];
+    NSDictionary *dict = @{@"adjustsFontSizeToFitWidth":@(self.adjustsFontSizeToFitWidth),
+                           @"baselineAdjustment":@(self.baselineAdjustment),
+                           @"highlighted":@(self.highlighted),
+                           @"lineBreakMode":@(self.lineBreakMode),
+                           @"numberOfLines":@(self.numberOfLines),
+                           @"textAlignment":@(self.textAlignment),
+                           @"textShadowOffset":[NSValue valueWithCGSize:self.textShadowOffset]
+                           };
+    NSMutableDictionary *localStyle = [dict mutableCopy];
     
-    NSMutableDictionary *localAndSuperStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+    if (self.font != nil) [localStyle setObject:self.font
+                                         forKey:@"font"];
+    if (self.highlightedTextColor != nil) [localStyle setObject:self.highlightedTextColor
+                                                         forKey:@"highlightedTextColor"];
+    if (self.textColor != nil) [localStyle setObject:self.textColor
+                                              forKey:@"textColor"];
+    if (self.textShadowColor != nil) [localStyle setObject:self.textShadowColor
+                                                    forKey:@"textShadowColor"];
+    
+    //I think i do this in this weird way to make sure I understand that i am adding
+    //the superclass's style to the local style
+    NSMutableDictionary *localAndSuperStyle = [localStyle mutableCopy];
     localStyle = nil;
     
     [localAndSuperStyle addEntriesFromDictionary:[super style]];
@@ -372,37 +423,48 @@
     
     //Local Style Values
     key = @"adjustsFontSizeToFitWidth";
-    if([styleKeys containsObject:key]) self.adjustsFontSizeToFitWidth = [[style objectForKey:key] boolValue];
+    if([styleKeys containsObject:key])
+        self.adjustsFontSizeToFitWidth = [[style objectForKey:key] boolValue];
     
     key = @"baselineAdjustment";
-    if([styleKeys containsObject:key]) self.baselineAdjustment = (C4BaselineAdjustment)[[style objectForKey:key] integerValue];
+    if([styleKeys containsObject:key])
+        self.baselineAdjustment = (C4BaselineAdjustment)[[style objectForKey:key] integerValue];
     
     key = @"font";
-    if([styleKeys containsObject:key]) self.font = [style objectForKey:key];
+    if([styleKeys containsObject:key])
+        self.font = [style objectForKey:key];
     
     key = @"highlighted";
-    if([styleKeys containsObject:key]) self.highlighted = [[style objectForKey:key] boolValue];
+    if([styleKeys containsObject:key])
+        self.highlighted = [[style objectForKey:key] boolValue];
     
     key = @"highlightedTextColor";
-    if([styleKeys containsObject:key]) self.highlightedTextColor = [style objectForKey:key];
+    if([styleKeys containsObject:key])
+        self.highlightedTextColor = [style objectForKey:key];
     
     key = @"lineBreakMode";
-    if([styleKeys containsObject:key]) self.lineBreakMode = (C4LineBreakMode)[[style objectForKey:key] integerValue];
+    if([styleKeys containsObject:key])
+        self.lineBreakMode = (C4LineBreakMode)[[style objectForKey:key] integerValue];
     
     key = @"numberOfLines";
-    if([styleKeys containsObject:key]) self.numberOfLines = [[style objectForKey:key] integerValue];
+    if([styleKeys containsObject:key])
+        self.numberOfLines = [[style objectForKey:key] integerValue];
     
     key = @"textAlignment";
-    if([styleKeys containsObject:key]) self.textAlignment = (C4TextAlignment)[[style objectForKey:key] integerValue];
+    if([styleKeys containsObject:key])
+        self.textAlignment = (C4TextAlignment)[[style objectForKey:key] integerValue];
     
     key = @"textColor";
-    if([styleKeys containsObject:key]) self.textColor = [style objectForKey:key];
-
+    if([styleKeys containsObject:key])
+        self.textColor = [style objectForKey:key];
+    
     key = @"textShadowColor";
-    if([styleKeys containsObject:key]) self.textShadowColor = [style objectForKey:key];
-
+    if([styleKeys containsObject:key])
+        self.textShadowColor = [style objectForKey:key];
+    
     key = @"textShadowOffset";
-    if([styleKeys containsObject:key]) self.textShadowOffset = [[style objectForKey:key] CGSizeValue];
+    if([styleKeys containsObject:key])
+        self.textShadowOffset = [[style objectForKey:key] CGSizeValue];
 }
 
 + (C4Label *)defaultStyle {
@@ -410,7 +472,9 @@
 }
 
 - (C4Label *)copyWithZone:(NSZone *)zone {
-    C4Label *label = [[C4Label allocWithZone:zone] initWithText:self.text font:self.font frame:self.frame];
+    C4Label *label = [[C4Label allocWithZone:zone] initWithText:self.text
+                                                           font:self.font
+                                                          frame:self.frame];
     label.style = self.style;
     return label;
 }

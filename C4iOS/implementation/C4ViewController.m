@@ -46,16 +46,27 @@
 
 #pragma mark Notification Methods
 - (void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:NSSelectorFromString(methodName)
+                                                 name:notification object:nil];
 }
 
-- (void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+- (void)listenFor:(NSString *)notification
+       fromObject:(id)object
+     andRunMethod:(NSString *)methodName {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:NSSelectorFromString(methodName)
+                                                 name:notification object:object];
 }
 
-- (void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName {
+- (void)listenFor:(NSString *)notification
+      fromObjects:(NSArray *)objectArray
+     andRunMethod:(NSString *)methodName {
     for (id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName) name:notification object:object];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:NSSelectorFromString(methodName)
+                                                     name:notification
+                                                   object:object];
     }
 }
 

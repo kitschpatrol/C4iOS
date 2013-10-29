@@ -89,7 +89,8 @@
     [localStyle addEntriesFromDictionary:@{@"button":self.UIButton}];
     
     NSDictionary *controlStyle = [super style];
-    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary dictionaryWithDictionary:localStyle];
+    NSMutableDictionary *localAndControlStyle = [NSMutableDictionary
+                                                 dictionaryWithDictionary:localStyle];
     [localAndControlStyle addEntriesFromDictionary:controlStyle];
     
     localStyle = nil;
@@ -106,14 +107,26 @@
     UIButton *b = [newStyle objectForKey:@"button"];
     if(b != nil) {
         
-        UIControlState state[4] = {UIControlStateDisabled, UIControlStateHighlighted, UIControlStateNormal, UIControlStateSelected};
+        UIControlState state[4] = {
+            UIControlStateDisabled,
+            UIControlStateHighlighted,
+            UIControlStateNormal,
+            UIControlStateSelected
+        };
+        
         for(int i = 0; i < 4; i++) {
-            [self.UIButton setTitle:[b titleForState:state[i]] forState:state[i]];
-            [self.UIButton setAttributedTitle:[b attributedTitleForState:state[i]] forState:state[i]];
-            [self.UIButton setTitleColor:[b titleColorForState:state[i]] forState:state[i]];
-            [self.UIButton setTitleShadowColor:[b titleShadowColorForState:state[i]] forState:state[i]];
-            [self.UIButton setImage:[b imageForState:state[i]] forState:state[i]];
-            [self.UIButton setBackgroundImage:[b backgroundImageForState:state[i]] forState:state[i]];
+            [self.UIButton setTitle:[b titleForState:state[i]]
+                           forState:state[i]];
+            [self.UIButton setAttributedTitle:[b attributedTitleForState:state[i]]
+                                     forState:state[i]];
+            [self.UIButton setTitleColor:[b titleColorForState:state[i]]
+                                forState:state[i]];
+            [self.UIButton setTitleShadowColor:[b titleShadowColorForState:state[i]]
+                                      forState:state[i]];
+            [self.UIButton setImage:[b imageForState:state[i]]
+                           forState:state[i]];
+            [self.UIButton setBackgroundImage:[b backgroundImageForState:state[i]]
+                                     forState:state[i]];
         }
                 
         self.UIButton.contentEdgeInsets = b.contentEdgeInsets;
@@ -138,7 +151,8 @@
 }
 
 - (C4Font *)font {
-    return [C4Font fontWithName:self.UIButton.titleLabel.font.fontName size:self.UIButton.titleLabel.font.pointSize];
+    return [C4Font fontWithName:self.UIButton.titleLabel.font.fontName
+                           size:self.UIButton.titleLabel.font.pointSize];
 }
 
 - (void)setFont:(C4Font *)font {
@@ -289,11 +303,15 @@
 
 #pragma mark C4UIElement
 - (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UIButton addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UIButton addTarget:object
+                      action:NSSelectorFromString(methodName)
+            forControlEvents:(UIControlEvents)event];
 }
 
 - (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
-    [self.UIButton removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
+    [self.UIButton removeTarget:object
+                         action:NSSelectorFromString(methodName)
+               forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark Tracking 
@@ -363,20 +381,24 @@
     return self.UIButton.selected;
 }
 
-- (void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)contentVerticalAlignment {
-    self.UIButton.contentVerticalAlignment = contentVerticalAlignment;
+- (void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)alignment {
+    self.UIButton.contentVerticalAlignment = alignment;
 }
 
-- (void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
-    self.UIButton.contentVerticalAlignment = contentHorizontalAlignment;
+- (void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)alignment {
+    self.UIButton.contentVerticalAlignment = alignment;
 }
 
 #pragma mark isEqual
 
 - (BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[UIButton class]]) return [self.UIButton isEqual:object];
-    else if([object isKindOfClass:[self class]]) return [self.UIButton isEqual:((C4Button *)object).UIButton];
-    return NO;
+    BOOL equalValue = NO;
+    if([object isKindOfClass:[UIButton class]]) {
+        equalValue = [self.UIButton isEqual:object];
+    } else if([object isKindOfClass:[self class]]){
+        equalValue = [self.UIButton isEqual:((C4Button *)object).UIButton];
+    }
+    return equalValue;
 }
 
 

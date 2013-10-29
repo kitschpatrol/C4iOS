@@ -39,7 +39,9 @@
         [self.layer addSublayer:self.previewLayer];
         self.cameraPosition = CAMERAFRONT;
 
-        [self listenFor:@"imageWasCaptured" fromObject:self.cameraController andRunMethod:@"imageWasCaptured"];
+        [self listenFor:@"imageWasCaptured"
+             fromObject:self.cameraController
+           andRunMethod:@"imageWasCaptured"];
         [self setup];
     }
     return self;

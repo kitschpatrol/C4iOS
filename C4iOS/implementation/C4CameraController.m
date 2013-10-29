@@ -91,7 +91,9 @@
     if(self.captureSession == nil) {
         self.captureSession = [[AVCaptureSession alloc] init];
     }
-    /*We use medium quality, on the iPhone 4 this demo would be laging too much, the conversion in UIImage and CGImage demands too much ressources for a 720p resolution.*/
+    /*We use medium quality, on the iPhone 4 this demo would be laging too much
+     the conversion in UIImage and CGImage demands too much ressources for a 720p resolution.
+     */
     [self.captureSession setSessionPreset:self.captureQuality];
     
     /*We add input and output*/
@@ -138,7 +140,8 @@
 
 - (void)captureImage {
     if(!self.stillImageOutput.isCapturingStillImage) {
-        AVCaptureConnection *captureConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+        AVCaptureConnection *captureConnection = [self.stillImageOutput
+                                                  connectionWithMediaType:AVMediaTypeVideo];
         typedef void (^AVBufferBlock)(CMSampleBufferRef, NSError *);
         AVBufferBlock bufferBlock = ^(CMSampleBufferRef buf, NSError *err) {
             NSData *d = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:buf];
@@ -187,13 +190,18 @@
                 currentCameraPosition = @"CAMERAUNSPECIFIED";
                 break;
         }
-        C4Log(@"Cannot set capture quality: %@ for current camera: %@ on current device: %@", captureQuality, currentCameraPosition, [C4Foundation currentDeviceModel]);
+        C4Log(@"Cannot set capture quality: %@ for current camera: %@ on current device: %@",
+              captureQuality,
+              currentCameraPosition,
+              [C4Foundation currentDeviceModel]);
     }
 }
 
 #pragma mark -
 #pragma mark AVCaptureSession delegate
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+- (void)captureOutput:(AVCaptureOutput *)captureOutput
+didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
+       fromConnection:(AVCaptureConnection *)connection {
     captureOutput = captureOutput;
     sampleBuffer = sampleBuffer;
     connection = connection;

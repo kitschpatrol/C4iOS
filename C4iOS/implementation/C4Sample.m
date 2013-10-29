@@ -18,7 +18,8 @@
 - (id)initWithSampleName:(NSString *)sampleName {
     self = [super init];
     if(self != nil) {
-        sampleName = [sampleName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        NSCharacterSet *trimSet = [NSCharacterSet whitespaceCharacterSet];
+        sampleName = [sampleName stringByTrimmingCharactersInSet:trimSet];
         NSArray *filenameComponents = [sampleName componentsSeparatedByString:@"."];
         
         NSURL *soundFileURL = [[NSBundle mainBundle] URLForResource:filenameComponents[0]

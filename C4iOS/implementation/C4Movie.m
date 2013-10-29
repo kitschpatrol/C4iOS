@@ -51,7 +51,9 @@
 
 - (id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame {
     NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
-    self.movieURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:movieNameComponents[0] ofType:movieNameComponents[1]]];
+    NSString *path =[[NSBundle mainBundle] pathForResource:movieNameComponents[0]
+                                                    ofType:movieNameComponents[1]];
+    self.movieURL = [[NSURL alloc] initFileURLWithPath:path];
     self = [self initWithURL:self.movieURL frame:movieFrame];
     return self;
 }
@@ -69,7 +71,9 @@
         _movieURL = url;
         if([_movieURL scheme]) {
             AVURLAsset *asset = [AVURLAsset URLAssetWithURL:_movieURL options:nil];
-            C4Assert(asset != nil, @"The asset (%@) you tried to create couldn't be initialized", _movieURL);
+            C4Assert(asset != nil,
+                     @"The asset (%@) you tried to create couldn't be initialized",
+                     _movieURL);
 
             NSArray *requestedKeys = @[@"duration", @"playable"];
             for (NSString *key in requestedKeys) {
@@ -82,7 +86,9 @@
             }
             
             if (asset.playable == NO) {
-                NSError *error = [NSError errorWithDomain:@"C4Movie asset cannot be played" code:0 userInfo:nil];
+                NSError *error = [NSError errorWithDomain:@"C4Movie asset cannot be played"
+                                                     code:0
+                                                 userInfo:nil];
                 [self assetFailedToPrepareForPlayback:error];
                 return nil;
             }
@@ -110,7 +116,9 @@
     }
     self.backgroundColor = [UIColor clearColor];
     _constrainsProportions = YES;
-    self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause; // currently C4Movie doesn't handle queues
+
+    // currently C4Movie doesn't handle queues
+    self.player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
     
     _rate = 1.0f;
 
@@ -153,7 +161,12 @@
 }
 
 - (void)assetFailedToPrepareForPlayback:(NSError *)error {
-    C4Log(@"The movie you tried to load failed...\n\n%@\n\nConfirm the following:\n1)the URL you used is correct.\n2)make sure your device is connected to the internet",error);
+    NSMutableString *msg = [@"The movie you tried to load failed...\n\n" mutableCopy];
+    [msg appendFormat:@"%@\n\n",error];
+    [msg appendString:@"Confirm the following:\n"];
+    [msg appendString:@"1)the URL you used is correct.\n"];
+    [msg appendString:@"2)make sure your device is connected to the internet"];
+    C4Log(msg);
 }
 
 - (void)prepareToPlayAsset:(AVURLAsset *)asset {
@@ -194,9 +207,10 @@
     NSArray *audioTracks = [asset tracksWithMediaType:AVMediaTypeAudio];
     NSMutableArray *allAudioTrackInputParameters = [@[] mutableCopy];
     for (AVAssetTrack *track in audioTracks) {
-        AVMutableAudioMixInputParameters *trackInputParameters =[AVMutableAudioMixInputParameters audioMixInputParameters];
-        [trackInputParameters setTrackID:[track trackID]];
-        [allAudioTrackInputParameters addObject:trackInputParameters];
+        AVMutableAudioMixInputParameters *trackInputParams;
+        trackInputParams = [AVMutableAudioMixInputParameters audioMixInputParameters];
+        [trackInputParams setTrackID:[track trackID]];
+        [allAudioTrackInputParameters addObject:trackInputParams];
     }
     
     AVMutableAudioMix *newAudioMix = [AVMutableAudioMix audioMix];
@@ -349,9 +363,12 @@
 - (void)seekToTime:(CGFloat)time {
     CMTime current = self.player.currentTime;
     CMTime newTime = CMTimeMakeWithSeconds(time, current.timescale);
-    CMTimeRange timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, current.timescale), self.playerItem.duration);
+    CMTimeRange timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, current.timescale),
+                                            self.playerItem.duration);
     CMTimeClampToRange(newTime, timeRange);
-    [self.player seekToTime:newTime toleranceBefore:CMTimeMake(1, current.timescale) toleranceAfter:CMTimeMake(1, current.timescale)];
+    [self.player seekToTime:newTime
+            toleranceBefore:CMTimeMake(1, current.timescale)
+             toleranceAfter:CMTimeMake(1, current.timescale)];
 }
 
 - (void)seekByAddingTime:(CGFloat)time {

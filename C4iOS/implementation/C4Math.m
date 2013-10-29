@@ -81,7 +81,11 @@ static C4Math *sharedC4Math = nil;
 	return logf(value);
 }
 
-+ (CGFloat)map:(CGFloat)value fromMin:(CGFloat)min1 max:(CGFloat)max1 toMin:(CGFloat)min2 max:(CGFloat)max2 {
++ (CGFloat)map:(CGFloat)value
+       fromMin:(CGFloat)min1
+           max:(CGFloat)max1
+         toMin:(CGFloat)min2
+           max:(CGFloat)max2 {
 	float rangeLength1 = max1-min1;
 	float rangeLength2 = max2-min2;
 	float multiplier = (value-min1)/rangeLength1;
@@ -171,7 +175,7 @@ static C4Math *sharedC4Math = nil;
     else {
         NSInteger max = a > b ? a : b;
         NSInteger min = a < b ? a : b;
-        C4Assert(max-min > 0, @"Your expression returned true for max-min <= 0 for some reason... max = %ld, min = %ld", (long)max, (long)min);
+        C4Assert(max-min > 0, @"max-min <= 0 ?!... max = %ld, min = %ld", (long)max, (long)min);
         srandomdev();
         returnVal = (((NSInteger)random())%(max-min) + min);
     }
