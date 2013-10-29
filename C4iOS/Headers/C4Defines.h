@@ -46,7 +46,8 @@ C4_EXTERN const CGFloat FOREVER;
 C4_EXTERN BOOL VERBOSELOAD;
 
 /* more lexical names for common mathematic variables, e.g. QUARTER_PI instead of M_PI_4 */
-C4_EXTERN const CGFloat QUARTER_PI, HALF_PI, PI, TWO_PI, ONE_OVER_PI, TWO_OVER_PI, TWO_OVER_ROOT_PI, E, LOG2E, LOG10E, LN2, LN10, SQRT_TWO, SQRT_ONE_OVER_TWO;
+C4_EXTERN const CGFloat QUARTER_PI, HALF_PI, PI, TWO_PI, ONE_OVER_PI, TWO_OVER_PI, TWO_OVER_ROOT_PI,
+C4_EXTERN const CGFloat E, LOG2E, LOG10E, LN2, LN10, SQRT_TWO, SQRT_ONE_OVER_TWO;
 
 typedef enum C4AnimationOptions : NSUInteger {
     

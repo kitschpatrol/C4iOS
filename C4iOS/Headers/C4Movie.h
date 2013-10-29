@@ -24,7 +24,7 @@
  
  @param movieName The filename of a video located in the application's main bundle.
  */
-+(C4Movie *)movieNamed:(NSString *)movieName;
++ (instancetype)movieNamed:(NSString *)movieName;
 
 /**Creates and returns a new C4Movie object with a given file name and frame.
  
@@ -33,7 +33,7 @@
  @param movieName The filename of a video located in the application's main bundle.
  @param movieFrame The frame for the new movie
  */
-+(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame;
++ (instancetype)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame;
 
 /**Initializes a C4Movie object with a given file name.
  
@@ -41,7 +41,7 @@
  
  @param movieName The filename of a video located in the application's main bundle.
  */
--(id)initWithMovieName:(NSString *)movieName;
+- (id)initWithMovieName:(NSString *)movieName;
 
 /**Initializes a C4Movie object with a given file name and frame.
  
@@ -50,48 +50,48 @@
  @param movieName The filename of a video located in the application's main bundle.
  @param movieFrame The frame for the new movie
  */
--(id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame;
+- (id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame;
 
 /**Starts playing the movie.
  
  The movie will play at its last specified rate.
  */
--(void)play;
+- (void)play;
 
 /**Pauses the movie.
  */
--(void)pause;
+- (void)pause;
 
 /**The duration of the movie, in seconds.
  */
--(CGFloat)duration;
+- (CGFloat)duration;
 
 /**The current time of the movie, in seconds.
  */
--(CGFloat)currentTime;
+- (CGFloat)currentTime;
 
 /**Will jump the movie to a specific time, in seconds.
  
  @param time A specific time to which the playhead will jump.
  */
--(void)seekToTime:(CGFloat)time;
+- (void)seekToTime:(CGFloat)time;
 
 /**Will jump the movie forwards or backwards by the given amount of time.
  @param time The amount of time to move forwards or backwards. Can have a + or - value.
  */
--(void)seekByAddingTime:(CGFloat)time;
+- (void)seekByAddingTime:(CGFloat)time;
 
 /**Method called when the movie reaches its end.
  
  Can be overridden to trigger actions at the end of the movie.
  */
--(void)reachedEnd;
+- (void)reachedEnd;
 
 /**Method called when the movie's time changes.
  
  Can be overridden to trigger actions when the movie's current time is changed arbitrarily.
  */
--(void)currentTimeChanged;
+- (void)currentTimeChanged;
 
 /**The original size of the movie file.
  */
@@ -161,7 +161,7 @@
 
  @return The initialized C4Movie object created or nil if initialization is not successful.
  */
-+(C4Movie *)movieWithURL:(NSString *)url;
++ (instancetype)movieWithURL:(NSString *)url;
 
 /**Creates and returns a new C4Movie object with a given URL pointing to a movie file.
  
@@ -172,7 +172,7 @@
  
  @return The initialized C4Movie object created or nil if initialization is not successful.
  */
-+(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame;
++ (instancetype)movieWithURL:(NSString *)url frame:(CGRect)movieFrame;
 
 /** Initializes a C4Movie object with a given URL pointing to a movie file.
  
@@ -182,7 +182,7 @@
  
  @return The initialized C4Movie object created or nil if initialization is not successful.
  */
--(id)initWithURL:(NSURL *)movieURL;
+- (id)initWithURL:(NSURL *)movieURL;
 
 /**Initializes a C4Movie object with a given URL pointing to a movie file.
  
@@ -193,7 +193,7 @@
  
  @return The initialized C4Movie object created or nil if initialization is not successful.
  */
--(id)initWithURL:(NSURL *)movieURL frame:(CGRect)movieFrame;
+- (id)initWithURL:(NSURL *)movieURL frame:(CGRect)movieFrame;
 
 /**Specifies whether or not the movie will maintain its visual proportions when either of its `width` or `height` properties are changed.
  
@@ -209,5 +209,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4Movie.
  */
-+(C4Movie *)defaultStyle;
++ (C4Movie *)defaultStyle;
 @end

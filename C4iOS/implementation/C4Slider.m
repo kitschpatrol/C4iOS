@@ -13,15 +13,15 @@
 #pragma mark style methods
 @synthesize maximumTrackTintColor = _maximumTrackTintColor, minimumTrackTintColor = _minimumTrackTintColor, thumbTintColor = _thumbTintColor;
 
--(id)init {
+- (id)init {
     return [self initWithFrame:CGRectZero];
 }
 
--(id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     return [self initWithFrame:frame defaults:YES];
 }
 
--(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults {
+- (id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults {
     self = [super initWithFrame:frame];
     if(self != nil) {
         
@@ -36,11 +36,11 @@
     return self;
 }
 
--(void)touchEvent:(id)sender {
+- (void)touchEvent:(id)sender {
     sender = sender;
 }
 
--(void)setupFromDefaults {
+- (void)setupFromDefaults {
     C4Slider *defaultSlider = [C4Slider defaultStyle];
 
     self.thumbTintColor = defaultSlider.thumbTintColor;
@@ -49,12 +49,12 @@
     //NOTE: UISlider only recognizes colors for its UIAppearance (check UISlider.h)
 }
 
--(void)setFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     self.UISlider.frame = frame;
 }
 
--(NSDictionary *)style {
+- (NSDictionary *)style {
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
     [localStyle addEntriesFromDictionary:@{@"slider":self.UISlider}];
@@ -70,7 +70,7 @@
     return (NSDictionary *)localAndControlStyle;
 }
 
--(void)setStyle:(NSDictionary *)newStyle {
+- (void)setStyle:(NSDictionary *)newStyle {
     self.maximumTrackTintColor = self.minimumTrackTintColor = self.thumbTintColor = nil;
     [super setStyle:newStyle];
 
@@ -109,217 +109,217 @@
     }
 }
 
--(UIColor *)thumbTintColor {
+- (UIColor *)thumbTintColor {
     return self.UISlider.thumbTintColor;
 }
 
--(void)setThumbTintColor:(UIColor *)color {
+- (void)setThumbTintColor:(UIColor *)color {
     _thumbTintColor = color;
     self.UISlider.thumbTintColor = [self nilForNullObject:color];
 }
 
--(UIColor *)maximumTrackTintColor {
+- (UIColor *)maximumTrackTintColor {
     return self.UISlider.maximumTrackTintColor;
 }
 
--(void)setMaximumTrackTintColor:(UIColor *)color {
+- (void)setMaximumTrackTintColor:(UIColor *)color {
     _maximumTrackTintColor = color;
     self.UISlider.maximumTrackTintColor = [self nilForNullObject:color];
 }
 
--(UIColor *)minimumTrackTintColor {
+- (UIColor *)minimumTrackTintColor {
     return self.UISlider.minimumTrackTintColor;
 }
 
--(void)setMinimumTrackTintColor:(UIColor *)color {
+- (void)setMinimumTrackTintColor:(UIColor *)color {
     _minimumTrackTintColor = color;
     self.UISlider.minimumTrackTintColor = [self nilForNullObject:color];
 }
 
--(C4Image *)maximumValueImage {
+- (C4Image *)maximumValueImage {
     return [C4Image imageWithUIImage:self.UISlider.minimumValueImage];
 }
 
--(C4Image *)minimumValueImage {
+- (C4Image *)minimumValueImage {
     return [C4Image imageWithUIImage:self.UISlider.minimumValueImage];
 }
 
--(BOOL)isContinuous {
+- (BOOL)isContinuous {
     return self.UISlider.continuous;
 }
 
--(void)setContinuous:(BOOL)continuous {
+- (void)setContinuous:(BOOL)continuous {
     self.UISlider.continuous = continuous;
 }
 
--(C4Image *)currentThumbImage {
+- (C4Image *)currentThumbImage {
     return [C4Image imageWithUIImage:self.UISlider.currentThumbImage];
 }
 
--(C4Image *)currentMinimumTrackImage {
+- (C4Image *)currentMinimumTrackImage {
     return [C4Image imageWithUIImage:self.UISlider.currentMinimumTrackImage];
 }
 
--(C4Image *)currentMaximumTrackImage {
+- (C4Image *)currentMaximumTrackImage {
     return [C4Image imageWithUIImage:self.UISlider.currentMaximumTrackImage];
 }
 
 #pragma mark Getter Setter methods for various states
--(C4Image *)maximumTrackImageForState:(C4ControlState)state {
+- (C4Image *)maximumTrackImageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UISlider maximumTrackImageForState:(UIControlState)state]];
 }
 
--(void)setMaximumTrackImage:(C4Image *)image forState:(C4ControlState)state {
+- (void)setMaximumTrackImage:(C4Image *)image forState:(C4ControlState)state {
     [self.UISlider setMaximumTrackImage:image.UIImage forState:(UIControlState)state];
 }
 
--(C4Image *)minimumTrackImageForState:(C4ControlState)state {
+- (C4Image *)minimumTrackImageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UISlider minimumTrackImageForState:(UIControlState)state]];
 }
 
--(void)setMinimumTrackImage:(C4Image *)image forState:(C4ControlState)state {
+- (void)setMinimumTrackImage:(C4Image *)image forState:(C4ControlState)state {
     [self.UISlider setMinimumTrackImage:image.UIImage forState:(UIControlState)state];
 }
 
--(C4Image *)thumbImageForState:(C4ControlState)state {
+- (C4Image *)thumbImageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UISlider thumbImageForState:(UIControlState)state]];
 }
 
--(void)setThumbImage:(C4Image *)image forState:(C4ControlState)state {
+- (void)setThumbImage:(C4Image *)image forState:(C4ControlState)state {
     [self.UISlider setThumbImage:image.UIImage forState:(UIControlState)state];
 }
 
 #pragma mark C4UIElement (target:action)
--(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+- (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISlider addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
 
--(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+- (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISlider removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark Tracking
 
-//-(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+//- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
 //    [self postNotification:@"trackingBegan"];
 //    [self beginTracking];
 //    return [self.UISlider beginTrackingWithTouch:touch withEvent:event];
 //}
 //
-//-(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+//- (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
 //    [self postNotification:@"trackingContinued"];
 //    [self continueTracking];
 //    return [self.UISlider continueTrackingWithTouch:touch withEvent:event];
 //}
 //
-//-(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+//- (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
 //    [self postNotification:@"trackingEnded"];
 //    [self endTracking];
 //    return [self.UISlider endTrackingWithTouch:touch withEvent:event];
 //}
 //
-//-(void)cancelTrackingWithEvent:(UIEvent *)event {
+//- (void)cancelTrackingWithEvent:(UIEvent *)event {
 //    [self postNotification:@"trackingCancelled"];
 //    [self cancelTracking];
 //    [self.UISlider cancelTrackingWithEvent:event];
 //}
 //
-//-(void)beginTracking {
+//- (void)beginTracking {
 //}
 //
-//-(void)continueTracking {
+//- (void)continueTracking {
 //}
 //
-//-(void)endTracking {
+//- (void)endTracking {
 //}
 //
-//-(void)cancelTracking {
+//- (void)cancelTracking {
 //}
 
-+(C4Slider *)slider:(CGRect)rect {
++ (C4Slider *)slider:(CGRect)rect {
     return [[C4Slider alloc] initWithFrame:rect];
 }
 
-+(C4Slider *)defaultStyle {
++ (C4Slider *)defaultStyle {
     return (C4Slider *)[C4Slider appearance];
 }
 
--(C4Slider *)copyWithZone:(NSZone *)zone {
+- (C4Slider *)copyWithZone:(NSZone *)zone {
     C4Slider *slider = [[C4Slider allocWithZone:zone] initWithFrame:self.frame defaults:NO];
     slider.style = self.style;
     return slider;
 }
 
 #pragma mark Slider
--(CGFloat)value {
+- (CGFloat)value {
     return self.UISlider.value;
 }
 
--(void)setValue:(CGFloat)value {
+- (void)setValue:(CGFloat)value {
     [self setValue:value animated:NO];
 }
 
--(void)setValue:(CGFloat)value animated:(BOOL)animated {
+- (void)setValue:(CGFloat)value animated:(BOOL)animated {
     [self.UISlider setValue:value animated:animated];
 }
 
--(CGFloat)maximumValue {
+- (CGFloat)maximumValue {
     return self.UISlider.maximumValue;
 }
 
--(void)setMaximumValue:(CGFloat)maximumValue {
+- (void)setMaximumValue:(CGFloat)maximumValue {
     self.UISlider.maximumValue = maximumValue;
 }
 
--(CGFloat)minimumValue {
+- (CGFloat)minimumValue {
     return self.UISlider.minimumValue;
 }
 
--(void)setMinimumValue:(CGFloat)minimumValue {
+- (void)setMinimumValue:(CGFloat)minimumValue {
     self.UISlider.minimumValue = minimumValue;
 }
 
 #pragma mark ControlState
 
--(UIControlState)state {
+- (UIControlState)state {
     return self.UISlider.state;
 }
 
--(void)setEnabled:(BOOL)enabled {
+- (void)setEnabled:(BOOL)enabled {
     self.UISlider.enabled = enabled;
 }
 
--(BOOL)enabled {
+- (BOOL)enabled {
     return self.UISlider.enabled;
 }
 
--(void)setHighlighted:(BOOL)highlighted {
+- (void)setHighlighted:(BOOL)highlighted {
     self.UISlider.highlighted = highlighted;
 }
 
--(BOOL)highlighted {
+- (BOOL)highlighted {
     return self.UISlider.highlighted;
 }
 
--(void)setSelected:(BOOL)selected {
+- (void)setSelected:(BOOL)selected {
     self.UISlider.selected = selected;
 }
 
--(BOOL)selected {
+- (BOOL)selected {
     return self.UISlider.selected;
 }
 
--(void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)contentVerticalAlignment {
+- (void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)contentVerticalAlignment {
     self.UISlider.contentVerticalAlignment = contentVerticalAlignment;
 }
 
--(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
+- (void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)contentHorizontalAlignment {
     self.UISlider.contentVerticalAlignment = contentHorizontalAlignment;
 }
 
 #pragma mark isEqual
 
--(BOOL)isEqual:(id)object {
+- (BOOL)isEqual:(id)object {
     if([object isKindOfClass:[UISlider class]]) return [self.UISlider isEqual:object];
     else if([object isKindOfClass:[self class]]) return [self.UISlider isEqual:((C4Slider *)object).UISlider];
     return NO;

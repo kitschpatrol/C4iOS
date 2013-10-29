@@ -34,7 +34,7 @@
 	[self initCapture];
 }
 
--(void)dealloc {
+- (void)dealloc {
     _captureSession = nil;
     _stillImageOutput = nil;
     _assetWriter = nil;
@@ -43,7 +43,7 @@
     _previewLayer = nil;
 }
 
--(void)setPreviewLayer:(C4CameraLayer *)previewLayer {
+- (void)setPreviewLayer:(C4CameraLayer *)previewLayer {
     _previewLayer = previewLayer;
 }
 
@@ -51,7 +51,7 @@
     [self initCapture:self.cameraPosition];
 }
 
--(AVCaptureDevice *)cameraForPosition:(C4CameraPosition)position {
+- (AVCaptureDevice *)cameraForPosition:(C4CameraPosition)position {
     NSArray *cameras = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     AVCaptureDevice *camera;
     _cameraPosition = position;
@@ -63,7 +63,7 @@
     return camera;
 }
 
--(void)initializeInputOutputForCamera:(AVCaptureDevice *)camera {
+- (void)initializeInputOutputForCamera:(AVCaptureDevice *)camera {
     if(self.input == nil) {
         self.input = [AVCaptureDeviceInput deviceInputWithDevice:camera error:nil];
     }
@@ -86,7 +86,7 @@
     }
 }
 
--(void)initializeCaptureSession {
+- (void)initializeCaptureSession {
     /*And we create a capture session*/
     if(self.captureSession == nil) {
         self.captureSession = [[AVCaptureSession alloc] init];
@@ -106,7 +106,7 @@
     [self.captureSession addOutput:self.stillImageOutput];
 }
 
--(void)initializePreviewLayer {
+- (void)initializePreviewLayer {
     self.previewLayer.session = self.captureSession;
     self.previewLayer.backgroundColor = [UIColor clearColor].CGColor;
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
@@ -122,7 +122,7 @@
     _initialized = YES;
 }
 
--(void)switchCameraPosition:(C4CameraPosition)position {
+- (void)switchCameraPosition:(C4CameraPosition)position {
     if(self.cameraPosition != position) {
         _cameraPosition = position;
         if(_initialized == YES) {
@@ -136,7 +136,7 @@
     }
 }
 
--(void)captureImage {
+- (void)captureImage {
     if(!self.stillImageOutput.isCapturingStillImage) {
         AVCaptureConnection *captureConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
         typedef void (^AVBufferBlock)(CMSampleBufferRef, NSError *);
@@ -165,7 +165,7 @@
     }
 }
 
--(void)setCaptureQuality:(NSString *)captureQuality {
+- (void)setCaptureQuality:(NSString *)captureQuality {
     if([self.captureSession canSetSessionPreset:captureQuality]) {
         _captureQuality = captureQuality;
         if(_initialized == YES) {

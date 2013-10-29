@@ -13,21 +13,22 @@
  
  @warning This class should only be used internally by the C4Camera object and not subclasses or used explicitly.
  */
-@interface C4CameraController : C4ViewController <AVCaptureVideoDataOutputSampleBufferDelegate, C4Notification> {
-}
+@interface C4CameraController : C4ViewController
+<AVCaptureVideoDataOutputSampleBufferDelegate, C4Notification>
+
 #pragma mark - Initializing Capture
 ///@name Initializing Capture
 /** Initializes a C4Camera object, making it ready to capture images.
 
  The default is CAMERAFRONT.
  */
--(void)initCapture;
+- (void)initCapture;
 
 /** Initializes camera capture for a given camera position.
 
  @param position The position of the camera to use upon initialization.
  */
--(void)initCapture:(C4CameraPosition)position;
+- (void)initCapture:(C4CameraPosition)position;
 
 /**Specifies whether or not the receiver has already been initialized.
  */
@@ -39,7 +40,7 @@
  
  This method also posts a notification when an image has been captured.
  */
--(void)captureImage;
+- (void)captureImage;
 
 /** The receiver’s most recently captured image. (read-only)
  
@@ -73,7 +74,7 @@
  
  @param position A position (CAMERAFRONT or CAMERABACK) to which the camera should switch.
  */
--(void)switchCameraPosition:(C4CameraPosition)position;
+- (void)switchCameraPosition:(C4CameraPosition)position;
 
 /**Specifies the current capture quality of the receiver. The following list of qualities is available:
  

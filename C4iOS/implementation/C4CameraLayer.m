@@ -36,18 +36,18 @@
     return self;
 }
 
--(void)awakeFromNib {
+- (void)awakeFromNib {
 #ifdef VERBOSE
     C4Log(@"%@ awakeFromNib",[self class]);
 #endif
 }
 
 #pragma mark Safe Initialization Methods
--(void)setup {}
--(void)test {}
+- (void)setup {}
+- (void)test {}
 
 #pragma mark C4Layer Animation Methods //code from this line forward should be common amongst all C4Layer variations
--(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
+- (CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.duration = self.animationDuration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
@@ -58,11 +58,11 @@
     return animation;
 }
 
--(CGFloat)animationDuration {
+- (CGFloat)animationDuration {
     return _animationDuration + 0.0001f;
 }
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
+- (void)setAnimationOptions:(NSUInteger)animationOptions {
     if((animationOptions & LINEAR) == LINEAR) {
         _currentAnimationEasing = kCAMediaTimingFunctionLinear;
     } else if((animationOptions & EASEOUT) == EASEOUT) {
@@ -85,7 +85,7 @@
     else _allowsInteraction = NO;
 }
 
--(void)setPerspectiveDistance:(CGFloat)perspectiveDistance {
+- (void)setPerspectiveDistance:(CGFloat)perspectiveDistance {
     _perspectiveDistance = perspectiveDistance;
     CATransform3D t = self.transform;
     if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
@@ -93,7 +93,7 @@
     self.transform = t;
 }
 
--(void)animateBackgroundColor:(CGColorRef)_backgroundColor {
+- (void)animateBackgroundColor:(CGColorRef)_backgroundColor {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundColor"];
     animation.fromValue = (id)self.backgroundColor;
@@ -108,7 +108,7 @@
     [CATransaction commit];
 }
 
--(void)animateBorderColor:(CGColorRef)_borderColor {
+- (void)animateBorderColor:(CGColorRef)_borderColor {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
     animation.fromValue = (id)self.borderColor;
@@ -123,7 +123,7 @@
     [CATransaction commit];
 }
 
--(void)animateBackgroundFilters:(NSArray *)_backgroundFilters {
+- (void)animateBackgroundFilters:(NSArray *)_backgroundFilters {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
     animation.fromValue = self.backgroundFilters;
@@ -138,7 +138,7 @@
     [CATransaction commit];
 }
 
--(void)animateBorderWidth:(CGFloat)_borderWidth {
+- (void)animateBorderWidth:(CGFloat)_borderWidth {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
     animation.fromValue = @(self.borderWidth);
@@ -153,7 +153,7 @@
     [CATransaction commit];
 }
 
--(void)animateCompositingFilter:(id)_compositingFilter {
+- (void)animateCompositingFilter:(id)_compositingFilter {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
     animation.fromValue = self.compositingFilter;
@@ -168,7 +168,7 @@
     [CATransaction commit];
 }
 
--(void)animateContents:(CGImageRef)_image {
+- (void)animateContents:(CGImageRef)_image {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"contents"];
     animation.fromValue = self.contents;
@@ -183,7 +183,7 @@
     [CATransaction commit];
 }
 
--(void)animateCornerRadius:(CGFloat)_cornerRadius {
+- (void)animateCornerRadius:(CGFloat)_cornerRadius {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
     animation.fromValue = @(self.cornerRadius);
@@ -198,7 +198,7 @@
     [CATransaction commit];
 }
 
--(void)animateLayerTransform:(CATransform3D)newTransform {
+- (void)animateLayerTransform:(CATransform3D)newTransform {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"sublayerTransform"];
     animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
@@ -213,7 +213,7 @@
     [CATransaction commit];
 }
 
--(void)animateRotation:(CGFloat)newRotationAngle {
+- (void)animateRotation:(CGFloat)newRotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = @(self.rotationAngle);
@@ -229,7 +229,7 @@
     [CATransaction commit];
 }
 
--(void)animateRotationX:(CGFloat)newRotationAngle {
+- (void)animateRotationX:(CGFloat)newRotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
     animation.fromValue = @(self.rotationAngleX);
@@ -245,7 +245,7 @@
     [CATransaction commit];
 }
 
--(void)animateRotationY:(CGFloat)newRotationAngle {
+- (void)animateRotationY:(CGFloat)newRotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
     animation.fromValue = @(self.rotationAngleY);
@@ -261,7 +261,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowColor:(CGColorRef)_shadowColor {
+- (void)animateShadowColor:(CGColorRef)_shadowColor {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
     animation.fromValue = (id)self.shadowColor;
@@ -276,7 +276,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowOffset:(CGSize)_shadowOffset {
+- (void)animateShadowOffset:(CGSize)_shadowOffset {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
     animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
@@ -291,7 +291,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowOpacity:(CGFloat)_shadowOpacity {
+- (void)animateShadowOpacity:(CGFloat)_shadowOpacity {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
     animation.fromValue = @(self.shadowOpacity);
@@ -306,7 +306,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowPath:(CGPathRef)_shadowPath {
+- (void)animateShadowPath:(CGPathRef)_shadowPath {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
     animation.fromValue = (id)self.shadowPath;
@@ -321,7 +321,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowRadius:(CGFloat)_shadowRadius {
+- (void)animateShadowRadius:(CGFloat)_shadowRadius {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
     animation.fromValue = @(self.shadowRadius);
@@ -336,7 +336,7 @@
     [CATransaction commit];
 }
 
--(void)animateZPosition:(CGFloat)_zPosition {
+- (void)animateZPosition:(CGFloat)_zPosition {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
     animation.fromValue = @(self.zPosition);

@@ -32,7 +32,7 @@
 }
 
 
--(void)setup {
+- (void)setup {
     
 }
 
@@ -70,7 +70,7 @@
 	_eaglContext = nil;
 }
 
--(C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone {
+- (C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone {
     return [[C4EAGLES1Renderer allocWithZone:zone] init];
 }
 

@@ -21,19 +21,19 @@
 
 /** A method to call instead of overriding any of the standard initializers.
  
- It is easier and safer to override this method than to override something like -(id)init, or -(id)initWithFrame, etc...
+ It is easier and safer to override this method than to override something like - (id)init, or - (id)initWithFrame, etc...
  */
--(void)setup;
+- (void)setup;
 
 /** A method to call when you want to test simple things.
  
  Override this method to test small bits of fuctionality. For example, you could call this method to make sure another call is working by doing the following in the .m file of your subclass:
  
- -(void)test {
+ - (void)test {
  C4Log(@"test was run");
  }
  */
--(void)test;
+- (void)test;
 
 /** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
  
@@ -41,7 +41,7 @@
  
  @param rotation the value (in radians) to rotate the receiver
  */
--(void)rotationDidFinish:(CGFloat)rotation;
+- (void)rotationDidFinish:(CGFloat)rotation;
 
 /// @name Setting A Control's Origin Point
 /** The origin point of the view.
@@ -245,7 +245,7 @@
  
  @param context The graphics context to use to render the layer.
  */
--(void)renderInContext:(CGContextRef)context;
+- (void)renderInContext:(CGContextRef)context;
 
 #pragma mark - Default Style
 ///@name Default Style
@@ -255,5 +255,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4Window.
  */
-+(C4Window *)defaultStyle;
++ (C4Window *)defaultStyle;
 @end

@@ -17,8 +17,8 @@
 
 #pragma mark Foundation Methods
 /// @name Foundation Methods
-
-+(C4Foundation *)sharedManager;
+//FIXME: should this also be +instancetype?
++ (C4Foundation *)sharedManager;
 
 /** Logs an error message to the console.
  
@@ -30,11 +30,11 @@ void C4Log(NSString *logString,...);
 
 /** Returns a pre-defined comparator for sorting float values.
  */
-+(NSComparator)floatComparator;
++ (NSComparator)floatComparator;
 
 /** Returns a pre-defined comparator for sorting float values.
  */
--(NSComparator)floatComparator;
+- (NSComparator)floatComparator;
 
 /** Sorts two undefined objects.
  
@@ -68,7 +68,11 @@ CGRect CGRectMakeFromPointArray(CGPoint *pointArray, int pointCount);
  @param clockwise the choice, YES or NO, for whether the arc will be drawn clockwise or counterclockwise
  @return a CGRect structure that encompasses the arc
  */
-CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise);
+CGRect CGRectMakeFromArcComponents(CGPoint centerPoint,
+                                   CGFloat radius,
+                                   CGFloat startAngle,
+                                   CGFloat endAngle,
+                                   BOOL clockwise);
 
 /**Returns a frame that encompasses a wedge created from the specified parameters
  
@@ -79,11 +83,15 @@ CGRect CGRectMakeFromArcComponents(CGPoint centerPoint, CGFloat radius, CGFloat 
  @param clockwise the choice, YES or NO, for whether the wedge will be drawn clockwise or counterclockwise
  @return a CGRect structure that encompasses the wedge
  */
-CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint, CGFloat radius, CGFloat startAngle, CGFloat endAngle, BOOL clockwise);
+CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint,
+                                     CGFloat radius,
+                                     CGFloat startAngle,
+                                     CGFloat endAngle,
+                                     BOOL clockwise);
 
 /**Returns a string that describes the current device model. For example, running this method from the simulator returns "x86_64" because the simulator is on a Macbook Pro whereas running this on an iPhone 5 returns "iPhone5,1".
  
  @return an NSString describing the current device model
  */
-+(NSString *)currentDeviceModel;
++ (NSString *)currentDeviceModel;
 @end

@@ -26,7 +26,7 @@
  
  @param shadowColor The color to which will be animated
  */
--(void)animateShadowColor:(CGColorRef)shadowColor;
+- (void)animateShadowColor:(CGColorRef)shadowColor;
 
 /** Animates the layer's shadowOpacity from it's current opacity to a new one.
  
@@ -34,7 +34,7 @@
  
  @param shadowOpacity The opacity to which will be animated
  */
--(void)animateShadowOpacity:(CGFloat)shadowOpacity;
+- (void)animateShadowOpacity:(CGFloat)shadowOpacity;
 
 /** Animates the layer's shadowRadius from it's current radius to a new one.
  
@@ -42,7 +42,7 @@
  
  @param shadowRadius The radius to which will be animated
  */
--(void)animateShadowRadius:(CGFloat)shadowRadius;
+- (void)animateShadowRadius:(CGFloat)shadowRadius;
 
 /** Animates the layer's shadowOffset from it's current offset size to a new one.
  
@@ -50,7 +50,7 @@
  
  @param shadowOffset The offset size to which will be animated
  */
--(void)animateShadowOffset:(CGSize)shadowOffset;
+- (void)animateShadowOffset:(CGSize)shadowOffset;
 
 /** Animates the layer's shadowPath from it's current path to a new one.
  
@@ -58,7 +58,7 @@
  
  @param shadowPath The path to which will be animated
  */
--(void)animateShadowPath:(CGPathRef)shadowPath;
+- (void)animateShadowPath:(CGPathRef)shadowPath;
 
 /** Animates the layer's backgroundFilters from it's current set of background filters to a new one.
  
@@ -66,7 +66,7 @@
  
  @param backgroundFilters The set of filters to which will be animated
  */
--(void)animateBackgroundFilters:(NSArray *)backgroundFilters;
+- (void)animateBackgroundFilters:(NSArray *)backgroundFilters;
 
 /** Animates the layer's contents.
  
@@ -74,7 +74,7 @@
  
  @param image The new image to set as the layer's contents
  */
--(void)animateContents:(CGImageRef)image;
+- (void)animateContents:(CGImageRef)image;
 
 /** Animates the layer's compositingFilters from it's current set of compositing filters to a new one.
  
@@ -82,7 +82,7 @@
  
  @param compositingFilter The set of compositing filters to which will be animated
  */
--(void)animateCompositingFilter:(id)compositingFilter;
+- (void)animateCompositingFilter:(id)compositingFilter;
 
 /** Animates the layer's background color from it's current color to a new one.
  
@@ -90,7 +90,7 @@
  
  @param backgroundColor A CGColorRef to which the background color will animate
  */
--(void)animateBackgroundColor:(CGColorRef)backgroundColor;
+- (void)animateBackgroundColor:(CGColorRef)backgroundColor;
 
 /** Animates the layer's border color from it's current color to a new one.
  
@@ -98,7 +98,7 @@
  
  @param borderColor A CGColorRef to which the border color will animate
  */
--(void)animateBorderColor:(CGColorRef)borderColor;
+- (void)animateBorderColor:(CGColorRef)borderColor;
 
 /** Animates the layer's border width from it's current width to a new one.
  
@@ -106,7 +106,7 @@
  
  @param borderWidth A CGFloat to which the border width will animate
  */
--(void)animateBorderWidth:(CGFloat)borderWidth;
+- (void)animateBorderWidth:(CGFloat)borderWidth;
 
 /** Animates the layer's corner radius from it's current width to a new one.
  
@@ -114,7 +114,7 @@
  
  @param cornerRadius A CGFloat to which the corner radius width will animate
  */
--(void)animateCornerRadius:(CGFloat)cornerRadius;
+- (void)animateCornerRadius:(CGFloat)cornerRadius;
 
 /** Animates the layer's z-position from it's current width to a new one.
  
@@ -122,7 +122,7 @@
  
  @param zPosition A CGFloat to which the z-position will animate
  */
--(void)animateZPosition:(CGFloat)zPosition;
+- (void)animateZPosition:(CGFloat)zPosition;
 
 /** Animates the layer's rotation angle (z-axis) from it's current width to a new one.
  
@@ -130,7 +130,7 @@
  
  @param rotationAngle A CGFloat to which the z-axis rotation angle will animate
  */
--(void)animateRotation:(CGFloat)rotationAngle;
+- (void)animateRotation:(CGFloat)rotationAngle;
 
 /** Animates the layer's rotation angle (x-axis) from it's current width to a new one.
  
@@ -138,7 +138,7 @@
  
  @param rotationAngle A CGFloat to which the x-axis rotation angle will animate
  */
--(void)animateRotationX:(CGFloat)rotationAngle;
+- (void)animateRotationX:(CGFloat)rotationAngle;
 
 /** Animates the layer's rotation angle (y-axis) from it's current width to a new one.
  
@@ -146,7 +146,7 @@
  
  @param rotationAngle A CGFloat to which the y-axis rotation angle will animate
  */
--(void)animateRotationY:(CGFloat)rotationAngle;
+- (void)animateRotationY:(CGFloat)rotationAngle;
 
 /** Animates the layer's sublayer transform from it's current value to a new one.
  
@@ -154,7 +154,7 @@
  
  @param layerTransform A CATransform3D structure to which the sublayer transform will animate
  */
--(void)animateLayerTransform:(CATransform3D)layerTransform;
+- (void)animateLayerTransform:(CATransform3D)layerTransform;
 
 /** Convenience method for creating a CABasicAnimation.
  
@@ -162,7 +162,7 @@
  
  @param keyPath A string representation of an animatable property (e.g. @"path", @"fillColor", etc..)
  */
--(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
+- (CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
 
 #pragma mark Properties
 /// @name Properties

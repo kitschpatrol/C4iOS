@@ -27,7 +27,7 @@
  
  @param camera A C4Camera object.
  */
--(void)addCamera:(C4Camera *)camera;
+- (void)addCamera:(C4Camera *)camera;
 
 /** Adds a C4GL to the view.
  
@@ -37,7 +37,7 @@
  
  @param gl A C4GL object.
  */
--(void)addGL:(C4GL *)gl;
+- (void)addGL:(C4GL *)gl;
 
 /** Adds a C4Image to the view.
  
@@ -47,7 +47,7 @@
  
  @param image A C4Image object.
  */
--(void)addImage:(C4Image *)image;
+- (void)addImage:(C4Image *)image;
 
 /** Adds a C4Label to the view.
  
@@ -57,7 +57,7 @@
  
  @param label A C4Label object.
  */
--(void)addLabel:(C4Label *)label;
+- (void)addLabel:(C4Label *)label;
 
 /** Adds a C4Movie to the view.
  
@@ -67,7 +67,7 @@
  
  @param movie A C4Movie object.
  */
--(void)addMovie:(C4Movie *)movie;
+- (void)addMovie:(C4Movie *)movie;
 
 /** A method for adding multiple objects to the canvas at one time.
  
@@ -75,7 +75,7 @@
  
  @param array The array of visual objects to remove from their parent view.
  */
--(void)addObjects:(NSArray *)array;
+- (void)addObjects:(NSArray *)array;
 
 /** Adds a C4Shape to the view.
  
@@ -85,7 +85,7 @@
  
  @param shape A C4Shape object.
  */
--(void)addShape:(C4Shape *)shape;
+- (void)addShape:(C4Shape *)shape;
 
 /** Adds a C4UIElement to the view.
  
@@ -95,7 +95,7 @@
  
  @param object an object that conforms to the C4UIElement protocol.
  */
--(void)addUIElement:(id <C4UIElement> )object;
+- (void)addUIElement:(id <C4UIElement> )object;
 
 /** A method to remove another object from its view.
  
@@ -103,7 +103,7 @@
  
  @param visualObject the visible object to remove from its parent view
  */
--(void)removeObject:(id)visualObject;
+- (void)removeObject:(id)visualObject;
 
 /** A method to remove an array of objects from their view.
  
@@ -111,5 +111,5 @@
  
  @param array The array of visual objects to remove from their parent view
  */
--(void)removeObjects:(NSArray *)array;
+- (void)removeObjects:(NSArray *)array;
 @end

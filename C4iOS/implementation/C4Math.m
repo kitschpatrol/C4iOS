@@ -37,133 +37,133 @@ static C4Math *sharedC4Math = nil;
 
 #pragma mark Initialization
 
-+(void)load {
++ (void)load {
 	if(VERBOSELOAD) printf("C4Math\n");
 }
 
 #pragma mark Calculation
-+(NSInteger)abs:(NSInteger)value {
++ (NSInteger)abs:(NSInteger)value {
 	return abs((int)value);
 }
 
-+(CGFloat)absf:(CGFloat)value {
++ (CGFloat)absf:(CGFloat)value {
 	return fabsf(value);
 }
 
-+(NSInteger)ceil:(CGFloat)value {
++ (NSInteger)ceil:(CGFloat)value {
 	return (NSInteger)ceilf(value);
 }
 
-+(NSInteger)constrain:(NSInteger)value min:(NSInteger)min max:(NSInteger)max {
++ (NSInteger)constrain:(NSInteger)value min:(NSInteger)min max:(NSInteger)max {
 	return (NSInteger)[self constrainf:value min:min max:max];
 }
 
-+(CGFloat)constrainf:(CGFloat)value min:(CGFloat)min max:(CGFloat)max {
++ (CGFloat)constrainf:(CGFloat)value min:(CGFloat)min max:(CGFloat)max {
 	if (min < value && value < max) return value;
 	else if (value <= min) return min;
 	else return max;
 }
 
-+(CGFloat)exp:(CGFloat)value {
++ (CGFloat)exp:(CGFloat)value {
 	return expf(value);
 }
 
-+(NSInteger)floor:(CGFloat)value {
++ (NSInteger)floor:(CGFloat)value {
 	return (NSInteger)floor((double)value);
 }
 
-+(CGFloat)lerpBetweenA:(CGFloat)a B:(CGFloat)b byAmount:(CGFloat)amount {
++ (CGFloat)lerpBetweenA:(CGFloat)a B:(CGFloat)b byAmount:(CGFloat)amount {
     CGFloat range = b-a;
 	return a+range*amount;
 }
 
-+(CGFloat)log:(CGFloat)value {
++ (CGFloat)log:(CGFloat)value {
 	return logf(value);
 }
 
-+(CGFloat)map:(CGFloat)value fromMin:(CGFloat)min1 max:(CGFloat)max1 toMin:(CGFloat)min2 max:(CGFloat)max2 {
++ (CGFloat)map:(CGFloat)value fromMin:(CGFloat)min1 max:(CGFloat)max1 toMin:(CGFloat)min2 max:(CGFloat)max2 {
 	float rangeLength1 = max1-min1;
 	float rangeLength2 = max2-min2;
 	float multiplier = (value-min1)/rangeLength1;
 	return multiplier*rangeLength2+min2;
 }
 
-+(CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b {
++ (CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b {
 	float max = a > b ? a : b;
 	return max;
 }
 
-+(CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c {
++ (CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c {
 	return [self maxOfA:[self maxOfA:a B:b] B:c];
 }
 
 
-+(CGFloat)minOfA:(CGFloat)a B:(CGFloat)b {
++ (CGFloat)minOfA:(CGFloat)a B:(CGFloat)b {
 	float min = a < b ? a : b;
 	return min;
 }
 
-+(CGFloat)minOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c {
++ (CGFloat)minOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c {
 	return [self minOfA:[self minOfA:a B:b] B:c];
 }
 
-+(CGFloat)norm:(CGFloat)value fromMin:(CGFloat)min toMax:(CGFloat)max {
++ (CGFloat)norm:(CGFloat)value fromMin:(CGFloat)min toMax:(CGFloat)max {
     value = value;
     min = min;
     max = max;
 	return 0;
 }
 
-+(CGFloat)pow:(CGFloat)value raisedTo:(CGFloat)degree {
++ (CGFloat)pow:(CGFloat)value raisedTo:(CGFloat)degree {
 	return powf(value,degree);
 }
 
-+(CGFloat)round:(CGFloat)value {
++ (CGFloat)round:(CGFloat)value {
 	return roundf(value);
 }
 
-+(CGFloat)square:(CGFloat)value {
++ (CGFloat)square:(CGFloat)value {
 	return powf(value, 2);
 }
 
-+(CGFloat)sqrt:(CGFloat)value {
++ (CGFloat)sqrt:(CGFloat)value {
 	return sqrtf(value);
 }
 
 #pragma mark Trigonometry
-+(CGFloat)acos:(CGFloat)value {
++ (CGFloat)acos:(CGFloat)value {
 	return acosf(value);
 }
 
-+(CGFloat)asin:(CGFloat)value {
++ (CGFloat)asin:(CGFloat)value {
 	return asinf(value);
 }
 
-+(CGFloat)atan:(CGFloat)value {
++ (CGFloat)atan:(CGFloat)value {
 	return atanf(value);
 }
 
-+(CGFloat)atan2Y:(CGFloat)y X:(CGFloat)x {
++ (CGFloat)atan2Y:(CGFloat)y X:(CGFloat)x {
 	return atan2f(y,x);
 }
 
-+(CGFloat)cos:(CGFloat)value {
++ (CGFloat)cos:(CGFloat)value {
 	return cosf(value);
 }
-+(CGFloat)sin:(CGFloat)value {
++ (CGFloat)sin:(CGFloat)value {
 	return sinf(value);
 }
 
-+(CGFloat)tan:(CGFloat)value {
++ (CGFloat)tan:(CGFloat)value {
 	return tanf(value);
 }
 #pragma mark Random
-+(NSInteger)randomInt:(NSInteger)value {
++ (NSInteger)randomInt:(NSInteger)value {
 	srandomdev();
 	return ((NSInteger)random())%value;
 }
 
-+(NSInteger)randomIntBetweenA:(NSInteger)a andB:(NSInteger)b{
++ (NSInteger)randomIntBetweenA:(NSInteger)a andB:(NSInteger)b{
     NSInteger returnVal;
 	if (a == b) {
         returnVal = a;
@@ -171,7 +171,7 @@ static C4Math *sharedC4Math = nil;
     else {
         NSInteger max = a > b ? a : b;
         NSInteger min = a < b ? a : b;
-        C4Assert(max-min > 0, @"Your expression returned true for max-min <= 0 for some reason... max = %d, min = %d", max, min);
+        C4Assert(max-min > 0, @"Your expression returned true for max-min <= 0 for some reason... max = %ld, min = %ld", (long)max, (long)min);
         srandomdev();
         returnVal = (((NSInteger)random())%(max-min) + min);
     }

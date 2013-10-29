@@ -11,7 +11,7 @@
 
 @implementation C4AppDelegate
 
--(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     launchOptions = launchOptions;
     
     [C4View class];
@@ -41,7 +41,7 @@
     return YES;
 }
 
-+(void)initialize {
++ (void)initialize {
     //set these before everything else.
     [C4Control defaultStyle].alpha = 1.0f;
     [C4Control defaultStyle].animationDuration = 0.0f;

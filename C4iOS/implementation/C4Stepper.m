@@ -11,12 +11,12 @@
 @implementation C4Stepper
 @synthesize tintColor = _tintColor;
 
-+(C4Stepper *)stepper {
++ (C4Stepper *)stepper {
     C4Stepper *stepper = [[C4Stepper alloc] initWithFrame:CGRectZero];
     return stepper;
 }
 
--(id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame {
     CGPoint origin = frame.origin;
     origin.x = floorf(origin.x);
     origin.y = floorf(origin.y);
@@ -32,130 +32,130 @@
     return self;
 }
 
--(void)setCenter:(CGPoint)center {
+- (void)setCenter:(CGPoint)center {
     center.x = floorf(center.x);
     center.y = floorf(center.y)+0.5f;
     [super setCenter:center];
 }
 
--(BOOL)isContinuous {
+- (BOOL)isContinuous {
     return self.UIStepper.isContinuous;
 }
 
--(void)setContinuous:(BOOL)continuous {
+- (void)setContinuous:(BOOL)continuous {
     self.UIStepper.continuous = continuous;
 }
 
--(BOOL)autorepeat {
+- (BOOL)autorepeat {
     return self.UIStepper.autorepeat;
 }
 
--(void)setAutorepeat:(BOOL)autorepeat {
+- (void)setAutorepeat:(BOOL)autorepeat {
     self.UIStepper.autorepeat = autorepeat;
 }
 
--(BOOL)wraps {
+- (BOOL)wraps {
     return self.UIStepper.wraps;
 }
 
--(void)setWraps:(BOOL)wraps {
+- (void)setWraps:(BOOL)wraps {
     self.UIStepper.wraps = wraps;
 }
 
--(CGFloat)value {
+- (CGFloat)value {
     return (CGFloat)self.UIStepper.value;
 }
 
--(void)setValue:(CGFloat)value {
+- (void)setValue:(CGFloat)value {
     self.UIStepper.value = (double)value;
 }
 
--(CGFloat)maximumValue {
+- (CGFloat)maximumValue {
     return (CGFloat)self.UIStepper.maximumValue;
 }
 
--(void)setMaximumValue:(CGFloat)maximumValue {
+- (void)setMaximumValue:(CGFloat)maximumValue {
     self.UIStepper.maximumValue = (double)maximumValue;
 }
 
--(CGFloat)minimumValue {
+- (CGFloat)minimumValue {
     return (CGFloat)self.UIStepper.minimumValue;
 }
 
--(void)setMinimumValue:(CGFloat)minimumValue {
+- (void)setMinimumValue:(CGFloat)minimumValue {
     self.UIStepper.minimumValue = (double)minimumValue;
 }
 
--(CGFloat)stepValue {
+- (CGFloat)stepValue {
     return (CGFloat)self.UIStepper.stepValue;
 }
 
--(void)setStepValue:(CGFloat)stepValue {
+- (void)setStepValue:(CGFloat)stepValue {
     self.UIStepper.stepValue = (double)stepValue;
 }
 
--(UIColor *)tintColor {
+- (UIColor *)tintColor {
     return self.UIStepper.tintColor;
 }
 
--(void)setTintColor:(UIColor *)tintColor {
+- (void)setTintColor:(UIColor *)tintColor {
     [self.UIStepper setTintColor:tintColor];
 }
 
 //FIXME: these UI_APPEARANCE_SELECTORS might be confusing because they refer to an object, but I don't want to have objects for all of them...
--(void)setBackgroundImage:(C4Image*)image forState:(C4ControlState)state {
+- (void)setBackgroundImage:(C4Image*)image forState:(C4ControlState)state {
     [self.UIStepper setBackgroundImage:image.UIImage forState:(UIControlState)state];
 }
 
--(C4Image*)backgroundImageForState:(C4ControlState)state {
+- (C4Image*)backgroundImageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UIStepper backgroundImageForState:(UIControlState)state]];
 }
 
--(void)setDividerImage:(C4Image*)image forLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState {
+- (void)setDividerImage:(C4Image*)image forLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState {
     [self.UIStepper setDividerImage:image.UIImage forLeftSegmentState:(UIControlState)leftState rightSegmentState:(UIControlState)rightState];
 }
 
--(C4Image*)dividerImageForLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState {
+- (C4Image*)dividerImageForLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState {
     return [C4Image imageWithUIImage:[self.UIStepper dividerImageForLeftSegmentState:(UIControlState)leftState rightSegmentState:(UIControlState)rightState]];
 }
 
--(void)setIncrementImage:(C4Image *)image forState:(C4ControlState)state {
+- (void)setIncrementImage:(C4Image *)image forState:(C4ControlState)state {
     [self.UIStepper setIncrementImage:image.UIImage forState:(UIControlState)state];
 }
--(C4Image *)incrementImageForState:(C4ControlState)state {
+- (C4Image *)incrementImageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UIStepper incrementImageForState:(UIControlState)state]];
 }
 
--(void)setDecrementImage:(C4Image *)image forState:(C4ControlState)state {
+- (void)setDecrementImage:(C4Image *)image forState:(C4ControlState)state {
     [self.UIStepper setDecrementImage:image.UIImage forState:(UIControlState)state];
 }
--(C4Image *)decrementImageForState:(C4ControlState)state {
+- (C4Image *)decrementImageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UIStepper decrementImageForState:(UIControlState)state]];
 }
 
 #pragma mark C4UIElement (target:action)
--(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+- (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UIStepper addTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
 
--(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+- (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UIStepper removeTarget:object action:NSSelectorFromString(methodName) forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark isEqual
 
--(BOOL)isEqual:(id)object {
+- (BOOL)isEqual:(id)object {
     if([object isKindOfClass:[UIStepper class]]) return [self.UIStepper isEqual:object];
     else if([object isKindOfClass:[self class]]) return [self.UIStepper isEqual:((C4Stepper *)object).UIStepper];
     return NO;
 }
 
 #pragma mark Style
-+(C4Stepper *)defaultStyle {
++ (C4Stepper *)defaultStyle {
     return (C4Stepper *)[C4Stepper appearance];
 }
 
--(C4Stepper *)copyWithZone:(NSZone *)zone {
+- (C4Stepper *)copyWithZone:(NSZone *)zone {
     C4Stepper *s = [[C4Stepper allocWithZone:zone] initWithFrame:self.frame];
     s.style = self.style;
     return s;

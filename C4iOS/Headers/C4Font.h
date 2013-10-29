@@ -32,7 +32,7 @@
 
  @return A C4Font object of the specified name and size;
 */
-+ (C4Font *)fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
++ (instancetype)fontWithName:(NSString *)fontName size:(CGFloat)fontSize;
 
 /** Returns a font object that is the same as the receiver but which has the specified size instead.
 
@@ -47,7 +47,7 @@
  @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0.
  @return A C4Font object of the specified size;
  */
--(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
+- (id)initWithName:(NSString *)fontName size:(CGFloat)fontSize;
 
 /** Returns an array of font family names available on the system.
 
@@ -71,21 +71,21 @@
  @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0. 
  @return A C4Font object of the specified size.
  */
-+ (C4Font *)systemFontOfSize:(CGFloat)fontSize;
++ (instancetype)systemFontOfSize:(CGFloat)fontSize;
 
 /** Returns the font object used for standard interface items that are rendered in boldface type in the specified size.
  
  @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0. 
  @return A C4Font object of the specified size.
  */
-+ (C4Font *)boldSystemFontOfSize:(CGFloat)fontSize;
++ (instancetype)boldSystemFontOfSize:(CGFloat)fontSize;
 
 /** Returns the font object used for standard interface items that are rendered in italic type in the specified size.
  
  @param fontSize The size (in points) to which the font is scaled. This value must be greater than 0.0. 
  @return A C4Font object of the specified size.
  */
-+ (C4Font *)italicSystemFontOfSize:(CGFloat)fontSize;
++ (instancetype)italicSystemFontOfSize:(CGFloat)fontSize;
 
 #pragma mark Properties
 /// @name Properties

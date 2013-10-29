@@ -21,7 +21,7 @@
  
  @return a new C4Stepper.
  */
-+(C4Stepper *)stepper;
++ (instancetype)stepper;
 
 #pragma mark - Configuring the Stepper
 ///@name Configuring the Stepper
@@ -96,7 +96,7 @@
  @param state The control state in which the image is displayed (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  @return The background image used by the control when it is in the specified state.
  */
--(C4Image*)backgroundImageForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (C4Image*)backgroundImageForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 /**Sets the background image for the control when it is in the specified state.
  
@@ -105,14 +105,14 @@
  @param image The background image to use for the specified state.
  @param state The control state in which you want to display the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
--(void)setBackgroundImage:(C4Image*)image forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (void)setBackgroundImage:(C4Image*)image forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 /**Returns the image used for the decrement glyph of the control.
  
  @param state The control state in which the image is displayed (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  @return The image used for the decrement glyph of the control.
  */
--(C4Image *)decrementImageForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (C4Image *)decrementImageForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 /**Sets the image to use for the decrement glyph of the control.
  
@@ -121,7 +121,7 @@
  @param image The image to use for the decrement glyph.
  @param state The control state in which you want to display the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
--(void)setDecrementImage:(C4Image *)image forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (void)setDecrementImage:(C4Image *)image forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 /**Returns the divider image for the given combination of left and right states.
  
@@ -129,7 +129,8 @@
  @param rightState The state of the right side of the control (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  @return The image used for the specified combination of left and right states.
  */
--(C4Image*)dividerImageForLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (C4Image*)dividerImageForLeftSegmentState:(C4ControlState)leftState
+                          rightSegmentState:(C4ControlState)rightState NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 /**Sets the image to use for the given combination of left and right states.
  
@@ -137,14 +138,16 @@
  @param leftState The state of the left side of the control (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  @param rightState The state of the right side of the control (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
--(void)setDividerImage:(C4Image*)image forLeftSegmentState:(C4ControlState)leftState rightSegmentState:(C4ControlState)rightState NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (void)setDividerImage:(C4Image*)image
+    forLeftSegmentState:(C4ControlState)leftState
+      rightSegmentState:(C4ControlState)rightState NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 /**Returns the image used for the increment glyph of the control.
  
  @param state The control state in which the image is displayed (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  @return The image used for the increment glyph of the control.
  */
--(C4Image *)incrementImageForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (C4Image *)incrementImageForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 /**Sets the image to use for the increment glyph of the control
  
@@ -153,7 +156,7 @@
  @param image The image to use for the increment glyph.
  @param state The control state (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
--(void)setIncrementImage:(C4Image *)image forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+- (void)setIncrementImage:(C4Image *)image forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 
 #pragma mark - Accessing The UIStepper
 ///@name Accessing The UIStepper
@@ -169,5 +172,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4Stepper.
  */
-+(C4Stepper *)defaultStyle;
++ (C4Stepper *)defaultStyle;
 @end

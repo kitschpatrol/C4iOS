@@ -9,7 +9,7 @@
 #import "C4Vector.h"
 
 @interface C4Vector ()
--(void)update;
+- (void)update;
 @end
 
 @implementation C4Vector {
@@ -22,7 +22,7 @@
 @synthesize x, y, z, magnitude, heading, displacedHeading;
 @synthesize CGPoint;
 
-+(CGFloat)distanceBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
++ (CGFloat)distanceBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) {
@@ -33,7 +33,7 @@
     return value;
 }
 
-+(CGFloat)angleBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
++ (CGFloat)angleBetweenA:(CGPoint)pointA andB:(CGPoint)pointB {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) {
@@ -44,12 +44,12 @@
     return value;
 }
 
-+(C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
++ (C4Vector *)vectorWithX:(CGFloat)x Y:(CGFloat)y Z:(CGFloat)z {
     C4Vector *v = [[C4Vector alloc] initWithX:x Y:y Z:z];
 	return v;
 }
 
--(id)initWithX:(CGFloat)_x Y:(CGFloat)_y Z:(CGFloat)_z {
+- (id)initWithX:(CGFloat)_x Y:(CGFloat)_y Z:(CGFloat)_z {
     self = [super init];
 	if(self != nil) {
         vec3[0] = _x;
@@ -66,47 +66,47 @@
 	return self;
 }
 
--(void)update {
+- (void)update {
     pVec3[0] = vec3[0];
     pVec3[1] = vec3[1];
     pVec3[2] = vec3[2];
 }
 
--(void)setX:(CGFloat)_x Y:(CGFloat)_y Z:(CGFloat)_z {
+- (void)setX:(CGFloat)_x Y:(CGFloat)_y Z:(CGFloat)_z {
     [self update];
 	vec3[0] = _x;
 	vec3[1] = _y;
 	vec3[2] = _z;
 }
 
--(void)setX:(CGFloat)newX {
+- (void)setX:(CGFloat)newX {
     pVec3[0] = vec3[0];
     vec3[0] = newX;
 }
 
--(void)setY:(CGFloat)newY {
+- (void)setY:(CGFloat)newY {
     pVec3[1] = vec3[1];
     vec3[1] = newY;
 }
 
--(void)setZ:(CGFloat)newZ {
+- (void)setZ:(CGFloat)newZ {
     pVec3[2] = vec3[2];
     vec3[2] = newZ;
 }
 
--(CGFloat)x {
+- (CGFloat)x {
 	return vec3[0];
 }
 
--(CGFloat)y {
+- (CGFloat)y {
 	return vec3[1];
 }
 
--(CGFloat)z {
+- (CGFloat)z {
 	return vec3[2];
 }
 
--(void)add:(C4Vector *)aVec {
+- (void)add:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -114,7 +114,7 @@
     });
 }
 
--(void)addScalar:(float)scalar {
+- (void)addScalar:(float)scalar {
     [self update];
     float *s = &scalar;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -123,7 +123,7 @@
     });
 }
 
--(void)divide:(C4Vector *)aVec {
+- (void)divide:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -131,7 +131,7 @@
     });
 }
 
--(void)divideScalar:(float)scalar {
+- (void)divideScalar:(float)scalar {
     [self update];
     float *s = &scalar;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -140,7 +140,7 @@
     });
 }
 
--(void)multiply:(C4Vector *)aVec {
+- (void)multiply:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -148,7 +148,7 @@
     });
 }
 
--(void)multiplyScalar:(float)scalar {
+- (void)multiplyScalar:(float)scalar {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -156,7 +156,7 @@
     });
 }
 
--(void)subtract:(C4Vector *)aVec {
+- (void)subtract:(C4Vector *)aVec {
     [self update];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -164,21 +164,21 @@
     });
 }
 
--(void)subtractScalar:(float)scalar {
+- (void)subtractScalar:(float)scalar {
     [self update];
 	[self addScalar:-1*scalar];
 }
 
--(CGFloat)distance:(C4Vector *)aVec {
+- (CGFloat)distance:(C4Vector *)aVec {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
-        value = (CGFloat)sqrt(pow(vec3[0]-(aVec.vec)[0], 2)+pow(vec3[1]-(aVec.vec)[1], 2)+pow(vec3[2]-(aVec.vec)[2], 2));
+        value = (CGFloat)sqrt(pow(vec3[0]- (aVec.vec)[0], 2)+pow(vec3[1]- (aVec.vec)[1], 2)+pow(vec3[2]- (aVec.vec)[2], 2));
     });
     return value;
 }
 
--(CGFloat)dot:(C4Vector *)aVec {
+- (CGFloat)dot:(C4Vector *)aVec {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -187,7 +187,7 @@
     return value;
 }
 
--(CGFloat)magnitude {
+- (CGFloat)magnitude {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -196,7 +196,7 @@
     return value;
 }
 
--(CGFloat)angleBetween:(C4Vector *)aVec {
+- (CGFloat)angleBetween:(C4Vector *)aVec {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
@@ -207,7 +207,7 @@
     return value;
 }
 
--(void)cross:(C4Vector *)aVec {
+- (void)cross:(C4Vector *)aVec {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
         float newVec[3];
@@ -220,22 +220,22 @@
     });
 }
 
--(void)normalize {
+- (void)normalize {
 	[self limit:1.0f];
 }
 
--(void)limit:(CGFloat)max {
+- (void)limit:(CGFloat)max {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) { 
         cblas_sscal(3, max/cblas_snrm2(3, vec3, 1), vec3, 1);
     });
 }
 
--(CGPoint)CGPoint {
+- (CGPoint)CGPoint {
 	return CGPointMake(vec3[0], vec3[1]);
 }
 
--(CGFloat)heading {
+- (CGFloat)heading {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) {
@@ -245,7 +245,7 @@
     return value;
 }
 
--(CGFloat)displacedHeading {
+- (CGFloat)displacedHeading {
     if([self distance:[C4Vector vectorWithX:pVec3[0] Y:pVec3[1] Z:pVec3[2]]] > .5) {
         __block CGFloat value;
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -258,7 +258,7 @@
     return pDisplacedHeading;
 }
 
--(CGFloat)headingBasedOn:(CGPoint)p {
+- (CGFloat)headingBasedOn:(CGPoint)p {
     __block CGFloat value;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_sync(queue, ^(void) {
@@ -268,11 +268,11 @@
     return value;
 }
 
--(float*)vec {
+- (float*)vec {
 	return vec3;
 }
 
--(NSString *)description {
+- (NSString *)description {
 	return [NSString stringWithFormat:@"vec(%4.2f,%4.2f,%4.2f)",vec3[0],vec3[1],vec3[2]];
 }
 @end

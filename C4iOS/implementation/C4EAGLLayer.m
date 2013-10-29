@@ -16,7 +16,7 @@
 @synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing, repeatCount = _repeatCount, animationDuration = _animationDuration, allowsInteraction = _allowsInteraction, repeats = _repeats;
 @synthesize perspectiveDistance = _perspectiveDistance;
 
--(id)init {
+- (id)init {
     self = [super init]; 
     if(self != nil) {
         self.name = @"eaglLayer";
@@ -32,7 +32,7 @@
 }
 
 #pragma mark C4Layer Animation Methods //code from this line forward should be common amongst all C4Layer variations
--(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
+- (CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:keyPath];
     animation.duration = self.animationDuration;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:self.currentAnimationEasing];
@@ -43,12 +43,12 @@
     return animation;
 }
 
--(CGFloat)animationDuration {
+- (CGFloat)animationDuration {
     //adding this because a default of 0.0 triggers implicit animation of 0.25f
     return _animationDuration + 0.00001f;
 }
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
+- (void)setAnimationOptions:(NSUInteger)animationOptions {
     if((animationOptions & LINEAR) == LINEAR) {
         _currentAnimationEasing = kCAMediaTimingFunctionLinear;
     } else if((animationOptions & EASEOUT) == EASEOUT) {
@@ -71,7 +71,7 @@
     else _allowsInteraction = NO;
 }
 
--(void)setPerspectiveDistance:(CGFloat)perspectiveDistance {
+- (void)setPerspectiveDistance:(CGFloat)perspectiveDistance {
     _perspectiveDistance = perspectiveDistance;
     CATransform3D t = self.transform;
     if(perspectiveDistance != 0.0f) t.m34 = 1/self.perspectiveDistance;
@@ -79,7 +79,7 @@
     self.transform = t;
 }
 
--(void)animateBackgroundColor:(CGColorRef)backgroundColor {
+- (void)animateBackgroundColor:(CGColorRef)backgroundColor {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -104,7 +104,7 @@
     }
 }
 
--(void)animateBorderColor:(CGColorRef)borderColor {
+- (void)animateBorderColor:(CGColorRef)borderColor {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -126,7 +126,7 @@
     [CATransaction commit];
 }
 
--(void)animateBackgroundFilters:(NSArray *)backgroundFilters {
+- (void)animateBackgroundFilters:(NSArray *)backgroundFilters {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -148,7 +148,7 @@
     [CATransaction commit];
 }
 
--(void)animateBorderWidth:(CGFloat)borderWidth {
+- (void)animateBorderWidth:(CGFloat)borderWidth {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -170,7 +170,7 @@
     [CATransaction commit];
 }
 
--(void)animateCompositingFilter:(id)compositingFilter {
+- (void)animateCompositingFilter:(id)compositingFilter {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -193,7 +193,7 @@
     [CATransaction commit];
 }
 
--(void)animateContents:(CGImageRef)image {
+- (void)animateContents:(CGImageRef)image {
     image = image;
     C4Log(@"C4EAGLLayer animateContents not currently available");
     
@@ -211,7 +211,7 @@
     //    [CATransaction commit];
 }
 
--(void)animateCornerRadius:(CGFloat)cornerRadius {
+- (void)animateCornerRadius:(CGFloat)cornerRadius {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -234,7 +234,7 @@
     [CATransaction commit];
 }
 
--(void)animateLayerTransform:(CATransform3D)layerTransform {
+- (void)animateLayerTransform:(CATransform3D)layerTransform {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -258,7 +258,7 @@
 
 
 
--(void)animateRotation:(CGFloat)rotationAngle {
+- (void)animateRotation:(CGFloat)rotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.z"];
     animation.fromValue = @(self.rotationAngle);
@@ -274,7 +274,7 @@
     [CATransaction commit];
 }
 
--(void)animateRotationX:(CGFloat)newRotationAngle {
+- (void)animateRotationX:(CGFloat)newRotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.x"];
     animation.fromValue = @(self.rotationAngleX);
@@ -290,7 +290,7 @@
     [CATransaction commit];
 }
 
--(void)animateRotationY:(CGFloat)newRotationAngle {
+- (void)animateRotationY:(CGFloat)newRotationAngle {
     [CATransaction begin];
     CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"transform.rotation.y"];
     animation.fromValue = @(self.rotationAngleY);
@@ -306,7 +306,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowColor:(CGColorRef)shadowColor {
+- (void)animateShadowColor:(CGColorRef)shadowColor {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -328,7 +328,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowOffset:(CGSize)shadowOffset {
+- (void)animateShadowOffset:(CGSize)shadowOffset {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -350,7 +350,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowOpacity:(CGFloat)shadowOpacity {
+- (void)animateShadowOpacity:(CGFloat)shadowOpacity {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -372,7 +372,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowPath:(CGPathRef)shadowPath {
+- (void)animateShadowPath:(CGPathRef)shadowPath {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -394,7 +394,7 @@
     [CATransaction commit];
 }
 
--(void)animateShadowRadius:(CGFloat)shadowRadius {
+- (void)animateShadowRadius:(CGFloat)shadowRadius {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f
@@ -416,7 +416,7 @@
     [CATransaction commit];
 }
 
--(void)animateZPosition:(CGFloat)zPosition {
+- (void)animateZPosition:(CGFloat)zPosition {
     //the following if{} makes sure that the property is set immediately, rather than animating...
     //for small values of animationDuration, property might not have enough time to tighten itself up
     //uses _animationDuration because self.animationDuration returns + 0.0001f

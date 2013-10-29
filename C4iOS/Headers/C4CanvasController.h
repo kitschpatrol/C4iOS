@@ -15,8 +15,8 @@
  
  @warning This class should only be used internally by the C4WorkSpace object and not subclassed or used explicitly.
  */
-@interface C4CanvasController : UIViewController <AVAudioSessionDelegate, C4Gesture, C4Notification, C4MethodDelay, C4AddSubview> {
-}
+@interface C4CanvasController : UIViewController
+<AVAudioSessionDelegate, C4Gesture, C4Notification, C4MethodDelay, C4AddSubview>
 
 #pragma mark - Setup
 ///@name Setup
@@ -26,7 +26,7 @@
  
  You should code everything you want your application to do, prior to loading, in this method.
  */
--(void)setup;
+- (void)setup;
 
 #pragma mark - The Canvas
 ///@name The Canvas
@@ -57,6 +57,6 @@
  
  `[self imageWasCaptured];`
  */
--(void)imageWasCaptured;
+- (void)imageWasCaptured;
 
 @end

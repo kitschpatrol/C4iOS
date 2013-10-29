@@ -24,11 +24,11 @@
 ///@name Setup & Render
 /**The method used for adding additional variable setup, outside of the main initialization methods.
   */
--(void)setup;
+- (void)setup;
 
 /**The method used for rendering OpenGL animations.
  */
--(void)render;
+- (void)render;
 
 #pragma mark - Width & Height
 ///@name Width & Height
@@ -72,6 +72,6 @@
  @param zone The zone for copying. Leave this as nil for normal results.
  @return a copy of the receiver.
  */
--(C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone;
+- (C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone;
 
 @end

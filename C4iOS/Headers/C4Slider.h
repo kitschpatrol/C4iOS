@@ -36,7 +36,7 @@
  @param rect a CGRect structure used to construct the slider's view.
  @return a new C4Slider object.
  */
-+(C4Slider *)slider:(CGRect)rect;
++ (instancetype)slider:(CGRect)rect;
 
 /**Initializes and returns a new slider object fit inside the given frame.
  
@@ -46,7 +46,7 @@
  @param useDefaults a boolean flag that allows the slider to be constructed with C4 default style. YES to use the default C4 images and colors, NO to use default UISlider style.
  @return a new C4Slider object.
  */
--(id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults;
+- (id)initWithFrame:(CGRect)frame defaults:(BOOL)useDefaults;
 
 #pragma mark - Accessing the Slider’s Value
 ///@name Accessing the Slider’s Value
@@ -65,7 +65,7 @@
  @param value The new value to assign to the value property
  @param animated Specify YES to animate the change in value when the receiver is redrawn; otherwise, specify NO to draw the receiver with the new value only. Animations are performed asynchronously and do not block the calling thread.
  */
--(void)setValue:(CGFloat)value animated:(BOOL)animated;
+- (void)setValue:(CGFloat)value animated:(BOOL)animated;
 
 #pragma mark - Accessing the Slider’s Value Limits
 ///@name Accessing the Slider’s Value Limits
@@ -132,7 +132,7 @@
  @param state The control state whose minimum track image you want (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED). You should specify only one control state value for this parameter.
  @return A C4Image. The minimum track image associated with the specified state, or nil if no image has been set. This method might also return nil if you specify multiple control states in the state parameter. For a description of track images, see “Customizing the Slider’s Appearance.”
  */
--(C4Image *)minimumTrackImageForState:(C4ControlState)state;
+- (C4Image *)minimumTrackImageForState:(C4ControlState)state;
 
 /**Assigns a minimum track image to the specified control states.
 
@@ -145,7 +145,7 @@
  @param image The minimum track image to associate with the specified states.
  @param state The control state with which to associate the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
--(void)setMinimumTrackImage:(C4Image *)image forState:(C4ControlState)state;
+- (void)setMinimumTrackImage:(C4Image *)image forState:(C4ControlState)state;
 
 /**The color used to tint the standard maximum track images.
  
@@ -166,7 +166,7 @@
  @param state The control state whose maximum track image you want (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED). You should specify only one control state value for this parameter.
  @return A C4Image. The maximum track image associated with the specified state, or nil if an appropriate image could not be retrieved. This method might return nil if you specify multiple control states in the state parameter.
  */
--(C4Image *)maximumTrackImageForState:(C4ControlState)state;
+- (C4Image *)maximumTrackImageForState:(C4ControlState)state;
 
 /**Assigns a maximum track image to the specified control states.
  
@@ -179,7 +179,7 @@
  @param image The maximum track image to associate with the specified states.
  @param state The control state with which to associate the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
--(void)setMaximumTrackImage:(C4Image *)image forState:(C4ControlState)state;
+- (void)setMaximumTrackImage:(C4Image *)image forState:(C4ControlState)state;
 
 /**The color used to tint the standard thumb images.
  
@@ -200,7 +200,7 @@
  @param state The control state whose thumb image you want (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED). You should specify only one control state value for this parameter.
  @return The thumb image associated with the specified state, or nil if an appropriate image could not be retrieved. This method might return nil if you specify multiple control states in the state parameter.
  */
--(C4Image *)thumbImageForState:(C4ControlState)state;
+- (C4Image *)thumbImageForState:(C4ControlState)state;
 
 /**Assigns a thumb image to the specified control states.
  
@@ -209,7 +209,7 @@
  @param image The thumb image to associate with the specified states.
  @param state The control state with which to associate the image (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
  */
--(void)setThumbImage:(C4Image *)image forState:(C4ControlState)state;
+- (void)setThumbImage:(C4Image *)image forState:(C4ControlState)state;
 
 #pragma mark - Accessing The UISlider
 ///@name Accessing The UISlider
@@ -225,6 +225,6 @@
  
  @return The appearance proxy for the receiver, cast as a C4Slider.
  */
-+(C4Slider *)defaultStyle;
++ (C4Slider *)defaultStyle;
 
 @end

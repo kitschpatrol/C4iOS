@@ -28,13 +28,13 @@
  
  @return A C4Camera object of the specified size;
  */
-+(C4Camera *)cameraWithFrame:(CGRect)frame;
++ (instancetype)cameraWithFrame:(CGRect)frame;
 
 #pragma mark - Initializing Capture
 ///@name Initializing Capture
 /** Initializes a C4Camera object, making it ready to capture images.
  */
--(void)initCapture;
+- (void)initCapture;
 
 #pragma mark - Capturing Images
 ///@name Capturing Images
@@ -42,7 +42,7 @@
  
  This method also posts a notification when an image has been captured.
  */
--(void)captureImage;
+- (void)captureImage;
 
 /** The receiver’s most recently captured image. (read-only)
  
@@ -82,5 +82,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4Camera.
  */
-+(C4Camera *)defaultStyle;
++ (C4Camera *)defaultStyle;
 @end

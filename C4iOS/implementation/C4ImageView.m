@@ -10,15 +10,15 @@
 
 @implementation C4ImageView
 
--(C4Layer *)imageLayer {
+- (C4Layer *)imageLayer {
     return (C4Layer *)self.layer;
 }
 
-+(Class)layerClass {
++ (Class)layerClass {
     return [C4Layer class];
 }
 
--(void)animateContents:(CGImageRef)_image {
+- (void)animateContents:(CGImageRef)_image {
     [CATransaction begin];
     CABasicAnimation *animation = [self.imageLayer setupBasicAnimationWithKeyPath:@"contents"];
     animation.fromValue = self.imageLayer.contents;
@@ -33,7 +33,7 @@
     [CATransaction commit];
 }
 
--(void)rotationDidFinish:(CGFloat)rotationAngle {
+- (void)rotationDidFinish:(CGFloat)rotationAngle {
     [(C4Image *)self.superview rotationDidFinish:rotationAngle];
 }
 

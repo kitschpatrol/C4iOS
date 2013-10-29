@@ -22,23 +22,23 @@
 @synthesize filterQueue = _filterQueue, rawData = _rawData, rotation = _rotation;
 
 #pragma mark Initialization
-+(C4Image *)imageNamed:(NSString *)name {
++ (C4Image *)imageNamed:(NSString *)name {
     return [[C4Image alloc] initWithImageName:name];
 }
 
-+(C4Image *)imageWithImage:(C4Image *)image {
++ (C4Image *)imageWithImage:(C4Image *)image {
     return [[C4Image alloc] initWithImage:image];
 }
 
-+(C4Image *)imageWithUIImage:(UIImage *)image {
++ (C4Image *)imageWithUIImage:(UIImage *)image {
     return [[C4Image alloc] initWithUIImage:image];
 }
 
-+(C4Image *)imageWithURL:(NSString *)imageURL {
++ (C4Image *)imageWithURL:(NSString *)imageURL {
     return [[C4Image alloc] initWithURL:[NSURL URLWithString:imageURL]];
 }
 
--(id)initWithRawData:(unsigned char*)data width:(NSInteger)width height:(NSInteger)height {
+- (id)initWithRawData:(unsigned char*)data width:(NSInteger)width height:(NSInteger)height {
     @autoreleasepool {
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         NSUInteger bitsPerComponent = 8;
@@ -52,21 +52,21 @@
     }
 }
 
--(id)initWithCGImage:(CGImageRef)image {
+- (id)initWithCGImage:(CGImageRef)image {
     return [self initWithUIImage:[UIImage imageWithCGImage:image]];
 }
 
--(id)initWithImageName:(NSString *)name {
+- (id)initWithImageName:(NSString *)name {
     name = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     UIImage *newImage = [UIImage imageNamed:name];
     return [self initWithUIImage:newImage];
 }
 
--(id)initWithImage:(C4Image *)image {
+- (id)initWithImage:(C4Image *)image {
     return [self initWithUIImage:image.UIImage];
 }
 
--(id)initWithUIImage:(UIImage *)image {
+- (id)initWithUIImage:(UIImage *)image {
     if(image == nil || image == (UIImage *)[NSNull null]) return nil;
     self = [super init];
     if(self != nil) {
@@ -90,15 +90,15 @@
     return self;
 }
 
-+(C4Image *)imageWithData:(NSData *)imageData {
++ (C4Image *)imageWithData:(NSData *)imageData {
     return [[C4Image alloc] initWithData:imageData];
 }
 
--(id)initWithData:(NSData *)imageData {
+- (id)initWithData:(NSData *)imageData {
     return [self initWithUIImage:[UIImage imageWithData:imageData]];
 }
 
--(id)initWithURL:(NSURL *)imageURL {
+- (id)initWithURL:(NSURL *)imageURL {
     NSError *error;
     NSData *data = [NSData dataWithContentsOfURL:imageURL options:NSDataReadingMappedIfSafe error:&error];
     if(data) {
@@ -109,7 +109,7 @@
     return nil;
 }
 
--(void)setProperties {
+- (void)setProperties {
     _originalSize = _originalImage.size;
     _originalRatio = _originalSize.width / _originalSize.height;
     
@@ -120,21 +120,21 @@
 }
 
 #pragma mark Properties
--(void)setHeight:(CGFloat)height {
+- (void)setHeight:(CGFloat)height {
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
     if(_constrainsProportions) newFrame.size.width = height * self.originalRatio;
     self.frame = newFrame;
 }
 
--(void)setWidth:(CGFloat)width {
+- (void)setWidth:(CGFloat)width {
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
     if(_constrainsProportions) newFrame.size.height = width/self.originalRatio;
     self.frame = newFrame;
 }
 
--(void)setSize:(CGSize)size {
+- (void)setSize:(CGSize)size {
     CGRect newFrame = CGRectZero;
     newFrame.origin = self.origin;
     newFrame.size = size;
@@ -147,15 +147,15 @@
  There are some issues with rotating the view inside the view, and as such we have to do the followign overrides.
  
  */
--(void)setRotation:(CGFloat)rotation {
+- (void)setRotation:(CGFloat)rotation {
     [self _setRotation:@(rotation)];
 }
 
--(void)_setRotation:(NSNumber *)rotation {
+- (void)_setRotation:(NSNumber *)rotation {
     [(id <C4LayerAnimation>)self.layer animateRotation:[rotation floatValue]-_rotation];
 }
 
--(void)rotationDidFinish:(CGFloat)rotation {
+- (void)rotationDidFinish:(CGFloat)rotation {
     _rotation += rotation;
     CGAffineTransform transform = CGAffineTransformMakeRotation(_rotation);
     [UIView beginAnimations:@"rotate" context:nil];
@@ -165,46 +165,46 @@
 }
 
 //We override this as well because if we don't it "looks" like the background doesn't rotate.
--(void)setBackgroundColor:(UIColor *)backgroundColor {
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
     self.imageView.backgroundColor = backgroundColor;
 }
 
 #pragma mark Contents
--(UIImage *)UIImage {
+- (UIImage *)UIImage {
     CGImageRef cg = self.contents;
     UIImage *image = [UIImage imageWithCGImage:cg scale:CGImageGetWidth(cg)/self.width orientation:self.originalImage.imageOrientation ];
     return image;
 }
 
--(CIImage *)CIImage {
+- (CIImage *)CIImage {
     return [CIImage imageWithCGImage:self.contents];
 }
 
--(CGImageRef)CGImage {
+- (CGImageRef)CGImage {
     return self.contents;
 }
 
--(CGImageRef)contents {
+- (CGImageRef)contents {
     return (__bridge CGImageRef)(self.imageLayer.contents);
 }
 
--(void)setContents:(CGImageRef)image {
+- (void)setContents:(CGImageRef)image {
     if(self.animationDuration == 0.0f) self.imageLayer.contents = (__bridge id)image;
     else [self.imageLayer animateContents:image];
 }
 
--(void)setImage:(C4Image *)image {
+- (void)setImage:(C4Image *)image {
     _originalImage = image.UIImage;
     [self setProperties];
     [self setContents:_originalImage.CGImage];
 }
 
 #pragma mark Filter Basics
--(void)startFiltering {
+- (void)startFiltering {
     _multipleFilterEnabled = YES;
 }
 
--(CIFilter *)prepareFilterWithName:(NSString *)filterName {
+- (CIFilter *)prepareFilterWithName:(NSString *)filterName {
     @autoreleasepool {
         CIFilter *filter = [CIFilter filterWithName:filterName];
         [filter setDefaults];
@@ -214,13 +214,13 @@
     }
 }
 
--(void)renderFilteredImage {
+- (void)renderFilteredImage {
     if(_multipleFilterEnabled == YES && _output != nil) {
         [self renderImageWithFilterName:@"MultipleFilter"];
     }
 }
 
--(void)renderImageWithFilterName:(NSString *)filterName {
+- (void)renderImageWithFilterName:(NSString *)filterName {
     if(self.showsActivityIndicator) [_filterIndicator startAnimating];
     dispatch_async(self.filterQueue, ^{
         //applies create the image based on its original size, contents will automatically scale
@@ -237,12 +237,12 @@
     });
 }
 
--(CIContext *)filterContext {
+- (CIContext *)filterContext {
     if(_filterContext == nil) _filterContext = [CIContext contextWithOptions:nil];
     return _filterContext;
 }
 
--(dispatch_queue_t)filterQueue {
+- (dispatch_queue_t)filterQueue {
     if(_filterQueue == nil) {
         const char *label = [[@"FILTER_QUEUE_" stringByAppendingString:[self description]]UTF8String];
         _filterQueue = dispatch_queue_create(label, DISPATCH_QUEUE_CONCURRENT);
@@ -251,7 +251,7 @@
 }
 
 #pragma mark Old Filters
--(void)additionComposite:(C4Image *)backgroundImage {
+- (void)additionComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAdditionCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -261,7 +261,7 @@
     }
 }
 
--(void)colorBlend:(C4Image *)backgroundImage {
+- (void)colorBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -271,7 +271,7 @@
     }
 }
 
--(void)colorBurn:(C4Image *)backgroundImage {
+- (void)colorBurn:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorBurnBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -281,7 +281,7 @@
     }
 }
 
--(void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast {
+- (void)colorControlSaturation:(CGFloat)saturation brightness:(CGFloat)brightness contrast:(CGFloat)contrast {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorControls"];
         [filter setValue:@(saturation) forKey:@"inputSaturation"];
@@ -293,7 +293,7 @@
     }
 }
 
--(void)colorDodge:(C4Image *)backgroundImage {
+- (void)colorDodge:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorDodgeBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -303,7 +303,7 @@
     }
 }
 
--(void)colorInvert {
+- (void)colorInvert {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorInvert"];
         _output = filter.outputImage;
@@ -312,7 +312,7 @@
     }
 }
 
--(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias {
+- (void)colorMatrix:(UIColor *)color bias:(CGFloat)bias {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorMatrix"];
         
@@ -331,7 +331,7 @@
     }
 }
 
--(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity {
+- (void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorMonochrome"];
         CGFloat rgba[4];
@@ -344,7 +344,7 @@
     }
 }
 
--(void)darkenBlend:(C4Image *)backgroundImage {
+- (void)darkenBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDarkenBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -354,7 +354,7 @@
     }
 }
 
--(void)differenceBlend:(C4Image *)backgroundImage {
+- (void)differenceBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDifferenceBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -364,7 +364,7 @@
     }
 }
 
--(void)exclusionBlend:(C4Image *)backgroundImage {
+- (void)exclusionBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIExclusionBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -374,7 +374,7 @@
     }
 }
 
--(void)exposureAdjust:(CGFloat)adjustment {
+- (void)exposureAdjust:(CGFloat)adjustment {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIExposureAdjust"];
         [filter setValue:@(adjustment) forKey:@"inputEV"];
@@ -384,7 +384,7 @@
     }
 }
 
--(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2 {
+- (void)falseColor:(UIColor *)color1 color2:(UIColor *)color2 {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIFalseColor"];
         [filter setValue:color1.CIColor forKey:@"inputColor0"];
@@ -395,7 +395,7 @@
     }
 }
 
--(void)gammaAdjustment:(CGFloat)adjustment {
+- (void)gammaAdjustment:(CGFloat)adjustment {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGammaAdjust"];
         [filter setValue:@(adjustment) forKey:@"inputPower"];
@@ -405,7 +405,7 @@
     }
 }
 
--(void)hardLightBlend:(C4Image *)backgroundImage {
+- (void)hardLightBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHardLightBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -415,7 +415,7 @@
     }
 }
 
--(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount {
+- (void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHighlightShadowAdjust"];
         [filter setValue:@(highlightAmount) forKey:@"inputHighlightAmount"];
@@ -426,7 +426,7 @@
     }
 }
 
--(void)hueAdjust:(CGFloat)angle {
+- (void)hueAdjust:(CGFloat)angle {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHueAdjust"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -436,7 +436,7 @@
     }
 }
 
--(void)hueBlend:(C4Image *)backgroundImage {
+- (void)hueBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHueBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -446,7 +446,7 @@
     }
 }
 
--(void)lightenBlend:(C4Image *)backgroundImage {
+- (void)lightenBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILightenBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -456,7 +456,7 @@
     }
 }
 
--(void)luminosityBlend:(C4Image *)backgroundImage {
+- (void)luminosityBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILuminosityBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -466,7 +466,7 @@
     }
 }
 
--(void)maximumComposite:(C4Image *)backgroundImage {
+- (void)maximumComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMaximumCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -476,7 +476,7 @@
     }
 }
 
--(void)minimumComposite:(C4Image *)backgroundImage {
+- (void)minimumComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMinimumCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -486,7 +486,7 @@
     }
 }
 
--(void)multiplyBlend:(C4Image *)backgroundImage {
+- (void)multiplyBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMultiplyBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -496,7 +496,7 @@
     }
 }
 
--(void)multiplyComposite:(C4Image *)backgroundImage {
+- (void)multiplyComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMultiplyCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -506,7 +506,7 @@
     }
 }
 
--(void)overlayBlend:(C4Image *)backgroundImage {
+- (void)overlayBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIOverlayBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -516,7 +516,7 @@
     }
 }
 
--(void)saturationBlend:(C4Image *)backgroundImage {
+- (void)saturationBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISaturationBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -526,7 +526,7 @@
     }
 }
 
--(void)screenBlend:(C4Image *)backgroundImage {
+- (void)screenBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIScreenBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -536,7 +536,7 @@
     }
 }
 
--(void)sepiaTone:(CGFloat)intensity {
+- (void)sepiaTone:(CGFloat)intensity {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISepiaTone"];
         [filter setValue:@(intensity) forKey:@"inputIntensity"];
@@ -546,7 +546,7 @@
     }
 }
 
--(void)softLightBlend:(C4Image *)backgroundImage {
+- (void)softLightBlend:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISoftLightBlendMode"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -556,7 +556,7 @@
     }
 }
 
--(void)sourceAtopComposite:(C4Image *)backgroundImage {
+- (void)sourceAtopComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISourceAtopCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -566,7 +566,7 @@
     }
 }
 
--(void)sourceInComposite:(C4Image *)backgroundImage {
+- (void)sourceInComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISourceInCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -576,7 +576,7 @@
     }
 }
 
--(void)sourceOutComposite:(C4Image *)backgroundImage {
+- (void)sourceOutComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISourceOutCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -586,7 +586,7 @@
     }
 }
 
--(void)sourceOverComposite:(C4Image *)backgroundImage {
+- (void)sourceOverComposite:(C4Image *)backgroundImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISourceOverCompositing"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -596,7 +596,7 @@
     }
 }
 
--(void)straighten:(CGFloat)angle {
+- (void)straighten:(CGFloat)angle {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIStraightenFilter"];
         [filter setValue:@(angle) forKey:@"inputAngle"];
@@ -606,7 +606,7 @@
     }
 }
 
--(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral {
+- (void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITemperatureAndTint"];
         [filter setValue:[CIVector vectorWithX:neutral.width Y:neutral.height] forKey:@"inputNeutral"];
@@ -617,7 +617,7 @@
     }
 }
 
--(void)toneCurve:(CGPoint *)pointArray {
+- (void)toneCurve:(CGPoint *)pointArray {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIToneCurve"];
         [filter setValue:[CIVector vectorWithCGPoint:pointArray[0]] forKey:@"inputPoint0"];
@@ -631,7 +631,7 @@
     }
 }
 
--(void)vibranceAdjust:(CGFloat)amount {
+- (void)vibranceAdjust:(CGFloat)amount {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIVibrance"];
         [filter setValue:@(amount) forKey:@"inputAmount"];
@@ -641,7 +641,7 @@
     }
 }
 
--(void)whitePointAdjust:(UIColor *)color {
+- (void)whitePointAdjust:(UIColor *)color {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIWhitePointAdjust"];
         [filter setValue:color.CIColor forKey:@"inputColor"];
@@ -652,7 +652,7 @@
 }
 
 #pragma mark New Filters
--(void)affineClamp:(CGAffineTransform)transform {
+- (void)affineClamp:(CGAffineTransform)transform {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAffineClamp"];
         [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)]
@@ -663,7 +663,7 @@
     }
 }
 
--(void)affineTile:(CGAffineTransform)transform {
+- (void)affineTile:(CGAffineTransform)transform {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAffineTile"];
         [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)]
@@ -674,7 +674,7 @@
     }
 };
 
--(void)affineTransform:(CGAffineTransform)transform {
+- (void)affineTransform:(CGAffineTransform)transform {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAffineTransform"];
         [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)]
@@ -685,7 +685,7 @@
     }
 }
 
--(C4Image *)areaAverage:(CGRect)area {
+- (C4Image *)areaAverage:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAreaAverage"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -700,7 +700,7 @@
     }
 }
 
--(void)areaHistogram:(CGRect)area count:(NSInteger)width scale:(CGFloat)scale {
+- (void)areaHistogram:(CGRect)area count:(NSInteger)width scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAreaHistogram"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -712,7 +712,7 @@
     }
 }
 
--(void)areaMaximum:(CGRect)area {
+- (void)areaMaximum:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAreaMaximum"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -722,7 +722,7 @@
     }
 }
 
--(void)areaMaximumAlpha:(CGRect)area {
+- (void)areaMaximumAlpha:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAreaMaximumAlpha"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -732,7 +732,7 @@
     }
 }
 
--(void)areaMinimum:(CGRect)area {
+- (void)areaMinimum:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAreaMinimum"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -742,7 +742,7 @@
     }
 }
 
--(void)areaMinimumAlpha:(CGRect)area {
+- (void)areaMinimumAlpha:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIAreaMinimumAlpha"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -752,7 +752,7 @@
     }
 }
 
--(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage {
+- (void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIBlendWithMask"];
         [filter setValue:backgroundImage.CIImage forKey:@"inputBackgroundImage"];
@@ -763,7 +763,7 @@
     }
 }
 
--(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity {
+- (void)bloom:(CGFloat)radius intensity:(CGFloat)intensity {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIBloom"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -774,7 +774,7 @@
     }
 }
 
--(void)boxBlur:(CGFloat)radius {
+- (void)boxBlur:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIBoxBlur"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -784,7 +784,7 @@
     }
 }
 
--(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale {
+- (void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIBumpDistortion"];
         center.y = self.height - center.y;
@@ -797,7 +797,7 @@
     }
 }
 
--(void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)scale {
+- (void)bumpDistortionLinear:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIBumpDistortionLinear"];
         center.y = self.height - center.y;
@@ -811,7 +811,7 @@
     }
 }
 
--(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius {
+- (void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CICircleSplashDistortion"];
         center.y = self.height - center.y;
@@ -823,7 +823,7 @@
     }
 }
 
--(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness {
+- (void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CICircularScreen"];
         center.y = self.height - center.y;
@@ -836,7 +836,7 @@
     }
 }
 
--(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
+- (void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CICircularWrap"];
         center.y = self.height - center.y;
@@ -848,7 +848,7 @@
         filter = nil;
     }
 }
--(void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr {
+- (void)halftoneCMYK:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle sharpness:(CGFloat)sharpness gcr:(CGFloat)gcr ucr:(CGFloat)ucr {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CICMYKHalftone"];
         center.y = self.height - center.y;
@@ -864,7 +864,7 @@
     }
 }
 
--(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data {
+- (void)colorCube:(CGFloat)dimension cubeData:(NSData *)data {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorCube"];
         [filter setValue:@(dimension) forKey:@"inputCubeDimension"];
@@ -875,7 +875,7 @@
     }
 }
 
--(void)colorMap:(C4Image *)gradientImage {
+- (void)colorMap:(C4Image *)gradientImage {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorMap"];
         [filter setValue:gradientImage.CIImage forKey:@"inputGradientImage"];
@@ -885,7 +885,7 @@
     }
 }
 
--(void)colorPosterize:(CGFloat)levels {
+- (void)colorPosterize:(CGFloat)levels {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColorPosterize"];
         [filter setValue:@(levels) forKey:@"inputLevels"];
@@ -895,7 +895,7 @@
     }
 }
 
--(void)columnAverage:(CGRect)area {
+- (void)columnAverage:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIColumnAverage"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -905,7 +905,7 @@
     }
 }
 
--(void)comicEffect {
+- (void)comicEffect {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIComicEffect"];
         _output = filter.outputImage;
@@ -914,7 +914,7 @@
     }
 }
 
--(void)crop:(CGRect)area {
+- (void)crop:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CICrop"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputRectangle"];
@@ -924,7 +924,7 @@
     }
 }
 
--(void)crystallize:(CGFloat)radius center:(CGPoint)center {
+- (void)crystallize:(CGFloat)radius center:(CGPoint)center {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CICrystallize"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -936,7 +936,7 @@
     }
 }
 
--(void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius {
+- (void)depthOfField:(CGPoint)point1 point2:(CGPoint)point2 saturation:(CGFloat)saturation maskRadius:(CGFloat)maskRadius maskIntensity:(CGFloat)maskIntensity blurRadius:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDepthOfField"];
         point1.y = self.height - point1.y;
@@ -953,7 +953,7 @@
     }
 }
 
--(void)discBlur:(CGFloat)radius {
+- (void)discBlur:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDiscBlur"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -963,7 +963,7 @@
     }
 }
 
--(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale {
+- (void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDisplacementDistortion"];
         [filter setValue:displacementImage.CIImage forKey:@"inputDisplacementImage"];
@@ -974,7 +974,7 @@
     }
 }
 
--(void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
+- (void)dotScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDotScreen"];
         center.y = self.height - center.y;
@@ -988,7 +988,7 @@
     }
 }
 
--(void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom {
+- (void)droste:(CGPoint)inset1 inset2:(CGPoint)inset2 strandRadius:(CGFloat)radius periodicity:(CGFloat)periodicity rotation:(CGFloat)rotation zoom:(CGFloat)zoom {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIDroste"];
         inset1.y = self.height - inset1.y;
@@ -1004,7 +1004,7 @@
         filter = nil;
     }
 }
--(void)edges:(CGFloat)intensity {
+- (void)edges:(CGFloat)intensity {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIEdges"];
         [filter setValue:@(intensity) forKey:@"inputIntensity"];
@@ -1014,7 +1014,7 @@
     }
 }
 
--(void)edgeWork:(CGFloat)radius {
+- (void)edgeWork:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIEdgeWork"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1024,7 +1024,7 @@
     }
 }
 
--(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+- (void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIEightFoldReflectedTile"];
         center.y = self.height - center.y;
@@ -1037,7 +1037,7 @@
     }
 }
 
--(void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+- (void)fourFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldReflectedTile"];
         center.y = self.height - center.y;
@@ -1051,7 +1051,7 @@
     }
 }
 
--(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+- (void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldRotatedTile"];
         center.y = self.height - center.y;
@@ -1064,7 +1064,7 @@
     }
 }
 
--(void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+- (void)fourFoldTranslatedTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIFourFoldTranslatedTile"];
         center.y = self.height - center.y;
@@ -1078,7 +1078,7 @@
     }
 }
 
--(void)gaussianBlur:(CGFloat)radius {
+- (void)gaussianBlur:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGaussianBlur"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1088,7 +1088,7 @@
     }
 }
 
--(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale {
+- (void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGlassDistortion"];
         [filter setValue:texture.CIImage forKey:@"inputTexture"];
@@ -1101,7 +1101,7 @@
     }
 }
 
--(void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction {
+- (void)glassLozenge:(CGPoint)point1 point2:(CGPoint)point2 radius:(CGFloat)radius refraction:(CGFloat)refraction {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGlassLozenge"];
         point1.y = self.height - point1.y;
@@ -1116,7 +1116,7 @@
     }
 }
 
--(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+- (void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGlideReflectedTile"];
         center.y = self.height - center.y;
@@ -1129,7 +1129,7 @@
     }
 }
 
--(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity {
+- (void)gloom:(CGFloat)radius intensity:(CGFloat)intensity {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIGloom"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1140,7 +1140,7 @@
     }
 }
 
--(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
+- (void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHatchedScreen"];
         center.y = self.height - center.y;
@@ -1154,7 +1154,7 @@
     }
 }
 
--(void)heightShieldFromMask:(CGFloat)radius {
+- (void)heightShieldFromMask:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHeightSheildFromMask"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1164,7 +1164,7 @@
     }
 }
 
--(void)hexagonalPixellate:(CGPoint)center scale:(CGFloat)scale {
+- (void)hexagonalPixellate:(CGPoint)center scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHexagonalPixellate"];
         center.y = self.height - center.y;
@@ -1176,7 +1176,7 @@
     }
 }
 
--(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius {
+- (void)holeDistortion:(CGPoint)center radius:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIHoleDistortion"];
         center.y = self.height - center.y;
@@ -1188,7 +1188,7 @@
     }
 }
 
--(void)kaleidescope:(CGFloat)count center:(CGPoint)center angle:(CGFloat)angle {
+- (void)kaleidescope:(CGFloat)count center:(CGPoint)center angle:(CGFloat)angle {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIKaleidescope"];
         [filter setValue:@(count) forKey:@"inputCount"];
@@ -1201,7 +1201,7 @@
     }
 }
 
--(void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio {
+- (void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILanczosScaleTransform"];
         [filter setValue:@(scale) forKey:@"inputScale"];
@@ -1212,7 +1212,7 @@
     }
 }
 
--(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius {
+- (void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILightTunnel"];
         center.y = self.height - center.y;
@@ -1225,7 +1225,7 @@
     }
 }
 
--(void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast {
+- (void)lineOverlay:(CGFloat)noiseLevel sharpness:(CGFloat)sharpness edgeIntensity:(CGFloat)edgeIntensity threshold:(CGFloat)threshold contrast:(CGFloat)contrast {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILightTunnel"];
         [filter setValue:@(noiseLevel) forKey:@"inputRotation"];
@@ -1239,7 +1239,7 @@
     }
 }
 
--(void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness{
+- (void)lineScreen:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width sharpness:(CGFloat)sharpness{
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CILineScreen"];
         center.y = self.height - center.y;
@@ -1253,7 +1253,7 @@
     }
 }
 
--(void)maskToAlpha {
+- (void)maskToAlpha {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMaskToAlpha"];
         _output = filter.outputImage;
@@ -1262,7 +1262,7 @@
     }
 }
 
--(void)maximumComponent {
+- (void)maximumComponent {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMaximumComponent"];
         _output = filter.outputImage;
@@ -1271,7 +1271,7 @@
     }
 }
 
--(void)medianFilter {
+- (void)medianFilter {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMedianFilter"];
         _output = filter.outputImage;
@@ -1280,7 +1280,7 @@
     }
 }
 
--(void)minimumComponent {
+- (void)minimumComponent {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMinimumComponent"];
         _output = filter.outputImage;
@@ -1289,7 +1289,7 @@
     }
 }
 
--(void)motionBlur:(CGFloat)radius angle:(CGFloat)angle {
+- (void)motionBlur:(CGFloat)radius angle:(CGFloat)angle {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIMotionBlur"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1300,7 +1300,7 @@
     }
 }
 
--(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness {
+- (void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CINoiseReduction"];
         [filter setValue:@(level) forKey:@"inputLevel"];
@@ -1311,7 +1311,7 @@
     }
 }
 
--(void)opTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width {
+- (void)opTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIOpTile"];
         center.y = self.height - center.y;
@@ -1325,7 +1325,7 @@
     }
 }
 
--(void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
+- (void)parallelogramTile:(CGPoint)center angle:(CGFloat)angle acuteAngle:(CGFloat)acuteAngle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIParallelogramTile"];
         center.y = self.height - center.y;
@@ -1339,7 +1339,7 @@
     }
 }
 
--(void)perspectiveTile:(CGPoint *)points {
+- (void)perspectiveTile:(CGPoint *)points {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIParallelogramTile"];
         for(int i = 0 ; i < 4; i++) points[i].y = self.height - points[i].y;
@@ -1353,7 +1353,7 @@
     }
 }
 
--(void)perspectiveTransform:(CGPoint *)points {
+- (void)perspectiveTransform:(CGPoint *)points {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIPerspectiveTransform"];
         for(int i = 0; i < 4; i++) points[i].y = self.height - points[i].y;
@@ -1367,7 +1367,7 @@
     }
 }
 
--(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale {
+- (void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIPinchDistortion"];
         center.y = self.height - center.y;
@@ -1380,7 +1380,7 @@
     }
 }
 
--(void)pixellate:(CGPoint)center scale:(CGFloat)scale {
+- (void)pixellate:(CGPoint)center scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIPixellate"];
         center.y = self.height - center.y;
@@ -1392,7 +1392,7 @@
     }
 }
 
--(void)pointillize:(CGFloat)radius center:(CGPoint)center {
+- (void)pointillize:(CGFloat)radius center:(CGPoint)center {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIPointillize"];
         [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1404,7 +1404,7 @@
     }
 }
 
--(void)rowAverage:(CGRect)area {
+- (void)rowAverage:(CGRect)area {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIRowAverage"];
         [filter setValue:[NSValue valueWithCGRect:area] forKey:@"inputExtent"];
@@ -1414,7 +1414,7 @@
     }
 }
 
--(void)shadedMaterial:(C4Image *)shadingImage scale:(CGFloat)scale {
+- (void)shadedMaterial:(C4Image *)shadingImage scale:(CGFloat)scale {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CIShadedMaterial"];
         [filter setValue:shadingImage.CIImage forKey:@"inputShadingImage"];
@@ -1425,7 +1425,7 @@
     }
 }
 
--(void)sharpenLuminance:(CGFloat)sharpness {
+- (void)sharpenLuminance:(CGFloat)sharpness {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISharpenLuminance"];
         [filter setValue:@(sharpness) forKey:@"inputSharpness"];
@@ -1435,7 +1435,7 @@
     }
 }
 
--(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+- (void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISixFoldReflectedTile"];
         center.y = self.height - center.y;
@@ -1448,7 +1448,7 @@
     }
 }
 
--(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+- (void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISixFoldRotatedTile"];
         center.y = self.height - center.y;
@@ -1461,7 +1461,7 @@
     }
 }
 
--(void)spotColor:(NSArray *)colorsets closenessAndContrast:(CGFloat *)values {
+- (void)spotColor:(NSArray *)colorsets closenessAndContrast:(CGFloat *)values {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CISpotColor"];
         [filter setValue:((UIColor *)colorsets[0]).CIColor forKey:@"inputCenterColor1"];
@@ -1481,7 +1481,7 @@
         filter = nil;
     }
 }
--(void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color {
+- (void)spotLight:(C4Vector *)position lightPointsAt:(C4Vector *)spot brightness:(CGFloat)brightness concentration:(CGFloat)concentration color:(UIColor *)color {
     CIFilter *filter = [self prepareFilterWithName:@"CISpotLight"];
     [filter setValue:[CIVector vectorWithX:position.x Y:position.y Z:position.z] forKey:@"inputLightPosition"];
     [filter setValue:[CIVector vectorWithX:spot.x Y:spot.y Z:spot.z] forKey:@"inputLightPointsAt"];
@@ -1493,7 +1493,7 @@
     filter = nil;
 }
 
--(void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount {
+- (void)stretchCrop:(CGSize)size cropAmount:(CGFloat)cropAmount stretchAmount:(CGFloat)stretchAmount {
     CIFilter *filter = [self prepareFilterWithName:@"CIStretchCrop"];
     [filter setValue:[NSValue valueWithCGSize:size] forKey:@"inputSize"];
     [filter setValue:@(cropAmount) forKey:@"inputCropAmount"];
@@ -1503,7 +1503,7 @@
     filter = nil;
 }
 
--(void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction {
+- (void)torusLensDistortion:(CGPoint)center radius:(CGFloat)radius width:(CGFloat)width refraction:(CGFloat)refraction {
     CIFilter *filter = [self prepareFilterWithName:@"CITorusLensDistortion"];
     [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
     [filter setValue:@(radius) forKey:@"inputRadius"];
@@ -1514,7 +1514,7 @@
     filter = nil;
 }
 
--(void)triangleKaleidescope:(CGPoint)point size:(CGFloat)size rotation:(CGFloat)rotation decay:(CGFloat)decay {
+- (void)triangleKaleidescope:(CGPoint)point size:(CGFloat)size rotation:(CGFloat)rotation decay:(CGFloat)decay {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITriangleKaleidoscope"];
         point.y = self.height - point.y;
@@ -1528,7 +1528,7 @@
     }
 }
 
--(void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width {
+- (void)triangleTile:(CGPoint)center scale:(CGFloat)scale angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITriangleTile"];
         center.y = self.height - center.y;
@@ -1542,7 +1542,7 @@
     }
 }
 
--(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
+- (void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width {
     @autoreleasepool {
         CIFilter *filter = [self prepareFilterWithName:@"CITwelveFoldReflectedTile"];
         center.y = self.height - center.y;
@@ -1555,7 +1555,7 @@
     }
 }
 
--(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
+- (void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
     CIFilter *filter = [self prepareFilterWithName:@"CITwirlDistortion"];
     center.y = self.height - center.y;
     [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
@@ -1566,7 +1566,7 @@
     filter = nil;
 }
 
--(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity {
+- (void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity {
     CIFilter *filter = [self prepareFilterWithName:@"CIUnsharpMask"];
     [filter setValue:@(radius) forKey:@"inputRadius"];
     [filter setValue:@(intensity) forKey:@"inputIntensity"];
@@ -1575,7 +1575,7 @@
     filter = nil;
 }
 
--(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity {
+- (void)vignette:(CGFloat)radius intensity:(CGFloat)intensity {
     CIFilter *filter = [self prepareFilterWithName:@"CIVignette"];
     [filter setValue:@(radius) forKey:@"inputRadius"];
     [filter setValue:@(intensity) forKey:@"inputIntensity"];
@@ -1584,7 +1584,7 @@
     filter = nil;
 }
 
--(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
+- (void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle {
     CIFilter *filter = [self prepareFilterWithName:@"CIVortexDistortion"];
     center.y = self.height - center.y;
     [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
@@ -1595,7 +1595,7 @@
     filter = nil;
 }
 
--(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount {
+- (void)zoomBlur:(CGPoint)center amount:(CGFloat)amount {
     CIFilter *filter = [self prepareFilterWithName:@"CIZoomBlur"];
     center.y = self.height - center.y;
     [filter setValue:[CIVector vectorWithCGPoint:center] forKey:@"inputCenter"];
@@ -1606,7 +1606,7 @@
 }
 
 #pragma mark Generators
-+(C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness {
++ (C4Image *)checkerboard:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 squareWidth:(CGFloat)width sharpness:(CGFloat)sharpness {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CICheckerboardGenerator"];
@@ -1626,7 +1626,7 @@
     }
 }
 
-+(C4Image *)constantColor:(CGSize)size color:(UIColor *)color{
++ (C4Image *)constantColor:(CGSize)size color:(UIColor *)color{
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIConstantColorGenerator"];
@@ -1640,7 +1640,7 @@
     }
 };
 
-+(C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time{
++ (C4Image *)lenticularHalo:(CGSize)size center:(CGPoint)center color:(UIColor *)color haloRadius:(CGFloat)radius haloWidth:(CGFloat)haloWidth haloOverlap:(CGFloat)overlap striationStrength:(CGFloat)strength striationContrast:(CGFloat)contrast time:(CGFloat)time{
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CILenticularHaloGenerator"];
@@ -1663,7 +1663,7 @@
     }
 };
 
-+(C4Image *)random:(CGSize)size{
++ (C4Image *)random:(CGSize)size{
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIRandomGenerator"];
@@ -1676,7 +1676,7 @@
     }
 }
 
-+(C4Image *)gaussianGradient:(CGSize)size center:(CGPoint)center innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor radius:(CGFloat)radius {
++ (C4Image *)gaussianGradient:(CGSize)size center:(CGPoint)center innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor radius:(CGFloat)radius {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIGaussianGradient"];
@@ -1696,7 +1696,7 @@
     return nil;
 }
 
-+(C4Image *)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor {
++ (C4Image *)linearGradient:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint startColor:(UIColor *)startColor endColor:(UIColor *)endColor {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CILinearGradient"];
@@ -1717,7 +1717,7 @@
     return nil;
 }
 
-+(C4Image *)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor {
++ (C4Image *)radialGradient:(CGSize)size center:(CGPoint)center innerRadius:(CGFloat)innerRadius outerRadius:(CGFloat)outerRadius innerColor:(UIColor *)innerColor outerColor:(UIColor *)outerColor {
     @autoreleasepool {
         CIContext *context = [CIContext contextWithOptions:nil];
         CIFilter *filter = [CIFilter filterWithName:@"CIRadialGradient"];
@@ -1737,7 +1737,7 @@
     }
 }
 
-+(NSArray *)availableFilters {
++ (NSArray *)availableFilters {
     NSArray *filterCategories = @[
     kCICategoryDistortionEffect,
     kCICategoryGeometryAdjustment,
@@ -1768,9 +1768,9 @@
     return sortedFilterList;
 }
 
-//+(C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon{return nil;};
+//+ (C4Image *)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon{return nil;};
 //
-//+(C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness{
+//+ (C4Image *)stripes:(CGSize)size center:(CGPoint)center color1:(UIColor *)color1 color2:(UIColor *)color2 stripeWidth:(CGFloat)width sharpness:(CGFloat)sharpness{
 //    @autoreleasepool {
 //        CIContext *context = [CIContext contextWithOptions:nil];
 //        CIFilter *filter = [CIFilter filterWithName:@"CIStripesGenerator"];
@@ -1786,15 +1786,15 @@
 //        return [[C4Image alloc] initWithCGImage:filteredImage];
 //    }
 //};
-//+(C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
+//+ (C4Image *)sunbeams:(CGSize)size center:(CGPoint)center color:(UIColor *)color sunRadius:(CGFloat)sunRadius maxStriationRadius:(CGFloat)striationRadius striationStrength:(CGFloat)striationStrength striationContrast:(CGFloat)striationContrast time:(CGFloat)time{return nil;};
 
 #pragma mark Animated Image 
-+(C4Image *)animatedImageWithNames:(NSArray *)imageNames {
++ (C4Image *)animatedImageWithNames:(NSArray *)imageNames {
     C4Image *animImg = [[C4Image alloc] initAnimatedImageWithNames:imageNames];
     return animImg;
 }
 
--(id)initAnimatedImageWithNames:(NSArray *)imageNames {
+- (id)initAnimatedImageWithNames:(NSArray *)imageNames {
     self = [C4Image imageNamed:imageNames[0]];
     if(nil != self) {
         NSMutableArray *animatedImages = [[NSMutableArray alloc] initWithCapacity:0];
@@ -1814,43 +1814,43 @@
     return  self;
 }
 
--(void)setAnimationRepeatCount:(NSInteger)animationRepeatCount {
+- (void)setAnimationRepeatCount:(NSInteger)animationRepeatCount {
     self.imageView.animationRepeatCount = animationRepeatCount;
 }
 
--(NSInteger)animationRepeatCount {
+- (NSInteger)animationRepeatCount {
     return self.imageView.animationRepeatCount;
 }
 
--(void)play {
+- (void)play {
     [self.imageView startAnimating];
 }
 
--(void)pause {
+- (void)pause {
     [self.imageView stopAnimating];
 }
 
--(void)setAnimatedImageDuration:(CGFloat)animatedImageDuration {
+- (void)setAnimatedImageDuration:(CGFloat)animatedImageDuration {
     self.imageView.animationDuration = (NSTimeInterval)animatedImageDuration;
 }
 
--(CGFloat)animatedImageDuration {
+- (CGFloat)animatedImageDuration {
     return (CGFloat)self.imageView.animationDuration;
 }
 
--(void)setAnimationImages:(NSArray *)animationImages {
+- (void)setAnimationImages:(NSArray *)animationImages {
     self.imageView.animationImages = animationImages;
 }
 
--(NSArray *)animationImages {
+- (NSArray *)animationImages {
     return self.imageView.animationImages;
 }
 
--(BOOL)isAnimating {
+- (BOOL)isAnimating {
     return self.imageView.isAnimating;
 }
 
--(void)setShowsActivityIndicator:(BOOL)showsActivityIndicator {
+- (void)setShowsActivityIndicator:(BOOL)showsActivityIndicator {
     _showsActivityIndicator = showsActivityIndicator;
     if(showsActivityIndicator == NO) {
         [_filterIndicator stopAnimating];
@@ -1859,7 +1859,7 @@
 }
 
 #pragma mark Pixels
--(void)loadPixelData {
+- (void)loadPixelData {
     const char *queueName = [@"pixelDataQueue" UTF8String];
     __block dispatch_queue_t pixelDataQueue = dispatch_queue_create(queueName,  DISPATCH_QUEUE_CONCURRENT);
     
@@ -1884,7 +1884,7 @@
     });
 }
 
--(UIColor *)colorAt:(CGPoint)point {
+- (UIColor *)colorAt:(CGPoint)point {
     if(_pixelDataLoaded == NO) {
         C4Log(@"You must first load pixel data");
     } else  if ([self pointInside:point withEvent:nil]) {
@@ -1903,7 +1903,7 @@
     return [UIColor clearColor];
 }
 
--(C4Vector *)rgbVectorAt:(CGPoint)point {
+- (C4Vector *)rgbVectorAt:(CGPoint)point {
     if(_pixelDataLoaded == NO) {
         C4Log(@"You must first load pixel data");
     } else if([self pointInside:point withEvent:nil]) {
@@ -1921,21 +1921,21 @@
 }
 
 #pragma mark Copying
--(C4Image *)copyWithZone:(NSZone *)zone {
+- (C4Image *)copyWithZone:(NSZone *)zone {
     return [[C4Image allocWithZone:zone] initWithImage:self];
 }
 
 #pragma mark Default Style
-+(C4Image *)defaultStyle {
++ (C4Image *)defaultStyle {
     return (C4Image *)[C4Image appearance];
 }
 
 #pragma mark Layer Access Overrides
--(C4Layer *)imageLayer {
+- (C4Layer *)imageLayer {
     return self.imageView.imageLayer;
 }
 
--(C4Layer *)layer {
+- (C4Layer *)layer {
     return self.imageLayer;
 }
 

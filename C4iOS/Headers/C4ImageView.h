@@ -10,6 +10,7 @@
 
 @interface C4ImageView : UIImageView
 
--(C4Layer *)imageLayer;
--(void)rotationDidFinish:(CGFloat)newRotationAngle;
+//FIXME: Needs documentation
+- (C4Layer *)imageLayer;
+- (void)rotationDidFinish:(CGFloat)newRotationAngle;
 @end

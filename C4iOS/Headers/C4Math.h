@@ -20,7 +20,7 @@
 @interface C4Math : C4Object
 
 #pragma mark Singleton
-+(C4Math *)sharedManager;
++ (C4Math *)sharedManager;
 
 #pragma mark Arithmetic
 /// @Arithmetic
@@ -29,20 +29,20 @@
  @param value The number to be converted to its absolute value
  @return NSInteger returns the positive whole (integer), if the given number is a floating-point the method first converts it to an integer
  */
-+(NSInteger)abs:(NSInteger)value;
++ (NSInteger)abs:(NSInteger)value;
 
 /** Computes the absolute value of a floating-point number
  
  @param value The float number to be converted to its absolute value
  @return NSInteger returns the positive floating-point value of a given number
  */
-+(CGFloat)absf:(CGFloat)value;
++ (CGFloat)absf:(CGFloat)value;
 
 /** Rounds a floating-point value
  @param value The number for which to calculate ceil:
  @return NSInteger returns the smallest whole number no less than _value_
  */
-+(NSInteger)ceil:(CGFloat)value;
++ (NSInteger)ceil:(CGFloat)value;
 
 /** Constrains a number to a given range of integer values
  
@@ -53,7 +53,7 @@
  @param max The largest possible number in the range
  @return NSInteger Either _min_ or _max_ if the given number lies outside the range (e.g. if _value_ is less than _min_ this method returns _min_), otherwise this method returns _value_ (unchanged)
  */
-+(NSInteger)constrain:(NSInteger)value min:(NSInteger)min max:(NSInteger)max;
++ (NSInteger)constrain:(NSInteger)value min:(NSInteger)min max:(NSInteger)max;
 
 /** Constrains a number to a given range of floating-point values
  
@@ -64,7 +64,7 @@
  @param max The largest possible number in the range
  @return CGFloat Either _min_ or _max_ if the given number lies outside the range (e.g. if _value_ is less than _min_ this method returns _min_), otherwise this method returns _value_ (unchanged)
  */
-+(CGFloat)constrainf:(CGFloat)value min:(CGFloat)min max:(CGFloat)max;
++ (CGFloat)constrainf:(CGFloat)value min:(CGFloat)min max:(CGFloat)max;
 
 /** The natural exponential function
  
@@ -74,14 +74,14 @@
 
  @return CGFloat Returns the calucation of of e ^ _value_
  */
-+(CGFloat)exp:(CGFloat)value;
++ (CGFloat)exp:(CGFloat)value;
 
 /** Rounds a floating-point value
   
  @param value The number to round up
  @return NSInteger returns the largest whole number no greater than _value_
  */
-+(NSInteger)floor:(CGFloat)value;
++ (NSInteger)floor:(CGFloat)value;
 
 /** Calculates the linear interpolation of a value between two numbers
  
@@ -94,13 +94,13 @@
  @param amount floating-point value (should be between 0.0 and 1.0) as a measure of relative distance between the two points
  @return CGFloat the floating point value of a number between _a_ and _b_ which is _amount_ point between those two numbers
  */
-+(CGFloat)lerpBetweenA:(CGFloat)a B:(CGFloat)b byAmount:(CGFloat)amount;
++ (CGFloat)lerpBetweenA:(CGFloat)a B:(CGFloat)b byAmount:(CGFloat)amount;
 
 /**Calculates the natural logarithm of a given value
  @param value The number to which to apply the logarithm equation
  @return CGFloat The natural logartihm of a given floating-point value
  */
-+(CGFloat)log:(CGFloat)value;
++ (CGFloat)log:(CGFloat)value;
 
 /** Takes a value within a given range of numbers, and converts it to a relative value between another set of numbers.
  
@@ -116,7 +116,11 @@
  @param max2 The largest number in the new range
  @return CGFloat Either _min_ or _max_ if the given number lies outside the range (e.g. if _value_ is less than _min_ this method returns _min_), otherwise this method returns _value_ (unchanged)
  */
-+(CGFloat)map:(CGFloat)value fromMin:(CGFloat)min1 max:(CGFloat)max1 toMin:(CGFloat)min2 max:(CGFloat)max2;
++ (CGFloat)map:(CGFloat)value
+       fromMin:(CGFloat)min1
+           max:(CGFloat)max1
+         toMin:(CGFloat)min2
+           max:(CGFloat)max2;
 
 /**Calculates the larger value of two given numbers
  
@@ -125,7 +129,7 @@
  
  @return CGFlaot the larger value of _a_ and _b_
  */
-+(CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b;
++ (CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b;
 
 /**Calculates the larger of three given numbers
  
@@ -134,7 +138,7 @@
  @param c A given number to compare
  @return CGFlaot the larger of _a_, _b_ and _c_
  */
-+(CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c;
++ (CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c;
 
 /**Calculates the smaller value of two given numbers
  
@@ -142,7 +146,7 @@
  @param b A given number to compare
  @return CGFlaot the smaller value of _a_ and _b_
  */
-+(CGFloat)minOfA:(CGFloat)a B:(CGFloat)b;
++ (CGFloat)minOfA:(CGFloat)a B:(CGFloat)b;
 
 /**Calculates the smaller value of three given numbers
 
@@ -151,7 +155,7 @@
  @param c A given number to compare
  @return CGFlaot the smaller value of _a_, _b_ and _c_
  */
-+(CGFloat)minOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c;
++ (CGFloat)minOfA:(CGFloat)a B:(CGFloat)b C:(CGFloat)c;
 
 
 /**Unused
@@ -161,7 +165,7 @@
  @param max -
  @return CGFloat returns 0
  */
-+(CGFloat)norm:(CGFloat)value fromMin:(CGFloat)min toMax:(CGFloat)max;
++ (CGFloat)norm:(CGFloat)value fromMin:(CGFloat)min toMax:(CGFloat)max;
 
 /**Calculates the value of a number raised to a given degree
  
@@ -172,7 +176,7 @@
  @param degree Any real floating-point value
  @return CGFloat The calculation of _value_ ^ _degree
  */
-+(CGFloat)pow:(CGFloat)value raisedTo:(CGFloat)degree;
++ (CGFloat)pow:(CGFloat)value raisedTo:(CGFloat)degree;
 
 /** Rounds a floating-point value
  
@@ -182,7 +186,7 @@
  @param value The number to round
  @return NSInteger returns the closest whole number to a given _value_
  */
-+(CGFloat)round:(CGFloat)value;
++ (CGFloat)round:(CGFloat)value;
 
 /**Squares a given value
  
@@ -195,7 +199,7 @@
 
  @return CGFloat The result of _value_ multiplied by itself
  */
-+(CGFloat)square:(CGFloat)value;
++ (CGFloat)square:(CGFloat)value;
 
 /**Calculates the square root of a given value
  
@@ -205,7 +209,7 @@
  @param value The number to which to apply the square root
  @return CGFloat The square root of _value_
  */
-+(CGFloat)sqrt:(CGFloat)value;
++ (CGFloat)sqrt:(CGFloat)value;
 
 #pragma mark Trigonometry
 /// @Trigonometry
@@ -215,21 +219,21 @@
  @param value The number for which to calculate the arccosine 
  @return CGFloat A value in the range of (0..PI)
  */
-+(CGFloat)acos:(CGFloat)value;
++ (CGFloat)acos:(CGFloat)value;
 
 /**Calculates the arc sine of a given value.
  
  @param value The number for which to calculate the arcsine 
  @return CGFloat A value in the range of (-PI/2..+PI/2)
  */
-+(CGFloat)asin:(CGFloat)value;
++ (CGFloat)asin:(CGFloat)value;
 
 /**Calculates the arc tangent of a single given value.
  
  @param value The number for which to calculate the arctanent 
  @return CGFloat A value in the range of (-PI/2..+PI/2)
  */
-+(CGFloat)atan:(CGFloat)value;
++ (CGFloat)atan:(CGFloat)value;
 
 /**Calculates the arc tangent of a two given values.
  
@@ -237,28 +241,28 @@
  @param x The x value for which to calculate the arctangent2 
  @return CGFloat The value of th earc tangent of y/x, using the signs of both arguments to determine the quadrant of the return value.
  */
-+(CGFloat)atan2Y:(CGFloat)y X:(CGFloat)x;
++ (CGFloat)atan2Y:(CGFloat)y X:(CGFloat)x;
 
 /**Calculates the cosine of a value
  
  @param value The number for which to calculate the cosine 
  @return CGFloat The cosine of _value_ measured in RADIANS.
  */
-+(CGFloat)cos:(CGFloat)value;
++ (CGFloat)cos:(CGFloat)value;
 
 /**Calculates the sine of a value
  
  @param value The number for which to calculate the sine 
  @return CGFloat The sine of _value_ measured in RADIANS.
  */
-+(CGFloat)sin:(CGFloat)value;
++ (CGFloat)sin:(CGFloat)value;
 
 /**Calculates the tangent of a value
  
  @param value The number for which to calculate the tan 
  @return CGFloat The tangent of _value_ measured in RADIANS.
  */
-+(CGFloat)tan:(CGFloat)value;
++ (CGFloat)tan:(CGFloat)value;
 
 #pragma mark Random
 /// @Random
@@ -268,7 +272,7 @@
  @param value The highest possible random number to return
  @return NSInteger A random integer between 0 and _value_
  */
-+(NSInteger)randomInt:(NSInteger)value;
++ (NSInteger)randomInt:(NSInteger)value;
 
 /**Calculates a random value 
  
@@ -276,7 +280,7 @@
  @param b The highest possible random number to return
  @return NSInteger A random integer between _a_ and _b_
  */
-+(NSInteger)randomIntBetweenA:(NSInteger)a andB:(NSInteger)b;
++ (NSInteger)randomIntBetweenA:(NSInteger)a andB:(NSInteger)b;
 
 #pragma mark Math Conversion Functions
 /// @Conversion

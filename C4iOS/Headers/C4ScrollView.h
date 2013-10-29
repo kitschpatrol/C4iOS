@@ -30,7 +30,7 @@
  @param rect the frame used to create the size and position of the scrollview.
  @return a new C4ScrollView object.
  */
-+(C4ScrollView *)scrollView:(CGRect)rect;
++ (instancetype)scrollView:(CGRect)rect;
 
 #pragma mark - ScrollView & Delegate
 ///@name ScrollView & Delegate
@@ -219,7 +219,7 @@
  @param rect A rectangle defining an area of the content view.
  @param animated YES if the scrolling should be animated, NO if it should be immediate.
  */
--(void)zoomToRect:(CGRect)rect animated:(BOOL)animated;
+- (void)zoomToRect:(CGRect)rect animated:(BOOL)animated;
 
 /**A floating-point value that specifies the current scale factor applied to the scroll view's content.
  
@@ -234,7 +234,7 @@
  @param scale The new value to scale the content to.
  @param animated YES to animate the transition to the new scale, NO to make the transition immediate.
  */
--(void)setZoomScale:(CGFloat)scale animated:(BOOL)animated;
+- (void)setZoomScale:(CGFloat)scale animated:(BOOL)animated;
 
 /**A floating-point value that specifies the maximum scale factor that can be applied to the scroll view's content.
  
@@ -302,5 +302,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4ScrollView.
  */
-+(C4ScrollView *)defaultStyle;
++ (C4ScrollView *)defaultStyle;
 @end

@@ -11,7 +11,7 @@
 @implementation C4Font
 @synthesize UIFont = _UIFont, CTFont = _CTFont, CGFont = _CGFont, familyName = _familyName, fontName = _fontName, pointSize = _pointSize, ascender = _ascender, descender = _descender, capHeight = _capHeight, xHeight = _xHeight, lineHeight = _lineHeight;
 
--(id)init {
+- (id)init {
     self = [super init];
     if(self != nil) {
         _UIFont = [UIFont systemFontOfSize:12.0f];
@@ -20,7 +20,7 @@
     return self;
 }
 
--(id)initWithName:(NSString *)fontName size:(CGFloat)fontSize {
+- (id)initWithName:(NSString *)fontName size:(CGFloat)fontSize {
     self = [super init];
     if(self != nil) {
         _UIFont = [UIFont fontWithName:fontName size:fontSize];
@@ -33,7 +33,7 @@
     return [[C4Font alloc] initWithName:fontName size:fontSize];
 }
 
--(void)dealloc {
+- (void)dealloc {
     _UIFont = nil;
     _CTFont = nil;
     _CGFont = nil;
@@ -69,55 +69,55 @@
     return [[C4Font alloc] initWithName:[self.UIFont fontName] size:fontSize];
 }
 
--(NSString *)familyName {
+- (NSString *)familyName {
     return _UIFont.familyName;
 }
 
--(NSString *)fontName {
+- (NSString *)fontName {
     return _UIFont.fontName;
 }
 
--(void)setFontName:(NSString *)fontName {
+- (void)setFontName:(NSString *)fontName {
     _UIFont = [UIFont fontWithName:fontName size:self.pointSize];
 }
 
--(CGFloat)pointSize {
+- (CGFloat)pointSize {
     return _UIFont.pointSize;
 }
 
--(void)setPointSize:(CGFloat)pointSize {
+- (void)setPointSize:(CGFloat)pointSize {
     _UIFont = [UIFont fontWithName:self.fontName size:pointSize];
 }
 
--(CGFloat)ascender {
+- (CGFloat)ascender {
     return _UIFont.ascender;
 }
 
--(CGFloat)descender {
+- (CGFloat)descender {
     return _UIFont.descender;
 }
 
--(CGFloat)capHeight {
+- (CGFloat)capHeight {
     return _UIFont.capHeight;
 }
 
--(CGFloat)xHeight {
+- (CGFloat)xHeight {
     return _UIFont.xHeight;
 }
 
--(CGFloat)lineHeight {
+- (CGFloat)lineHeight {
     return _UIFont.lineHeight;
 }
 
--(CGFontRef)CGFont {
+- (CGFontRef)CGFont {
     return (__bridge CGFontRef)self.UIFont;
 }
 
--(CTFontRef)CTFont {
+- (CTFontRef)CTFont {
     return CTFontCreateWithName((__bridge CFStringRef)self.fontName, self.pointSize, nil);
 }
 
--(C4Font *)copyWithZone:(NSZone *)zone {
+- (C4Font *)copyWithZone:(NSZone *)zone {
     return [[C4Font allocWithZone:zone] initWithName:self.fontName size:self.pointSize];
 }
 

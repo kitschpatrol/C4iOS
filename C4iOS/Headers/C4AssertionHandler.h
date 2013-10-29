@@ -18,7 +18,7 @@
 
  Raises NSInternalInconsistencyException.
 
- -(void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...
+ - (void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...
  
  @param functionName The function that failed.
  @param fileName The name of the source file.
@@ -26,13 +26,16 @@
  @param format A format string followed by a comma-separated list of arguments to substitute into the format string. See Formatting String Objects for more information.
  @param ... The variables for the format string
  */
--(void)handleFailureInFunction:(NSString *)functionName file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...;
+- (void)handleFailureInFunction:(NSString *)functionName
+                           file:(NSString *)fileName
+                     lineNumber:(NSInteger)line
+                    description:(NSString *)format, ...;
 
 /** Logs (using C4Log) an error message that includes the name of the method that failed, the class name of the object, the name of the source file, and the line number.
  
  Raises NSInternalInconsistencyException.
  
- -(void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...
+ - (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...
  
  @param selector The selector for the method that failed The function that failed.
  @param object The object that failed.
@@ -41,6 +44,9 @@
  @param format A format string followed by a comma-separated list of arguments to substitute into the format string. See Formatting String Objects for more information.
  @param ... The variables for the format string
  */
--(void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(NSString *)format, ...;
+- (void)handleFailureInMethod:(SEL)selector
+                       object:(id)object file:(NSString *)fileName
+                   lineNumber:(NSInteger)line
+                  description:(NSString *)format, ...;
 
 @end

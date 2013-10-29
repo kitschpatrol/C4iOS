@@ -66,11 +66,11 @@ const GLubyte colors[] = {
     int startPoint;
 }
 
--(void)setup {
+- (void)setup {
     startPoint = 0;
 }
 
--(void)render {
+- (void)render {
 
     GLfloat currentVerts[48];
     for(int i = 0; i < 48; i++){
@@ -114,7 +114,7 @@ const GLubyte colors[] = {
     if(startPoint >= 96) startPoint = 0;
 }
 
--(C4GL1Renderer *)copyWithZone:(NSZone *)zone {
+- (C4GL1Renderer *)copyWithZone:(NSZone *)zone {
     return [[C4GL1Renderer allocWithZone:zone] init];
 }
 

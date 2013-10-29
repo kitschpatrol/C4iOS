@@ -9,7 +9,7 @@
 #import "C4GL.h"
 
 @interface C4GL () 
--(void)render;
+- (void)render;
 @property (readonly, nonatomic, getter = isDisplayLinkSupported) BOOL displayLinkSupported;
 @property (readonly, strong, nonatomic) C4EAGLLayer *eaglLayer;
 @property (readwrite, strong, nonatomic) id displayLink;
@@ -26,17 +26,17 @@
 //@synthesize drawOnce;
 //@synthesize shouldAutoreverse = _shouldAutoreverse;
 
-+(C4GL *)glWithFrame:(CGRect)frame {
++ (C4GL *)glWithFrame:(CGRect)frame {
     C4GL *gl = [[C4GL alloc] init];
     gl.frame = frame;
     return gl;
 }
 
--(id)init {
+- (id)init {
     return [self initWithRenderer:[[C4GL1Renderer alloc] init]];
 }
 
--(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
+- (id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
     self = [super init];
     if (self != nil) {        
         _eaglLayer = (C4EAGLLayer *)self.layer;
@@ -68,11 +68,11 @@
     return self;
 }
 
--(void)dealloc {
+- (void)dealloc {
     self.renderer = nil;
 }
 
--(void)render {
+- (void)render {
     [_renderer render];
     if (YES == self.drawOnce) {
         [self stopAnimation];
@@ -95,7 +95,7 @@
 	}
 }
 
--(void)startAnimation {
+- (void)startAnimation {
 	if (!self.isAnimating) {
 		if (self.isDisplayLinkSupported) {
 			self.displayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self 
@@ -129,7 +129,7 @@
 	}
 }
 
--(void)setRenderer:(id<C4EAGLESRenderer>)renderer {
+- (void)setRenderer:(id<C4EAGLESRenderer>)renderer {
     BOOL wasAnimating = NO;
     if(self.isAnimating) {
         wasAnimating = YES;
@@ -145,16 +145,16 @@
     return [C4EAGLLayer class];
 }
 
--(void)setBackgroundColor:(UIColor *)backgroundColor {
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
     backgroundColor = [UIColor clearColor]; // can't remember why... should test and document
     [super setBackgroundColor:backgroundColor];
 }
 
-+(C4GL *)defaultStyle {
++ (C4GL *)defaultStyle {
     return (C4GL *)[C4GL appearance];
 }
 
--(C4GL *)copyWithZone:(NSZone *)zone {
+- (C4GL *)copyWithZone:(NSZone *)zone {
     C4GL *newGL = [[C4GL allocWithZone:zone]
                    initWithRenderer:[(C4GL1Renderer *)self.renderer copy]];
     newGL.frame = self.frame;

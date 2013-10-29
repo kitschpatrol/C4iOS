@@ -32,7 +32,7 @@
 
  @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
  */
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName;
+- (void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName;
 
 /** Sets up a given object to listen for a given notification _from a specific object_, and runs a specific method.
  
@@ -46,7 +46,9 @@
  
  @warning *Note:* To listen for messages coming from a specific object, use listenFor:fromObject:andRunMethod 
  */
--(void)listenFor:(NSString *)notification fromObject:(id)object andRunMethod:(NSString *)methodName;
+- (void)listenFor:(NSString *)notification
+       fromObject:(id)object
+     andRunMethod:(NSString *)methodName;
 
 /** Sets up a given object to listen for a given notification _from an array of objects_, and runs a specific method.
  
@@ -58,7 +60,9 @@
  @param objectArray a set of object to listen to
  @param methodName a string which represents the name of a method defined in the object's class or any of its superclasses, this parameter should be written as a string (e.g. @"test", @"changePosition:")
  */
--(void)listenFor:(NSString *)notification fromObjects:(NSArray *)objectArray andRunMethod:(NSString *)methodName;
+- (void)listenFor:(NSString *)notification
+      fromObjects:(NSArray *)objectArray
+     andRunMethod:(NSString *)methodName;
 
 /** Stops an object from listening for a given notification.
  
@@ -68,7 +72,7 @@
  
  @param notification the name of a notification for which the object should stop listening
  */
--(void)stopListeningFor:(NSString *)notification;
+- (void)stopListeningFor:(NSString *)notification;
 
 /** Stops an object from listening for a given notification which originates from a specific object.
  
@@ -79,7 +83,7 @@
  @param notification the name of a notification for which the object should stop listening
  @param object the object for which to stop listening
  */
--(void)stopListeningFor:(NSString *)notification object:(id)object;
+- (void)stopListeningFor:(NSString *)notification object:(id)object;
 
 /** Stops an object from listening for a given notification which originates from a set of specific objects.
  
@@ -90,7 +94,7 @@
  @param notification the name of a notification for which the object should stop listening
  @param objectArray the set of objects for which to stop listening
  */
--(void)stopListeningFor:(NSString *)notification objects:(NSArray *)objectArray;
+- (void)stopListeningFor:(NSString *)notification objects:(NSArray *)objectArray;
 
 #pragma mark Broadcast Methods
 /// @name Broadcast Methods
@@ -101,6 +105,6 @@
  
  @param notification the name of a notification to be broadcast
  */
--(void)postNotification:(NSString *)notification;
+- (void)postNotification:(NSString *)notification;
 
 @end

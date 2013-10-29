@@ -9,7 +9,7 @@
 #import "UIColor+CIColorFix.h"
 
 @implementation UIColor (CIColorFix)
--(CIColor *)CIColor {
+- (CIColor *)CIColor {
     CGFloat rgba[4];
     [self getRed:&rgba[0] green:&rgba[1] blue:&rgba[2] alpha:&rgba[3]];
     return [CIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];

@@ -18,13 +18,13 @@
  
  This method gets called automatically at the end of the object's initialization.
  
- @warning Do NOT override initialization methods such as -(id)init, instead override this method.
+ @warning Do NOT override initialization methods such as - (id)init, instead override this method.
  */
--(void)setup;
+- (void)setup;
 
 /**The method to override for adding custom drawing calls.
   */
--(void)render;
+- (void)render;
 
 #pragma mark - Copying
 ///@name Copying
@@ -32,6 +32,6 @@
  @param zone The zone for copying. Leave this as nil for normal results.
  @return a copy of the receiver.
  */
--(C4GL1Renderer *)copyWithZone:(NSZone *)zone;
+- (C4GL1Renderer *)copyWithZone:(NSZone *)zone;
 
 @end
