@@ -22,7 +22,12 @@
 @implementation C4WorkSpace
 
 -(void)setup {
-    
+    C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
+    s.center = self.canvas.center;
+    s.borderColor = C4GREY;
+    s.borderWidth = 1.0f;
+    s.cornerRadius = 5.0f;
+    [self.canvas addShape:s];
 }
 
 @end

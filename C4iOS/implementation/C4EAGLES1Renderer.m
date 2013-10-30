@@ -54,6 +54,7 @@
 }
 
 - (BOOL) resizeFromLayer:(C4EAGLLayer *)layer{
+    BOOL shouldResize = YES;
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderBuffer);
     [_eaglContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
 	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &_width);
@@ -62,10 +63,9 @@
     if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
 		NSLog(@"Failed to make complete framebuffer object %x",
               glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
-        return NO;
+        shouldResize = NO;
     }
-    
-    return YES;
+    return shouldResize;
 }
 
 - (void) dealloc

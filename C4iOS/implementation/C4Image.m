@@ -1796,7 +1796,6 @@
         CFRelease(filteredImage);
         return [[C4Image alloc] initWithUIImage:uiimg];
     }
-    return nil;
 }
 
 + (C4Image *)linearGradient:(CGSize)size
@@ -1821,7 +1820,6 @@
         CFRelease(filteredImage);
         return [[C4Image alloc] initWithUIImage:uiimg];
     }
-    return nil;
 }
 
 + (C4Image *)radialGradient:(CGSize)size
@@ -2009,6 +2007,7 @@
 }
 
 - (UIColor *)colorAt:(CGPoint)point {
+    UIColor *color = [UIColor clearColor];
     if(_pixelDataLoaded == NO) {
         C4Log(@"You must first load pixel data");
     } else  if ([self pointInside:point withEvent:nil]) {
@@ -2022,15 +2021,16 @@
         b = _rawData[byteIndex + 2];
         a = _rawData[byteIndex + 3];
         
-        return [UIColor colorWithRed:RGBToFloat(r)
-                               green:RGBToFloat(g)
-                                blue:RGBToFloat(b)
-                               alpha:RGBToFloat(a)];
+        color = [UIColor colorWithRed:RGBToFloat(r)
+                                green:RGBToFloat(g)
+                                 blue:RGBToFloat(b)
+                                alpha:RGBToFloat(a)];
     }
-    return [UIColor clearColor];
+    return color;
 }
 
 - (C4Vector *)rgbVectorAt:(CGPoint)point {
+    C4Vector *vector = [C4Vector vectorWithX:-1 Y:-1 Z:-1];
     if(_pixelDataLoaded == NO) {
         C4Log(@"You must first load pixel data");
     } else if([self pointInside:point withEvent:nil]) {
@@ -2042,9 +2042,9 @@
         r = _rawData[byteIndex];
         g = _rawData[byteIndex + 1];
         b = _rawData[byteIndex + 2];
-        return [C4Vector vectorWithX:r Y:g Z:b];
+        vector = [C4Vector vectorWithX:r Y:g Z:b];
     }
-    return [C4Vector vectorWithX:-1 Y:-1 Z:-1];
+    return vector;
 }
 
 #pragma mark Copying

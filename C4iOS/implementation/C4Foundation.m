@@ -39,12 +39,10 @@ NSInteger floatSort(id obj1, id obj2, void *context);
         floatSortComparator = ^(id obj1, id obj2) {
             float flt1 = [obj1 floatValue];
             float flt2 = [obj2 floatValue];
-            if (flt1 < flt2)
-                return NSOrderedAscending;
-            else if (flt1 > flt2)
-                return NSOrderedDescending;
-            else
-                return NSOrderedSame;
+            NSComparisonResult result = NSOrderedSame;
+            if (flt1 < flt2) result = NSOrderedAscending;
+            else if (flt1 > flt2) result = NSOrderedDescending;
+            return result;
         };
     }
     
@@ -56,7 +54,6 @@ NSInteger floatSort(id obj1, id obj2, void *context);
         static dispatch_once_t once;
         dispatch_once(&once, ^ { sharedC4Foundation = [[super allocWithZone:NULL] init]; 
         });
-        return sharedC4Foundation;
     }
     return sharedC4Foundation;
 }
@@ -73,14 +70,15 @@ void C4Log(NSString *logString,...) {
 }
 
 NSInteger basicSort(id obj1, id obj2, void *context) {
+    NSComparisonResult result = 0;
 	if([obj1 class] == [NSNumber class]){
-		return numSort(obj1, obj2, context);
-	}
-	
-	if([obj1 class] == [@"" class] || [obj1 class] == [NSString class]){
-		return strSort(obj1, obj2, context);
-	}
- 	return floatSort(obj1, obj2, context);
+		result = numSort(obj1, obj2, context);
+	} else if([obj1 class] == [@"" class] || [obj1 class] == [NSString class]){
+		result = strSort(obj1, obj2, context);
+	} else {
+        result = floatSort(obj1, obj2, context);
+    }
+    return result;
 }
 
 NSInteger numSort(id num1, id num2, void *context) {
@@ -97,17 +95,16 @@ NSInteger floatSort(id obj1, id obj2, void *context) {
     context = context;
 	float flt1 = [obj1 floatValue];
 	float flt2 = [obj2 floatValue];
-	if (flt1 < flt2)
-        return NSOrderedAscending;
-    else if (flt1 > flt2)
-        return NSOrderedDescending;
-    else
-        return NSOrderedSame;
+    NSComparisonResult result = NSOrderedSame;
+	if (flt1 < flt2) result = NSOrderedAscending;
+    else if (flt1 > flt2) result = NSOrderedDescending;
+    return result;
 }
 
 - (NSComparator) floatComparator {
     return floatSortComparator;
 }
+
 + (NSComparator) floatComparator {
     return [[self sharedManager] floatComparator];
 }

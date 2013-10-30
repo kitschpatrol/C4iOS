@@ -24,14 +24,12 @@ static C4Math *sharedC4Math = nil;
 @implementation C4Math
 #pragma mark Singleton
 
-+ (C4Math *)sharedManager
-{
++ (C4Math *)sharedManager {
     if (sharedC4Math == nil) {
         static dispatch_once_t once;
         dispatch_once(&once, ^ {
             sharedC4Math = [[super allocWithZone:NULL] init];
         });
-        return sharedC4Math;
     }
     return sharedC4Math;
 }
@@ -97,14 +95,14 @@ static C4Math *sharedC4Math = nil;
            max:(CGFloat)max1
          toMin:(CGFloat)min2
            max:(CGFloat)max2 {
-	float rangeLength1 = max1-min1;
-	float rangeLength2 = max2-min2;
-	float multiplier = (value-min1)/rangeLength1;
+	CGFloat rangeLength1 = max1-min1;
+	CGFloat rangeLength2 = max2-min2;
+	CGFloat multiplier   = (value-min1)/rangeLength1;
 	return multiplier*rangeLength2+min2;
 }
 
 + (CGFloat)maxOfA:(CGFloat)a B:(CGFloat)b {
-	float max = a > b ? a : b;
+	CGFloat max = a > b ? a : b;
 	return max;
 }
 
@@ -114,7 +112,7 @@ static C4Math *sharedC4Math = nil;
 
 
 + (CGFloat)minOfA:(CGFloat)a B:(CGFloat)b {
-	float min = a < b ? a : b;
+	CGFloat min = a < b ? a : b;
 	return min;
 }
 
@@ -179,11 +177,10 @@ static C4Math *sharedC4Math = nil;
 }
 
 + (NSInteger)randomIntBetweenA:(NSInteger)a andB:(NSInteger)b{
-    NSInteger returnVal;
+    NSInteger returnVal = 0;
 	if (a == b) {
         returnVal = a;
-    }
-    else {
+    } else {
         NSInteger max = a > b ? a : b;
         NSInteger min = a < b ? a : b;
         C4Assert(max-min > 0, @"max-min <= 0 ?!... max = %ld, min = %ld", (long)max, (long)min);

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "C4iOS/implementation/C4CanvasController.m"
-            timestampString = "404677887.671179"
+            timestampString = "404784089.359231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-addGesture:name:action:"
             landmarkType = "5">
          </BreakpointContent>

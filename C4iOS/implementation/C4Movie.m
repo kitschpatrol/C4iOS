@@ -92,7 +92,7 @@
                 AVKeyValueStatus keyStatus = [asset statusOfValueForKey:key error:&error];
                 if (keyStatus == AVKeyValueStatusFailed) {
                     [self assetFailedToPrepareForPlayback:error];
-                    return nil;
+                    return nil; //leaving this return here because we're resonding to an error
                 }
             }
             
@@ -101,7 +101,7 @@
                                                      code:0
                                                  userInfo:nil];
                 [self assetFailedToPrepareForPlayback:error];
-                return nil;
+                return nil; //leaving this return here because we're resonding to an error
             }
 
             [asset loadValuesAsynchronouslyForKeys:requestedKeys completionHandler: ^(void) {

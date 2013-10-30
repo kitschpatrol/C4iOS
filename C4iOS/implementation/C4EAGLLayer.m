@@ -125,20 +125,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.borderColor = borderColor;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
+        animation.fromValue = (id)self.borderColor;
+        animation.toValue = (__bridge id)borderColor;
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.borderColor = borderColor;
+                [self removeAnimationForKey:@"animateBorderColor"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateBorderColor"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderColor"];
-    animation.fromValue = (id)self.borderColor;
-    animation.toValue = (__bridge id)borderColor;
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.borderColor = borderColor;
-            [self removeAnimationForKey:@"animateBorderColor"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateBorderColor"];
-    [CATransaction commit];
 }
 
 - (void)animateBackgroundFilters:(NSArray *)backgroundFilters {
@@ -147,20 +147,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.backgroundFilters = backgroundFilters;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
+        animation.fromValue = self.backgroundFilters;
+        animation.toValue = backgroundFilters;
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.backgroundFilters = backgroundFilters;
+                [self removeAnimationForKey:@"animateBackgroundFilters"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateBackgroundFilters"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"backgroundFilters"];
-    animation.fromValue = self.backgroundFilters;
-    animation.toValue = backgroundFilters;
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.backgroundFilters = backgroundFilters;
-            [self removeAnimationForKey:@"animateBackgroundFilters"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateBackgroundFilters"];
-    [CATransaction commit];
 }
 
 - (void)animateBorderWidth:(CGFloat)borderWidth {
@@ -169,20 +169,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.borderWidth = borderWidth;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
+        animation.fromValue = @(self.borderWidth);
+        animation.toValue = @(borderWidth);
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.borderWidth = borderWidth;
+                [self removeAnimationForKey:@"animateBorderWidth"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateBorderWidth"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"borderWidth"];
-    animation.fromValue = @(self.borderWidth);
-    animation.toValue = @(borderWidth);
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.borderWidth = borderWidth;
-            [self removeAnimationForKey:@"animateBorderWidth"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateBorderWidth"];
-    [CATransaction commit];
 }
 
 - (void)animateCompositingFilter:(id)compositingFilter {
@@ -191,21 +191,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.compositingFilter = compositingFilter;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
+        animation.fromValue = self.compositingFilter;
+        animation.toValue = compositingFilter;
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.compositingFilter = compositingFilter;
+                [self removeAnimationForKey:@"animateCompositingFilter"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateCompositingFilter"];
+        [CATransaction commit];
     }
-    
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"compositingFilter"];
-    animation.fromValue = self.compositingFilter;
-    animation.toValue = compositingFilter;
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.compositingFilter = compositingFilter;
-            [self removeAnimationForKey:@"animateCompositingFilter"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateCompositingFilter"];
-    [CATransaction commit];
 }
 
 - (void)animateContents:(CGImageRef)image {
@@ -232,21 +231,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.cornerRadius = cornerRadius;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
+        animation.fromValue = @(self.cornerRadius);
+        animation.toValue = @(cornerRadius);
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.cornerRadius = cornerRadius;
+                [self removeAnimationForKey:@"animateCornerRadius"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateCornerRadius"];
+        [CATransaction commit];
     }
-    
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"cornerRadius"];
-    animation.fromValue = @(self.cornerRadius);
-    animation.toValue = @(cornerRadius);
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.cornerRadius = cornerRadius;
-            [self removeAnimationForKey:@"animateCornerRadius"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateCornerRadius"];
-    [CATransaction commit];
 }
 
 - (void)animateLayerTransform:(CATransform3D)layerTransform {
@@ -255,20 +253,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.sublayerTransform = layerTransform;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"sublayerTransform"];
+        animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
+        animation.toValue = [NSValue valueWithCATransform3D:layerTransform];
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.sublayerTransform = layerTransform;
+                [self removeAnimationForKey:@"sublayerTransform"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"sublayerTransform"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"sublayerTransform"];
-    animation.fromValue = [NSValue valueWithCATransform3D:self.sublayerTransform];
-    animation.toValue = [NSValue valueWithCATransform3D:layerTransform];
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.sublayerTransform = layerTransform;
-            [self removeAnimationForKey:@"sublayerTransform"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"sublayerTransform"];
-    [CATransaction commit];
 }
 
 
@@ -327,20 +325,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.shadowColor = shadowColor;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
+        animation.fromValue = (id)self.shadowColor;
+        animation.toValue = (__bridge id)shadowColor;
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.shadowColor = shadowColor;
+                [self removeAnimationForKey:@"animateShadowColor"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateShadowColor"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowColor"];
-    animation.fromValue = (id)self.shadowColor;
-    animation.toValue = (__bridge id)shadowColor;
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.shadowColor = shadowColor;
-            [self removeAnimationForKey:@"animateShadowColor"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateShadowColor"];
-    [CATransaction commit];
 }
 
 - (void)animateShadowOffset:(CGSize)shadowOffset {
@@ -349,20 +347,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.shadowOffset = shadowOffset;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
+        animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
+        animation.toValue = [NSValue valueWithCGSize:shadowOffset];
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.shadowOffset = shadowOffset;
+                [self removeAnimationForKey:@"animateShadowOffset"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateShadowOffset"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOffset"];
-    animation.fromValue = [NSValue valueWithCGSize:self.shadowOffset];
-    animation.toValue = [NSValue valueWithCGSize:shadowOffset];
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.shadowOffset = shadowOffset;
-            [self removeAnimationForKey:@"animateShadowOffset"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateShadowOffset"];
-    [CATransaction commit];
 }
 
 - (void)animateShadowOpacity:(CGFloat)shadowOpacity {
@@ -371,20 +369,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.shadowOpacity = shadowOpacity;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
+        animation.fromValue = @(self.shadowOpacity);
+        animation.toValue = @(shadowOpacity);
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.shadowOpacity = shadowOpacity;
+                [self removeAnimationForKey:@"animateShadowOpacity"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateShadowOpacity"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowOpacity"];
-    animation.fromValue = @(self.shadowOpacity);
-    animation.toValue = @(shadowOpacity);
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.shadowOpacity = shadowOpacity;
-            [self removeAnimationForKey:@"animateShadowOpacity"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateShadowOpacity"];
-    [CATransaction commit];
 }
 
 - (void)animateShadowPath:(CGPathRef)shadowPath {
@@ -393,20 +391,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.shadowPath = shadowPath;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
+        animation.fromValue = (id)self.shadowPath;
+        animation.toValue = (__bridge id)shadowPath;
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.shadowPath = shadowPath;
+                [self removeAnimationForKey:@"animateShadowPath"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateShadowPath"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowPath"];
-    animation.fromValue = (id)self.shadowPath;
-    animation.toValue = (__bridge id)shadowPath;
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.shadowPath = shadowPath;
-            [self removeAnimationForKey:@"animateShadowPath"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateShadowPath"];
-    [CATransaction commit];
 }
 
 - (void)animateShadowRadius:(CGFloat)shadowRadius {
@@ -415,20 +413,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.shadowRadius = shadowRadius;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
+        animation.fromValue = @(self.shadowRadius);
+        animation.toValue = @(shadowRadius);
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.shadowRadius = shadowRadius;
+                [self removeAnimationForKey:@"animateShadowRadius"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateShadowRadius"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"shadowRadius"];
-    animation.fromValue = @(self.shadowRadius);
-    animation.toValue = @(shadowRadius);
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.shadowRadius = shadowRadius;
-            [self removeAnimationForKey:@"animateShadowRadius"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateShadowRadius"];
-    [CATransaction commit];
 }
 
 - (void)animateZPosition:(CGFloat)zPosition {
@@ -437,20 +435,20 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     //uses _animationDuration because self.animationDuration returns + 0.0001f
     if(_animationDuration == 0.0f) {
         self.zPosition = zPosition;
-        return;
+    } else {
+        [CATransaction begin];
+        CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
+        animation.fromValue = @(self.zPosition);
+        animation.toValue = @(zPosition);
+        if (animation.repeatCount != FOREVER && !self.autoreverses) {
+            [CATransaction setCompletionBlock:^ {
+                self.zPosition = zPosition;
+                [self removeAnimationForKey:@"animateZPosition"];
+            }];
+        }
+        [self addAnimation:animation forKey:@"animateZPosition"];
+        [CATransaction commit];
     }
-    [CATransaction begin];
-    CABasicAnimation *animation = [self setupBasicAnimationWithKeyPath:@"zPosition"];
-    animation.fromValue = @(self.zPosition);
-    animation.toValue = @(zPosition);
-    if (animation.repeatCount != FOREVER && !self.autoreverses) {
-        [CATransaction setCompletionBlock:^ {
-            self.zPosition = zPosition;
-            [self removeAnimationForKey:@"animateZPosition"];
-        }];
-    }
-    [self addAnimation:animation forKey:@"animateZPosition"];
-    [CATransaction commit];
 }
 
 @end
