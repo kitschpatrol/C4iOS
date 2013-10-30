@@ -18,16 +18,20 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "C4WorkSpace.h"
+#import "ClassA.h"
+#import "ClassB.h"
 
 @implementation C4WorkSpace
 
 -(void)setup {
-    C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
-    s.center = self.canvas.center;
-    s.borderColor = C4GREY;
-    s.borderWidth = 1.0f;
-    s.cornerRadius = 5.0f;
-    [self.canvas addShape:s];
+    ClassA *objA = [ClassA new];
+    ClassB *objB = [ClassB new];
+    
+    [objA methodA];
+    [objA methodB];
+
+    [objB methodA];
+    [objB methodB];
 }
 
 @end

@@ -69,6 +69,8 @@
 		BED79ECA17F2435500F0F82E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E2F17F2435400F0F82E /* UIKit.framework */; };
 		BED79ED217F2435500F0F82E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BED79ED017F2435500F0F82E /* InfoPlist.strings */; };
 		BED79ED417F2435500F0F82E /* C4iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79ED317F2435500F0F82E /* C4iOSTests.m */; };
+		EDA0681C1820DC3800D493B0 /* ClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA0681B1820DC3800D493B0 /* ClassA.m */; };
+		EDA0681F1820DC4E00D493B0 /* ClassB.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA0681E1820DC4E00D493B0 /* ClassB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +194,11 @@
 		BED79ECF17F2435500F0F82E /* C4iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "C4iOSTests-Info.plist"; sourceTree = "<group>"; };
 		BED79ED117F2435500F0F82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BED79ED317F2435500F0F82E /* C4iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C4iOSTests.m; sourceTree = "<group>"; };
+		EDA0681A1820DC3800D493B0 /* ClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassA.h; sourceTree = "<group>"; };
+		EDA0681B1820DC3800D493B0 /* ClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassA.m; sourceTree = "<group>"; };
+		EDA0681D1820DC4E00D493B0 /* ClassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassB.h; sourceTree = "<group>"; };
+		EDA0681E1820DC4E00D493B0 /* ClassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassB.m; sourceTree = "<group>"; };
+		EDA068201820DC6300D493B0 /* DefaultProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +276,11 @@
 			children = (
 				BED79EBB17F2435500F0F82E /* C4WorkSpace.h */,
 				BED79EBC17F2435500F0F82E /* C4WorkSpace.m */,
+				EDA0681A1820DC3800D493B0 /* ClassA.h */,
+				EDA0681B1820DC3800D493B0 /* ClassA.m */,
+				EDA0681D1820DC4E00D493B0 /* ClassB.h */,
+				EDA0681E1820DC4E00D493B0 /* ClassB.m */,
+				EDA068201820DC6300D493B0 /* DefaultProtocol.h */,
 				BED79EBE17F2435500F0F82E /* Images.xcassets */,
 				BED79EC017F2435500F0F82E /* Media.xcassets */,
 				BED79EB517F2435500F0F82E /* Main_iPhone.storyboard */,
@@ -516,6 +528,7 @@
 				BED79E6A17F2435400F0F82E /* C4ActivityIndicator.m in Sources */,
 				BED79EB017F2435500F0F82E /* C4ViewController.m in Sources */,
 				BED79E8E17F2435500F0F82E /* C4Label.m in Sources */,
+				EDA0681F1820DC4E00D493B0 /* ClassB.m in Sources */,
 				BED79E9017F2435500F0F82E /* C4Layer.m in Sources */,
 				BED79E8C17F2435500F0F82E /* C4ImageView.m in Sources */,
 				BED79EB217F2435500F0F82E /* C4Window.m in Sources */,
@@ -537,6 +550,7 @@
 				BED79E8217F2435500F0F82E /* C4Font.m in Sources */,
 				BED79E9C17F2435500F0F82E /* C4ScrollView.m in Sources */,
 				BED79E8617F2435500F0F82E /* C4GL.m in Sources */,
+				EDA0681C1820DC3800D493B0 /* ClassA.m in Sources */,
 				BED79EAC17F2435500F0F82E /* C4Vector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
