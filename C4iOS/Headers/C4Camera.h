@@ -59,7 +59,7 @@
  
  When a camera object captures an image it overwrites any other image that was previously captured.
  */
-@property (readonly, strong, nonatomic) C4Image *capturedImage;
+@property (nonatomic, readonly, strong) C4Image *capturedImage;
 
 #pragma mark - Camera Position & Quality
 ///@name Camera Position & Quality
@@ -67,7 +67,7 @@
  
  A camera's position can be either `CAMERAFRONT` or `CAMERABACK`, setting this property will change to the specified camera position.
  */
-@property (readwrite, nonatomic) C4CameraPosition cameraPosition;
+@property (nonatomic) C4CameraPosition cameraPosition;
 
 /**Specifies the current capture quality of the camera. The following list of qualities is available:
  
@@ -83,7 +83,7 @@
 
  See C4Defines for more information.
  */
-@property (readwrite, nonatomic) NSString *captureQuality;
+@property (nonatomic) NSString *captureQuality;
 
 #pragma mark - Default Style
 ///@name Default Style

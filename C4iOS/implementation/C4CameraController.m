@@ -20,12 +20,12 @@
 #import "C4CameraController.h"
 
 @interface C4CameraController ()
-@property (readwrite, strong, atomic) AVCaptureStillImageOutput *stillImageOutput;
-@property (readwrite, strong, atomic) AVAssetWriter *assetWriter;
-@property (readwrite, strong, nonatomic) AVCaptureDevice *currentCamera;
-@property (readwrite, strong, nonatomic) AVCaptureDeviceInput *input;
-@property (readwrite, strong, nonatomic) AVCaptureVideoDataOutput *output;
-@property (readwrite, strong, nonatomic) __block dispatch_queue_t cameraQueue;
+@property (atomic, strong) AVCaptureStillImageOutput *stillImageOutput;
+@property (atomic, strong) AVAssetWriter *assetWriter;
+@property (nonatomic, strong) AVCaptureDevice *currentCamera;
+@property (nonatomic, strong) AVCaptureDeviceInput *input;
+@property (nonatomic, strong) AVCaptureVideoDataOutput *output;
+@property (nonatomic, strong) __block dispatch_queue_t cameraQueue;
 @end
 
 @implementation C4CameraController

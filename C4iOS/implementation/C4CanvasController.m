@@ -22,8 +22,8 @@
 #import <objc/message.h>
 
 @interface C4CanvasController ()
-@property (readwrite, atomic, strong) NSString *longPressMethodName;
-@property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
+@property (atomic, strong) NSString *longPressMethodName;
+@property (atomic, strong) NSMutableDictionary *gestureDictionary;
 @end
 
 @implementation C4CanvasController

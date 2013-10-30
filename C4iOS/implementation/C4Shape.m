@@ -20,9 +20,9 @@
 #import "C4Shape.h"
 
 @interface C4Shape()
-@property (readonly, nonatomic) BOOL initialized, shouldClose;
-@property (atomic) BOOL isTriangle;
-@property (readonly, atomic) NSArray *localStylePropertyNames;
+@property (nonatomic, readonly) BOOL initialized, shouldClose;
+@property (nonatomic) BOOL isTriangle;
+@property (nonatomic, readonly) NSArray *localStylePropertyNames;
 @end
 
 @implementation C4Shape

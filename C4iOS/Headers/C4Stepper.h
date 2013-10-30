@@ -43,7 +43,7 @@
  
  The default value for this property is YES.
  */
-@property(nonatomic,getter = isContinuous) BOOL continuous;
+@property (nonatomic,getter = isContinuous) BOOL continuous;
 
 /**The automatic vs. nonautomatic repeat state of the stepper.
  
@@ -51,7 +51,7 @@
  
  The default value for this property is YES.
  */
-@property(nonatomic) BOOL autorepeat;
+@property (nonatomic) BOOL autorepeat;
 
 /**The wrap vs. no-wrap state of the stepper.
  
@@ -59,7 +59,7 @@
  
  The default value for this property is NO.
  */
-@property(nonatomic) BOOL wraps;
+@property (nonatomic) BOOL wraps;
 
 /**The lowest possible numeric value for the stepper.
  
@@ -67,7 +67,7 @@
  
  The default value for this property is 0.
  */
-@property(readwrite, nonatomic) CGFloat minimumValue;
+@property (nonatomic) CGFloat minimumValue;
 
 /**The highest possible numeric value for the stepper.
  
@@ -75,7 +75,7 @@
  
  The default value of this property is 5.
  */
-@property(readwrite, nonatomic) CGFloat maximumValue;
+@property (nonatomic) CGFloat maximumValue;
 
 /**The step, or increment, value for the stepper.
  
@@ -83,7 +83,7 @@
  
  The default value for this property is 1.
  */
-@property(readwrite, nonatomic) CGFloat stepValue;
+@property (nonatomic) CGFloat stepValue;
 
 #pragma mark - Accessing the Stepper’s Value
 ///@name Accessing the Stepper’s Value
@@ -93,7 +93,7 @@
  
  The default value for this property is 0. This property is clamped at its lower extreme to minimumValue and is clamped at its upper extreme to maximumValue.
  */
-@property(readwrite, nonatomic) CGFloat value;
+@property (nonatomic) CGFloat value;
 
 #pragma mark - Customizing Appearance
 ///@name Customizing Appearance
@@ -101,7 +101,7 @@
  
  The value of this property is nil by default.
  */
-@property(readwrite, nonatomic, strong) UIColor *tintColor NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *tintColor NS_AVAILABLE_IOS(6_0) UI_APPEARANCE_SELECTOR;
 /**Returns the background image associated with the specified control state.
  
  @param state The control state in which the image is displayed (one of: DISABLED, NORMAL, HIGHLIGHTED, SELECTED).
@@ -173,7 +173,7 @@
 ///@name Accessing The UIStepper
 /**The UIStepper object which is the primary subview of the receiver.
  */
-@property (readonly, nonatomic, strong) UIStepper *UIStepper;
+@property (nonatomic, readonly, strong) UIStepper *UIStepper;
 
 #pragma mark - Default Style
 ///@name Default Style

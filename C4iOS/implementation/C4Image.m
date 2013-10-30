@@ -20,14 +20,14 @@
 #import "C4Image.h"
 
 @interface C4Image ()
-@property (readwrite, strong, nonatomic) C4ImageView *imageView;
-@property (readwrite, strong, nonatomic) UIImage *originalImage;
-@property (readwrite, strong, nonatomic) CIImage *output;
-@property (readwrite, strong, nonatomic) CIContext *filterContext;
-@property (readonly, nonatomic) dispatch_queue_t filterQueue;
-@property (readonly, nonatomic) NSUInteger bytesPerPixel, bytesPerRow;
-@property (readonly, nonatomic) unsigned char *rawData;
-@property (readonly, nonatomic) C4ActivityIndicator *filterIndicator;
+@property (nonatomic, strong) C4ImageView *imageView;
+@property (nonatomic, strong) UIImage *originalImage;
+@property (nonatomic, strong) CIImage *output;
+@property (nonatomic, strong) CIContext *filterContext;
+@property (nonatomic, readonly) dispatch_queue_t filterQueue;
+@property (nonatomic, readonly) NSUInteger bytesPerPixel, bytesPerRow;
+@property (nonatomic, readonly) unsigned char *rawData;
+@property (nonatomic, readonly) C4ActivityIndicator *filterIndicator;
 @end
 
 @implementation C4Image

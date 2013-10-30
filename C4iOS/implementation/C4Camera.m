@@ -21,10 +21,10 @@
 #import "C4CameraController.h"
 
 @interface C4Camera ()
-@property (readwrite, strong, nonatomic) C4CameraController *cameraController;
-@property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
-@property (readonly, nonatomic) BOOL initialized;
-//@property (readwrite, atomic) BOOL shouldAutoreverse;
+@property (nonatomic, strong) C4CameraController *cameraController;
+@property (nonatomic, strong) C4CameraLayer *previewLayer;
+@property (nonatomic, readonly) BOOL initialized;
+//@property (atomic) BOOL shouldAutoreverse;
 @end
 
 @implementation C4Camera

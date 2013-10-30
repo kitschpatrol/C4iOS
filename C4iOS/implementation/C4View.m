@@ -19,9 +19,9 @@
 
 #import "C4View.h"
 @interface C4View() 
-@property (readwrite, atomic) BOOL shouldAutoreverse;
-@property (readwrite, atomic, strong) NSString *longPressMethodName;
-@property (readwrite, atomic, strong) NSMutableDictionary *gestureDictionary;
+@property (nonatomic) BOOL shouldAutoreverse;
+@property (nonatomic, strong) NSString *longPressMethodName;
+@property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
 @end
 
 @implementation C4View

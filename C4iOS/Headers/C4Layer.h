@@ -42,24 +42,24 @@
  
  Defaults to 0.
  */
-@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+@property (nonatomic) CGFloat perspectiveDistance;
 
 /**The rotation angle for the receiver's Z-axis.
  
  The Z-axis is the one that comes out of the screen, it is orthogonal to the device.
  */
-@property (readwrite, nonatomic) CGFloat rotationAngle;
+@property (nonatomic) CGFloat rotationAngle;
 
 /**The rotation angle for the receiver's X-axis
  
  The X-axis is the one parallel to the left-hand / right-hand sides of the device.
  */
-@property (readwrite, nonatomic) CGFloat rotationAngleX;
+@property (nonatomic) CGFloat rotationAngleX;
 
 /**The rotation angle for the receiver's Y-axis
  
  The Y-axis is the one parallel to the top / bottom edges of the device.
  */
-@property (readwrite, nonatomic) CGFloat rotationAngleY;
+@property (nonatomic) CGFloat rotationAngleY;
 
 @end

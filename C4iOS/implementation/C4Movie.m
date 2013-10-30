@@ -22,10 +22,10 @@
 @interface C4Movie() {
     void *rateContext, *currentItemContext, *playerItemStatusContext;
 }
-@property (readwrite, nonatomic) NSURL *movieURL;
-@property (readwrite, nonatomic, strong) C4MovieLayer *playerLayer;
-@property (readwrite, nonatomic, strong) AVPlayer *player;
-@property (readwrite, nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic) NSURL *movieURL;
+@property (nonatomic, strong) C4MovieLayer *playerLayer;
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVPlayerItem *playerItem;
 @end
 
 @implementation C4Movie

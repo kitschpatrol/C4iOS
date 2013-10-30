@@ -223,13 +223,13 @@
 
  @return BOOL YES if the layer allows interaction, NO otherwise.
  */
-@property (readonly, nonatomic) BOOL allowsInteraction;
+@property (nonatomic, readonly) BOOL allowsInteraction;
 
 /** The repeat state.
  
  @return BOOL YES if the layer's animations will repeat, NO otherwise.
  */
-@property (readonly, nonatomic) BOOL repeats;
+@property (nonatomic, readonly) BOOL repeats;
 
 /**Specifies the perspective distance for x and y axis rotations.
  
@@ -242,6 +242,6 @@
  
  Defaults to 0.
  */
-@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+@property (nonatomic) CGFloat perspectiveDistance;
 
 @end

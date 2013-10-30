@@ -21,7 +21,7 @@
 #import "C4EAGLLayer.h"
 
 @interface C4EAGLLayer ()
-@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
+@property (nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
 @implementation C4EAGLLayer

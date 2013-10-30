@@ -98,12 +98,12 @@
 		BED79E3517F2435400F0F82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BED79E3717F2435400F0F82E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BED79E3917F2435400F0F82E /* C4iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C4iOS-Prefix.pch"; sourceTree = "<group>"; };
-		BED79E3B17F2435400F0F82E /* C4ActivityIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4ActivityIndicator.h; path = Headers/C4ActivityIndicator.h; sourceTree = "<group>"; };
+		BED79E3B17F2435400F0F82E /* C4ActivityIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = C4ActivityIndicator.h; path = Headers/C4ActivityIndicator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BED79E3C17F2435400F0F82E /* C4AddSubview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4AddSubview.h; path = Headers/C4AddSubview.h; sourceTree = "<group>"; };
 		BED79E3D17F2435400F0F82E /* C4AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4AppDelegate.h; path = Headers/C4AppDelegate.h; sourceTree = "<group>"; };
 		BED79E3E17F2435400F0F82E /* C4AssertionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4AssertionHandler.h; path = Headers/C4AssertionHandler.h; sourceTree = "<group>"; };
-		BED79E3F17F2435400F0F82E /* C4Button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4Button.h; path = Headers/C4Button.h; sourceTree = "<group>"; };
-		BED79E4017F2435400F0F82E /* C4Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4Camera.h; path = Headers/C4Camera.h; sourceTree = "<group>"; };
+		BED79E3F17F2435400F0F82E /* C4Button.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = C4Button.h; path = Headers/C4Button.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		BED79E4017F2435400F0F82E /* C4Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = C4Camera.h; path = Headers/C4Camera.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		BED79E4117F2435400F0F82E /* C4CameraController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4CameraController.h; path = Headers/C4CameraController.h; sourceTree = "<group>"; };
 		BED79E4217F2435400F0F82E /* C4CameraLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4CameraLayer.h; path = Headers/C4CameraLayer.h; sourceTree = "<group>"; };
 		BED79E4317F2435400F0F82E /* C4CanvasController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = C4CanvasController.h; path = Headers/C4CanvasController.h; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		BED79E6917F2435400F0F82E /* C4ActivityIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4ActivityIndicator.m; path = implementation/C4ActivityIndicator.m; sourceTree = "<group>"; };
 		BED79E6B17F2435400F0F82E /* C4AssertionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4AssertionHandler.m; path = implementation/C4AssertionHandler.m; sourceTree = "<group>"; };
 		BED79E6D17F2435400F0F82E /* C4Button.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4Button.m; path = implementation/C4Button.m; sourceTree = "<group>"; };
-		BED79E6F17F2435400F0F82E /* C4Camera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4Camera.m; path = implementation/C4Camera.m; sourceTree = "<group>"; };
+		BED79E6F17F2435400F0F82E /* C4Camera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = C4Camera.m; path = implementation/C4Camera.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		BED79E7117F2435400F0F82E /* C4CameraController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4CameraController.m; path = implementation/C4CameraController.m; sourceTree = "<group>"; };
 		BED79E7317F2435400F0F82E /* C4CameraLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4CameraLayer.m; path = implementation/C4CameraLayer.m; sourceTree = "<group>"; };
 		BED79E7517F2435400F0F82E /* C4CanvasController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = C4CanvasController.m; path = implementation/C4CanvasController.m; sourceTree = "<group>"; };

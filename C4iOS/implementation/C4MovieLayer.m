@@ -20,7 +20,7 @@
 #import "C4MovieLayer.h"
 
 @interface C4MovieLayer ()
-@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
+@property (nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
 @implementation C4MovieLayer

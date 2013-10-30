@@ -51,7 +51,7 @@
  
  `self.canvas.backgroundColor = [UIColor ...];`
  */
-@property (readonly, strong, nonatomic) C4Window *canvas;
+@property (nonatomic, readonly, strong) C4Window *canvas;
 
 #pragma mark C4Camera Callback
 #pragma mark - Callbacks

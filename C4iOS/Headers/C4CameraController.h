@@ -43,7 +43,7 @@
 
 /**Specifies whether or not the receiver has already been initialized.
  */
-@property (readonly, nonatomic, getter = isInitialized) BOOL initialized;
+@property (nonatomic, readonly, getter = isInitialized) BOOL initialized;
 
 #pragma mark - Capturing Images
 ///@name Capturing Images
@@ -57,17 +57,17 @@
  
  When a camera object captures an image it overwrites any other image that was previously captured.
  */
-@property (readonly, strong, nonatomic) C4Image *capturedImage;
+@property (nonatomic, readonly, strong) C4Image *capturedImage;
 
 #pragma mark - View & Layer
 ///@name View & Layer
 /** The receiver’s view.
  */
-@property (readwrite, strong, nonatomic) C4View *view;
+@property (nonatomic, strong) C4View *view;
 
 /** The receiver’s view's backing layer.
  */
-@property (readwrite, strong, nonatomic) C4CameraLayer *previewLayer;
+@property (nonatomic, strong) C4CameraLayer *previewLayer;
 
 #pragma mark - Camera Position & Quality
 ///@name Camera Position & Quality
@@ -75,7 +75,7 @@
  
  Use this property to set or determine the current position of a given C4Camera object.
  */
-@property (readonly, nonatomic) C4CameraPosition cameraPosition;
+@property (nonatomic, readonly) C4CameraPosition cameraPosition;
 
 /**Switches the camera's position to the front or back.
  
@@ -101,7 +101,7 @@
  
  See C4Defines for more information.
  */
-@property (readwrite, nonatomic) NSString *captureQuality;
+@property (nonatomic) NSString *captureQuality;
 
 #pragma mark - Capture Session
 ///@name Capture Session
@@ -113,6 +113,6 @@
 
  See AVCaptureSession for more details.
  */
-@property (readwrite, strong, atomic) AVCaptureSession *captureSession;
+@property (nonatomic, strong) AVCaptureSession *captureSession;
 
 @end

@@ -30,12 +30,12 @@
 
  @return C4Window a subclass of UIWindow customized specifically for the C4 Framework
  */
-@property (strong, nonatomic) IBOutlet C4Window *window;
+@property (nonatomic, strong) IBOutlet C4Window *window;
 
 /** The root view controller of the main application window.
  
  @return C4CanvasController a subclass of UIViewController customized specifically for the C4 Framework
  */
-@property (strong, nonatomic) C4WorkSpace *workspace;
+@property (nonatomic, strong) C4WorkSpace *workspace;
 
 @end

@@ -21,7 +21,7 @@
 
 @interface C4ShapeLayer()
 - (CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
-@property (readwrite, nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
+@property (nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
 @implementation C4ShapeLayer

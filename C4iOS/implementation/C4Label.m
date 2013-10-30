@@ -20,7 +20,7 @@
 #import "C4Label.h"
 
 @interface C4Label()
-//@property (readwrite, atomic) BOOL shouldAutoreverse;
+//@property (atomic) BOOL shouldAutoreverse;
 @property (readonly, atomic) NSArray *localStylePropertyNames;
 @end
 

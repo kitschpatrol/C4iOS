@@ -113,6 +113,6 @@
  
  Defaults to 0.
  */
-@property (readwrite, nonatomic) CGFloat perspectiveDistance;
+@property (nonatomic) CGFloat perspectiveDistance;
 
 @end
