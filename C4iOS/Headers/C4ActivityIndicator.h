@@ -18,7 +18,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-#import "C4Control.h"
 
 typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
     WHITELARGE,

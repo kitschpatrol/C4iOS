@@ -18,7 +18,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
-#import "C4CameraLayer.h"
+
+@class C4CameraLayer;
 
 /** The C4CameraController class provides control over the image, view and preview layer for a C4Camera object.
  

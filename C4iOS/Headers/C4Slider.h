@@ -17,7 +17,6 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "C4Control.h"
 /**This document describes the C4Slider class. An instance of the C4Slider class implements a slider on the touch screen. A slider intercepts touch events and sends an action message to a target object when its value has changed, or for other touch events.
  
  A C4Slider object is a visual control used to select a single value from a continuous range of values. Sliders are always displayed as horizontal bars. An indicator, or thumb, notes the current value of the slider and can be moved by the user to change the setting.

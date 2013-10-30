@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 /** The C4Label class implements a read-only text view. You can use this class to draw one or multiple lines of static text, such as those you might use to identify other parts of your user interface. The base C4Label class provides control over the appearance of your text, including whether it uses a shadow or draws with a highlight. If needed, you can customize the appearance of your text further by subclassing.
  
  C4Label is a subclass of C4Control, and so inherits all the functionality of animation and interaction provided by C4Control. It encapsulates a UILabel and provides all the necessary methods to access and manipulate its label. 

@@ -17,9 +17,10 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "C4EAGLLayer.h"
 #import <OpenGLES/ES1/gl.h>
 #import <OpenGLES/ES1/glext.h>
+
+@class C4EAGLLayer;
 
 /**This document describes the C4EAGLES1Renderer class, which is the default rendering class to use when working with OpenGL ES 1.x
  

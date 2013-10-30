@@ -17,8 +17,7 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "C4Control.h"
-/**This document describes the C4Button class. An instance of the C4Button class implements a button on the touch screen. A button intercepts touch events and sends an action message to a target object when tapped. 
+/**This document describes the C4Button class. An instance of the C4Button class implements a button on the touch screen. A button intercepts touch events and sends an action message to a target object when tapped.
  
  The C4Button class implements a UIButton embedded in a C4Control view with bindings directly to the native object. That is, many of the methods in this class are simpy wrappers for triggering the same methods on the contained UIButton.
  

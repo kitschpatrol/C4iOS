@@ -17,7 +17,6 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "C4Control.h"
 /**You use the C4Switch class to create and manage the On/Off buttons you see, for example, in the preferences (Settings) for such services as Airplane Mode. These objects are known as switches.
  
  The C4Switch class declares a property and a method to control its on/off state. As with C4Slider, when the user manipulates the switch control (“flips” it) a VALUECHANGED event is generated, which results in the control (if properly configured) sending an action message.

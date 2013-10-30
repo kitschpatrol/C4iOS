@@ -56,6 +56,7 @@
 #import "C4Timer.h"
 #import "C4Layer.h"
 #import "C4Control.h"
+#import "C4ImageView.h"
 #import "C4Image.h"
 #import "C4ShapeLayer.h"
 #import "C4Shape.h"
@@ -78,6 +79,7 @@
 #import "C4ScrollView.h"
 
 #import "C4ViewController.h"
+#import "C4CameraLayer.h"
 #import "C4Camera.h"
 #import "C4CanvasController.h"
 #import "C4WorkSpace.h"
