@@ -118,4 +118,6 @@
  */
 -(void)postNotification:(NSString *)notification;
 
++(void)copyMethods;
+
 @end

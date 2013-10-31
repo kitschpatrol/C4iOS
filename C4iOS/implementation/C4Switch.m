@@ -171,6 +171,15 @@ tintColor = _tintColor, thumbTintColor = _thumbTintColor;
 }
 
 #pragma mark other C4UIElement (target:action)
+/*
+ Cannot swizzle these methods because the object (i.e. self.UIButton, self.UISlider, etc.)
+ are uniquely different objects. Setting these in the init constructor of an object is ugly, and
+ I don't want to touch that at the moment. That is, I don't want to write:
+ -(id)init {
+    ...
+    self.UIElement = self.UISlider;
+ }
+ */
 -(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISwitch addTarget:object action:NSSelectorFromString(methodName)
             forControlEvents:(UIControlEvents)event];

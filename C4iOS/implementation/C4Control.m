@@ -21,8 +21,8 @@
 
 @interface C4Control()
 @property (nonatomic) BOOL shouldAutoreverse;
-@property (nonatomic, strong) NSString *longPressMethodName;
 @property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
+@property (nonatomic, strong) NSString *longPressMethodName;
 @property (nonatomic, readonly) NSArray *stylePropertyNames;
 @property (nonatomic) CGPoint firstPositionForMove;
 @end
@@ -32,13 +32,32 @@
 +(void)initialize {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        //grabs a class method from ClassA
+        Method copy;
+        Method local;
+        
+        //NOTIFICATION
+        //grabs a class method from C4NotificationIMP
         //method being copied contains boilerplate code
         //for copying all other protocol methods
-        Method copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
+        copy = class_getClassMethod([C4NotificationIMP class], @selector(copyMethods));
         
         //local method into which we will set the implementation of "copy"
-        Method local = class_getClassMethod([self class], @selector(copyMethods));
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+
+        //ADD SUBVIEW
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
         
         //sets the implementation of "local" with that of "copy"
         method_setImplementation(local, method_getImplementation(copy));
@@ -81,7 +100,9 @@
 
 -(void)setup {}
 
--(void)test {}
+-(void)test {
+    C4Log(@"test (%@)", [self class]);
+}
 
 #pragma mark UIView animatable property overrides
 
@@ -603,48 +624,23 @@
 }
 
 #pragma mark Notification Methods
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification object:nil];
-}
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
        fromObject:(id)object
-     andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification object:object];
-}
+     andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
       fromObjects:(NSArray *)objectArray
-     andRunMethod:(NSString *)methodName {
-    for (id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:NSSelectorFromString(methodName)
-                                                     name:notification
-                                                   object:object];
-    }
-}
+     andRunMethod:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName {
-    [self stopListeningFor:methodName object:nil];
-}
+-(void)stopListeningFor:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName object:(id)object {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-}
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {}
 
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
-    for(id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-    }
-}
+-(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {}
 
--(void)postNotification:(NSString *)notification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
-}
+-(void)postNotification:(NSString *)notification {}
 
 #pragma mark C4AddSubview
 +(void)copyMethods {}

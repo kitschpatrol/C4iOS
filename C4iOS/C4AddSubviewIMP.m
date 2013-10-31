@@ -19,6 +19,10 @@
 
 #import "C4AddSubviewIMP.h"
 
+@interface C4AddSubviewIMP ()
+@property UIView *view;
+@end
+
 static C4AddSubviewIMP *sharedC4AddSubviewIMP = nil;
 
 @implementation C4AddSubviewIMP
@@ -47,7 +51,8 @@ static C4AddSubviewIMP *sharedC4AddSubviewIMP = nil;
 -(void)addCamera:(C4Camera *)camera {
     C4Assert([camera isKindOfClass:[C4Camera class]],
              @"You tried to add a %@ using [obj addShape:]", [camera class]);
-    [super addSubview:camera];
+    if([self isKindOfClass:[C4WorkSpace class]]) [(C4View *)self.view addSubview:camera];
+    else [super addSubview:camera];
 }
 
 -(void)addShape:(C4Shape *)shape {
@@ -69,37 +74,41 @@ static C4AddSubviewIMP *sharedC4AddSubviewIMP = nil;
              @"You just tried to add a C4GL using the addSubview: method, please use addGL:");
     C4Assert(![[subview class] isKindOfClass:[C4Label class]],
              @"You just tried to add a C4Label using the addSubview: method, please use addLabel:");
-    [super addSubview:subview];
+    if([self isKindOfClass:[C4WorkSpace class]]) [(C4View *)self.view addSubview:subview];
+    else [super addSubview:subview];
 }
 
 -(void)addUIElement:(id<C4UIElement>)object {
-    C4Assert(![[object class] conformsToProtocol:@protocol(C4UIElement)],
-             @"You just tried to add a %@ using  [obj addUIElement:]", [object class]);
-    [super addSubview:(UIView *)object];
+    if([self isKindOfClass:[C4WorkSpace class]]) [(C4View *)self.view addSubview:(UIView *)object];
+    else [super addSubview:(UIView *)object];
 }
 
 -(void)addLabel:(C4Label *)label {
     C4Assert([label isKindOfClass:[C4Label class]],
              @"You tried to add a %@ using [obj addLabel:]", [label class]);
-    [super addSubview:label];
+    if([self isKindOfClass:[C4WorkSpace class]]) [(C4View *)self.view addSubview:label];
+    else [super addSubview:label];
 }
 
 -(void)addGL:(C4GL *)gl {
     C4Assert([gl isKindOfClass:[C4GL class]],
              @"You tried to add a %@ using [obj addGL:]", [gl class]);
-    [super addSubview:gl];
+    if([self isKindOfClass:[C4WorkSpace class]]) [(C4View *)self.view addSubview:gl];
+    else [super addSubview:gl];
 }
 
 -(void)addImage:(C4Image *)image {
     C4Assert([image isKindOfClass:[C4Image class]],
              @"You tried to add a %@ using [obj addImage:]", [image class]);
-    [super addSubview:image];
+    if([self isKindOfClass:[C4WorkSpace class]]) [(C4View *)self.view addSubview:image];
+    else [super addSubview:image];
 }
 
 -(void)addMovie:(C4Movie *)movie {
     C4Assert([movie isKindOfClass:[C4Movie class]],
              @"You tried to add a %@ using [obj addMovie:]", [movie class]);
-    [super addSubview:movie];
+    if([self isKindOfClass:[C4WorkSpace class]]) [(C4View *)self.view addSubview:movie];
+    else [super addSubview:movie];
 }
 
 -(void)addObjects:(NSArray *)array {

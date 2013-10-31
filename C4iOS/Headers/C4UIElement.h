@@ -43,4 +43,5 @@
  @param event A bitmask specifying the control events for which the action message is sent. See “Control Events” for bitmask constants.
  */
 -(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event;
+
 @end

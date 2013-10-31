@@ -70,6 +70,8 @@
 		BED79ED217F2435500F0F82E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BED79ED017F2435500F0F82E /* InfoPlist.strings */; };
 		BED79ED417F2435500F0F82E /* C4iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79ED317F2435500F0F82E /* C4iOSTests.m */; };
 		ED446994182205E5008B88A2 /* C4AddSubviewIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED446993182205E5008B88A2 /* C4AddSubviewIMP.m */; };
+		ED44699A182221F3008B88A2 /* C4NotificationIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED446999182221F3008B88A2 /* C4NotificationIMP.m */; };
+		ED44699D1822381B008B88A2 /* C4GestureIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED44699C1822381B008B88A2 /* C4GestureIMP.m */; };
 		EDA0681C1820DC3800D493B0 /* ClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA0681B1820DC3800D493B0 /* ClassA.m */; };
 		EDA0681F1820DC4E00D493B0 /* ClassB.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA0681E1820DC4E00D493B0 /* ClassB.m */; };
 /* End PBXBuildFile section */
@@ -197,6 +199,10 @@
 		BED79ED317F2435500F0F82E /* C4iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C4iOSTests.m; sourceTree = "<group>"; };
 		ED446992182205E5008B88A2 /* C4AddSubviewIMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AddSubviewIMP.h; sourceTree = "<group>"; };
 		ED446993182205E5008B88A2 /* C4AddSubviewIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AddSubviewIMP.m; sourceTree = "<group>"; };
+		ED446998182221F3008B88A2 /* C4NotificationIMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4NotificationIMP.h; sourceTree = "<group>"; };
+		ED446999182221F3008B88A2 /* C4NotificationIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4NotificationIMP.m; sourceTree = "<group>"; };
+		ED44699B1822381B008B88A2 /* C4GestureIMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GestureIMP.h; sourceTree = "<group>"; };
+		ED44699C1822381B008B88A2 /* C4GestureIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GestureIMP.m; sourceTree = "<group>"; };
 		EDA0681A1820DC3800D493B0 /* ClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassA.h; sourceTree = "<group>"; };
 		EDA0681B1820DC3800D493B0 /* ClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassA.m; sourceTree = "<group>"; };
 		EDA0681D1820DC4E00D493B0 /* ClassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassB.h; sourceTree = "<group>"; };
@@ -284,9 +290,15 @@
 				EDA0681D1820DC4E00D493B0 /* ClassB.h */,
 				EDA0681E1820DC4E00D493B0 /* ClassB.m */,
 				EDA068201820DC6300D493B0 /* DefaultProtocol.h */,
+				BED79E4B17F2435400F0F82E /* C4Gesture.h */,
+				ED44699B1822381B008B88A2 /* C4GestureIMP.h */,
+				ED44699C1822381B008B88A2 /* C4GestureIMP.m */,
 				BED79E3C17F2435400F0F82E /* C4AddSubview.h */,
 				ED446992182205E5008B88A2 /* C4AddSubviewIMP.h */,
 				ED446993182205E5008B88A2 /* C4AddSubviewIMP.m */,
+				BED79E5717F2435400F0F82E /* C4Notification.h */,
+				ED446998182221F3008B88A2 /* C4NotificationIMP.h */,
+				ED446999182221F3008B88A2 /* C4NotificationIMP.m */,
 				BED79EBE17F2435500F0F82E /* Images.xcassets */,
 				BED79EC017F2435500F0F82E /* Media.xcassets */,
 				BED79EB517F2435500F0F82E /* Main_iPhone.storyboard */,
@@ -327,7 +339,6 @@
 				BED79E4817F2435400F0F82E /* C4EAGLLayer.h */,
 				BED79E4917F2435400F0F82E /* C4Font.h */,
 				BED79E4A17F2435400F0F82E /* C4Foundation.h */,
-				BED79E4B17F2435400F0F82E /* C4Gesture.h */,
 				BED79E4C17F2435400F0F82E /* C4GL.h */,
 				BED79E4D17F2435400F0F82E /* C4GL1Renderer.h */,
 				BED79E4E17F2435400F0F82E /* C4Image.h */,
@@ -339,7 +350,6 @@
 				BED79E5417F2435400F0F82E /* C4MethodDelay.h */,
 				BED79E5517F2435400F0F82E /* C4Movie.h */,
 				BED79E5617F2435400F0F82E /* C4MovieLayer.h */,
-				BED79E5717F2435400F0F82E /* C4Notification.h */,
 				BED79E5817F2435400F0F82E /* C4Object.h */,
 				BED79E5917F2435400F0F82E /* C4Sample.h */,
 				BED79E5A17F2435400F0F82E /* C4ScrollView.h */,
@@ -523,6 +533,7 @@
 				BED79E9417F2435500F0F82E /* C4Movie.m in Sources */,
 				BED79E6C17F2435400F0F82E /* C4AssertionHandler.m in Sources */,
 				BED79E8017F2435500F0F82E /* C4EAGLLayer.m in Sources */,
+				ED44699A182221F3008B88A2 /* C4NotificationIMP.m in Sources */,
 				BED79E7C17F2435400F0F82E /* C4EAGLES1Renderer.m in Sources */,
 				BED79E7817F2435400F0F82E /* C4Control.m in Sources */,
 				BED79E9E17F2435500F0F82E /* C4Shape.m in Sources */,
@@ -540,6 +551,7 @@
 				BED79EB217F2435500F0F82E /* C4Window.m in Sources */,
 				BED79E7017F2435400F0F82E /* C4Camera.m in Sources */,
 				BED79E9817F2435500F0F82E /* C4Object.m in Sources */,
+				ED44699D1822381B008B88A2 /* C4GestureIMP.m in Sources */,
 				BED79E8817F2435500F0F82E /* C4GL1Renderer.m in Sources */,
 				BED79E3817F2435400F0F82E /* main.m in Sources */,
 				BED79E7617F2435400F0F82E /* C4CanvasController.m in Sources */,

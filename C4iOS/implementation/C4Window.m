@@ -42,6 +42,21 @@
         
         //implements, at a class level, the copy method for this class
         [[self class] copyMethods];
+
+        //NOTIFICATION
+        //grabs a class method from C4NotificationIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4NotificationIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
     });
 }
 
@@ -499,21 +514,18 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
     [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
     [super touchesMoved:touches withEvent:event];
     [self postNotification:@"touchesMoved"];
     [self touchesMoved];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesEnded:touches withEvent:event];
     [super touchesEnded:touches withEvent:event];
     [self postNotification:@"touchesEnded"];
     [self touchesEnded];
@@ -583,51 +595,23 @@
 }
 
 #pragma mark Notification Methods
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification
-                                               object:nil];
-}
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
        fromObject:(id)object
-     andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification
-                                               object:object];
-}
+     andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
       fromObjects:(NSArray *)objectArray
-     andRunMethod:(NSString *)methodName {
-    for (id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:NSSelectorFromString(methodName)
-                                                     name:notification
-                                                   object:object];
-    }
-}
+     andRunMethod:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName {
-    [self stopListeningFor:methodName object:nil];
-}
+-(void)stopListeningFor:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName object:(id)object {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-}
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {}
 
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
-    for(id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-    }
-}
+-(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {}
 
--(void)postNotification:(NSString *)notification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
-}
-
+-(void)postNotification:(NSString *)notification {}
 
 #pragma mark C4AddSubview
 +(void)copyMethods {}

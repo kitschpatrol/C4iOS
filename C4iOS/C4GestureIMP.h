@@ -1,5 +1,5 @@
 //
-//  C4WorkSpace.m
+//  C4GestureIMP.h
 //  C4iOS
 //
 //  Copyright © 2010-2013 Travis Kirton
@@ -17,32 +17,6 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "C4WorkSpace.h"
-#import "ClassA.h"
-#import "ClassB.h"
-
-@implementation C4WorkSpace
-
--(void)setup {
-    C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
-    [self.canvas addShape:s];
-    
-    C4Shape *t = [C4Shape ellipse:CGRectMake(0, 0, 20, 20)];
-    [s addShape:t];
-
-    s.center = self.canvas.center;
-    
-    [self listenFor:@"hello" andRunMethod:@"test"];
-    
-    [self addGesture:SWIPERIGHT name:@"s" action:@"test"];
-}
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self postNotification:@"hello"];
-}
-
--(void)test {
-    C4Log(@"test (%@)", [self class]);
-}
-
+@interface C4GestureIMP : UIControl <C4Gesture>
++(C4GestureIMP *)sharedManager;
 @end

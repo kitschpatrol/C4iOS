@@ -258,4 +258,6 @@ typedef enum C4SwipeDirection {
 /**Returns a dictionary of all the gestures associated with the receiver.
  */
 -(NSDictionary *)allGestures;
+
++(void)copyMethods;
 @end
