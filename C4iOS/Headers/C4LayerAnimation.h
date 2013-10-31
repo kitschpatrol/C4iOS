@@ -244,4 +244,5 @@
  */
 @property (nonatomic) CGFloat perspectiveDistance;
 
++(void)copyMethods;
 @end

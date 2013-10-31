@@ -53,7 +53,7 @@
 #import "C4NotificationIMP.h"
 #import "C4GestureIMP.h"
 #import "C4MethodDelayIMP.h"
-
+#import "C4LayerAnimationIMP.h"
 //classes
 #import "C4Object.h"
 #import "C4Math.h"
