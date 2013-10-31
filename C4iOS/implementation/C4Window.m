@@ -29,13 +29,45 @@
 +(void)initialize {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        //grabs a class method from ClassA
+        Method copy;
+        Method local;
+        //GESTURE
+        //grabs a class method from C4AddSubviewIMP
         //method being copied contains boilerplate code
         //for copying all other protocol methods
-        Method copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
+        copy = class_getClassMethod([C4GestureIMP class], @selector(copyMethods));
         
         //local method into which we will set the implementation of "copy"
-        Method local = class_getClassMethod([self class], @selector(copyMethods));
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+
+        //NOTIFICATION
+        //grabs a class method from C4NotificationIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4NotificationIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+        
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
         
         //sets the implementation of "local" with that of "copy"
         method_setImplementation(local, method_getImplementation(copy));
@@ -44,6 +76,7 @@
         [[self class] copyMethods];
     });
 }
+
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -384,203 +417,63 @@
 
 #pragma mark Gesture Methods
 
--(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {
-    if(self.gestureDictionary == nil) self.gestureDictionary = [@{} mutableCopy];
-    BOOL containsGesture = ((self.gestureDictionary)[gestureName] != nil);
-    if(containsGesture == NO) {
-        UIGestureRecognizer *recognizer;
-        switch (type) {
-            case TAP:
-                recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                break;
-            case PAN:
-                recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                break;
-            case SWIPERIGHT:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRRIGHT;
-                break;
-            case SWIPELEFT:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRLEFT;
-                break;
-            case SWIPEUP:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRUP;
-                break;
-            case SWIPEDOWN:
-                recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:NSSelectorFromString(methodName)];
-                ((UISwipeGestureRecognizer *)recognizer).direction = SWIPEDIRDOWN;
-                break;
-            case LONGPRESS:
-                self.longPressMethodName = methodName;
-                recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(pressedLong:)];
-                break;
-            default:
-                C4Assert(NO,@"The gesture you tried to use is not one of: TAP, PINCH, SWIPERIGHT, SWIPELEFT, SWIPEUP, SWIPEDOWN, ROTATION, PAN, or LONGPRESS");
-                break;
-        }
-        recognizer.delaysTouchesBegan = YES;
-        recognizer.delaysTouchesEnded = YES;
-        [self addGestureRecognizer:recognizer];
-        (self.gestureDictionary)[gestureName] = recognizer;
-    }
-}
+-(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {}
 
 -(UIGestureRecognizer *)gestureForName:(NSString *)gestureName {
-    return (self.gestureDictionary)[gestureName];
+    return nil;
 }
 
 -(NSDictionary *)allGestures {
-    return self.gestureDictionary;
+    return nil;
 }
 
--(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
-             [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
-             [recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UILongPressGestureRecognizer *) recognizer).numberOfTapsRequired = tapCount;
-}
+-(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {}
 
--(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]] ||
-             [recognizer isKindOfClass:[UISwipeGestureRecognizer class]] ||
-             [recognizer isKindOfClass:[UILongPressGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
-             [recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UITapGestureRecognizer *) recognizer).numberOfTouchesRequired = touchCount;
-}
+-(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName {}
 
--(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UITapGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method %@",
-             [recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UILongPressGestureRecognizer *) recognizer).minimumPressDuration = duration;
-}
+-(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName {}
 
--(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
-             [recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UIPanGestureRecognizer *) recognizer).minimumNumberOfTouches = touchCount;
-}
+-(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {}
 
--(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UIPanGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
-             [recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UIPanGestureRecognizer *) recognizer).maximumNumberOfTouches = touchCount;
-}
+-(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName {}
 
--(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {
-    UIGestureRecognizer *recognizer = _gestureDictionary[gestureName];
-    
-    C4Assert([recognizer isKindOfClass:[UISwipeGestureRecognizer class]],
-             @"The gesture type(%@) you tried to configure does not respond to the method: %@",
-             [recognizer class],NSStringFromSelector(_cmd));
-    
-    ((UISwipeGestureRecognizer *) recognizer).direction = direction;
-}
+-(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName {}
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesBegan:touches withEvent:event];
-    [super touchesBegan:touches withEvent:event];
-    [self postNotification:@"touchesBegan"];
-    [self touchesBegan];
-}
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {}
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesMoved:touches withEvent:event];
-    [super touchesMoved:touches withEvent:event];
-    [self postNotification:@"touchesMoved"];
-    [self touchesMoved];
-}
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {}
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    //    if([[self nextResponder] isKindOfClass:[C4WorkSpace class]]) [super touchesEnded:touches withEvent:event];
-    [super touchesEnded:touches withEvent:event];
-    [self postNotification:@"touchesEnded"];
-    [self touchesEnded];
-}
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {}
 
--(void)touchesBegan {
-}
+-(void)touchesBegan {}
 
--(void)touchesEnded {
-}
+-(void)touchesEnded {}
 
--(void)touchesMoved {
-}
+-(void)touchesMoved {}
 
--(void)swipedRight:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedRight"];
-    [self swipedRight];
-}
+-(void)swipedRight:(id)sender {}
 
--(void)swipedLeft:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedLeft"];
-    [self swipedLeft];
-}
+-(void)swipedLeft:(id)sender {}
 
--(void)swipedUp:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedUp"];
-    [self swipedUp];
-}
+-(void)swipedUp:(id)sender {}
 
--(void)swipedDown:(id)sender {
-    sender = sender;
-    [self postNotification:@"swipedDown"];
-    [self swipedDown];
-}
+-(void)swipedDown:(id)sender {}
 
--(void)tapped:(id)sender {
-    sender = sender;
-    [self postNotification:NSStringFromSelector(_cmd)];
-    [self tapped];
-}
+-(void)tapped:(id)sender {}
 
--(void)tapped {
-}
+-(void)tapped {}
 
--(void)swipedUp {
-}
+-(void)swipedUp {}
 
--(void)swipedDown {
-}
+-(void)swipedDown {}
 
--(void)swipedLeft {
-}
+-(void)swipedLeft {}
 
--(void)swipedRight {
-}
+-(void)swipedRight {}
 
--(void)pressedLong {
-}
+-(void)pressedLong {}
 
--(void)pressedLong:(id)sender {
-    if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan
-       && [((UIGestureRecognizer *)sender) isKindOfClass:[UILongPressGestureRecognizer class]])
-        [self runMethod:self.longPressMethodName withObject:sender afterDelay:0.0f];
-}
+-(void)pressedLong:(id)sender {}
 
 #pragma mark Notification Methods
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {

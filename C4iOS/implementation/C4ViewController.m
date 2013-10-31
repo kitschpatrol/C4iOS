@@ -30,6 +30,8 @@
     return self;
 }
 
++(void)copyMethods{}
+
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -52,49 +54,25 @@
 //}
 
 #pragma mark Notification Methods
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification object:nil];
-}
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
        fromObject:(id)object
-     andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification object:object];
-}
+     andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
       fromObjects:(NSArray *)objectArray
-     andRunMethod:(NSString *)methodName {
-    for (id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:NSSelectorFromString(methodName)
-                                                     name:notification
-                                                   object:object];
-    }
-}
+     andRunMethod:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName {
-    [self stopListeningFor:methodName object:nil];
-}
+-(void)stopListeningFor:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName object:(id)object {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-}
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {}
 
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
-    for(id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-    }
-}
+-(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {}
 
--(void)postNotification:(NSString *)notification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
-}
+-(void)postNotification:(NSString *)notification {}
 
+#pragma mark run methods
 -(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
     [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
 }

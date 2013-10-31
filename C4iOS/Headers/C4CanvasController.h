@@ -71,4 +71,5 @@
  */
 -(void)imageWasCaptured;
 
+-(void)test;
 @end

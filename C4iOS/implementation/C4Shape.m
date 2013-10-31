@@ -587,9 +587,6 @@
     }
 }
 
--(void)test {
-}
-
 -(CGPathRef)path {
     return self.shapeLayer.path;
 }

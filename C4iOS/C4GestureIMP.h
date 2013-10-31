@@ -1,5 +1,5 @@
 //
-//  C4WorkSpace.m
+//  C4GestureIMP.h
 //  C4iOS
 //
 //  Copyright © 2010-2013 Travis Kirton
@@ -17,31 +17,6 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "C4WorkSpace.h"
-#import "ClassA.h"
-#import "ClassB.h"
-
-@implementation C4WorkSpace
-
--(void)setup {
-    ClassA *objA = [ClassA new];
-    ClassB *objB = [ClassB new];
-    
-    [objA methodA];
-    [objA methodB];
-    [objA methodC];
-    
-    [objB methodA];
-    [objB methodB];
-    [objB methodC];
-    
-    C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
-    [self.canvas addShape:s];
-    
-    C4Shape *t = [C4Shape ellipse:CGRectMake(0, 0, 20, 20)];
-    [s addShape:t];
-    
-    [s addGesture:TAP name:@"tap" action:@"test"];
-}
-
+@interface C4GestureIMP : UIControl <C4Gesture>
++(C4GestureIMP *)sharedManager;
 @end

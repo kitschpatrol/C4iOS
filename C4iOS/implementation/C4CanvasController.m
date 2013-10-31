@@ -56,6 +56,10 @@
 -(void)setup {
 }
 
+-(void)test {
+    C4Log(@"test (%@)",[self class]);
+}
+
 -(C4Window *)canvas {
     return (C4Window *)self.view;
 }
