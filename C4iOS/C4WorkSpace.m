@@ -37,8 +37,13 @@
     
     C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
     [self.canvas addShape:s];
+    
     C4Shape *t = [C4Shape ellipse:CGRectMake(0, 0, 20, 20)];
     [s addShape:t];
+}
+
+-(void)touchesBegan {
+    C4Log(@"hi");
 }
 
 @end

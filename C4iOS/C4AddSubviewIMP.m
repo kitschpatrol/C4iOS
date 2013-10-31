@@ -73,8 +73,6 @@ static C4AddSubviewIMP *sharedC4AddSubviewIMP = nil;
 }
 
 -(void)addUIElement:(id<C4UIElement>)object {
-    C4Assert(![[object class] conformsToProtocol:@protocol(C4UIElement)],
-             @"You just tried to add a %@ using  [obj addUIElement:]", [object class]);
     [super addSubview:(UIView *)object];
 }
 

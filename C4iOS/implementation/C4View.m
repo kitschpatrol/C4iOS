@@ -25,6 +25,24 @@
 @end
 
 @implementation C4View
++(void)initialize {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //grabs a class method from ClassA
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        Method copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        Method local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+    });
+}
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
