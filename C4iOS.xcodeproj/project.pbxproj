@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BE0FDA7A1822E4EC0011C1C1 /* C4NotificationIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FDA791822E4EC0011C1C1 /* C4NotificationIMP.m */; };
 		BE0FDA7E1822E4FC0011C1C1 /* C4GestureIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FDA7D1822E4FC0011C1C1 /* C4GestureIMP.m */; };
+		BE0FDA811822F03D0011C1C1 /* C4MethodDelayIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FDA801822F03D0011C1C1 /* C4MethodDelayIMP.m */; };
 		BED79E1C17F2435400F0F82E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1B17F2435400F0F82E /* Accelerate.framework */; };
 		BED79E1E17F2435400F0F82E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1D17F2435400F0F82E /* AVFoundation.framework */; };
 		BED79E2017F2435400F0F82E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1F17F2435400F0F82E /* CoreFoundation.framework */; };
@@ -93,6 +94,8 @@
 		BE0FDA7B1822E4FC0011C1C1 /* C4Gesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4Gesture.h; sourceTree = "<group>"; };
 		BE0FDA7C1822E4FC0011C1C1 /* C4GestureIMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4GestureIMP.h; sourceTree = "<group>"; };
 		BE0FDA7D1822E4FC0011C1C1 /* C4GestureIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4GestureIMP.m; sourceTree = "<group>"; };
+		BE0FDA7F1822F03D0011C1C1 /* C4MethodDelayIMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4MethodDelayIMP.h; sourceTree = "<group>"; };
+		BE0FDA801822F03D0011C1C1 /* C4MethodDelayIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MethodDelayIMP.m; sourceTree = "<group>"; };
 		BED79E1817F2435400F0F82E /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED79E1B17F2435400F0F82E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		BED79E1D17F2435400F0F82E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -292,6 +295,9 @@
 				EDA0681D1820DC4E00D493B0 /* ClassB.h */,
 				EDA0681E1820DC4E00D493B0 /* ClassB.m */,
 				EDA068201820DC6300D493B0 /* DefaultProtocol.h */,
+				BED79E5417F2435400F0F82E /* C4MethodDelay.h */,
+				BE0FDA7F1822F03D0011C1C1 /* C4MethodDelayIMP.h */,
+				BE0FDA801822F03D0011C1C1 /* C4MethodDelayIMP.m */,
 				BED79E3C17F2435400F0F82E /* C4AddSubview.h */,
 				ED446992182205E5008B88A2 /* C4AddSubviewIMP.h */,
 				ED446993182205E5008B88A2 /* C4AddSubviewIMP.m */,
@@ -350,7 +356,6 @@
 				BED79E5117F2435400F0F82E /* C4Layer.h */,
 				BED79E5217F2435400F0F82E /* C4LayerAnimation.h */,
 				BED79E5317F2435400F0F82E /* C4Math.h */,
-				BED79E5417F2435400F0F82E /* C4MethodDelay.h */,
 				BED79E5517F2435400F0F82E /* C4Movie.h */,
 				BED79E5617F2435400F0F82E /* C4MovieLayer.h */,
 				BED79E5717F2435400F0F82E /* C4Notification.h */,
@@ -556,6 +561,7 @@
 				BED79E7017F2435400F0F82E /* C4Camera.m in Sources */,
 				BED79E9817F2435500F0F82E /* C4Object.m in Sources */,
 				BE0FDA7E1822E4FC0011C1C1 /* C4GestureIMP.m in Sources */,
+				BE0FDA811822F03D0011C1C1 /* C4MethodDelayIMP.m in Sources */,
 				BED79E8817F2435500F0F82E /* C4GL1Renderer.m in Sources */,
 				BED79E3817F2435400F0F82E /* main.m in Sources */,
 				BED79E7617F2435400F0F82E /* C4CanvasController.m in Sources */,

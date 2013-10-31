@@ -20,6 +20,44 @@
 #import "C4ViewController.h"
 
 @implementation C4ViewController
++(void)initialize {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Method copy;
+        Method local;
+        //METHOD DELAY
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4MethodDelayIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+
+        //NOTIFICATION
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4NotificationIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+});
+}
+
++(void)copyMethods{}
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,8 +67,6 @@
     }
     return self;
 }
-
-+(void)copyMethods{}
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -72,12 +108,8 @@
 
 -(void)postNotification:(NSString *)notification {}
 
-#pragma mark run methods
--(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
-}
+#pragma mark C4MethodDelay
+-(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {}
 
--(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
-}
+-(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {}
 @end

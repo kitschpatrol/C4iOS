@@ -31,6 +31,21 @@
     dispatch_once(&onceToken, ^{
         Method copy;
         Method local;
+        //METHOD DELAY
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4MethodDelayIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+
         //GESTURE
         //grabs a class method from C4AddSubviewIMP
         //method being copied contains boilerplate code
@@ -394,27 +409,6 @@
     _animationOptions = animationOptions | BEGINCURRENT;
 }
 
-#pragma mark Move
--(void)move:(id)sender {
-    [self postNotification:@"moved"];
-    NSUInteger _ani = self.animationOptions;
-    CGFloat _dur = self.animationDuration;
-    CGFloat _del = self.animationDelay;
-    self.animationDuration = 0;
-    self.animationDelay = 0;
-    self.animationOptions = DEFAULT;
-    
-    CGPoint translatedPoint = [(UIPanGestureRecognizer *)sender translationInView:self];
-    translatedPoint.x += self.center.x;
-    translatedPoint.y += self.center.y;
-    self.center = translatedPoint;
-    [(UIPanGestureRecognizer *)sender setTranslation:CGPointZero inView:self];
-    
-    self.animationDelay = _del;
-    self.animationDuration = _dur;
-    self.animationOptions = _ani;
-}
-
 #pragma mark Gesture Methods
 
 -(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {}
@@ -475,52 +469,26 @@
 
 -(void)pressedLong:(id)sender {}
 
+-(void)move:(id)sender {}
+
 #pragma mark Notification Methods
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification
-                                               object:nil];
-}
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
-       fromObject:(id)object
-     andRunMethod:(NSString *)methodName {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:NSSelectorFromString(methodName)
-                                                 name:notification
-                                               object:object];
-}
+      fromObject:(id)object
+    andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
-      fromObjects:(NSArray *)objectArray
-     andRunMethod:(NSString *)methodName {
-    for (id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:NSSelectorFromString(methodName)
-                                                     name:notification
-                                                   object:object];
-    }
-}
+     fromObjects:(NSArray *)objectArray
+    andRunMethod:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName {
-    [self stopListeningFor:methodName object:nil];
-}
+-(void)stopListeningFor:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)methodName object:(id)object {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-}
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {}
 
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
-    for(id object in objectArray) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:methodName object:object];
-    }
-}
+-(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {}
 
--(void)postNotification:(NSString *)notification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
-}
-
+-(void)postNotification:(NSString *)notification {}
 
 #pragma mark C4AddSubview
 +(void)copyMethods {}
@@ -657,14 +625,6 @@
     return [C4Layer class];
 }
 
--(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
-}
-
--(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
-}
-
 +(C4Window *)defaultStyle {
     return (C4Window *)[C4Window appearance];
 }
@@ -681,4 +641,10 @@
     }
     [self.layer renderInContext:context];
 }
+
+#pragma mark C4MethodDelay
+-(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {}
+
+-(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {}
+
 @end

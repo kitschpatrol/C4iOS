@@ -29,6 +29,45 @@
 @implementation C4CanvasController
 @synthesize canvas = _canvas;
 
++(void)initialize {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Method copy;
+        Method local;
+        //METHOD DELAY
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4MethodDelayIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+
+        //NOTIFICATION
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4NotificationIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+});
+}
+
++(void)copyMethods{}
+
 -(id)init {
     self = [super init];
     if(self != nil) {
@@ -176,53 +215,24 @@
     }
 }
 
-+(void)copyMethods{}
-
 #pragma mark Notification Methods
--(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {
-    [self listenFor:notification fromObject:nil andRunMethod:methodName];
-}
+-(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
-       fromObject:(id)object
-     andRunMethod:(NSString *)methodName {
-    if([methodName isEqualToString:@"swipedUp"] ||
-       [methodName isEqualToString:@"swipedDown"] ||
-       [methodName isEqualToString:@"swipedLeft"] ||
-       [methodName isEqualToString:@"swipedRight"] ||
-       [methodName isEqualToString:@"tapped"]) {
-        methodName = [methodName stringByAppendingString:@":"];
-    }
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(methodName)
-                                                 name:notification
-                                               object:object];
-}
+      fromObject:(id)object
+    andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
-      fromObjects:(NSArray *)objectArray
-     andRunMethod:(NSString *)methodName {
-    for (id object in objectArray) {
-        [self listenFor:notification fromObject:object andRunMethod:methodName];
-    }
-}
+     fromObjects:(NSArray *)objectArray
+    andRunMethod:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)notification {
-    [self stopListeningFor:notification object:nil];
-}
+-(void)stopListeningFor:(NSString *)methodName {}
 
--(void)stopListeningFor:(NSString *)notification object:(id)object {
-   	[[NSNotificationCenter defaultCenter] removeObserver:self name:notification object:object];
-}
+-(void)stopListeningFor:(NSString *)methodName object:(id)object {}
 
--(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {
-    for(id object in objectArray) {
-        [self stopListeningFor:methodName object:object];
-    }
-}
+-(void)stopListeningFor:(NSString *)methodName objects:(NSArray *)objectArray {}
 
--(void)postNotification:(NSString *)notification {
-	[[NSNotificationCenter defaultCenter] postNotificationName:notification object:self];
-}
+-(void)postNotification:(NSString *)notification {}
 
 #pragma mark New Stuff
 
@@ -438,14 +448,6 @@
     sender = sender;
 }
 
--(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
-}
-
--(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
-}
-
 -(void)movieIsReadyForPlayback:(NSNotification *)notification {
     C4Movie *currentMovie = (C4Movie *)[notification object];
     [self movieIsReady:currentMovie];
@@ -455,5 +457,10 @@
 -(void)movieIsReady:(C4Movie *)movie {
     movie = movie;
 }
+
+#pragma mark C4MethodDelay
+-(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {}
+
+-(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {}
 
 @end

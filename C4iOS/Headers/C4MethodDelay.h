@@ -45,4 +45,6 @@
  @param seconds The amount of time to wait, in seconds, before running the specified method
  */
 -(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds;
+
++(void)copyMethods;
 @end

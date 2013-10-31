@@ -52,7 +52,7 @@
 #import "C4AddSubviewIMP.h"
 #import "C4NotificationIMP.h"
 #import "C4GestureIMP.h"
-
+#import "C4MethodDelayIMP.h"
 
 //classes
 #import "C4Object.h"

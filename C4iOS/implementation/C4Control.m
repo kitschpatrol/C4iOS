@@ -34,6 +34,21 @@
     dispatch_once(&onceToken, ^{
         Method copy;
         Method local;
+        //METHOD DELAY
+        //grabs a class method from C4AddSubviewIMP
+        //method being copied contains boilerplate code
+        //for copying all other protocol methods
+        copy = class_getClassMethod([C4MethodDelayIMP class], @selector(copyMethods));
+        
+        //local method into which we will set the implementation of "copy"
+        local = class_getClassMethod([self class], @selector(copyMethods));
+        
+        //sets the implementation of "local" with that of "copy"
+        method_setImplementation(local, method_getImplementation(copy));
+        
+        //implements, at a class level, the copy method for this class
+        [[self class] copyMethods];
+
         //GESTURE
         //grabs a class method from C4AddSubviewIMP
         //method being copied contains boilerplate code
@@ -396,31 +411,6 @@
     _animationOptions = animationOptions | BEGINCURRENT;
 }
 
-#pragma mark Move
--(void)move:(id)sender {
-    UIPanGestureRecognizer *p = (UIPanGestureRecognizer *)sender;
-    
-    NSUInteger _ani = self.animationOptions;
-    CGFloat _dur = self.animationDuration;
-    CGFloat _del = self.animationDelay;
-    self.animationDuration = 0;
-    self.animationDelay = 0;
-    self.animationOptions = DEFAULT;
-    
-    CGPoint translatedPoint = [p translationInView:self];
-
-    translatedPoint.x += self.center.x;
-    translatedPoint.y += self.center.y;
-
-    self.center = translatedPoint;
-    [p setTranslation:CGPointZero inView:self];
-    [self postNotification:@"moved"];
-    
-    self.animationDelay = _del;
-    self.animationDuration = _dur;
-    self.animationOptions = _ani;
-}
-
 #pragma mark Gesture Methods
 
 -(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {}
@@ -480,6 +470,8 @@
 -(void)pressedLong {}
 
 -(void)pressedLong:(id)sender {}
+
+-(void)move:(id)sender {}
 
 #pragma mark Notification Methods
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {}
@@ -650,14 +642,6 @@
     return [C4Layer class];
 }
 
--(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
-}
-
--(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
-    [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
-}
-
 -(NSDictionary *)style {
     //FIXME: Will never transfer nil for some properties
     //(let's deal with it later rather than solve a "potential" problem)
@@ -781,5 +765,10 @@
     [self.layer renderInContext:context];
 //    CGContextRestoreGState(context);
 }
+
+#pragma mark C4MethodDelay
+-(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {}
+
+-(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {}
 
 @end
