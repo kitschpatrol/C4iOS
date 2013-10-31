@@ -37,11 +37,49 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
 //The other class will then run this method
 //This method should never be run by the class itself
 +(void)copyMethods {
-    unsigned int methodListCount;
-    Method *methodList = class_copyMethodList([C4GestureIMP class], &methodListCount);
-    for(int i = 0; i < methodListCount; i ++) {
-        Method m = methodList[i];
-        class_replaceMethod([self class], method_getName(m), method_getImplementation(m), method_getTypeEncoding(m));
+    NSArray *methodList = @[
+    @"setLongPressMethodName:",
+    @"pressedLong:",
+    @"touchesBegan",
+    @"touchesMoved",
+    @"touchesEnded",
+    @"swipedRight",
+    @"swipedLeft",
+    @"swipedUp",
+    @"swipedDown",
+    @"tapped",
+    @"longPressMethodName",
+    @"addGesture:name:action:",
+    @"numberOfTapsRequired:forGesture:",
+    @"numberOfTouchesRequired:forGesture:",
+    @"minimumNumberOfTouches:forGesture:",
+    @"maximumNumberOfTouches:forGesture:",
+    @"swipeDirection:forGesture:",
+    @"minimumPressDuration:forGesture:",
+    @"pressedLong",
+    @"swipedRight:",
+    @"swipedLeft:",
+    @"swipedUp:",
+    @"swipedDown:",
+    @"move:",
+    @"tapped:",
+    @"gestureForName:",
+    @"allGestures",
+    @"touchesBegan:withEvent:",
+    @"touchesMoved:withEvent:",
+    @"touchesEnded:withEvent:"
+     ];
+    
+    for(int i = 0; i < methodList.count; i ++) {
+        NSString *currentMethod = methodList[i];
+        SEL currentSelector = NSSelectorFromString(currentMethod);
+        Method m = class_getClassMethod([C4GestureIMP class], currentSelector);
+        //FIXME: was having trouble isolating why the C4CanvasController wasn't implementing
+        //its touchesBegan etc, might be because the previous line is calling getClassMethod
+        //and not getImplementationMethod, or instance or whatever...
+        class_replaceMethod([self class], currentSelector, method_getImplementation(m), method_getTypeEncoding(m));
+        
+        C4Log(@"%@ %@",[self class], NSStringFromSelector(method_getName(m)));
     }
 }
 
@@ -193,14 +231,11 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
     [self touchesEnded];
 }
 
--(void)touchesBegan {
-}
+-(void)touchesBegan {}
 
--(void)touchesEnded {
-}
+-(void)touchesEnded {}
 
--(void)touchesMoved {
-}
+-(void)touchesMoved {}
 
 -(void)swipedRight:(id)sender {
     sender = sender;
@@ -232,24 +267,18 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
     [self tapped];
 }
 
--(void)tapped {
-}
+-(void)tapped {}
 
 
--(void)swipedUp {
-}
+-(void)swipedUp {}
 
--(void)swipedDown {
-}
+-(void)swipedDown {}
 
--(void)swipedLeft {
-}
+-(void)swipedLeft {}
 
--(void)swipedRight {
-}
+-(void)swipedRight {}
 
--(void)pressedLong {
-}
+-(void)pressedLong {}
 
 -(void)pressedLong:(id)sender {
     if(((UIGestureRecognizer *)sender).state == UIGestureRecognizerStateBegan

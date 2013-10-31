@@ -34,11 +34,10 @@
     dispatch_once(&onceToken, ^{
         Method copy;
         Method local;
-        
-        //grabs a class method from C4AddSubviewIMP
+        //grabs a class method from C4GestureIMP
         //method being copied contains boilerplate code
         //for copying all other protocol methods
-        copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
+        copy = class_getClassMethod([C4GestureIMP class], @selector(copyMethods));
         
         //local method into which we will set the implementation of "copy"
         local = class_getClassMethod([self class], @selector(copyMethods));
@@ -49,10 +48,10 @@
         //implements, at a class level, the copy method for this class
         [[self class] copyMethods];
 
-        //grabs a class method from C4GestureIMP
+        //grabs a class method from C4AddSubviewIMP
         //method being copied contains boilerplate code
         //for copying all other protocol methods
-        copy = class_getClassMethod([C4GestureIMP class], @selector(copyMethods));
+        copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
         
         //local method into which we will set the implementation of "copy"
         local = class_getClassMethod([self class], @selector(copyMethods));
