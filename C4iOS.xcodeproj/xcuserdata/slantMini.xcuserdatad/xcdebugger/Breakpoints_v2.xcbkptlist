@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "C4iOS/C4GestureIMP.m"
-            timestampString = "404938660.939218"
+            filePath = "C4iOS/implementation/C4CanvasController.m"
+            timestampString = "404784089.359231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "-touchesBegan:withEvent:"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-addGesture:name:action:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

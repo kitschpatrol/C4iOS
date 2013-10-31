@@ -18,29 +18,27 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "C4WorkSpace.h"
+#import "ClassA.h"
+#import "ClassB.h"
 
 @implementation C4WorkSpace
 
 -(void)setup {
+    ClassA *objA = [ClassA new];
+    ClassB *objB = [ClassB new];
+    
+    [objA methodA];
+    [objA methodB];
+    [objA methodC];
+    
+    [objB methodA];
+    [objB methodB];
+    [objB methodC];
+    
     C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
     [self.canvas addShape:s];
-    
     C4Shape *t = [C4Shape ellipse:CGRectMake(0, 0, 20, 20)];
     [s addShape:t];
-
-    s.center = self.canvas.center;
-    
-    [self listenFor:@"hello" andRunMethod:@"test"];
-    
-    [self addGesture:SWIPERIGHT name:@"s" action:@"test"];
-}
-
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self postNotification:@"hello"];
-}
-
--(void)test {
-    C4Log(@"test (%@)", [self class]);
 }
 
 @end

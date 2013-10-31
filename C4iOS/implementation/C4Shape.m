@@ -588,7 +588,6 @@
 }
 
 -(void)test {
-    C4Log(@"test (%@)", [self class]);
 }
 
 -(CGPathRef)path {
