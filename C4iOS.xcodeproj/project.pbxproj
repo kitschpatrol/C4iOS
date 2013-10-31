@@ -253,9 +253,6 @@
 		BE0FDA821822F4280011C1C1 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				BED79E5217F2435400F0F82E /* C4LayerAnimation.h */,
-				BE0FDA841822F4610011C1C1 /* C4LayerAnimationImp.h */,
-				BE0FDA851822F4610011C1C1 /* C4LayerAnimationImp.m */,
 				BE0FDA831822F43B0011C1C1 /* Complete */,
 			);
 			name = Protocols;
@@ -264,6 +261,9 @@
 		BE0FDA831822F43B0011C1C1 /* Complete */ = {
 			isa = PBXGroup;
 			children = (
+				BED79E5217F2435400F0F82E /* C4LayerAnimation.h */,
+				BE0FDA841822F4610011C1C1 /* C4LayerAnimationImp.h */,
+				BE0FDA851822F4610011C1C1 /* C4LayerAnimationImp.m */,
 				BED79E5417F2435400F0F82E /* C4MethodDelay.h */,
 				BE0FDA7F1822F03D0011C1C1 /* C4MethodDelayIMP.h */,
 				BE0FDA801822F03D0011C1C1 /* C4MethodDelayIMP.m */,

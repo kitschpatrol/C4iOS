@@ -153,20 +153,6 @@
     }
 }
 
-/*
- Had this in before, but took it out when I was fixing center position issues with labels and shapes
- There was a bug with this implementation that was sometimes switching the position base on landscape orientation
- */
-//- (CGPoint)center {
-//    CGPoint currentCenter = super.center;
-//    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-//    if(orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
-//        currentCenter.x = super.center.y;
-//        currentCenter.y = super.center.x;
-//    }
-//    return currentCenter;
-//}
-
 -(CGPoint)origin {
     return self.frame.origin;
 }

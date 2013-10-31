@@ -19,8 +19,13 @@
 
 #import "C4ShapeLayer.h"
 
+/*
+ The C4LayerAnimation protocol requires some private properties
+ Here, we list the private properties.
+ These need to be manually copied into each new class that conforms to C4LayerAnimation.
+ It's a pain, but this small conformance allows for a significantly lighter code-base.
+ */
 @interface C4ShapeLayer()
--(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
 @property (nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 
@@ -30,7 +35,7 @@
     dispatch_once(&onceToken, ^{
         Method copy;
         Method local;
-        //METHOD DELAY
+        //LAYER ANIMATION
         //grabs a class method from C4LayerAnimationImp
         //method being copied contains boilerplate code
         //for copying all other protocol methods
@@ -284,6 +289,12 @@
 }
 
 #pragma mark C4Layer Animation Methods
+/*
+ The C4LayerAnimation protocol requires the synthesis of some public properties.
+ Here we list the private properties that need to be synthesized.
+ These synths need to be manually copied into each class that conforms to C4LayerAnimation.
+ It's a pain, but this small conformance allows for a significantly lighter code-base.
+ */
 @synthesize animationOptions = _animationOptions, currentAnimationEasing = _currentAnimationEasing,
 repeatCount = _repeatCount, animationDuration = _animationDuration,
 allowsInteraction = _allowsInteraction, repeats = _repeats;

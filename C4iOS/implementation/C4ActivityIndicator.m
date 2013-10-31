@@ -22,8 +22,6 @@
 @implementation C4ActivityIndicator
 @synthesize color = _color;
 
-
-
 +(C4ActivityIndicator *)indicatorWithStyle:(C4ActivityIndicatorStyle)style {
     C4ActivityIndicator *indicator = [[C4ActivityIndicator alloc] initWithActivityIndicatorStyle:style];
     return indicator;
@@ -129,5 +127,17 @@
         
     }
     return equalValue;
+}
+
+-(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{
+    methodName = methodName;
+    object = object;
+    event = event;
+}
+
+-(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+    methodName = methodName;
+    object = object;
+    event = event;
 }
 @end

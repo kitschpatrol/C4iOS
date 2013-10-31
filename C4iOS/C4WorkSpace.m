@@ -21,9 +21,7 @@
 #import "ClassA.h"
 #import "ClassB.h"
 
-@implementation C4WorkSpace {
-    C4Shape *s;
-}
+@implementation C4WorkSpace
 
 -(void)setup {
     ClassA *objA = [ClassA new];
@@ -37,7 +35,9 @@
     [objB methodB];
     [objB methodC];
     
-    s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
+    C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
+    s.perspectiveDistance = 500;
+    s.center = self.canvas.center;
     [self.canvas addShape:s];
     
     C4Shape *t = [C4Shape ellipse:CGRectMake(0, 0, 20, 20)];
@@ -47,9 +47,15 @@
 }
 
 -(void)test {
+    [super test];
+    for(C4Shape *s in self.canvas.subviews) {
         s.animationDuration = 1.0f;
-        s.animationOptions = AUTOREVERSE;
-        s.lineWidth = 10.0f;
+        s.animationOptions = REPEAT;
+        s.rotation = TWO_PI;
+        s.borderColor = C4RED;
+        s.borderWidth = 10.0f;
+        s.rotationY = TWO_PI;
+    }
 }
 
 @end

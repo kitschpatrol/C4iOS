@@ -15,7 +15,6 @@
  It's a pain, but this small conformance allows for a significantly lighter code-base.
  */
 @interface C4LayerAnimationImp ()
--(CABasicAnimation *)setupBasicAnimationWithKeyPath:(NSString *)keyPath;
 @property (nonatomic) CGFloat rotationAngle, rotationAngleX, rotationAngleY;
 @end
 

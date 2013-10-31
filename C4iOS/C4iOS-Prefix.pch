@@ -54,6 +54,11 @@
 #import "C4GestureIMP.h"
 #import "C4MethodDelayIMP.h"
 #import "C4LayerAnimationIMP.h"
+
+//UIView animation implementation
+//#import "C4ViewAnimation.h"
+//#import "C4ViewAnimationIMP.h"
+
 //classes
 #import "C4Object.h"
 #import "C4Math.h"
