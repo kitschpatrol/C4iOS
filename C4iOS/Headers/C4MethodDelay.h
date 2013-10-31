@@ -34,7 +34,7 @@
  @param methodName The name of the method to run
  @param seconds The amount of time to wait, in seconds, before running the specified method
  */
-- (void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds;
+-(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds;
 
 /** Sends a message to the receiver with an object as the argument after a specific amount of time.
    
@@ -44,5 +44,5 @@
  @param object An object that is the sole argument of the message.
  @param seconds The amount of time to wait, in seconds, before running the specified method
  */
-- (void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds;
+-(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds;
 @end

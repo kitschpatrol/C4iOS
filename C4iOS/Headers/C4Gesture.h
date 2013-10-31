@@ -63,7 +63,7 @@ typedef enum C4SwipeDirection {
  
  In the case of a method such as aMethod:(id)sender it is assumed that the sender object is of the type UIGestureRecognizer or any of its subclasses. From this assumption it is safe to assume that the sender can be cast to the appropriate type, such as UIPanGestureRecognizer depending on the original C4GestureType specified in the _type_ parameter. 
  */
-- (void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName;
+-(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName;
 
 /** Specifies the number of taps required for a given gesture. 
  
@@ -72,7 +72,7 @@ typedef enum C4SwipeDirection {
  @param tapCount the desired number of required taps
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
-- (void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName;
+-(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName;
 
 /** Specifies the number of touches required for a given gesture. 
  
@@ -81,7 +81,7 @@ typedef enum C4SwipeDirection {
  @param touchCount the desired number of required touches
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
-- (void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName;
+-(void)numberOfTouchesRequired:(NSInteger)touchCount forGesture:(NSString *)gestureName;
 
 /** Specifies the minimum number of touches required for a given gesture. 
  
@@ -90,7 +90,7 @@ typedef enum C4SwipeDirection {
  @param touchCount the desired minimum number of touches
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
-- (void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
+-(void)minimumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
 
 /** Specifies the maximum number of touches required for a given gesture. 
  
@@ -99,7 +99,7 @@ typedef enum C4SwipeDirection {
  @param touchCount the desired maximum number of touches
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
-- (void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
+-(void)maximumNumberOfTouches:(NSInteger)touchCount forGesture:(NSString *)gestureName;
 
 /** Specifies the direction for a given swipe gesture. 
  
@@ -111,7 +111,7 @@ typedef enum C4SwipeDirection {
  @warning *Note:* There can be only 1 direction associated with a given gesture and are set up by default. For example, the default direction for a gesture created with the type SWIPELEFT is SWIPEDIRLEFT. You should not have to call this method explicitly.
  
  */
-- (void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName;
+-(void)swipeDirection:(C4SwipeDirection)direction forGesture:(NSString *)gestureName;
 
 /** Specifies the direction for a given swipe gesture. 
  
@@ -120,7 +120,7 @@ typedef enum C4SwipeDirection {
  @param duration the desired number of seconds (defaults to 0.5)
  @param gestureName a string identifying the gesture upon which this method should act. The value of _gestureName_ should correspond to the name of a gesture already added using the addGesture:name:action: method
  */
-- (void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName;
+-(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName;
 
 #pragma mark Basic Touch Methods
 /// @name Basic Touch Methods
@@ -131,7 +131,7 @@ typedef enum C4SwipeDirection {
  
  @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesBegan:withEvent: making sure to call _super touchesBegan:withEvent:_
  */
-- (void)touchesBegan;
+-(void)touchesBegan;
 
 /** Method which is called each time an object is finished being touched
  
@@ -139,7 +139,7 @@ typedef enum C4SwipeDirection {
  
  @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesEnded:withEvent:_
  */
-- (void)touchesEnded;
+-(void)touchesEnded;
 
 /** Method which is called each time touches associated with an object are moved
  
@@ -147,7 +147,7 @@ typedef enum C4SwipeDirection {
  
  @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesMoved:withEvent:_
  */
-- (void)touchesMoved;
+-(void)touchesMoved;
 
 /** Default method which is called each time an object receives a long press
  
@@ -155,7 +155,7 @@ typedef enum C4SwipeDirection {
  
  If a LONGPRESS gesture has been added to an object, and the object receives a long press notification, this method is triggered.
  */
-- (void)pressedLong;
+-(void)pressedLong;
 
 /** Method which is called each time an object receives a long press
  
@@ -165,7 +165,7 @@ typedef enum C4SwipeDirection {
  
  @param sender the object that is sending the pressedLong: message.
  */
-- (void)pressedLong:(id)sender;
+-(void)pressedLong:(id)sender;
 
 #pragma mark Basic Swipe Methods
 /// @name Basic Swipe Methods
@@ -173,7 +173,7 @@ typedef enum C4SwipeDirection {
 
  This method can be overridden to trigger other custom actions or events.
 */
-- (void)swipedRight;
+-(void)swipedRight;
 
 /** Method which is called each time an object receives a swipe from left to right
  
@@ -181,13 +181,13 @@ typedef enum C4SwipeDirection {
  
  @param sender a UIGestureRecognizer object.
  */
-- (void)swipedRight:(id)sender;
+-(void)swipedRight:(id)sender;
 
 /** Method which is called each time an object receives a swipe from right to left
  
  This method can be overridden to trigger other custom actions or events.
  */
-- (void)swipedLeft;
+-(void)swipedLeft;
 
 /**Default method which is called each time an object receives a swipe from right to left
  
@@ -195,13 +195,13 @@ typedef enum C4SwipeDirection {
  
  @param sender a UIGestureRecognizer object.
  */
-- (void)swipedLeft:(id)sender;
+-(void)swipedLeft:(id)sender;
 
 /** Method which is called each time an object receives a swipe from down to up
  
  This method can be overridden to trigger other custom actions or events.
  */
-- (void)swipedUp;
+-(void)swipedUp;
 
 /** Method which is called each time an object receives a swipe from down to up
  
@@ -209,13 +209,13 @@ typedef enum C4SwipeDirection {
  
  @param sender a UIGestureRecognizer object.
  */
-- (void)swipedUp:(id)sender;
+-(void)swipedUp:(id)sender;
 
 /** Method which is called each time an object receives a swipe from up to down
  
  This method can be overridden to trigger other custom actions or events.
  */
-- (void)swipedDown;
+-(void)swipedDown;
 
 /** Method which is called each time an object receives a swipe from up to down
  
@@ -223,7 +223,7 @@ typedef enum C4SwipeDirection {
  
  @param sender a UIGestureRecognizer object.
  */
-- (void)swipedDown:(id)sender;
+-(void)swipedDown:(id)sender;
 
 /** A default method which can be called when using a PAN gesture, if the object is to follow a moving touch
  
@@ -233,13 +233,13 @@ typedef enum C4SwipeDirection {
  
  @warning *Note:* In its default implementation, it is assumed that PAN is the only kind of gesture which will call this method.
  */
-- (void)move:(id)sender;
+-(void)move:(id)sender;
 
 /**The basic method that gets called when a tap gesture gets recognized.
  
  Use this method if you only need to react to the tap gesture.
  */
-- (void)tapped;
+-(void)tapped;
 
 /**Default method which is called each time an object receives a tap gesture.
  
@@ -247,15 +247,15 @@ typedef enum C4SwipeDirection {
  
  @param sender a UIGestureRecognizer object.
  */
-- (void)tapped:(id)sender;
+-(void)tapped:(id)sender;
 
 /**Returns the UIGesture associated with a specified gesture name for the receiver.
  
  @param gestureName the name of the gesture to retrieve.
  */
-- (UIGestureRecognizer *)gestureForName:(NSString *)gestureName;
+-(UIGestureRecognizer *)gestureForName:(NSString *)gestureName;
 
 /**Returns a dictionary of all the gestures associated with the receiver.
  */
-- (NSDictionary *)allGestures;
+-(NSDictionary *)allGestures;
 @end

@@ -42,7 +42,7 @@
  
  @param path The new path to which this shape will change.
  */
-- (void)animatePath:(CGPathRef)path;
+-(void)animatePath:(CGPathRef)path;
 
 /**Changes the fillColor to a new color.
  
@@ -50,7 +50,7 @@
  
  @param fillColor The new color to which this shape will change its fillColor.
  */
-- (void)animateFillColor:(CGColorRef)fillColor;
+-(void)animateFillColor:(CGColorRef)fillColor;
 
 /**Changes the lineWidth to a new thickness.
  
@@ -58,7 +58,7 @@
  
  @param lineWidth The new value to which this shape will change its lineWidth.
  */
-- (void)animateLineWidth:(CGFloat)lineWidth;
+-(void)animateLineWidth:(CGFloat)lineWidth;
 
 /**Changes the miterLimit to a new value.
  
@@ -66,7 +66,7 @@
  
  @param miterLimit The new value to which this shape will change its miterLimit.
  */
-- (void)animateMiterLimit:(CGFloat)miterLimit;
+-(void)animateMiterLimit:(CGFloat)miterLimit;
 
 /**Changes the strokeColor to a new color.
  
@@ -74,7 +74,7 @@
  
  @param strokeColor The new color to which this shape will change its strokeColor.
  */
-- (void)animateStrokeColor:(CGColorRef)strokeColor;
+-(void)animateStrokeColor:(CGColorRef)strokeColor;
 
 /**Changes the strokeEnd to a new position.
  
@@ -82,7 +82,7 @@
  
  @param strokeEnd The new value to which this shape will change its strokeEnd.
  */
-- (void)animateStrokeEnd:(CGFloat)strokeEnd;
+-(void)animateStrokeEnd:(CGFloat)strokeEnd;
 
 /**Changes the strokeStart to a new position.
  
@@ -90,7 +90,7 @@
  
  @param strokeStart The new value to which this shape will change its strokeStart.
  */
-- (void)animateStrokeStart:(CGFloat)strokeStart;
+-(void)animateStrokeStart:(CGFloat)strokeStart;
 
 /**The dash phase applied to the shape’s path when stroked. Animatable.
  
@@ -100,7 +100,7 @@
  
  @param lineDashPhase The new value to which the lineDashPhase will change.
  */
-- (void)animateLineDashPhase:(CGFloat)lineDashPhase;
+-(void)animateLineDashPhase:(CGFloat)lineDashPhase;
 
 /**Specifies the perspective distance for x and y axis rotations.
  

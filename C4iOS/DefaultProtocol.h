@@ -10,6 +10,8 @@
 
 @protocol DefaultProtocol <NSObject>
 +(void)copyProtocolMethods;
++(void)copyMethods;
 -(void)methodA;
 -(void)methodB;
+-(void)methodC;
 @end

@@ -33,12 +33,12 @@
 @synthesize previewLayer = _previewLayer;
 //@synthesize shouldAutoreverse = _shouldAutoreverse;
 
-+ (C4Camera *)cameraWithFrame:(CGRect)frame {
++(C4Camera *)cameraWithFrame:(CGRect)frame {
     C4Camera *c = [[C4Camera alloc] initWithFrame:frame];
     return c;
 }
 
-- (id)initWithFrame:(CGRect)frame {
+-(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.cameraController = [[C4CameraController alloc] init];
@@ -58,18 +58,18 @@
     return self;
 }
 
-- (void)dealloc {
+-(void)dealloc {
     _previewLayer = nil;
     _cameraController = nil;
     _capturedImage = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)initCapture {
+-(void)initCapture {
     [self.cameraController initCapture];
 }
 
-+ (Class)layerClass {
++(Class)layerClass {
 	return [C4Layer class];
 }
 
@@ -77,43 +77,43 @@
 //	return (C4CameraLayer *)self.layer;
 //}
 
-- (void)captureImage {
+-(void)captureImage {
     [self.cameraController captureImage];
 }
 
-- (void)imageWasCaptured {
+-(void)imageWasCaptured {
     [self postNotification:@"imageWasCaptured"];
 }
 
-- (C4Image *)capturedImage {
+-(C4Image *)capturedImage {
     return self.cameraController.capturedImage;
 }
 
-- (void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
+-(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {
     [self performSelector:NSSelectorFromString(methodName) withObject:self afterDelay:seconds];
 }
 
-- (void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
+-(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {
     [self performSelector:NSSelectorFromString(methodName) withObject:object afterDelay:seconds];
 }
 
-+ (C4Camera *)defaultStyle {
++(C4Camera *)defaultStyle {
     return (C4Camera *)[C4Camera appearance];
 }
 
-- (void)setCameraPosition:(C4CameraPosition)position {
+-(void)setCameraPosition:(C4CameraPosition)position {
     [self.cameraController switchCameraPosition:position];
 }
 
-- (C4CameraPosition)cameraPosition {
+-(C4CameraPosition)cameraPosition {
     return self.cameraController.cameraPosition;
 }
 
-- (void)setCaptureQuality:(NSString *)captureQuality {
+-(void)setCaptureQuality:(NSString *)captureQuality {
     self.cameraController.captureQuality = captureQuality;
 }
 
-- (NSString *)captureQuality {
+-(NSString *)captureQuality {
     return self.cameraController.captureQuality;
 }
 

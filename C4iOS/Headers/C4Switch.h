@@ -30,7 +30,7 @@
 /**Creates and returns a C4Switch object.
  @return A new C4Switch.
  */
-+ (instancetype)switch;
++(instancetype)switch;
 
 /**Creates and returns a C4Switch object.
 
@@ -38,7 +38,7 @@
  @param frame A rectangle defining the frame of the C4Switch object. The size components of this rectangle are ignored.
  @return a new C4Switch.
  */
-+ (instancetype)switch:(CGRect)frame;
++(instancetype)switch:(CGRect)frame;
 
 #pragma mark - Initializing the Switch Object
 ///@name Initializing the Switch Object
@@ -49,7 +49,7 @@
  @param frame A rectangle defining the frame of the C4Switch object. The size components of this rectangle are ignored.
  @return An initialized UISwitch object or nil if the object could not be initialized.
  */
-- (id)initWithFrame:(CGRect)frame;
+-(id)initWithFrame:(CGRect)frame;
 
 #pragma mark - Setting the Off/On State
 ///@name Setting the Off/On State
@@ -66,7 +66,7 @@
  @param on YES if the switch should be turned to the On position; NO if it should be turned to the Off position. If the switch is already in the designated position, nothing happens.
  @param animated YES to animate the “flipping” of the switch; otherwise NO.
  */
-- (void)setOn:(BOOL)on animated:(BOOL)animated;
+-(void)setOn:(BOOL)on animated:(BOOL)animated;
 
 #pragma mark - Customizing the Appearance of the Switch
 ///@name Customizing the Appearance of the Switch
@@ -114,5 +114,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4Switch.
  */
-+ (C4Switch *)defaultStyle;
++(C4Switch *)defaultStyle;
 @end

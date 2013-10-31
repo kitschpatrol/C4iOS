@@ -30,7 +30,7 @@ NSInteger floatSort(id obj1, id obj2, void *context);
 
 @implementation C4Foundation
 
-- (id)init {
+-(id)init {
     self = [super init];
     if (self) {
 #ifdef VERBOSE
@@ -49,7 +49,7 @@ NSInteger floatSort(id obj1, id obj2, void *context);
     return self;
 }
 
-+ (C4Foundation *)sharedManager {
++(C4Foundation *)sharedManager {
     if (sharedC4Foundation == nil) {
         static dispatch_once_t once;
         dispatch_once(&once, ^ { sharedC4Foundation = [[super allocWithZone:NULL] init]; 
@@ -101,20 +101,20 @@ NSInteger floatSort(id obj1, id obj2, void *context) {
     return result;
 }
 
-- (NSComparator) floatComparator {
+-(NSComparator) floatComparator {
     return floatSortComparator;
 }
 
-+ (NSComparator) floatComparator {
++(NSComparator) floatComparator {
     return [[self sharedManager] floatComparator];
 }
 
-+ (id)allocWithZone:(NSZone *)zone {
++(id)allocWithZone:(NSZone *)zone {
     zone = zone;
     return [self sharedManager];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
+-(id)copyWithZone:(NSZone *)zone {
     zone = zone;
     return self;
 }
@@ -170,7 +170,7 @@ CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint,
     return arcRect;
 }
 
-+ (NSString *)currentDeviceModel {
++(NSString *)currentDeviceModel {
     struct utsname systemInfo;
     uname(&systemInfo);
     return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];

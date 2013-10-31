@@ -27,11 +27,11 @@
 
 /**The method within which all drawing code should be written.
  */
-- (void)render;
+-(void)render;
 
 /**The method within which custom allocation of variables can be made. It should be called at the end of an object's initialization method, before the object is returned.
  */
-- (void)setup;
+-(void)setup;
 
 /**Default method for handling layer size changes.
  
@@ -39,5 +39,5 @@
  
  @param layer The underlying CAEAGLLayer from which to resize.
  */
-- (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
+-(BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
 @end

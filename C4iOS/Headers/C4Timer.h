@@ -33,7 +33,7 @@
  @param methodName The name of the method that will be sent to the object
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+ (instancetype)automaticTimerWithInterval:(CGFloat)seconds
++(instancetype)automaticTimerWithInterval:(CGFloat)seconds
                                     target:(id)object
                                     method:(NSString *)methodName
                                    repeats:(BOOL)repeats;
@@ -46,7 +46,7 @@
  @param infoObject The object to pass to the method being called
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+ (instancetype)automaticTimerWithInterval:(CGFloat)seconds
++(instancetype)automaticTimerWithInterval:(CGFloat)seconds
                                     target:(id)object
                                     method:(NSString *)methodName
                                   userInfo:(id)infoObject
@@ -61,7 +61,7 @@
  @param methodName The name of the method that will be sent to the object
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+ (instancetype)timerWithInterval:(CGFloat)seconds
++(instancetype)timerWithInterval:(CGFloat)seconds
                            target:(id)object
                            method:(NSString *)methodName
                           repeats:(BOOL)repeats;
@@ -76,7 +76,7 @@
  @param infoObject The object to pass to the method being called
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+ (instancetype)timerWithInterval:(CGFloat)seconds
++(instancetype)timerWithInterval:(CGFloat)seconds
                            target:(id)object
                            method:(NSString *)methodName
                          userInfo:(id)infoObject
@@ -90,7 +90,7 @@
  @param methodName The name of the method that will be sent to the object
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+ (instancetype)timerWithFireDate:(NSDate *)date
++(instancetype)timerWithFireDate:(NSDate *)date
                          interval:(CGFloat)seconds
                            target:(id)object
                            method:(NSString *)methodName
@@ -105,7 +105,7 @@
  @param infoObject The object to pass to the method being called
  @param repeats A boolean value that specifies whether or not the timer will continuously fire
  */
-+ (instancetype)timerWithFireDate:(NSDate *)date
++(instancetype)timerWithFireDate:(NSDate *)date
                          interval:(CGFloat)seconds
                            target:(id)object
                            method:(NSString *)methodName
@@ -118,20 +118,20 @@
  
  You can use this method to fire a repeating timer without interrupting its regular firing schedule. If the timer is non-repeating, it is automatically invalidated after firing, even if its scheduled fire date has not arrived.
  */
-- (void)fire;
+-(void)fire;
 #pragma mark - Starting & Stopping a Timer
 ///@name Starting & Stopping a Timer
 /**Calling this method will start the timer firing, if it is supposed to repeat it will continue to fire.
  
  This method creates a new instance of an NSTimer, based on the stored properties in the reciever, and starts firing immediately.
  */
-- (void)start;
+-(void)start;
 
 /**Calling this method will stop a timer from firing continuously.
 
  This method effectively invalidates the timer.
  */
-- (void)stop;
+-(void)stop;
 
 /**Stops the receiver from ever firing again and requests its removal from its run loop.
  
@@ -139,7 +139,7 @@
  
  If it was configured with target and user info objects, the receiver releases its references to those objects as well.
  */
-- (void)invalidate;
+-(void)invalidate;
 #pragma mark - Information About a Timer
 ///@name Information About a Timer
 

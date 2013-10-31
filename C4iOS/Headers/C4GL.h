@@ -41,23 +41,23 @@
  @return a new C4GL object.
  */
 
-+ (instancetype)glWithFrame:(CGRect)frame;
++(instancetype)glWithFrame:(CGRect)frame;
 
 /**Initializes a C4GL object with a specific renderer.
 
  @param renderer A rendering object which conforms to the C4EAGLESRenderer protocol.
  */
-- (id)initWithRenderer:(id <C4EAGLESRenderer>)renderer;
+-(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer;
 
 #pragma mark Animation Control
 ///@name Animation Control
 /**Starts rendering
  */
-- (void)startAnimation;
+-(void)startAnimation;
 
 /**Stops rendering.
  */
-- (void)stopAnimation;
+-(void)stopAnimation;
 
 #pragma mark Properties
 /// @name Properties
@@ -98,7 +98,7 @@
  @param zone The zone for copying. Leave this as nil for normal results.
  @return a copy of the receiver.
  */
-- (C4GL *)copyWithZone:(NSZone *)zone;
+-(C4GL *)copyWithZone:(NSZone *)zone;
 
 #pragma mark - Default Style
 ///@name Default Style
@@ -108,6 +108,6 @@
  
  @return The appearance proxy for the receiver, cast as a C4GL.
  */
-+ (C4GL *)defaultStyle;
++(C4GL *)defaultStyle;
 
 @end

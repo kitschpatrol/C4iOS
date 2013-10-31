@@ -22,12 +22,12 @@
 @implementation C4ActivityIndicator
 @synthesize color = _color;
 
-+ (C4ActivityIndicator *)indicatorWithStyle:(C4ActivityIndicatorStyle)style {
++(C4ActivityIndicator *)indicatorWithStyle:(C4ActivityIndicatorStyle)style {
     C4ActivityIndicator *indicator = [[C4ActivityIndicator alloc] initWithActivityIndicatorStyle:style];
     return indicator;
 }
 
-- (id)initWithActivityIndicatorStyle:(C4ActivityIndicatorStyle)style {
+-(id)initWithActivityIndicatorStyle:(C4ActivityIndicatorStyle)style {
     self = [super init];
     if(self != nil) {
         _UIActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style];
@@ -38,54 +38,54 @@
     return self;
 }
 
-- (void)setupFromDefaults {
+-(void)setupFromDefaults {
     _UIActivityIndicatorView.hidesWhenStopped = YES;
     _UIActivityIndicatorView.color = [C4ActivityIndicator defaultStyle].color;
 }
 
-- (void)startAnimating {
+-(void)startAnimating {
     [self.UIActivityIndicatorView startAnimating];
 }
 
-- (void)stopAnimating {
+-(void)stopAnimating {
     [self.UIActivityIndicatorView stopAnimating];
 }
 
-- (BOOL)isAnimating {
+-(BOOL)isAnimating {
     return self.UIActivityIndicatorView.isAnimating;
 }
 
-- (void)setActivityIndicatorStyle:(C4ActivityIndicatorStyle)style {
+-(void)setActivityIndicatorStyle:(C4ActivityIndicatorStyle)style {
     self.activityIndicatorStyle = style;
 }
 
-- (C4ActivityIndicatorStyle)activityIndicatorStyle {
+-(C4ActivityIndicatorStyle)activityIndicatorStyle {
     return (C4ActivityIndicatorStyle)_UIActivityIndicatorView.activityIndicatorViewStyle;
 }
 
-- (void)setHidesWhenStopped:(BOOL)hidesWhenStopped {
+-(void)setHidesWhenStopped:(BOOL)hidesWhenStopped {
     _UIActivityIndicatorView.hidesWhenStopped = hidesWhenStopped;
 }
 
-- (BOOL)hidesWhenStopped {
+-(BOOL)hidesWhenStopped {
     return _UIActivityIndicatorView.hidesWhenStopped;
 }
 
-- (void)setColor:(UIColor *)color {
+-(void)setColor:(UIColor *)color {
     _color = color;
     self.UIActivityIndicatorView.color = color;
 }
 
-- (UIColor *)color {
+-(UIColor *)color {
     return _UIActivityIndicatorView.color;
 }
 
 #pragma mark Style
-+ (C4ActivityIndicator *)defaultStyle {
++(C4ActivityIndicator *)defaultStyle {
     return ((C4ActivityIndicator *)[C4ActivityIndicator appearance]);
 }
 
-- (NSDictionary *)style {
+-(NSDictionary *)style {
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
     [localStyle addEntriesFromDictionary:@{@"indicator":self.UIActivityIndicatorView}];
@@ -102,7 +102,7 @@
     return (NSDictionary *)localAndControlStyle;
 }
 
-- (void)setStyle:(NSDictionary *)newStyle {
+-(void)setStyle:(NSDictionary *)newStyle {
     self.color = nil;
     
     [super setStyle:newStyle];
@@ -116,7 +116,7 @@
 
 #pragma mark isEqual
 
-- (BOOL)isEqual:(id)object {
+-(BOOL)isEqual:(id)object {
     BOOL equalValue = NO;
     if([object isKindOfClass:[UIActivityIndicatorView class]]) {
         equalValue = [self.UIActivityIndicatorView isEqual:object];
@@ -129,13 +129,13 @@
     return equalValue;
 }
 
-- (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{
+-(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event{
     methodName = methodName;
     object = object;
     event = event;
 }
 
-- (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+-(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     methodName = methodName;
     object = object;
     event = event;

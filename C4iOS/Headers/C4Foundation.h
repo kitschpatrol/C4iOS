@@ -29,7 +29,7 @@
 #pragma mark Foundation Methods
 /// @name Foundation Methods
 //FIXME: should this also be +instancetype?
-+ (C4Foundation *)sharedManager;
++(C4Foundation *)sharedManager;
 
 /** Logs an error message to the console.
  
@@ -41,11 +41,11 @@ void C4Log(NSString *logString,...);
 
 /** Returns a pre-defined comparator for sorting float values.
  */
-+ (NSComparator)floatComparator;
++(NSComparator)floatComparator;
 
 /** Returns a pre-defined comparator for sorting float values.
  */
-- (NSComparator)floatComparator;
+-(NSComparator)floatComparator;
 
 /** Sorts two undefined objects.
  
@@ -104,5 +104,5 @@ CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint,
  
  @return an NSString describing the current device model
  */
-+ (NSString *)currentDeviceModel;
++(NSString *)currentDeviceModel;
 @end

@@ -34,33 +34,33 @@
 @synthesize width = _width;
 @synthesize height = _height;
 
-+ (C4Movie *)movieNamed:(NSString *)movieName {
++(C4Movie *)movieNamed:(NSString *)movieName {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:CGRectZero];
     return newMovie;
 }
 
-+ (C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame {
++(C4Movie *)movieNamed:(NSString *)movieName inFrame:(CGRect)movieFrame {
     C4Movie *newMovie = [[C4Movie alloc] initWithMovieName:movieName frame:movieFrame];
     return newMovie;
 }
 
-+ (C4Movie *)movieWithURL:(NSString *)url {
++(C4Movie *)movieWithURL:(NSString *)url {
     C4Movie *newMovie = [[C4Movie alloc] initWithURL:[NSURL URLWithString:url] frame:CGRectZero];
     return newMovie;
 }
 
-+ (C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame {
++(C4Movie *)movieWithURL:(NSString *)url frame:(CGRect)movieFrame {
     C4Movie *newMovie = [[C4Movie alloc] initWithURL:[NSURL URLWithString:url] frame:movieFrame];
     return newMovie;
 }
 
-- (id)initWithMovieName:(NSString *)movieName {
+-(id)initWithMovieName:(NSString *)movieName {
     movieName = [movieName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     self = [self initWithMovieName:movieName frame:CGRectZero];
     return self;
 }
 
-- (id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame {
+-(id)initWithMovieName:(NSString *)movieName frame:(CGRect)movieFrame {
     NSArray *movieNameComponents = [movieName componentsSeparatedByString:@"."];
     NSString *path =[[NSBundle mainBundle] pathForResource:movieNameComponents[0]
                                                     ofType:movieNameComponents[1]];
@@ -69,12 +69,12 @@
     return self;
 }
 
-- (id)initWithURL:(NSURL *)url {
+-(id)initWithURL:(NSURL *)url {
     self = [self initWithURL:url frame:CGRectZero];
     return self;
 }
 
-- (id)initWithURL:(NSURL *)url frame:(CGRect)movieFrame {
+-(id)initWithURL:(NSURL *)url frame:(CGRect)movieFrame {
     self = [super initWithFrame:movieFrame];
     if(self != nil) {
         _volume = 1.0f;
@@ -115,7 +115,7 @@
     return self;
 }
 
-- (void)completeSetupWithAsset:(AVURLAsset *)asset frame:(CGRect)movieFrame {
+-(void)completeSetupWithAsset:(AVURLAsset *)asset frame:(CGRect)movieFrame {
     NSArray *assetTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
     
     if(CGRectEqualToRect(movieFrame, CGRectZero)) {
@@ -136,7 +136,7 @@
     [self setup];
 }
 
-- (CMTime)playerItemDuration {
+-(CMTime)playerItemDuration {
 	AVPlayerItem *thePlayerItem = [_player currentItem];
 	if (thePlayerItem.status == AVPlayerItemStatusReadyToPlay) {
 		return(_playerItem.duration);
@@ -144,15 +144,15 @@
 	return(kCMTimeInvalid);
 }
 
-- (BOOL)isPlaying {
+-(BOOL)isPlaying {
 	return (self.player.rate != 0.0f);
 }
 
-- (CGFloat)rate {
+-(CGFloat)rate {
     return self.player.rate;
 }
 
-- (void)setRate:(CGFloat)rate {
+-(void)setRate:(CGFloat)rate {
     BOOL wasPlaying = self.isPlaying;
     if(wasPlaying == YES) {
         [self pause];
@@ -163,15 +163,15 @@
     }
 }
 
-+ (Class)layerClass {
++(Class)layerClass {
 	return [C4MovieLayer class];
 }
 
-- (C4MovieLayer *)playerLayer {
+-(C4MovieLayer *)playerLayer {
 	return (C4MovieLayer *)self.layer;
 }
 
-- (void)assetFailedToPrepareForPlayback:(NSError *)error {
+-(void)assetFailedToPrepareForPlayback:(NSError *)error {
     NSMutableString *msg = [@"The movie you tried to load failed...\n\n" mutableCopy];
     [msg appendFormat:@"%@\n\n",error];
     [msg appendString:@"Confirm the following:\n"];
@@ -180,7 +180,7 @@
     C4Log(msg);
 }
 
-- (void)prepareToPlayAsset:(AVURLAsset *)asset {
+-(void)prepareToPlayAsset:(AVURLAsset *)asset {
     rateContext = &rateContext;
     currentItemContext = &currentItemContext;
     playerItemStatusContext = &playerItemStatusContext;
@@ -236,7 +236,7 @@
     self.volume = self.volume;    
 }
 
-- (void)observeValueForKeyPath:(NSString*) path
+-(void)observeValueForKeyPath:(NSString*) path
                       ofObject:(id)object
                         change:(NSDictionary*)change
                        context:(void*)context
@@ -306,7 +306,7 @@
     return;
 }
 
-- (void)playerItemDidReachEnd:(NSNotification*)aNotification {
+-(void)playerItemDidReachEnd:(NSNotification*)aNotification {
     aNotification = aNotification;
     [self postNotification:@"reachedEnd"];
     if(self.loops) {
@@ -319,19 +319,19 @@
     [self reachedEnd];
 }
 
-- (void)play {
+-(void)play {
     self.player.rate = _rate;
 }
 
-- (void)pause {
+-(void)pause {
     [self.player pause];
 }
 
-- (CGFloat)width {
+-(CGFloat)width {
     return self.bounds.size.width;
 }
 
-- (void)setWidth:(CGFloat)width {
+-(void)setWidth:(CGFloat)width {
     _width = width;
     CGRect newFrame = self.frame;
     newFrame.size.width = width;
@@ -339,11 +339,11 @@
     self.frame = newFrame;
 }
 
-- (CGFloat)height {
+-(CGFloat)height {
     return self.frame.size.height;
 }
 
-- (void)setHeight:(CGFloat)height {
+-(void)setHeight:(CGFloat)height {
     _height = height;
     CGRect newFrame = self.frame;
     newFrame.size.height = height;
@@ -351,27 +351,27 @@
     self.frame = newFrame;
 }
 
-- (CGSize)size {
+-(CGSize)size {
     return self.frame.size;
 }
 
-- (void)setSize:(CGSize)size {
+-(void)setSize:(CGSize)size {
     CGRect newFrame = CGRectZero;
     newFrame.origin = self.origin;
     newFrame.size = size;
     self.frame = newFrame;
 }
 
-- (CGFloat)currentTime {
+-(CGFloat)currentTime {
     return (CGFloat)CMTimeGetSeconds(self.player.currentTime);
 }
 
-- (CGFloat)duration {
+-(CGFloat)duration {
     return (CGFloat)CMTimeGetSeconds(self.playerItem.duration);
 }
 
 /* clamps to the nearest frame, based on the movie's time scale */
-- (void)seekToTime:(CGFloat)time {
+-(void)seekToTime:(CGFloat)time {
     CMTime current = self.player.currentTime;
     CMTime newTime = CMTimeMakeWithSeconds(time, current.timescale);
     CMTimeRange timeRange = CMTimeRangeMake(CMTimeMakeWithSeconds(0, current.timescale),
@@ -382,17 +382,17 @@
              toleranceAfter:CMTimeMake(1, current.timescale)];
 }
 
-- (void)seekByAddingTime:(CGFloat)time {
+-(void)seekByAddingTime:(CGFloat)time {
     [self seekToTime:time + self.currentTime];
 }
 
-- (void)reachedEnd {
+-(void)reachedEnd {
 }
 
-- (void)currentTimeChanged {
+-(void)currentTimeChanged {
 }
 
-- (void)setVolume:(CGFloat)volume {
+-(void)setVolume:(CGFloat)volume {
     _volume = volume;
     for(AVMutableAudioMixInputParameters *avmam in self.audioMix.inputParameters) {
         [avmam setVolume:volume atTime:kCMTimeZero];
@@ -400,11 +400,11 @@
     self.player.currentItem.audioMix = self.audioMix;
 }
 
-+ (C4Movie *)defaultStyle {
++(C4Movie *)defaultStyle {
     return (C4Movie *)[C4Movie appearance];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
+-(id)copyWithZone:(NSZone *)zone {
     C4Movie *newMovie = [[C4Movie allocWithZone:zone] initWithURL:self.movieURL];
     newMovie.style = self.style;
     return newMovie;

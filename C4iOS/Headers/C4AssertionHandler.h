@@ -37,7 +37,7 @@
  @param format A format string followed by a comma-separated list of arguments to substitute into the format string. See Formatting String Objects for more information.
  @param ... The variables for the format string
  */
-- (void)handleFailureInFunction:(NSString *)functionName
+-(void)handleFailureInFunction:(NSString *)functionName
                            file:(NSString *)fileName
                      lineNumber:(NSInteger)line
                     description:(NSString *)format, ...;
@@ -55,7 +55,7 @@
  @param format A format string followed by a comma-separated list of arguments to substitute into the format string. See Formatting String Objects for more information.
  @param ... The variables for the format string
  */
-- (void)handleFailureInMethod:(SEL)selector
+-(void)handleFailureInMethod:(SEL)selector
                        object:(id)object file:(NSString *)fileName
                    lineNumber:(NSInteger)line
                   description:(NSString *)format, ...;

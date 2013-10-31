@@ -20,17 +20,17 @@
 #import "C4Timer.h"
 
 @interface C4Timer ()
-- (id)initScheduledTimerWithInterval:(CGFloat)seconds
+-(id)initScheduledTimerWithInterval:(CGFloat)seconds
                               target:(id)object
                               method:(NSString *)methodName
                             userInfo:(id)infoObject
                              repeats:(BOOL)repeats;
-- (id)initWithInterval:(CGFloat)seconds
+-(id)initWithInterval:(CGFloat)seconds
                 target:(id)object
                 method:(NSString *)methodName
               userInfo:(id)infoObject
                repeats:(BOOL)repeats;
-- (id)initWithFireDate:(NSDate *)date
+-(id)initWithFireDate:(NSDate *)date
               interval:(CGFloat)seconds
                 target:(id)target
                 method:(NSString *)methodName
@@ -44,7 +44,7 @@
 
 @implementation C4Timer
 
-+ (C4Timer *)automaticTimerWithInterval:(CGFloat)seconds
++(C4Timer *)automaticTimerWithInterval:(CGFloat)seconds
                                  target:(id)object
                                  method:(NSString *)methodName
                                 repeats:(BOOL)repeats {
@@ -55,7 +55,7 @@
                                        repeats:repeats];
 }
 
-+ (C4Timer *)automaticTimerWithInterval:(CGFloat)seconds
++(C4Timer *)automaticTimerWithInterval:(CGFloat)seconds
                                  target:(id)object
                                  method:(NSString *)methodName
                                userInfo:(id)infoObject
@@ -67,7 +67,7 @@
                                                              repeats:repeats];
     return timer;
 }
-- (id)initScheduledTimerWithInterval:(CGFloat)seconds
+-(id)initScheduledTimerWithInterval:(CGFloat)seconds
                               target:(id)object
                               method:(NSString *)methodName
                             userInfo:(id)infoObject
@@ -101,7 +101,7 @@
     return self;
 }
 
-+ (C4Timer *)timerWithInterval:(CGFloat)seconds
++(C4Timer *)timerWithInterval:(CGFloat)seconds
                         target:(id)object
                         method:(NSString *)methodName
                        repeats:(BOOL)repeats {
@@ -112,7 +112,7 @@
                               repeats:repeats];
 }
 
-+ (C4Timer *)timerWithInterval:(CGFloat)seconds
++(C4Timer *)timerWithInterval:(CGFloat)seconds
                         target:(id)object
                         method:(NSString *)methodName
                       userInfo:(id)infoObject
@@ -125,7 +125,7 @@
     return timer;
 }
 
-- (id)initWithInterval:(CGFloat)seconds
+-(id)initWithInterval:(CGFloat)seconds
                 target:(id)object
                 method:(NSString *)methodName
               userInfo:(id)infoObject
@@ -162,7 +162,7 @@
     return self;
 }
 
-+ (C4Timer *)timerWithFireDate:(NSDate *)date
++(C4Timer *)timerWithFireDate:(NSDate *)date
                       interval:(CGFloat)seconds
                         target:(id)object
                         method:(NSString *)methodName
@@ -175,7 +175,7 @@
                                                repeats:repeats];
     return timer;
 }
-+ (C4Timer *)timerWithFireDate:(NSDate *)date
++(C4Timer *)timerWithFireDate:(NSDate *)date
                       interval:(CGFloat)seconds
                         target:(id)object
                         method:(NSString *)methodName
@@ -190,7 +190,7 @@
     return timer;
 }
 
-- (id)initWithFireDate:(NSDate *)date
+-(id)initWithFireDate:(NSDate *)date
               interval:(CGFloat)seconds
                 target:(id)object
                 method:(NSString *)methodName
@@ -202,7 +202,7 @@
                          userInfo:nil 
                           repeats:repeats];
 }
-- (id)initWithFireDate:(NSDate *)date
+-(id)initWithFireDate:(NSDate *)date
               interval:(CGFloat)seconds
                 target:(id)object
                 method:(NSString *)methodName
@@ -240,16 +240,16 @@
     return self;
 }
 
-- (void)dealloc {
+-(void)dealloc {
     if ([_timer isValid]) [_timer invalidate];
     _timer = nil;
 }
 
-- (void)fire {
+-(void)fire {
     [_timer fire];
 }
 
-- (void)start {
+-(void)start {
     if(_timer.isValid) {
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
     } else {
@@ -272,35 +272,35 @@
     }
 }
 
-- (void)stop {
+-(void)stop {
     [_timer invalidate];
     _timerCanStart = YES;
 }
 
-- (BOOL)isValid {
+-(BOOL)isValid {
     return _timer.isValid;
 }
 
-- (void)setFireDate:(NSDate *)_fireDate {
+-(void)setFireDate:(NSDate *)_fireDate {
     if (self.isValid) {
         _timer.fireDate = _fireDate;
     }
 }
 
-- (NSDate *)fireDate {
+-(NSDate *)fireDate {
     return _timer.fireDate;
 }
 
-- (CGFloat)timeInterval {
+-(CGFloat)timeInterval {
     return (CGFloat)_timer.timeInterval;
 }
 
-- (id)userInfo {
+-(id)userInfo {
     if(self.isValid) return _timer.userInfo;
     return nil;
 }
 
-- (void)invalidate {
+-(void)invalidate {
     [_timer invalidate];
 }
 @end

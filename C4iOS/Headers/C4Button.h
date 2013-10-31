@@ -37,7 +37,7 @@ This class provides methods for setting the title, image, and other appearance p
  
  @return A newly created button.
  */
-+ (instancetype)buttonWithType:(C4ButtonType)buttonType;
++(instancetype)buttonWithType:(C4ButtonType)buttonType;
 
 /**The default initialization method for the C4Button class.
  
@@ -47,7 +47,7 @@ This class provides methods for setting the title, image, and other appearance p
  
  @return A newly created C4Button.
  */
-- (id)initWithType:(C4ButtonType)buttonType;
+-(id)initWithType:(C4ButtonType)buttonType;
 
 #pragma mark Configuring the Button Title
 ///@name Configuring the Button Title
@@ -77,7 +77,7 @@ This class provides methods for setting the title, image, and other appearance p
  
  @param state The state that uses the specified title. The possible values are described in UIControlState.
  */
-- (void)setTitle:(NSString *)title forState:(C4ControlState)state;
+-(void)setTitle:(NSString *)title forState:(C4ControlState)state;
 
 /**Sets the styled title to use for the specified state.
  
@@ -88,7 +88,7 @@ This class provides methods for setting the title, image, and other appearance p
  @param title The styled text string so use for the title.
  @param state The state that uses the specified title. The possible values are described in UIControlState.
  */
-- (void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
+-(void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
 
 /**Sets the color of the title to use for the specified state.
  
@@ -97,7 +97,7 @@ This class provides methods for setting the title, image, and other appearance p
  @param color The color of the title to use for the specified state.
  @param state The state that uses the specified color. The possible values are described in C4ControlState.
  */
-- (void)setTitleColor:(UIColor *)color forState:(C4ControlState)state;
+-(void)setTitleColor:(UIColor *)color forState:(C4ControlState)state;
 
 /**Sets the color of the title to use for the specified state.
  
@@ -106,7 +106,7 @@ This class provides methods for setting the title, image, and other appearance p
  @param color The color of the title to use for the specified state.
  @param state The state that uses the specified color. The possible values are described in C4ControlState.
  */
-- (void)setTitleShadowColor:(UIColor *)color forState:(C4ControlState)state;
+-(void)setTitleShadowColor:(UIColor *)color forState:(C4ControlState)state;
 
 /**Returns the title color used for a state.
  
@@ -114,7 +114,7 @@ This class provides methods for setting the title, image, and other appearance p
  
  @return The color of the title for the specified state.
  */
-- (UIColor *)titleColorForState:(C4ControlState)state;
+-(UIColor *)titleColorForState:(C4ControlState)state;
 
 /**Returns the title associated with the specified state.
 
@@ -122,21 +122,21 @@ This class provides methods for setting the title, image, and other appearance p
  
  @return The title for the specified state. If no title has been set for the specific state, this method returns the title associated with the NORMAL state.
  */
-- (NSString *)titleForState:(C4ControlState)state;
+-(NSString *)titleForState:(C4ControlState)state;
 
 /**Returns the styled title associated with the specified state.
  
  @param state The state that uses the styled title. The possible values are described in C4ControlState.
  @return The title for the specified state. If no attributed title has been set for the specific state, this method returns the attributed title associated with the NORMAL state.
  */
-- (NSAttributedString *)attributedTitleForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
+-(NSAttributedString *)attributedTitleForState:(C4ControlState)state NS_AVAILABLE_IOS(6_0);
 
 /**Returns the title color used for a state.
  
  @param state The state that uses the title color. The possible values are described in C4ControlState.
  @return The color of the title for the specified state.
  */
-- (UIColor *)titleShadowColorForState:(C4ControlState)state;
+-(UIColor *)titleShadowColorForState:(C4ControlState)state;
 
 #pragma mark - Configuring Button Presentation
 ///@name Configuring Button Presentation
@@ -164,7 +164,7 @@ This class provides methods for setting the title, image, and other appearance p
  
  @return The image used for the background of the specified state.
  */
-- (C4Image *)backgroundImageForState:(C4ControlState)state;
+-(C4Image *)backgroundImageForState:(C4ControlState)state;
 
 /**Returns the C4Image used for a button state.
  
@@ -172,7 +172,7 @@ This class provides methods for setting the title, image, and other appearance p
  
  @return The image used for the specified state.
  */
-- (C4Image *)imageForState:(C4ControlState)state;
+-(C4Image *)imageForState:(C4ControlState)state;
 
 /**Sets the background image to use for the specified button state.
  
@@ -181,7 +181,7 @@ This class provides methods for setting the title, image, and other appearance p
  @param image The background image to use for the specified state.
  @param state The state that uses the specified image. The values are described in UIControlState.
  */
-- (void)setBackgroundImage:(C4Image *)image forState:(C4ControlState)state;
+-(void)setBackgroundImage:(C4Image *)image forState:(C4ControlState)state;
 
 /**Sets the C4Image to use for the specified state.
  
@@ -190,7 +190,7 @@ This class provides methods for setting the title, image, and other appearance p
  @param image The image to use for the specified state.
  @param state The state that uses the specified title. The values are described in C4ControlState.
  */
-- (void)setImage:(C4Image *)image forState:(C4ControlState)state;
+-(void)setImage:(C4Image *)image forState:(C4ControlState)state;
 
 /**The tint color for the button.
  
@@ -291,5 +291,5 @@ This class provides methods for setting the title, image, and other appearance p
  
  @return The appearance proxy for the receiver, cast as a C4Button.
  */
-+ (C4Button *)defaultStyle;
++(C4Button *)defaultStyle;
 @end

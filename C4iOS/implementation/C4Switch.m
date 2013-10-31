@@ -23,17 +23,17 @@
 @synthesize on = _on, onImage = _onImage, onTintColor = _onTintColor, offImage = _offImage,
 tintColor = _tintColor, thumbTintColor = _thumbTintColor;
 
-+ (C4Switch *)switch:(CGRect)frame {
++(C4Switch *)switch:(CGRect)frame {
     C4Switch *s = [[C4Switch alloc] initWithFrame:frame];
     return s;
 }
 
-+ (C4Switch *)switch {
++(C4Switch *)switch {
     C4Switch *s = [[C4Switch alloc] initWithFrame:CGRectZero];
     return s;
 }
 
-- (id)initWithFrame:(CGRect)frame {
+-(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
         //not sure if i really need this
@@ -47,13 +47,13 @@ tintColor = _tintColor, thumbTintColor = _thumbTintColor;
     return self;
 }
 
-- (void)setCenter:(CGPoint)center {
+-(void)setCenter:(CGPoint)center {
     center.x = floorf(center.x)+0.5f;
     center.y = floorf(center.y)+0.5f;
     [super setCenter:center];
 }
 
-- (void)setupFromDefaults {
+-(void)setupFromDefaults {
     _UISwitch.onTintColor = [C4Switch defaultStyle].onTintColor;
     _UISwitch.tintColor = [C4Switch defaultStyle].tintColor;
     _UISwitch.thumbTintColor = [C4Switch defaultStyle].thumbTintColor;
@@ -61,74 +61,74 @@ tintColor = _tintColor, thumbTintColor = _thumbTintColor;
     _UISwitch.onImage = [C4Switch defaultStyle].onImage.UIImage;
 }
 
-+ (C4Switch *)defaultStyle {
++(C4Switch *)defaultStyle {
     return (C4Switch *)[C4Switch appearance];
 }
 
-- (C4Switch *)copyWithZone:(NSZone *)zone {
+-(C4Switch *)copyWithZone:(NSZone *)zone {
     C4Switch *s = [[C4Switch allocWithZone:zone] initWithFrame:self.frame];
     s.style = self.style;
     return s;
 }
 
-- (UIColor *)onTintColor {
+-(UIColor *)onTintColor {
     return _UISwitch.onTintColor;
 }
 
-- (void)setOnTintColor:(UIColor *)onTintColor {
+-(void)setOnTintColor:(UIColor *)onTintColor {
     _onTintColor = onTintColor;
     _UISwitch.onTintColor = onTintColor;
 }
 
-- (UIColor *)tintColor {
+-(UIColor *)tintColor {
     return _UISwitch.tintColor;
 }
 
-- (void)setTintColor:(UIColor *)tintColor {
+-(void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
     _UISwitch.tintColor = tintColor;
 }
 
-- (UIColor *)thumbTintColor {
+-(UIColor *)thumbTintColor {
     return _UISwitch.thumbTintColor;
 }
 
-- (void)setThumbTintColor:(UIColor *)thumbTintColor {
+-(void)setThumbTintColor:(UIColor *)thumbTintColor {
     _thumbTintColor = thumbTintColor;
     _UISwitch.thumbTintColor = thumbTintColor;
 }
 
-- (C4Image *)onImage {
+-(C4Image *)onImage {
     return [C4Image imageWithUIImage:_UISwitch.onImage];
 }
 
-- (void)setOnImage:(C4Image *)onImage {
+-(void)setOnImage:(C4Image *)onImage {
     _onImage = onImage;
     _UISwitch.onImage = onImage.UIImage;
 }
 
-- (C4Image *)offImage {
+-(C4Image *)offImage {
     return [C4Image imageWithUIImage:_UISwitch.offImage];
 }
 
-- (void)setOffImage:(C4Image *)offImage {
+-(void)setOffImage:(C4Image *)offImage {
     _offImage = offImage;
     _UISwitch.offImage = offImage.UIImage;
 }
 
-- (BOOL)isOn {
+-(BOOL)isOn {
     return _UISwitch.isOn;
 }
 
-- (void)setOn:(BOOL)on {
+-(void)setOn:(BOOL)on {
     _UISwitch.on = on;
 }
 
-- (void)setOn:(BOOL)on animated:(BOOL)animated {
+-(void)setOn:(BOOL)on animated:(BOOL)animated {
     [_UISwitch setOn:on animated:animated];
 }
 
-- (NSDictionary *)style {
+-(NSDictionary *)style {
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
     [localStyle addEntriesFromDictionary:@{@"switch":self.UISwitch}];
@@ -145,7 +145,7 @@ tintColor = _tintColor, thumbTintColor = _thumbTintColor;
     return (NSDictionary *)localAndControlStyle;
 }
 
-- (void)setStyle:(NSDictionary *)newStyle {
+-(void)setStyle:(NSDictionary *)newStyle {
     self.tintColor = self.thumbTintColor = self.onTintColor = nil;
     self.offImage = self.onImage = nil;
     
@@ -162,7 +162,7 @@ tintColor = _tintColor, thumbTintColor = _thumbTintColor;
     }
 }
 
-- (void)setFrame:(CGRect)frame {
+-(void)setFrame:(CGRect)frame {
     CGPoint origin = frame.origin;
     origin.x = floorf(origin.x);
     origin.y = floorf(origin.y);
@@ -171,19 +171,19 @@ tintColor = _tintColor, thumbTintColor = _thumbTintColor;
 }
 
 #pragma mark other C4UIElement (target:action)
-- (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+-(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISwitch addTarget:object action:NSSelectorFromString(methodName)
             forControlEvents:(UIControlEvents)event];
 }
 
-- (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+-(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UISwitch removeTarget:object action:NSSelectorFromString(methodName)
                forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark isEqual
 
-- (BOOL)isEqual:(id)object {
+-(BOOL)isEqual:(id)object {
     BOOL equalValue = NO;
     if([object isKindOfClass:[UISwitch class]])
         equalValue = [self.UISwitch isEqual:object];

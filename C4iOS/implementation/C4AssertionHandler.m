@@ -21,7 +21,7 @@
 
 @implementation C4AssertionHandler
 
-- (void)handleFailureInFunction:(NSString *)functionName
+-(void)handleFailureInFunction:(NSString *)functionName
                            file:(NSString *)fileName
                      lineNumber:(NSInteger)line
                     description:(NSString *)format, ... {
@@ -37,7 +37,7 @@
     abort();
 }
 
-- (void)handleFailureInMethod:(SEL)selector object:(id)object
+-(void)handleFailureInMethod:(SEL)selector object:(id)object
                          file:(NSString *)fileName
                    lineNumber:(NSInteger)line
                   description:(NSString *)format, ... {

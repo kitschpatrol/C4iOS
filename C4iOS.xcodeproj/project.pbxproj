@@ -69,6 +69,7 @@
 		BED79ECA17F2435500F0F82E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E2F17F2435400F0F82E /* UIKit.framework */; };
 		BED79ED217F2435500F0F82E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BED79ED017F2435500F0F82E /* InfoPlist.strings */; };
 		BED79ED417F2435500F0F82E /* C4iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BED79ED317F2435500F0F82E /* C4iOSTests.m */; };
+		ED446994182205E5008B88A2 /* C4AddSubviewIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = ED446993182205E5008B88A2 /* C4AddSubviewIMP.m */; };
 		EDA0681C1820DC3800D493B0 /* ClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA0681B1820DC3800D493B0 /* ClassA.m */; };
 		EDA0681F1820DC4E00D493B0 /* ClassB.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA0681E1820DC4E00D493B0 /* ClassB.m */; };
 /* End PBXBuildFile section */
@@ -194,6 +195,8 @@
 		BED79ECF17F2435500F0F82E /* C4iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "C4iOSTests-Info.plist"; sourceTree = "<group>"; };
 		BED79ED117F2435500F0F82E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BED79ED317F2435500F0F82E /* C4iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = C4iOSTests.m; sourceTree = "<group>"; };
+		ED446992182205E5008B88A2 /* C4AddSubviewIMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4AddSubviewIMP.h; sourceTree = "<group>"; };
+		ED446993182205E5008B88A2 /* C4AddSubviewIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4AddSubviewIMP.m; sourceTree = "<group>"; };
 		EDA0681A1820DC3800D493B0 /* ClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassA.h; sourceTree = "<group>"; };
 		EDA0681B1820DC3800D493B0 /* ClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassA.m; sourceTree = "<group>"; };
 		EDA0681D1820DC4E00D493B0 /* ClassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassB.h; sourceTree = "<group>"; };
@@ -281,6 +284,9 @@
 				EDA0681D1820DC4E00D493B0 /* ClassB.h */,
 				EDA0681E1820DC4E00D493B0 /* ClassB.m */,
 				EDA068201820DC6300D493B0 /* DefaultProtocol.h */,
+				BED79E3C17F2435400F0F82E /* C4AddSubview.h */,
+				ED446992182205E5008B88A2 /* C4AddSubviewIMP.h */,
+				ED446993182205E5008B88A2 /* C4AddSubviewIMP.m */,
 				BED79EBE17F2435500F0F82E /* Images.xcassets */,
 				BED79EC017F2435500F0F82E /* Media.xcassets */,
 				BED79EB517F2435500F0F82E /* Main_iPhone.storyboard */,
@@ -308,7 +314,6 @@
 			isa = PBXGroup;
 			children = (
 				BED79E3B17F2435400F0F82E /* C4ActivityIndicator.h */,
-				BED79E3C17F2435400F0F82E /* C4AddSubview.h */,
 				BED79E3E17F2435400F0F82E /* C4AssertionHandler.h */,
 				BED79E3F17F2435400F0F82E /* C4Button.h */,
 				BED79E4017F2435400F0F82E /* C4Camera.h */,
@@ -526,6 +531,7 @@
 				BED79E8417F2435500F0F82E /* C4Foundation.m in Sources */,
 				BED79EAA17F2435500F0F82E /* C4UIElement.m in Sources */,
 				BED79E6A17F2435400F0F82E /* C4ActivityIndicator.m in Sources */,
+				ED446994182205E5008B88A2 /* C4AddSubviewIMP.m in Sources */,
 				BED79EB017F2435500F0F82E /* C4ViewController.m in Sources */,
 				BED79E8E17F2435500F0F82E /* C4Label.m in Sources */,
 				EDA0681F1820DC4E00D493B0 /* ClassB.m in Sources */,

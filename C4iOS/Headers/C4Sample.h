@@ -46,13 +46,13 @@
  
  @param sampleName The filename of a sample to be loaded.
  */
-+ (instancetype)sampleNamed:(NSString *)sampleName;
++(instancetype)sampleNamed:(NSString *)sampleName;
 
 /**Initializes a C4Sample with a given file name. 
  
  @param sampleName The filename of a sample to be loaded.
  */
-- (id)initWithSampleName:(NSString *)sampleName;
+-(id)initWithSampleName:(NSString *)sampleName;
 
 #pragma mark - Configuring and Controlling Playback
 ///@name Configuring and Controlling Playback
@@ -60,7 +60,7 @@
  
  Calling this method implicitly calls the prepareToPlay method if the audio player is not already prepared to play.
  */
-- (void)play;
+-(void)play;
 
 /**Plays a sound asynchronously, starting at a specified point in the audio output device’s timeline.
  
@@ -70,13 +70,13 @@
  
  @param time The number of seconds to delay playback, relative to the audio output device’s current time.
  */
-- (void)playAtTime:(CGFloat)time;
+-(void)playAtTime:(CGFloat)time;
 
 /**Pauses playback; sound remains ready to resume playback from where it left off.
  
  Calling pause leaves the audio player prepared to play; it does not release the audio hardware that was acquired upon calling play or prepareToPlay.
  */
-- (void)pause;
+-(void)pause;
 
 /**Stops playback and undoes the setup needed for playback.
  
@@ -84,7 +84,7 @@
  
  The stop method does not reset the value of the currentTime property to 0. In other words, if you call stop during playback and then call play, playback resumes at the point where it left off.
  */
-- (void)stop;
+-(void)stop;
 
 /**Prepares the audio player for playback by preloading its buffers.
  
@@ -92,7 +92,7 @@
  
  Calling the stop method, or allowing a sound to finish playing, undoes this setup.
  */
-- (void)prepareToPlay;
+-(void)prepareToPlay;
 
 /**A Boolean value that indicates whether the audio player is playing (YES) or not (NO). (read-only)
  */
@@ -152,7 +152,7 @@
 ///@name Managing Information About a Sound
 /**The number of audio channels in the sound associated with the audio player. (read-only)
  */
-- (NSUInteger)numberOfChannels;
+-(NSUInteger)numberOfChannels;
 
 /**Returns the total duration, in seconds, of the sound associated with the audio player. (read-only)
  */
@@ -195,7 +195,7 @@
  @param channelNumber The audio channel whose peak power value you want to obtain. Channel numbers are zero-indexed. A monaural signal, or the left channel of a stereo signal, has channel number 0.
  @return A floating-point representation, in decibels, of a given audio channel’s current peak power. A return value of 0 dB indicates full scale, or maximum power; a return value of -160 dB indicates minimum power (that is, near silence). If the signal provided to the audio player exceeds ±full scale, then the return value may exceed 0 (that is, it may enter the positive range).
  */
-- (CGFloat)peakPowerForChannel:(NSUInteger)channelNumber;
+-(CGFloat)peakPowerForChannel:(NSUInteger)channelNumber;
 
 /**Returns the average power for a given channel, in decibels, for the sound being played.
  
@@ -204,13 +204,13 @@
  @param channelNumber The audio channel whose average power value you want to obtain. Channel numbers are zero-indexed. A monaural signal, or the left channel of a stereo signal, has channel number 0.
  @return A floating-point representation, in decibels, of a given audio channel’s current average power. A return value of 0 dB indicates full scale, or maximum power; a return value of -160 dB indicates minimum power (that is, near silence). If the signal provided to the audio player exceeds ±full scale, then the return value may exceed 0 (that is, it may enter the positive range).
  */
-- (CGFloat)averagePowerForChannel:(NSUInteger)channelNumber;
+-(CGFloat)averagePowerForChannel:(NSUInteger)channelNumber;
 
 /**Refreshes the average and peak power values for all channels of an audio player.
  
  To obtain current audio power values, you must call this method before calling averagePowerForChannel: or peakPowerForChannel:.
  */
-- (void)updateMeters;
+-(void)updateMeters;
 
 #pragma mark - Marking the End of Playback
 /**Method called when the audio sample reaches its end and stops.
@@ -219,7 +219,7 @@
  
  Similar to C4Movie's reachedEnd method, however when an audio sample is looping this method will not get called when the currentTime reaches the end of the file's playback length.
  */
-- (void)endedNormally;
+-(void)endedNormally;
 
 #pragma mark - Accessing the AVAudioPlayer
 ///@name Accessing the AVAudioPlayer

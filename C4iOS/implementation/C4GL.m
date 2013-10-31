@@ -20,7 +20,7 @@
 #import "C4GL.h"
 
 @interface C4GL () 
-- (void)render;
+-(void)render;
 @property (nonatomic, readonly, getter = isDisplayLinkSupported) BOOL displayLinkSupported;
 @property (nonatomic, readonly, strong) C4EAGLLayer *eaglLayer;
 @property (nonatomic, strong) id displayLink;
@@ -29,17 +29,17 @@
 
 @implementation C4GL
 
-+ (C4GL *)glWithFrame:(CGRect)frame {
++(C4GL *)glWithFrame:(CGRect)frame {
     C4GL *gl = [[C4GL alloc] init];
     gl.frame = frame;
     return gl;
 }
 
-- (id)init {
+-(id)init {
     return [self initWithRenderer:[[C4GL1Renderer alloc] init]];
 }
 
-- (id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
+-(id)initWithRenderer:(id <C4EAGLESRenderer>)renderer {
     self = [super init];
     if (self != nil) {        
         _eaglLayer = (C4EAGLLayer *)self.layer;
@@ -72,11 +72,11 @@
     return self;
 }
 
-- (void)dealloc {
+-(void)dealloc {
     self.renderer = nil;
 }
 
-- (void)render {
+-(void)render {
     [_renderer render];
     if (YES == self.drawOnce) {
         [self stopAnimation];
@@ -84,12 +84,12 @@
     }
 }
 
-- (void) layoutSubviews {
+-(void) layoutSubviews {
 	[_renderer resizeFromLayer:(C4EAGLLayer*)self.layer];
     [self render];
 }
 
-- (void) setAnimationFrameInterval:(NSInteger)frameInterval {
+-(void) setAnimationFrameInterval:(NSInteger)frameInterval {
 	if (frameInterval >= 1) {
 	_animationFrameInterval = frameInterval;
 		if (self.isAnimating) {
@@ -99,7 +99,7 @@
 	}
 }
 
-- (void)startAnimation {
+-(void)startAnimation {
 	if (!self.isAnimating) {
 		if (self.isDisplayLinkSupported) {
             SEL selector = @selector(render);
@@ -121,7 +121,7 @@
 	}
 }
 
-- (void)stopAnimation {
+-(void)stopAnimation {
 	if (self.isAnimating) {
 		if (self.isDisplayLinkSupported) {
 			[self.displayLink invalidate];
@@ -134,7 +134,7 @@
 	}
 }
 
-- (void)setRenderer:(id<C4EAGLESRenderer>)renderer {
+-(void)setRenderer:(id<C4EAGLESRenderer>)renderer {
     BOOL wasAnimating = NO;
     if(self.isAnimating) {
         wasAnimating = YES;
@@ -146,20 +146,20 @@
     if(wasAnimating) [self startAnimation];
 }
 
-+ (Class) layerClass {
++(Class) layerClass {
     return [C4EAGLLayer class];
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor {
+-(void)setBackgroundColor:(UIColor *)backgroundColor {
     backgroundColor = [UIColor clearColor]; // can't remember why... should test and document
     [super setBackgroundColor:backgroundColor];
 }
 
-+ (C4GL *)defaultStyle {
++(C4GL *)defaultStyle {
     return (C4GL *)[C4GL appearance];
 }
 
-- (C4GL *)copyWithZone:(NSZone *)zone {
+-(C4GL *)copyWithZone:(NSZone *)zone {
     C4GL *newGL = [[C4GL allocWithZone:zone]
                    initWithRenderer:[(C4GL1Renderer *)self.renderer copy]];
     newGL.frame = self.frame;

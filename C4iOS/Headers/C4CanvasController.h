@@ -38,7 +38,7 @@
  
  You should code everything you want your application to do, prior to loading, in this method.
  */
-- (void)setup;
+-(void)setup;
 
 #pragma mark - The Canvas
 ///@name The Canvas
@@ -69,6 +69,6 @@
  
  `[self imageWasCaptured];`
  */
-- (void)imageWasCaptured;
+-(void)imageWasCaptured;
 
 @end

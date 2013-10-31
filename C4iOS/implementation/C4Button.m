@@ -22,12 +22,12 @@
 @implementation C4Button
 @synthesize tintColor = _tintColor;
 
-+ (C4Button *)buttonWithType:(C4ButtonType)type {
++(C4Button *)buttonWithType:(C4ButtonType)type {
     C4Button *button = [[C4Button alloc] initWithType:type];
     return button;
 }
 
-- (id)initWithType:(C4ButtonType)type {
+-(id)initWithType:(C4ButtonType)type {
     UIButton *button = [UIButton buttonWithType:(UIButtonType)type];
     self = [super initWithFrame:button.frame];
     if(self != nil) {
@@ -42,11 +42,11 @@
 }
 
 #pragma mark Style 
-+ (C4Button *)defaultStyle {
++(C4Button *)defaultStyle {
     return (C4Button *)[C4Button appearance];
 }
 
-- (void)setupFromDefaults {
+-(void)setupFromDefaults {
     self.UIButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:15.0f];
     self.tintColor = [C4Button defaultStyle].tintColor;
     
@@ -68,7 +68,7 @@
     //NOTE: UIButton only recognizes tintColor for its appearance (check UIButton.h)
 }
 
-- (void)setFrame:(CGRect)frame {
+-(void)setFrame:(CGRect)frame {
     CGPoint origin = frame.origin;
     origin.x = floorf(origin.x);
     origin.y = floorf(origin.y) + 0.5f;
@@ -77,24 +77,24 @@
     self.UIButton.frame = self.bounds;
 }
 
-- (void)setCenter:(CGPoint)center {
+-(void)setCenter:(CGPoint)center {
     center.x = floorf(center.x);
     center.y = floorf(center.y) + 0.5f;
     [super setCenter:center];
 }
 
-- (C4Button *)copyWithZone:(NSZone *)zone {
+-(C4Button *)copyWithZone:(NSZone *)zone {
     C4Button *button = [[C4Button allocWithZone:zone] initWithType:self.buttonType];
     button.style = self.style;
     return button;
 }
 
-- (void)setCornerRadius:(CGFloat)cornerRadius {
+-(void)setCornerRadius:(CGFloat)cornerRadius {
     [super setCornerRadius:cornerRadius];
     [self.UIButton.layer setCornerRadius:cornerRadius];
 }
 
-- (NSDictionary *)style {
+-(NSDictionary *)style {
     //mutable local styles
     NSMutableDictionary *localStyle = [[NSMutableDictionary alloc] initWithCapacity:0];
     [localStyle addEntriesFromDictionary:@{@"button":self.UIButton}];
@@ -111,7 +111,7 @@
 
 }
 
-- (void)setStyle:(NSDictionary *)newStyle {
+-(void)setStyle:(NSDictionary *)newStyle {
     self.tintColor = nil;
     [super setStyle:newStyle];
     
@@ -157,252 +157,252 @@
     }
 }
 
-- (C4Label *)titleLabel {
+-(C4Label *)titleLabel {
     return nil;
 }
 
-- (C4Font *)font {
+-(C4Font *)font {
     return [C4Font fontWithName:self.UIButton.titleLabel.font.fontName
                            size:self.UIButton.titleLabel.font.pointSize];
 }
 
-- (void)setFont:(C4Font *)font {
+-(void)setFont:(C4Font *)font {
     self.UIButton.titleLabel.font = font.UIFont;
 }
 
-- (NSString *)titleForState:(C4ControlState)state {
+-(NSString *)titleForState:(C4ControlState)state {
     return [self.UIButton titleForState:(UIControlState)state];
 }
 
-- (void)setTitle:(NSString *)title forState:(C4ControlState)state {
+-(void)setTitle:(NSString *)title forState:(C4ControlState)state {
     [self.UIButton setTitle:title forState:(UIControlState)state];
     [self.UIButton setAttributedTitle:nil forState:(UIControlState)state];
 }
 
-- (UIColor *)titleColorForState:(C4ControlState)state {
+-(UIColor *)titleColorForState:(C4ControlState)state {
     return [self.UIButton titleColorForState:(UIControlState)state];
 }
 
-- (void)setTitleColor:(UIColor *)color forState:(C4ControlState)state {
+-(void)setTitleColor:(UIColor *)color forState:(C4ControlState)state {
     [self.UIButton setTitleColor:color forState:(UIControlState)state];
 }
 
-- (UIColor *)titleShadowColorForState:(C4ControlState)state {
+-(UIColor *)titleShadowColorForState:(C4ControlState)state {
     return [self.UIButton titleShadowColorForState:(UIControlState)state];
 }
 
-- (void)setTitleShadowColor:(UIColor *)color forState:(C4ControlState)state {
+-(void)setTitleShadowColor:(UIColor *)color forState:(C4ControlState)state {
     [self.UIButton setTitleShadowColor:color forState:(UIControlState)state];
 }
 
-- (C4Image *)imageForState:(C4ControlState)state {
+-(C4Image *)imageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UIButton imageForState:(UIControlState)state]];
 }
 
-- (void)setImage:(C4Image *)image forState:(C4ControlState)state {
+-(void)setImage:(C4Image *)image forState:(C4ControlState)state {
     [self.UIButton setImage:image.UIImage forState:(UIControlState)state];
 }
 
-- (C4Image *)backgroundImageForState:(C4ControlState)state {
+-(C4Image *)backgroundImageForState:(C4ControlState)state {
     return [C4Image imageWithUIImage:[self.UIButton backgroundImageForState:(UIControlState)state]];
 }
 
-- (void)setBackgroundImage:(C4Image *)image forState:(C4ControlState)state {
+-(void)setBackgroundImage:(C4Image *)image forState:(C4ControlState)state {
     [self.UIButton setBackgroundImage:image.UIImage forState:(UIControlState)state];
 }
 
-- (NSAttributedString *)attributedTitleForState:(C4ControlState)state {
+-(NSAttributedString *)attributedTitleForState:(C4ControlState)state {
     return [self.UIButton attributedTitleForState:(UIControlState)state];
 }
 
-- (void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state {
+-(void)setAttributedTitle:(NSAttributedString *)title forState:(C4ControlState)state {
     [self.UIButton setAttributedTitle:title forState:(UIControlState)state];
 }
 
-- (UIEdgeInsets)contentEdgeInsets {
+-(UIEdgeInsets)contentEdgeInsets {
     return self.UIButton.contentEdgeInsets;
 }
 
-- (void)setContentEdgeInsets:(UIEdgeInsets)contentEdgeInsets {
+-(void)setContentEdgeInsets:(UIEdgeInsets)contentEdgeInsets {
     self.UIButton.contentEdgeInsets = contentEdgeInsets;
 }
 
-- (UIEdgeInsets)titleEdgeInsets {
+-(UIEdgeInsets)titleEdgeInsets {
     return self.UIButton.titleEdgeInsets;
 }
 
-- (void)setTitleEdgeInsets:(UIEdgeInsets)titleEdgeInsets {
+-(void)setTitleEdgeInsets:(UIEdgeInsets)titleEdgeInsets {
     self.UIButton.titleEdgeInsets = titleEdgeInsets;
 }
 
-- (UIEdgeInsets)imageEdgeInsets {
+-(UIEdgeInsets)imageEdgeInsets {
     return self.UIButton.imageEdgeInsets;
 }
 
-- (void)setImageEdgeInsets:(UIEdgeInsets)imageEdgeInsets {
+-(void)setImageEdgeInsets:(UIEdgeInsets)imageEdgeInsets {
     self.UIButton.imageEdgeInsets = imageEdgeInsets;
 }
 
-- (BOOL)reversesTitleShadowWhenHighlighted {
+-(BOOL)reversesTitleShadowWhenHighlighted {
     return self.UIButton.reversesTitleShadowWhenHighlighted;
 }
 
-- (void)setReversesTitleShadowWhenHighlighted:(BOOL)reversesTitleShadowWhenHighlighted {
+-(void)setReversesTitleShadowWhenHighlighted:(BOOL)reversesTitleShadowWhenHighlighted {
     self.UIButton.reversesTitleShadowWhenHighlighted = reversesTitleShadowWhenHighlighted;
 }
 
-- (BOOL)adjustsImageWhenDisabled {
+-(BOOL)adjustsImageWhenDisabled {
     return self.UIButton.adjustsImageWhenDisabled;
 }
 
-- (void)setAdjustsImageWhenDisabled:(BOOL)adjustsImageWhenDisabled {
+-(void)setAdjustsImageWhenDisabled:(BOOL)adjustsImageWhenDisabled {
     self.UIButton.adjustsImageWhenDisabled = adjustsImageWhenDisabled;
 }
 
-- (BOOL)adjustsImageWhenHighlighted {
+-(BOOL)adjustsImageWhenHighlighted {
     return self.UIButton.adjustsImageWhenHighlighted;
 }
 
-- (void)setAdjustsImageWhenHighlighted:(BOOL)adjustsImageWhenHighlighted {
+-(void)setAdjustsImageWhenHighlighted:(BOOL)adjustsImageWhenHighlighted {
     self.UIButton.adjustsImageWhenHighlighted = adjustsImageWhenHighlighted;
 }
 
-- (BOOL)showsTouchWhenHighlighted {
+-(BOOL)showsTouchWhenHighlighted {
     return self.UIButton.showsTouchWhenHighlighted;
 }
 
-- (void)setShowsTouchWhenHighlighted:(BOOL)showsTouchWhenHighlighted {
+-(void)setShowsTouchWhenHighlighted:(BOOL)showsTouchWhenHighlighted {
     self.UIButton.showsTouchWhenHighlighted = showsTouchWhenHighlighted;
 }
 
-- (UIColor *)tintColor {
+-(UIColor *)tintColor {
     return self.UIButton.tintColor;
 }
 
-- (void)setTintColor:(UIColor *)tintColor {
+-(void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
     self.UIButton.tintColor = tintColor;
 }
 
-- (C4ButtonType)buttonType {
+-(C4ButtonType)buttonType {
     return (C4ButtonType)self.UIButton.buttonType;
 }
 
-- (NSString *)currentTitle {
+-(NSString *)currentTitle {
     return self.UIButton.currentTitle;
 }
 
-- (NSAttributedString *)currentAttributedTitle {
+-(NSAttributedString *)currentAttributedTitle {
     return self.UIButton.currentAttributedTitle;
 }
 
-- (UIColor *)currentTitleColor {
+-(UIColor *)currentTitleColor {
     return self.UIButton.currentTitleColor;
 }
 
-- (UIColor *)currentTitleShadowColor {
+-(UIColor *)currentTitleShadowColor {
     return self.UIButton.currentTitleShadowColor;
 }
 
-- (C4Image *)currentImage {
+-(C4Image *)currentImage {
     return [C4Image imageWithUIImage:self.UIButton.currentImage];
 }
 
-- (C4Image *)currentBackgroundImage {
+-(C4Image *)currentBackgroundImage {
     return [C4Image imageWithUIImage:self.UIButton.currentBackgroundImage];
 }
 
 #pragma mark C4UIElement
-- (void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+-(void)runMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UIButton addTarget:object
                       action:NSSelectorFromString(methodName)
             forControlEvents:(UIControlEvents)event];
 }
 
-- (void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
+-(void)stopRunningMethod:(NSString *)methodName target:(id)object forEvent:(C4ControlEvents)event {
     [self.UIButton removeTarget:object
                          action:NSSelectorFromString(methodName)
                forControlEvents:(UIControlEvents)event];
 }
 
 #pragma mark Tracking 
-- (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+-(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [self postNotification:@"trackingBegan"];
     [self beginTracking];
     return [self.UIButton beginTrackingWithTouch:touch withEvent:event];
 }
 
-- (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+-(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [self postNotification:@"trackingContinued"];
     [self continueTracking];
     return [self.UIButton continueTrackingWithTouch:touch withEvent:event];
 }
 
-- (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+-(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     [self postNotification:@"trackingEnded"];
     [self endTracking];
     return [self.UIButton endTrackingWithTouch:touch withEvent:event];
 }
 
-- (void)cancelTrackingWithEvent:(UIEvent *)event {
+-(void)cancelTrackingWithEvent:(UIEvent *)event {
     [self postNotification:@"trackingCancelled"];
     [self cancelTracking];
     [self.UIButton cancelTrackingWithEvent:event];
 }
 
-- (void)beginTracking {
+-(void)beginTracking {
 }
 
-- (void)continueTracking {
+-(void)continueTracking {
 }
 
-- (void)endTracking {
+-(void)endTracking {
 }
 
-- (void)cancelTracking {
+-(void)cancelTracking {
 }
 
 #pragma mark Control State
 
-- (UIControlState)state {
+-(UIControlState)state {
     return self.UIButton.state;
 }
 
-- (void)setEnabled:(BOOL)enabled {
+-(void)setEnabled:(BOOL)enabled {
     self.UIButton.enabled = enabled;
 }
 
-- (BOOL)enabled {
+-(BOOL)enabled {
     return self.UIButton.enabled;
 }
 
-- (void)setHighlighted:(BOOL)highlighted {
+-(void)setHighlighted:(BOOL)highlighted {
     self.UIButton.highlighted = highlighted;
 }
 
-- (BOOL)highlighted {
+-(BOOL)highlighted {
     return self.UIButton.highlighted;
 }
 
-- (void)setSelected:(BOOL)selected {
+-(void)setSelected:(BOOL)selected {
     self.UIButton.selected = selected;
 }
 
-- (BOOL)selected {
+-(BOOL)selected {
     return self.UIButton.selected;
 }
 
-- (void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)alignment {
+-(void)setContentVerticalAlignment:(UIControlContentVerticalAlignment)alignment {
     self.UIButton.contentVerticalAlignment = alignment;
 }
 
-- (void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)alignment {
+-(void)setContentHorizontalAlignment:(UIControlContentHorizontalAlignment)alignment {
     self.UIButton.contentVerticalAlignment = alignment;
 }
 
 #pragma mark isEqual
 
-- (BOOL)isEqual:(id)object {
+-(BOOL)isEqual:(id)object {
     BOOL equalValue = NO;
     if([object isKindOfClass:[UIButton class]]) {
         equalValue = [self.UIButton isEqual:object];

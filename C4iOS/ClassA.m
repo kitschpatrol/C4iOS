@@ -35,18 +35,35 @@
                         method_getTypeEncoding(methodB));
 }
 
++(void)copyMethods {
+    unsigned int methodListCount;
+    Method *methodList = class_copyMethodList([ClassA class], &methodListCount);
+    for(int i = 0; i < methodListCount; i ++) {
+        Method m = methodList[i];
+        class_replaceMethod([self class], method_getName(m), method_getImplementation(m), method_getTypeEncoding(m));
+    }
+}
+
+
 //prints the selector name, and the name of the calling class
 -(void)methodA {
     NSString *selectorName = NSStringFromSelector(_cmd);
     NSString *className = NSStringFromClass([self class]);
-    C4Log(@"%@ | %@", selectorName, className);
+    C4Log(@"A) %@ | %@", selectorName, className);
 }
 
 //prints the selector name, and the name of the calling class
 -(void)methodB {
     NSString *selectorName = NSStringFromSelector(_cmd);
     NSString *className = NSStringFromClass([self class]);
-    C4Log(@"%@ | %@", selectorName, className);
+    C4Log(@"B) %@ | %@", selectorName, className);
+}
+
+//prints the selector name, and the name of the calling class
+-(void)methodC {
+    NSString *selectorName = NSStringFromSelector(_cmd);
+    NSString *className = NSStringFromClass([self class]);
+    C4Log(@"C) %@ | %@", selectorName, className);
 }
 
 @end

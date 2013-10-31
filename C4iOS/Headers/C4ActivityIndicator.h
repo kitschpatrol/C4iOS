@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  
  @return An initialized C4ActivityIndicator object or nil if the object couldn’t be created.
  */
-+ (instancetype)indicatorWithStyle:(C4ActivityIndicatorStyle)style;
++(instancetype)indicatorWithStyle:(C4ActivityIndicatorStyle)style;
 
 /**Initializes and returns an activity-indicator object.
  
@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  
  @return An initialized C4ActivityIndicator object or nil if the object couldn’t be created.
  */
-- (id)initWithActivityIndicatorStyle:(C4ActivityIndicatorStyle)style;
+-(id)initWithActivityIndicatorStyle:(C4ActivityIndicatorStyle)style;
 
 #pragma mark Managing an Activity Indicator
 ///@name Managing an Activity Indicator
@@ -61,19 +61,19 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  
  When the progress indicator is animated, the gear spins to indicate indeterminate progress. The indicator is animated until stopAnimating is called.
  */
-- (void)startAnimating;
+-(void)startAnimating;
 
 /**Stops the animation of the progress indicator.
  
  Call this method to stop the animation of the progress indicator started with a call to startAnimating. When animating is stopped, the indicator is hidden, unless hidesWhenStopped is NO.
  */
-- (void)stopAnimating;
+-(void)stopAnimating;
 
 /**Returns whether the receiver is animating.
  
  @return YES if the receiver is animating, otherwise NO.
  */
-- (BOOL)isAnimating;
+-(BOOL)isAnimating;
 
 /**The embedded UIActivityIndicatorView.
  
@@ -107,5 +107,5 @@ typedef NS_ENUM(NSInteger, C4ActivityIndicatorStyle) {
  
  @return The appearance proxy for the receiver, cast as a C4ActivityIndicator.
  */
-+ (C4ActivityIndicator *)defaultStyle;
++(C4ActivityIndicator *)defaultStyle;
 @end

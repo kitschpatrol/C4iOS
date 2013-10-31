@@ -31,5 +31,5 @@ C4Objects conform to the C4Notification protocol which means that all objects wi
  
  A convenience method so that initialization of subclasses can happen in this method rather than overriding (id)init, (id)initWithFrame:, etc...
  */
-- (void)setup;
+-(void)setup;
 @end

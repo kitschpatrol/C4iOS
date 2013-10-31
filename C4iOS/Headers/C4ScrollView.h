@@ -40,7 +40,7 @@
  @param rect the frame used to create the size and position of the scrollview.
  @return a new C4ScrollView object.
  */
-+ (instancetype)scrollView:(CGRect)rect;
++(instancetype)scrollView:(CGRect)rect;
 
 #pragma mark - ScrollView & Delegate
 ///@name ScrollView & Delegate
@@ -62,7 +62,7 @@
  @param contentOffset A point (expressed in points) that is offset from the content view’s origin.
  @param animated YES to animate the transition at a constant velocity to the new offset, NO to make the transition immediate.
  */
-- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
+-(void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated;
 
 /**The point at which the origin of the content view is offset from the origin of the scroll view.
  
@@ -113,7 +113,7 @@
  @param rect A rectangle defining an area of the content view.
  @param animated YES if the scrolling should be animated, NO if it should be immediate.
  */
-- (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated;
+-(void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated;
 
 /**A Boolean value that determines whether paging is enabled for the scroll view.
  
@@ -204,7 +204,7 @@
  
  You should call this method whenever you bring the scroll view to front.
  */
-- (void)flashScrollIndicators;
+-(void)flashScrollIndicators;
 
 #pragma mark - Zooming and Panning
 ///@name Zooming & Panning
@@ -229,7 +229,7 @@
  @param rect A rectangle defining an area of the content view.
  @param animated YES if the scrolling should be animated, NO if it should be immediate.
  */
-- (void)zoomToRect:(CGRect)rect animated:(BOOL)animated;
+-(void)zoomToRect:(CGRect)rect animated:(BOOL)animated;
 
 /**A floating-point value that specifies the current scale factor applied to the scroll view's content.
  
@@ -244,7 +244,7 @@
  @param scale The new value to scale the content to.
  @param animated YES to animate the transition to the new scale, NO to make the transition immediate.
  */
-- (void)setZoomScale:(CGFloat)scale animated:(BOOL)animated;
+-(void)setZoomScale:(CGFloat)scale animated:(BOOL)animated;
 
 /**A floating-point value that specifies the maximum scale factor that can be applied to the scroll view's content.
  
@@ -293,7 +293,7 @@
  @param view The subview in the content where the touch-down gesture occurred.
  @return value NO if you don’t want the scroll view to send event messages to view. If you want view to receive those messages, return YES (the default).
  */
-- (BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view;
+-(BOOL)touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view;
 
 /**Returns whether to cancel touches related to the content subview and start dragging.
  
@@ -302,7 +302,7 @@
  @param view The view object in the content that is being touched.
  @return value YES to cancel further touch messages to view, NO to have view continue to receive those messages. The default returned value is YES if view is not a UIControl object; otherwise, it returns NO.
  */
-- (BOOL)touchesShouldCancelInContentView:(UIView *)view;
+-(BOOL)touchesShouldCancelInContentView:(UIView *)view;
 
 #pragma mark - Default Style
 ///@name Default Style
@@ -312,5 +312,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4ScrollView.
  */
-+ (C4ScrollView *)defaultStyle;
++(C4ScrollView *)defaultStyle;
 @end

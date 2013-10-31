@@ -59,7 +59,7 @@
  
  It is easier and safer to override this method than to override something like - (id)init, or - (id)initWithFrame, etc...
   */
-- (void)setup;
+-(void)setup;
 
 /** A method to call when you want to test simple things.
  
@@ -69,7 +69,7 @@
     C4Log(@"test was run");
  }
  */
-- (void)test;
+-(void)test;
 
 /** A method to remove another object from its view.
  
@@ -77,7 +77,7 @@
  
  @param visualObject the visible object to remove from its parent view
  */
-- (void)removeObject:(id)visualObject;
+-(void)removeObject:(id)visualObject;
 
 /** A method to remove an array of objects from their view.
  
@@ -85,7 +85,7 @@
  
  @param array the array of visible objects to remove from their parent view
  */
-- (void)removeObjects:(NSArray *)array;
+-(void)removeObjects:(NSArray *)array;
 
 /** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
  
@@ -93,7 +93,7 @@
 
  @param rotation the value (in radians) to rotate the receiver
  */
-- (void)rotationDidFinish:(CGFloat)rotation;
+-(void)rotationDidFinish:(CGFloat)rotation;
 
 /**This method returns an NSNull object if the current object is nil, otherwise it returns the given object as-is.
  
@@ -104,7 +104,7 @@
  @param object An object to test if its value is nil
  @return NSNull or the object being passed.
  */
-- (id)nullForNilObject:(id)object;
+-(id)nullForNilObject:(id)object;
 
 /**This method returns nil if the current object is NSNull, otherwise it returns the given object as-is.
  
@@ -115,7 +115,7 @@
  @param object An object to test if its value is NSNull
  @return nil or the object being passed.
  */
-- (id)nilForNullObject:(id)object;
+-(id)nilForNullObject:(id)object;
 
 /**Renders the receiver and its sublayers into the specified context.
  
@@ -125,7 +125,7 @@
  
  @param context The graphics context to use to render the layer.
  */
-- (void)renderInContext:(CGContextRef)context;
+-(void)renderInContext:(CGContextRef)context;
 
 #pragma mark Animation Properties
 ///@name Animation Properties
@@ -354,5 +354,5 @@
  
  @return The appearance proxy for the receiver, cast as a C4Control.
  */
-+ (C4Control *)defaultStyle;
++(C4Control *)defaultStyle;
 @end

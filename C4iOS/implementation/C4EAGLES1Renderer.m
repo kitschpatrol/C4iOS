@@ -24,7 +24,7 @@
 @implementation C4EAGLES1Renderer
 
 // Create an ES 1.1 context
-- (id <C4EAGLESRenderer>) init
+-(id <C4EAGLESRenderer>) init
 {
 	if (self = [super init])
 	{
@@ -46,14 +46,14 @@
 }
 
 
-- (void)setup {
+-(void)setup {
     
 }
 
-- (void) render {
+-(void) render {
 }
 
-- (BOOL) resizeFromLayer:(C4EAGLLayer *)layer{
+-(BOOL) resizeFromLayer:(C4EAGLLayer *)layer{
     BOOL shouldResize = YES;
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, _renderBuffer);
     [_eaglContext renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
@@ -68,7 +68,7 @@
     return shouldResize;
 }
 
-- (void) dealloc
+-(void) dealloc
 {
 	if (_frameBuffer) {
 		glDeleteFramebuffersOES(1, &_frameBuffer);
@@ -85,7 +85,7 @@
 	_eaglContext = nil;
 }
 
-- (C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone {
+-(C4EAGLES1Renderer *)copyWithZone:(NSZone *)zone {
     return [[C4EAGLES1Renderer allocWithZone:zone] init];
 }
 

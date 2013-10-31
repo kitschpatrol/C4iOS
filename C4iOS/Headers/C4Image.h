@@ -34,25 +34,25 @@
  
  @param name A string representation of the file name (e.g. photo.jpg, image.png, etc.)
  */
-+ (instancetype)imageNamed:(NSString *)name;
++(instancetype)imageNamed:(NSString *)name;
 
 /**Creates and returns a new image using a pre-existing C4Image object.
  
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
-+ (instancetype)imageWithImage:(C4Image *)image;
++(instancetype)imageWithImage:(C4Image *)image;
 
 /**Creates and returns a new image using an NSData object.
  
  @param imageData An NSData object.
  */
-+ (instancetype)imageWithData:(NSData *)imageData;
++(instancetype)imageWithData:(NSData *)imageData;
 
 /**Creates and returns a new image using an UIImage object.
  
  @param image a UIImage used to create the C4Image.
  */
-+ (instancetype)imageWithUIImage:(UIImage *)image;
++(instancetype)imageWithUIImage:(UIImage *)image;
 
 /**Creates and returns a new image using an URL.
  
@@ -60,14 +60,14 @@
  
  @param imageURL the URL for the file used to create the image.
  */
-+ (instancetype)imageWithURL:(NSString *)imageURL;
++(instancetype)imageWithURL:(NSString *)imageURL;
 
 /**Creates and returns a new animated image from an array of image file names.
  
  @param imageNames An NSArray of image names (e.g. C4Sky, C4Table@2x.png, etc.) used to construct the images for the animation.
  @return a new animatable image.
  */
-+ (instancetype)animatedImageWithNames:(NSArray *)imageNames;
++(instancetype)animatedImageWithNames:(NSArray *)imageNames;
 
 /**Initializes an image using a file with the given name.
  
@@ -75,19 +75,19 @@
  
  @param name A string representation of the file name (e.g. photo.jpg, image.png, etc.)
  */
-- (id)initWithImageName:(NSString *)name;
+-(id)initWithImageName:(NSString *)name;
 
 /**Initializes a C4Image using the contents of another C4Image
  
  @param image A C4Image whose contents will be used to create a new C4Image object.
  */
-- (id)initWithImage:(C4Image *)image;
+-(id)initWithImage:(C4Image *)image;
 
 /**Initializes a C4Image using an NSData object
  
  @param imageData an NSData object
  */
-- (id)initWithData:(NSData *)imageData;
+-(id)initWithData:(NSData *)imageData;
 
 /**Initializes a C4Image using an array of raw data.
  
@@ -97,19 +97,19 @@
  @param width The width of the image to create
  @param height The height of the image to create
  */
-- (id)initWithRawData:(unsigned char *)data width:(NSInteger)width height:(NSInteger)height;
+-(id)initWithRawData:(unsigned char *)data width:(NSInteger)width height:(NSInteger)height;
 
 /**Initializes a C4Image using a CGImageRef object
  
  @param image A CGImageRef whose contents will be used to create a new C4Image object.
  */
-- (id)initWithCGImage:(CGImageRef)image;
+-(id)initWithCGImage:(CGImageRef)image;
 
 /**Initializes a C4Image using a UIImage object
  
  @param image A UIImage whose contents will be used to create a new C4Image object.
  */
-- (id)initWithUIImage:(UIImage *)image;
+-(id)initWithUIImage:(UIImage *)image;
 
 /**Initializes and returns a new image using an URL.
  
@@ -117,14 +117,14 @@
  
  @param imageURL the URL for the file used to create the image.
  */
-- (id)initWithURL:(NSURL *)imageURL;
+-(id)initWithURL:(NSURL *)imageURL;
 
 /**Initializes and returns a new animated image from an array of image file names.
  
  @param imageNames An NSArray of image names (e.g. C4Sky, C4Table@2x.png, etc.) used to construct the images for the animation.
  @return a new animatable image.
  */
-- (id)initAnimatedImageWithNames:(NSArray *)imageNames;
+-(id)initAnimatedImageWithNames:(NSArray *)imageNames;
 
 #pragma mark - Animated Images
 ///@name Animated Images
@@ -151,11 +151,11 @@
  
  This method always starts the animation from the first image in the list.
  */
-- (void)play;
+-(void)play;
 
 /**Stops animating the images in the receiver.
  */
-- (void)pause;
+-(void)pause;
 
 /**Returns a Boolean value indicating whether the animation is running.
  
@@ -169,7 +169,7 @@
  
  @param image A C4Image whose contents will be used to set the visible representation of the receiver.
  */
-- (void)setImage:(C4Image *)image;
+-(void)setImage:(C4Image *)image;
 
 #pragma mark - Pixels & Colors
 ///@name Pixels & Colors
@@ -177,19 +177,19 @@
  
  This will load the array one time, and must be called before colorAt: or rgbVectorAt:
  */
-- (void)loadPixelData;
+-(void)loadPixelData;
 
 /**Creates and returns a UIColor object from the specified coordinate in the image.
  
  @param point The coordinate in the image from which to pull color values
  */
-- (UIColor *)colorAt:(CGPoint)point;
+-(UIColor *)colorAt:(CGPoint)point;
 
 /**Creates and returns a C4Vector object containing 4 points mapping to the RGBA value from the specified coordinate in the image.
  
  @param point The coordinate in the image from which to pull color values
  */
-- (C4Vector *)rgbVectorAt:(CGPoint)point;
+-(C4Vector *)rgbVectorAt:(CGPoint)point;
 
 #pragma mark - Properties
 /// @name Properties
@@ -262,7 +262,7 @@
  
  @return An array of available filters, by name.
  */
-+ (NSArray *)availableFilters;
++(NSArray *)availableFilters;
 
 /**Specifies whether or not an image will process one or many filters at a time.
  
@@ -283,13 +283,13 @@
  
  Essentially, this method prevents automatic render after individual filters have completed.
  */
-- (void)startFiltering;
+-(void)startFiltering;
 
 /**Renders the current image's filter stack. 
  
  Calling this method will composite all previously called filters and then switch the reciever's contents to the new filtered image.
  */
-- (void)renderFilteredImage;
+-(void)renderFilteredImage;
 
 /**Specifies whether the activity indicator for this image should show.
  
@@ -311,32 +311,32 @@
 
  @param radius a CGFloat representing the length of the radius for the blur. Default value: 10.00
  */
-- (void)boxBlur:(CGFloat)radius;
+-(void)boxBlur:(CGFloat)radius;
 
 /**Blurs an image using a disc-shaped convolution kernel.
 
  @param radius a CGFloat representing the length of the radius for the blur. Default value: 8.00
  */
-- (void)discBlur:(CGFloat)radius;
+-(void)discBlur:(CGFloat)radius;
 
 /**Spreads source pixels by an amount specified by a Gaussian distribution.
  
  @param radius a CGFloat representing the length of the radius for the blur. Default value: 10.00
  */
-- (void)gaussianBlur:(CGFloat)radius;
+-(void)gaussianBlur:(CGFloat)radius;
 
 /**Computes the median value for a group of neighboring pixels and replaces each pixel value with the median.
  
  The effect is to reduce noise.
  */
-- (void)medianFilter;
+-(void)medianFilter;
 
 /**Blurs an image to simulate the effect of using a camera that moves a specified angle and distance while capturing the image.
  
  @param radius a CGFloat representing the length of the radius for the blur. Default value: 20.00
  @param angle a CGFloat representing the angle of the blur (in radians).
  */
-- (void)motionBlur:(CGFloat)radius angle:(CGFloat)angle;
+-(void)motionBlur:(CGFloat)radius angle:(CGFloat)angle;
 
 /**Reduces noise using a threshold value to define what is considered noise.
  
@@ -345,14 +345,14 @@
  @param level A CGFloat representing the threshold to use for determining noise. Default value: 0.02
  @param sharpness A CGFloat representing the sharpness to apply to the filter. Default value: 0.40
  */
-- (void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness;
+-(void)noiseRedution:(CGFloat)level sharpness:(CGFloat)sharpness;
 
 /**Simulates the effect of zooming the camera while capturing the image.
 
  @param center A CGPoint representing the center of the zoom. Default value {150,150}
  @param amount The amount of zoom to apply. Default value 20.0
  */
-- (void)zoomBlur:(CGPoint)center amount:(CGFloat)amount;
+-(void)zoomBlur:(CGPoint)center amount:(CGFloat)amount;
 
 #pragma mark - Color Adjustments
 /// @name Color Adjustments
@@ -373,7 +373,7 @@
  @param brightness Brightness value defaults to 0.0f, minimum -1.0f, maximum 1.0f
  @param contrast Contrast value defaults to 1.0f, minimum 0.0f, maximum 4.0f
  */
-- (void)colorControlSaturation:(CGFloat)saturation
+-(void)colorControlSaturation:(CGFloat)saturation
                     brightness:(CGFloat)brightness
                       contrast:(CGFloat)contrast  NS_AVAILABLE_IOS(5_0);
 
@@ -393,7 +393,7 @@
  @param color The color whose components will be used in the matrix multiplication
  @param bias The bias value to be used in the matrix multiplication
  */
-- (void)colorMatrix:(UIColor *)color bias:(CGFloat)bias;
+-(void)colorMatrix:(UIColor *)color bias:(CGFloat)bias;
 
 /**Exposure adjustment filter
  Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
@@ -404,7 +404,7 @@
  
  @param adjustment The level of exposure adjustment, defaults to 0.5, minimum -10.0, maximum 10.0
  */
-- (void)exposureAdjust:(CGFloat)adjustment;
+-(void)exposureAdjust:(CGFloat)adjustment;
 
 /**Gamma adjustment filter
  Adjusts midtone brightness.
@@ -415,7 +415,7 @@
  
  @param adjustment The level of gamma adjustment, defaults to 0.75, minimum 0.10, maximum 3.0
  */
-- (void)gammaAdjustment:(CGFloat)adjustment;
+-(void)gammaAdjustment:(CGFloat)adjustment;
 
 /**Hue adjustment filter
  Changes the overall hue, or tint, of the source pixels.
@@ -424,7 +424,7 @@
  
  @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
  */
-- (void)hueAdjust:(CGFloat)angle;
+-(void)hueAdjust:(CGFloat)angle;
 
 /**Temperature and tint filter
  Adapts the reference white point for an image.
@@ -432,7 +432,7 @@
  @param neutral An offset value, defaults to {6500,0}
  @param targetNeutral An target offset value, defaults to {6500,0}
  */
-- (void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
+-(void)tempartureAndTint:(CGSize)neutral target:(CGSize)targetNeutral;
 
 /**Tone curve filter
  Adjusts tone response of the R, G, and B channels of an image.
@@ -451,21 +451,21 @@
  
  @param pointArray A C-Array of CGPoints which will be used to construct the tone curve
  */
-- (void)toneCurve:(CGPoint *)pointArray;
+-(void)toneCurve:(CGPoint *)pointArray;
 
 /**Vibrance adjustment filter
  Adjusts the saturation of an image while keeping pleasing skin tones.
  
  @param amount The amount to adjust the image's vibrance, defaults to 0.0, minimum -1.0, maximum 1.0
  */
-- (void)vibranceAdjust:(CGFloat)amount;
+-(void)vibranceAdjust:(CGFloat)amount;
 
 /*White point adjustment filter
  Adjusts the reference white point for an image and maps all colors in the source using the new reference.
  
  @param color The reference color for the new mapping.
  */
-- (void)whitePointAdjust:(UIColor *)color;
+-(void)whitePointAdjust:(UIColor *)color;
 
 #pragma mark - Color Effects
 ///@name Color Effects
@@ -476,19 +476,19 @@
  @param dimension A CGFloat representing the number of XY planes used to create the resulting image. The size of the planes are dimension x dimension. Default value: 2.00
  @param data An NSData object that represents a three-dimensional texture.
  */
-- (void)colorCube:(CGFloat)dimension cubeData:(NSData *)data;
+-(void)colorCube:(CGFloat)dimension cubeData:(NSData *)data;
 
 /**Color invert filter.
 
  Inverts the colors in an image.
  */
-- (void)colorInvert;
+-(void)colorInvert;
 
 /**Performs a nonlinear transformation of source color values using mapping values provided in a table.
  
  @param gradientImage The image that provides the basis for the color map transformation.
  */
-- (void)colorMap:(C4Image *)gradientImage;
+-(void)colorMap:(C4Image *)gradientImage;
 
 /**Color monochrome filter.
  Remaps colors so they fall within shades of a single color.
@@ -496,7 +496,7 @@
  @param color The color to which the image will be mapped.
  @param intensity The intensity of the mapping, defaults to 1.0f, minimum 0.0f, maximum 1.0f
  */
-- (void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity;
+-(void)colorMonochrome:(UIColor *)color inputIntensity:(CGFloat)intensity;
 
 /**Remaps red, green, and blue color components to the number of brightness values you specify for each color component.
  
@@ -504,7 +504,7 @@
  
  @param levels A CGFloat representing the level of posterize effect to be applied to the image. Default value: 6.00
  */
-- (void)colorPosterize:(CGFloat)levels;
+-(void)colorPosterize:(CGFloat)levels;
 
 /**False color filter
  Maps luminance to a color ramp of two colors.
@@ -514,7 +514,7 @@
  @param color1 A UIColor.
  @param color2 A UIColor.
  */
-- (void)falseColor:(UIColor *)color1 color2:(UIColor *)color2;
+-(void)falseColor:(UIColor *)color1 color2:(UIColor *)color2;
 
 /**Converts a grayscale image to a white image that is masked by alpha.
  
@@ -522,29 +522,29 @@
  
  To use this method you would take a black and white image, apply this filter to it, and then use the results as the mask for another object.
  */
-- (void)maskToAlpha;
+-(void)maskToAlpha;
 
 /**Returns a grayscale image from max(r,g,b).
  */
-- (void)maximumComponent;
+-(void)maximumComponent;
 
 /**Returns a grayscale image from min(r,g,b).
  */
-- (void)minimumComponent;
+-(void)minimumComponent;
 
 /**Sepia tone filter
  Maps the colors of an image to various shades of brown.
  
  @param intensity The level of intensity for which to apply the sepia tone, defaults to 1.0, minimum 0.0, maximum 1.0
  */
-- (void)sepiaTone:(CGFloat)intensity;
+-(void)sepiaTone:(CGFloat)intensity;
 
 /**Reduces the brightness of an image at the periphery.
  
  @param radius A CGFloat representing the radius for the vignette.
  @param intensity A CGFloat representing the intensity of the vignette.
  */
-- (void)vignette:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)vignette:(CGFloat)radius intensity:(CGFloat)intensity;
 
 #pragma mark - Composite Operations
 /// @name Composite Operations
@@ -554,13 +554,13 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)additionComposite:(C4Image *)backgroundImage;
+-(void)additionComposite:(C4Image *)backgroundImage;
 
 /**Color blend filter
  Uses the luminance values of the background with the hue and saturation values of the source image.
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)colorBlend:(C4Image *)backgroundImage;
+-(void)colorBlend:(C4Image *)backgroundImage;
 
 /**Color burn filter
  Darkens the background image samples to reflect the source image samples.
@@ -569,7 +569,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)colorBurn:(C4Image *)backgroundImage;
+-(void)colorBurn:(C4Image *)backgroundImage;
 
 /**Color dodge filter.
  
@@ -579,7 +579,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)colorDodge:(C4Image *)backgroundImage;
+-(void)colorDodge:(C4Image *)backgroundImage;
 
 /**Darken blend filter
  Creates composite image samples by choosing the darker samples (from either the source image or the background).
@@ -588,7 +588,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)darkenBlend:(C4Image *)backgroundImage;
+-(void)darkenBlend:(C4Image *)backgroundImage;
 
 /**Difference blend filter
  Subtracts either the source image sample color from the background image sample color, or the reverse, depending on which sample has the greater brightness value.
@@ -597,7 +597,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)differenceBlend:(C4Image *)backgroundImage;
+-(void)differenceBlend:(C4Image *)backgroundImage;
 
 /**Exclusion blend filter
  Produces an effect similar to that produced by the Difference Blend filter but with lower contrast.
@@ -606,14 +606,14 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)exclusionBlend:(C4Image *)backgroundImage;
+-(void)exclusionBlend:(C4Image *)backgroundImage;
 
 /**Hard light blend filter
  Either multiplies or screens colors, depending on the source image sample color.
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)hardLightBlend:(C4Image *)backgroundImage;
+-(void)hardLightBlend:(C4Image *)backgroundImage;
 
 /**Hue blend filter
  Uses the luminance and saturation values of the background with the hue of the source image.
@@ -622,7 +622,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)hueBlend:(C4Image *)backgroundImage;
+-(void)hueBlend:(C4Image *)backgroundImage;
 
 /**Lighten blend filter
  Creates composite image samples by choosing the lighter samples (either from the source image or the background).
@@ -631,7 +631,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)lightenBlend:(C4Image *)backgroundImage;
+-(void)lightenBlend:(C4Image *)backgroundImage;
 
 /**Luminosity blend filter
  Uses the hue and saturation of the background with the luminance of the source image.
@@ -640,7 +640,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)luminosityBlend:(C4Image *)backgroundImage;
+-(void)luminosityBlend:(C4Image *)backgroundImage;
 
 /**Maximum compositing filter
  Computes the maximum value, by color component, of two input images and creates an output image using the maximum values.
@@ -649,7 +649,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)maximumComposite:(C4Image *)backgroundImage;
+-(void)maximumComposite:(C4Image *)backgroundImage;
 
 /**Minimum compositing filter
  Computes the minimum value, by color component, of two input images and creates an output image using the minimum values.
@@ -658,7 +658,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)minimumComposite:(C4Image *)backgroundImage;
+-(void)minimumComposite:(C4Image *)backgroundImage;
 
 /**Multiply blend filter
  Multiplies the source image samples with the background image samples.
@@ -667,7 +667,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)multiplyBlend:(C4Image *)backgroundImage;
+-(void)multiplyBlend:(C4Image *)backgroundImage;
 
 /**Multiply compositing filter
  Multiplies the color component of two input images and creates an output image using the multiplied values.
@@ -676,7 +676,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)multiplyComposite:(C4Image *)backgroundImage;
+-(void)multiplyComposite:(C4Image *)backgroundImage;
 
 /**Overlay blend filter
  Either multiplies or screens the source image samples with the background image samples, depending on the background color.
@@ -685,7 +685,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)overlayBlend:(C4Image *)backgroundImage;
+-(void)overlayBlend:(C4Image *)backgroundImage;
 
 /**Saturation blend filter
  Uses the luminance and hue values of the background with the saturation of the source image.
@@ -694,7 +694,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)saturationBlend:(C4Image *)backgroundImage;
+-(void)saturationBlend:(C4Image *)backgroundImage;
 
 /**Screen blend filter
  Multiplies the inverse of the source image samples with the inverse of the background image samples.
@@ -703,7 +703,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)screenBlend:(C4Image *)backgroundImage;
+-(void)screenBlend:(C4Image *)backgroundImage;
 
 /**Soft light blend filter
  Either darkens or lightens colors, depending on the source image sample color.
@@ -712,7 +712,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)softLightBlend:(C4Image *)backgroundImage;
+-(void)softLightBlend:(C4Image *)backgroundImage;
 
 /**Source-atop compositing filter
  Places the source image over the background image, then uses the luminance of the background image to determine what to show.
@@ -721,7 +721,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)sourceAtopComposite:(C4Image *)backgroundImage;
+-(void)sourceAtopComposite:(C4Image *)backgroundImage;
 
 /**Source-in compositing filter
  Uses the background image to define what to leave in the source image, effectively cropping the image.
@@ -730,7 +730,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)sourceInComposite:(C4Image *)backgroundImage;
+-(void)sourceInComposite:(C4Image *)backgroundImage;
 
 /**Source-out compositing filter
  Uses the background image to define what to take out of the first image.
@@ -739,7 +739,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)sourceOutComposite:(C4Image *)backgroundImage;
+-(void)sourceOutComposite:(C4Image *)backgroundImage;
 
 /**Source-over compositing filter
  Places the background image over the source image.
@@ -748,7 +748,7 @@
  
  @param backgroundImage The image that will provide the background for this filter.
  */
-- (void)sourceOverComposite:(C4Image *)backgroundImage;
+-(void)sourceOverComposite:(C4Image *)backgroundImage;
 
 #pragma mark - Distortion Effects
 /// @name Distortion Effects
@@ -760,7 +760,7 @@
  @param radius A CGFloat specifying the radius of the bump.
  @param scale A CGFloat marking the positive or negative scale of the bump.
  */
-- (void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+-(void)bumpDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
 
 /**Creates a concave or convex distortion that originates from a line in the image.
   
@@ -769,7 +769,7 @@
  @param angle A GFloat specifying the angle of the line, in radians.
  @param scale A CGFloat marking the positive or negative scale of the bump.
  */
-- (void)bumpDistortionLinear:(CGPoint)center
+-(void)bumpDistortionLinear:(CGPoint)center
                       radius:(CGFloat)radius
                        angle:(CGFloat)angle
                        scale:(CGFloat)scale;
@@ -779,7 +779,7 @@
  @param center A CGPoint marking the center of the circle.
  @param radius A CGFloat specifying the radius of the circle.
  */
-- (void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius;
+-(void)circleSplashDistortion:(CGPoint)center radius:(CGFloat)radius;
 
 /**Wraps an image around a transparent circle.
  
@@ -789,7 +789,7 @@
  @param radius A CGFloat specifying the radius of the circle.
  @param angle A GFloat specifying the angle of the distortion.
  */
-- (void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)circularWrap:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 
 /**Recursively draws a portion of an image in imitation of an M. C. Escher drawing.
 
@@ -800,7 +800,7 @@
  @param rotation The rotation angle of the portion of the image to be repeated.
  @param zoom The zoom level for the repetition.
  */
-- (void)droste:(CGPoint)inset1
+-(void)droste:(CGPoint)inset1
         inset2:(CGPoint)inset2
   strandRadius:(CGFloat)radius
    periodicity:(CGFloat)periodicity
@@ -814,7 +814,7 @@
  @param displacementImage The second image to use as the basis for distortion the receiver.
  @param scale The scale of the effect on the receiver's image.
  */
-- (void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale;
+-(void)displacementDistortion:(C4Image *)displacementImage scale:(CGFloat)scale;
 
 /**Distorts an image by applying a glass-like texture.
  
@@ -824,7 +824,7 @@
  @param center A CGPoint representing the center of the texture map.
  @param scale A CGFloat representing the scale of the effect of the distortion.
  */
-- (void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale;
+-(void)glassDistortion:(C4Image *)texture center:(CGPoint)center scale:(CGFloat)scale;
 
 /**Creates a lozenge-shaped lens and distorts the portion of the image over which the lens is placed.
  
@@ -833,7 +833,7 @@
  @param radius The radius of the lozenge.
  @param refraction The level of refraction for the simulated glass effect.
  */
-- (void)glassLozenge:(CGPoint)point1
+-(void)glassLozenge:(CGPoint)point1
               point2:(CGPoint)point2
               radius:(CGFloat)radius
           refraction:(CGFloat)refraction;
@@ -843,7 +843,7 @@
  @param center The center point of the hole.
  @param radius The radius of the hole.
  */
-- (void)holeDistortion:(CGPoint)center radius:(CGFloat)radius;
+-(void)holeDistortion:(CGPoint)center radius:(CGFloat)radius;
 
 /**Rotates a portion of the input image specified by the center and radius parameters to give a tunneling effect.
  
@@ -851,7 +851,7 @@
  @param rotation The rotation angle of the distortion.
  @param radius The radius of the invisible circle around which the distortion will be stretched.
  */
-- (void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius;
+-(void)lightTunnel:(CGPoint)center rotation:(CGFloat)rotation radius:(CGFloat)radius;
 
 /**Creates a rectangular-shaped area that pinches source pixels inward, distorting those pixels closest to the rectangle the most.
  
@@ -859,7 +859,7 @@
  @param radius The radius of the pinch.
  @param scale The scale of the pinch. This value must greater than 0.0 and less than 2.0
  */
-- (void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
+-(void)pinchDistortion:(CGPoint)center radius:(CGFloat)radius scale:(CGFloat)scale;
 
 /**Distorts an image by stretching and or cropping it to fit a target size.
  
@@ -867,7 +867,7 @@
  @param cropAmount This value determines if, and how much, cropping should be used to achieve the target size. If the value is 0, the image is stretched but not cropped. If the value is 1, the image is cropped but not stretched. Values in-between use stretching and cropping proportionally.
  @param stretchAmount This value determines how much stretching to apply to the center of the image, if stretching is indicated by the inputCropAmount value. A value of 0 causes the center of the image to maintain its original aspect ratio. A value of 0 causes the image to be stretched uniformly.
  */
-- (void)stretchCrop:(CGSize)size
+-(void)stretchCrop:(CGSize)size
          cropAmount:(CGFloat)cropAmount
       stretchAmount:(CGFloat)stretchAmount;
 
@@ -878,7 +878,7 @@
  @param width The width of the band of the torus.
  @param refraction The level of refraction seen through the torus.
  */
-- (void)torusLensDistortion:(CGPoint)center
+-(void)torusLensDistortion:(CGPoint)center
                      radius:(CGFloat)radius
                       width:(CGFloat)width
                  refraction:(CGFloat)refraction;
@@ -889,7 +889,7 @@
  @param radius A CGFloat specifying the radius of the twirl.
  @param angle A GFloat specifying the number of rotations that the twirl will do.
  */
-- (void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)twirlDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 
 /**Rotates pixels around a point to simulate a vortex.
  
@@ -897,7 +897,7 @@
  @param radius A CGFloat specifying the radius of the vortex.
  @param angle A GFloat specifying the number of rotations that the vortex will do.
  */
-- (void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
+-(void)vortexDistortion:(CGPoint)center radius:(CGFloat)radius angle:(CGFloat)angle;
 
 #pragma mark - Generators
 /// @name Generators
@@ -914,7 +914,7 @@
  
  @return A new C4Image whose contents are a checkerboard pattern of two colors.
  */
-+ (instancetype)checkerboard:(CGSize)size
++(instancetype)checkerboard:(CGSize)size
                       center:(CGPoint)center
                       color1:(UIColor *)color1
                       color2:(UIColor *)color2
@@ -927,7 +927,7 @@
  @param color The color used to generate the image.
  @return A new C4Image whose contents are a solid color.
  */
-+ (instancetype)constantColor:(CGSize)size color:(UIColor *)color;
++(instancetype)constantColor:(CGSize)size color:(UIColor *)color;
 //
 ///**Simulates a lens flare.
 // 
@@ -947,7 +947,7 @@
  
  @param size The size of the resulting image, this should be greater than CGPointZero.
  */
-+ (instancetype)random:(CGSize)size;
++(instancetype)random:(CGSize)size;
 
 //FIXME: I don't think these filters work right now... There's no code online to check
 //+ (instancetype)starShineGenerator:(CGSize)size center:(CGPoint)center color:(UIColor *)color radius:(CGFloat)radius crossScale:(CGFloat)scale crossAngle:(CGFloat)angle crossOpacity:(CGFloat)opacity crossWidth:(CGFloat)width epsilon:(CGFloat)epsilon;
@@ -969,7 +969,7 @@
 
  @param transform A CGAffineTransform.
  */
-- (void)affineTransform:(CGAffineTransform)transform;
+-(void)affineTransform:(CGAffineTransform)transform;
 
 /**Applies a crop to an image.
  
@@ -977,7 +977,7 @@
 
  @param area A CGRect defined in the receiver's coordinates to which its image will be cropped.
  */
-- (void)crop:(CGRect)area;
+-(void)crop:(CGRect)area;
 
 /**Produces a high-quality, scaled version of a source image.
  
@@ -986,7 +986,7 @@
  @param scale A CGFloat specifying the scale you want to which the receiver should downsize.
  @param ratio A CGFloat specifying the new width : height ratio.
  */
-- (void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio;
+-(void)lanczosScaleTransform:(CGFloat)scale aspectRatio:(CGFloat)ratio;
 
 /**Alters the geometry of an image to simulate the observer changing viewing position.
  
@@ -994,7 +994,7 @@
  
  @param points An array of 4 CGPoints to use for the transform.
  */
-- (void)perspectiveTransform:(CGPoint *)points;
+-(void)perspectiveTransform:(CGPoint *)points;
 
 //FIXME: Add the folliwng filter
 //- (void)perspectiveTransform:(CGPoint *)points withExtent:(CGRect)extent;
@@ -1006,7 +1006,7 @@
  
  @param angle The angular value to calculate the adjustment, defaults to 0.0, minimum -PI, maximum PI
  */
-- (void)straighten:(CGFloat)angle;
+-(void)straighten:(CGFloat)angle;
 
 
 #pragma mark - Gradients
@@ -1019,7 +1019,7 @@
  @param outerColor The outer color of the gradient.
  @param radius The radius of the gradient.
  */
-+ (instancetype)gaussianGradient:(CGSize)size center:(CGPoint)center
++(instancetype)gaussianGradient:(CGSize)size center:(CGPoint)center
                       innerColor:(UIColor *)innerColor
                       outerColor:(UIColor *)outerColor
                           radius:(CGFloat)radius;
@@ -1032,7 +1032,7 @@
  @param startColor The start color of the gradient.
  @param endColor The end color of the gradient.
  */
-+ (instancetype)linearGradient:(CGSize)size
++(instancetype)linearGradient:(CGSize)size
                     startPoint:(CGPoint)startPoint
                       endPoint:(CGPoint)endPoint
                     startColor:(UIColor *)startColor
@@ -1047,7 +1047,7 @@
  @param innerColor The inner color of the gradient.
  @param outerColor The outer color of the gradient.
  */
-+ (instancetype)radialGradient:(CGSize)size center:(CGPoint)center
++(instancetype)radialGradient:(CGSize)size center:(CGPoint)center
                    innerRadius:(CGFloat)innerRadius
                    outerRadius:(CGFloat)outerRadius
                     innerColor:(UIColor *)innerColor
@@ -1061,7 +1061,7 @@
  @param width The width of the bands in the effect.
  @param sharpness The sharpness of the edges of the bands in the effect (values from 0.0 to 1.0)
  */
-- (void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness;
+-(void)circularScreen:(CGPoint)center width:(CGFloat)width sharpness:(CGFloat)sharpness;
 
 ///**Creates a color, halftoned rendition of the source image, using cyan, magenta, yellow, and black inks over a white page.
 // */
@@ -1074,7 +1074,7 @@
  @param width The width of the dots in the effect.
  @param sharpness The sharpness of the edges of the dots in the effect (values from 0.0 to 1.0)
  */
-- (void)dotScreen:(CGPoint)center angle:(CGFloat)angle
+-(void)dotScreen:(CGPoint)center angle:(CGFloat)angle
             width:(CGFloat)width
         sharpness:(CGFloat)sharpness;
 
@@ -1085,7 +1085,7 @@
  @param width The width of the hatches in the effect.
  @param sharpness The sharpness of the edges of the hatches in the effect (values from 0.0 to 1.0)
  */
-- (void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle
+-(void)hatchedScreen:(CGPoint)center angle:(CGFloat)angle
                 width:(CGFloat)width
             sharpness:(CGFloat)sharpness;
 
@@ -1095,7 +1095,7 @@
  @param width The width of the lines in the effect.
  @param sharpness The sharpness of the edges of the lines in the effect (values from 0.0 to 1.0)
  */
-- (void)lineScreen:(CGPoint)center angle:(CGFloat)angle
+-(void)lineScreen:(CGPoint)center angle:(CGFloat)angle
              width:(CGFloat)width
          sharpness:(CGFloat)sharpness;
 
@@ -1107,14 +1107,14 @@
 
  @param sharpness The level of sharpness for the filter's effect.
  */
-- (void)sharpenLuminance:(CGFloat)sharpness;
+-(void)sharpenLuminance:(CGFloat)sharpness;
 
 /**Increases the contrast of the edges between pixels of different colors in an image.
  
  @param radius The radius of the blending area.
  @param intensity The intensity of the filter's effect.
  */
-- (void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)unsharpMask:(CGFloat)radius intensity:(CGFloat)intensity;
 
 #pragma mark - Stylize
 /// @name Stylize
@@ -1125,25 +1125,25 @@
  @param backgroundImage The background image that will be revealed by the mask.
  @param maskImage The image to use as the mask (should be black and white).
  */
-- (void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
+-(void)blendWithMask:(C4Image *)backgroundImage mask:(C4Image *)maskImage;
 
 /**Softens edges and applies a pleasant glow to an image.
  
  @param radius The radius of the area, per pixel, to which the bloom filter is applied.
  @param intensity The intensity of the filter's effect.
  */
-- (void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)bloom:(CGFloat)radius intensity:(CGFloat)intensity;
 
 /**Simulates a comic book drawing by outlining edges and applying a color halftone effect.
  */
-- (void)comicEffect;
+-(void)comicEffect;
 
 /**Dulls the highlights of an image.
 
  @param radius The radius of the area, per pixel, to which the bloom filter is applied.
  @param intensity The intensity of the filter's effect.
 */
-- (void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
+-(void)gloom:(CGFloat)radius intensity:(CGFloat)intensity;
 
 /**Highlight and shadow adjustment filter
  Adjust the tonal mapping of an image while preserving spatial detail.
@@ -1151,14 +1151,14 @@
  @param highlightAmount The adjustment value for image highlights, defaults to 1.0, minimum 0.0, maximum 1.0
  @param shadowAmount The adjustment value for image shadows, defaults to 0.0, minimum -1.0, maximum 1.0
  */
-- (void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount;
+-(void)highlightShadowAdjust:(CGFloat)highlightAmount shadowAmount:(CGFloat)shadowAmount;
 
 /**Makes an image blocky by mapping the image to colored squares whose color is defined by the replaced pixels.
  
  @param center The center of the effect.
  @param scale The scale of the pixel sizes after the effect has been applied.
  */
-- (void)pixellate:(CGPoint)center scale:(CGFloat)scale;
+-(void)pixellate:(CGPoint)center scale:(CGFloat)scale;
 
 #pragma mark - Tile Effects
 /// @name Tile Effects
@@ -1168,13 +1168,13 @@
  
  @param transform The affine transform you wish to apply prior to clamping the outer edge pixels.
  */
-- (void)affineClamp:(CGAffineTransform)transform;
+-(void)affineClamp:(CGAffineTransform)transform;
 
 /**Applies an affine transform to an image and then tiles the transformed image.
  
  @param transform The affine transform you wish to apply prior to tiling the transformed image. 
  */
-- (void)affineTile:(CGAffineTransform)transform;
+-(void)affineTile:(CGAffineTransform)transform;
 
 /**Produces a tiled image from a source image by applying an 8-way reflected symmetry.
  
@@ -1182,7 +1182,7 @@
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)eightFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
 /**Produces a tiled image from a source image by applying a 4-way reflected symmetry.
  
@@ -1191,7 +1191,7 @@
  @param acuteAngle The acute angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)fourFoldReflectedTile:(CGPoint)center
+-(void)fourFoldReflectedTile:(CGPoint)center
                         angle:(CGFloat)angle
                    acuteAngle:(CGFloat)acuteAngle
                         width:(CGFloat)width;
@@ -1202,7 +1202,7 @@
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)fourFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
 /**Produces a tiled image from a source image by applying 4 translation operations.
  
@@ -1211,7 +1211,7 @@
  @param acuteAngle The acute angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)fourFoldTranslatedTile:(CGPoint)center
+-(void)fourFoldTranslatedTile:(CGPoint)center
                          angle:(CGFloat)angle
                     acuteAngle:(CGFloat)acuteAngle
                          width:(CGFloat)width;
@@ -1222,13 +1222,13 @@
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)glideReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
 /**Applies a perspective transform to an image and then tiles the result.
  
  @param points A CGPoint array of 4 points defining the space into which the image will be transformed prior to tiling.
  */
-- (void)perspectiveTile:(CGPoint *)points;
+-(void)perspectiveTile:(CGPoint *)points;
 
 /**Produces a tiled image from a source image by applying a 6-way reflected symmetry.
 
@@ -1236,7 +1236,7 @@
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)sixFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
 /**Produces a tiled image from a source image by rotating the source image at increments of 60 degrees.
  
@@ -1244,7 +1244,7 @@
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)sixFoldRotatedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
 /**Maps a triangular portion of an input image to create a kaleidoscope effect.
  
@@ -1253,7 +1253,7 @@
  @param rotation The rotation of the effect's space.
  @param decay The decay of the effect.
  */
-- (void)triangleKaleidescope:(CGPoint)point
+-(void)triangleKaleidescope:(CGPoint)point
                         size:(CGFloat)size
                     rotation:(CGFloat)rotation
                        decay:(CGFloat)decay;
@@ -1264,7 +1264,7 @@
  @param angle The angle of the effect.
  @param width The width, along with the center parameter, defines the portion of the image to tile.
  */
-- (void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
+-(void)twelveFoldReflectedTile:(CGPoint)center angle:(CGFloat)angle width:(CGFloat)width;
 
 #pragma mark - Default Style
 ///@name Default Style
@@ -1274,6 +1274,6 @@
  
  @return The appearance proxy for the receiver, cast as a C4Image.
  */
-+ (C4Image *)defaultStyle;
++(C4Image *)defaultStyle;
 
 @end

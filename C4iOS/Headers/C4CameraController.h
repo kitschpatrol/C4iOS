@@ -34,13 +34,13 @@
 
  The default is CAMERAFRONT.
  */
-- (void)initCapture;
+-(void)initCapture;
 
 /** Initializes camera capture for a given camera position.
 
  @param position The position of the camera to use upon initialization.
  */
-- (void)initCapture:(C4CameraPosition)position;
+-(void)initCapture:(C4CameraPosition)position;
 
 /**Specifies whether or not the receiver has already been initialized.
  */
@@ -52,7 +52,7 @@
  
  This method also posts a notification when an image has been captured.
  */
-- (void)captureImage;
+-(void)captureImage;
 
 /** The receiver’s most recently captured image. (read-only)
  
@@ -86,7 +86,7 @@
  
  @param position A position (CAMERAFRONT or CAMERABACK) to which the camera should switch.
  */
-- (void)switchCameraPosition:(C4CameraPosition)position;
+-(void)switchCameraPosition:(C4CameraPosition)position;
 
 /**Specifies the current capture quality of the receiver. The following list of qualities is available:
  

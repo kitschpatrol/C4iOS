@@ -35,6 +35,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 #import <math.h>
+#import <objc/runtime.h>
 
 #import "C4AssertionHandler.h"
 
@@ -49,6 +50,7 @@
 
 //classes
 #import "C4Object.h"
+#import "C4AddSubviewIMP.h"
 #import "C4Math.h"
 #import "C4Font.h"
 #import "C4Foundation.h"
