@@ -11,6 +11,7 @@
 		BE0FDA7E1822E4FC0011C1C1 /* C4GestureIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FDA7D1822E4FC0011C1C1 /* C4GestureIMP.m */; };
 		BE0FDA811822F03D0011C1C1 /* C4MethodDelayIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FDA801822F03D0011C1C1 /* C4MethodDelayIMP.m */; };
 		BE0FDA861822F4610011C1C1 /* C4LayerAnimationImp.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FDA851822F4610011C1C1 /* C4LayerAnimationImp.m */; };
+		BE0FDA95182316C20011C1C1 /* C4VisibleObjectIMP.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0FDA94182316C20011C1C1 /* C4VisibleObjectIMP.m */; };
 		BED79E1C17F2435400F0F82E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1B17F2435400F0F82E /* Accelerate.framework */; };
 		BED79E1E17F2435400F0F82E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1D17F2435400F0F82E /* AVFoundation.framework */; };
 		BED79E2017F2435400F0F82E /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED79E1F17F2435400F0F82E /* CoreFoundation.framework */; };
@@ -99,6 +100,9 @@
 		BE0FDA801822F03D0011C1C1 /* C4MethodDelayIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4MethodDelayIMP.m; sourceTree = "<group>"; };
 		BE0FDA841822F4610011C1C1 /* C4LayerAnimationImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4LayerAnimationImp.h; sourceTree = "<group>"; };
 		BE0FDA851822F4610011C1C1 /* C4LayerAnimationImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4LayerAnimationImp.m; sourceTree = "<group>"; };
+		BE0FDA921823169D0011C1C1 /* C4VisibleObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = C4VisibleObject.h; sourceTree = "<group>"; };
+		BE0FDA93182316C20011C1C1 /* C4VisibleObjectIMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4VisibleObjectIMP.h; sourceTree = "<group>"; };
+		BE0FDA94182316C20011C1C1 /* C4VisibleObjectIMP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4VisibleObjectIMP.m; sourceTree = "<group>"; };
 		BED79E1817F2435400F0F82E /* C4iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = C4iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED79E1B17F2435400F0F82E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		BED79E1D17F2435400F0F82E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -253,6 +257,9 @@
 		BE0FDA821822F4280011C1C1 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				BE0FDA921823169D0011C1C1 /* C4VisibleObject.h */,
+				BE0FDA93182316C20011C1C1 /* C4VisibleObjectIMP.h */,
+				BE0FDA94182316C20011C1C1 /* C4VisibleObjectIMP.m */,
 				BE0FDA831822F43B0011C1C1 /* Complete */,
 			);
 			name = Protocols;
@@ -562,6 +569,7 @@
 				BED79E9217F2435500F0F82E /* C4Math.m in Sources */,
 				BED79E9417F2435500F0F82E /* C4Movie.m in Sources */,
 				BED79E6C17F2435400F0F82E /* C4AssertionHandler.m in Sources */,
+				BE0FDA95182316C20011C1C1 /* C4VisibleObjectIMP.m in Sources */,
 				BED79E8017F2435500F0F82E /* C4EAGLLayer.m in Sources */,
 				BE0FDA7A1822E4EC0011C1C1 /* C4NotificationIMP.m in Sources */,
 				BED79E7C17F2435400F0F82E /* C4EAGLES1Renderer.m in Sources */,
