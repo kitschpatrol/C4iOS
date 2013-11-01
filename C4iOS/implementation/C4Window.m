@@ -22,6 +22,7 @@
 @property (nonatomic) BOOL shouldAutoreverse;
 @property (nonatomic, strong) NSString *longPressMethodName;
 @property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
+@property (nonatomic, readonly) NSArray *stylePropertyNames;
 @end
 
 @implementation C4Window
@@ -45,6 +46,9 @@
             [[self class] copyMethods];
         };
         
+        //Copies method implementations from C4VisibleObjectIMP
+        classCopyBlock([C4VisibleObjectIMP class]);
+        
         //Copies method implementations from C4MethodDelayIMP
         classCopyBlock([C4MethodDelayIMP class]);
         
@@ -54,11 +58,12 @@
         //Copies method implementations from C4NotificationIMP
         classCopyBlock([C4NotificationIMP class]);
         
-        //Copies method implementations from C4MethodDelayIMP
+        //Copies method implementations from C4AddSubviewIMP
         classCopyBlock([C4AddSubviewIMP class]);
     });
 }
 
++(void)copyMethods {}
 
 -(id)init {
     return [self initWithFrame:CGRectZero];
@@ -67,27 +72,20 @@
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self != nil) {
+        
         //these need to be self.anim... etc., rather than _anim = because the setters are overridden
         self.animationDuration = 0.0f;
         self.animationDelay = 0.0f;
-        self.animationOptions = BEGINCURRENT;
+//        self.animationOptions = BEGINCURRENT;
         self.repeatCount = 0;
         self.shouldAutoreverse = NO;
         self.longPressMethodName = @"pressedLong";
         self.layer.delegate = self;
+        
+//        self.style = [C4Window defaultStyle].style;
     }
     return self;
 }
-
-/* don't add this ever...
- creates a:
- CoreAnimation: failed to allocate 3145760 bytes
- wait_fences: failed to receive reply: 10004003
- 
- - (void)drawRect:(CGRect)rect {
- [self.layer display];
- }
- */
 
 -(void)dealloc {
     [[NSRunLoop mainRunLoop] cancelPerformSelectorsWithTarget:self];
@@ -104,289 +102,136 @@
     self.gestureDictionary = nil;
 }
 
+#pragma mark - C4VisibleObject
+@synthesize animationDuration = _animationDuration, animationDelay = _animationDelay, animationOptions = _animationOptions, repeatCount = _repeatCount;
+@synthesize shadowColor = _shadowColor, shadowOffset = _shadowOffset, shadowOpacity = _shadowOpacity, shadowPath = _shadowPath, shadowRadius = _shadowRadius;
+@synthesize masksToBounds = _masksToBounds, layerTransform = _layerTransform, mask = _mask;
+@synthesize origin = _origin, width = _width, height = _height, size = _size;
+@synthesize anchorPoint = _anchorPoint, borderColor = _borderColor, borderWidth = _borderWidth, cornerRadius = _cornerRadius;
+@synthesize perspectiveDistance = _perspectiveDistance, rotation = _rotation, rotationX = _rotationX, rotationY = _rotationY, zPosition = _zPosition;
+
+#pragma mark Setup & Test
 -(void)setup {}
 -(void)test {}
 
-#pragma mark UIView animatable property overrides
+#pragma mark Position & Size
+-(void)setCenter:(CGPoint)center {}
 
--(void)setCenter:(CGPoint)center {
-    if(self.animationDuration == 0.0f) super.center = center;
-    else {
-        CGPoint oldCenter = CGPointMake(self.center.x, self.center.y);
-        
-        void (^animationBlock) (void) = ^ { super.center = center; };
-        void (^completionBlock) (BOOL) = nil;
-        
-        BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-        if(self.shouldAutoreverse && animationShouldNotRepeat) {
-            completionBlock = ^ (BOOL animationIsComplete) {
-                if(animationIsComplete){}
-                [self autoreverseAnimation:^ { super.center = oldCenter;}];
-            };
-        }
-        [self animateWithBlock:animationBlock completion:completionBlock];
-    }
-}
+-(CGPoint)origin { return CGPointZero; }
 
--(CGPoint)center {
-    CGPoint currentCenter = super.center;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if(orientation == UIDeviceOrientationLandscapeLeft ||
-       orientation == UIDeviceOrientationLandscapeRight) {
-        currentCenter.x = super.center.y;
-        currentCenter.y = super.center.x;
-    }
-    return currentCenter;
-}
+-(void)setOrigin:(CGPoint)origin {}
 
--(void)setOrigin:(CGPoint)origin {
-    _origin = origin;
-    CGPoint difference = self.origin;
-    difference.x += self.frame.size.width/2.0f;
-    difference.y += self.frame.size.height/2.0f;
-    self.center = difference;
-}
+-(void)setFrame:(CGRect)frame {}
 
--(void)setFrame:(CGRect)frame {
-    if(self.animationDuration == 0.0f) super.frame = frame;
-    else {
-        CGRect oldFrame = self.frame;
-        
-        void (^animationBlock) (void) = ^ { super.frame = frame; };
-        void (^completionBlock) (BOOL) = nil;
-        
-        BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-        if(self.shouldAutoreverse && animationShouldNotRepeat) {
-            completionBlock = ^ (BOOL animationIsComplete) {
-                if(animationIsComplete){}
-                [self autoreverseAnimation:^ { super.frame = oldFrame;}];
-            };
-        }
-        [self animateWithBlock:animationBlock completion:completionBlock];
-    }
-}
+-(void)setBounds:(CGRect)bounds {}
 
--(void)setBounds:(CGRect)bounds {
-    if(self.animationDuration == 0.0f) super.bounds = bounds;
-    else {
-        CGRect oldBounds = self.bounds;
-        
-        void (^animationBlock) (void) = ^ { super.bounds = bounds; };
-        void (^completionBlock) (BOOL) = nil;
-        
-        BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-        if(self.shouldAutoreverse && animationShouldNotRepeat) {
-            completionBlock = ^ (BOOL animationIsComplete) {
-                if(animationIsComplete){}
-                [self autoreverseAnimation:^ { super.bounds = oldBounds;}];
-            };
-        }
-        
-        [self animateWithBlock:animationBlock completion:completionBlock];
-    }
-}
+-(void)setTransform:(CGAffineTransform)transform {}
 
--(void)setTransform:(CGAffineTransform)transform {
-    if(self.animationDuration == 0.0f) super.transform = transform;
-    else {
-        CGAffineTransform oldTransform = self.transform;
-        
-        void (^animationBlock) (void) = ^ { super.transform = transform; };
-        void (^completionBlock) (BOOL) = nil;
-        
-        BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-        if(self.shouldAutoreverse && animationShouldNotRepeat) {
-            completionBlock = ^ (BOOL animationIsComplete) {
-                if(animationIsComplete){}
-                [self autoreverseAnimation:^ { super.transform = oldTransform;}];
-            };
-        }
-        
-        [self animateWithBlock:animationBlock completion:completionBlock];
-    }
-}
+-(CGFloat)width { return 0.0f; }
 
--(void)setAlpha:(CGFloat)alpha {
-    if(self.animationDuration == 0.0f) super.alpha = alpha;
-    else {
-        CGFloat oldAlpha = self.alpha;
-        
-        void (^animationBlock) (void) = ^ { super.alpha = alpha; };
-        void (^completionBlock) (BOOL) = nil;
-        
-        BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-        if(self.shouldAutoreverse && animationShouldNotRepeat) {
-            completionBlock = ^ (BOOL animationIsComplete) {
-                if(animationIsComplete){}
-                [self autoreverseAnimation:^ { super.alpha = oldAlpha;}];
-            };
-        }
-        
-        [self animateWithBlock:animationBlock completion:completionBlock];
-    }
-}
+-(CGFloat)height { return 0.0f; }
 
--(void)setBackgroundColor:(UIColor *)backgroundColor {
-    if(self.animationDuration == 0.0f) super.backgroundColor = backgroundColor;
-    else {
-        UIColor *oldBackgroundColor = self.backgroundColor;
-        
-        void (^animationBlock) (void) = ^ { super.backgroundColor = backgroundColor; };
-        void (^completionBlock) (BOOL) = nil;
-        
-        BOOL animationShouldNotRepeat = (self.animationOptions & REPEAT) !=  REPEAT;
-        if(self.shouldAutoreverse && animationShouldNotRepeat) {
-            completionBlock = ^ (BOOL animationIsComplete) {
-                if(animationIsComplete){}
-                [self autoreverseAnimation:^ { super.backgroundColor = oldBackgroundColor;}];
-            };
-        }
-        
-        [self animateWithBlock:animationBlock completion:completionBlock];
-    }
-}
+-(CGFloat)zPosition { return 0.0f; }
 
-#pragma mark Position, Rotation, Transform
--(CGFloat)width {
-    return self.bounds.size.width;
-}
+-(CGSize)size { return CGSizeZero; }
 
--(CGFloat)height {
-    return self.bounds.size.height;
-}
+-(void)setZPosition:(CGFloat)zPosition {}
 
--(CGFloat)zPosition {
-    return self.layer.zPosition;
-}
+#pragma mark Rotation & Transform
+-(void)setRotation:(CGFloat)rotation {}
 
--(void)setZPosition:(CGFloat)_zPosition {
-    [(id <C4LayerAnimation>)self.layer animateZPosition:_zPosition];
-}
+-(void)_setRotation:(NSNumber *)rotation {}
 
--(void)setRotation:(CGFloat)rotation {
-    if(self.animationDelay == 0.0f) [self _setRotation:@(rotation)];
-    else [self performSelector:@selector(_setRotation:)
-                    withObject:@(rotation)
-                    afterDelay:self.animationDelay];
-}
+-(void)setRotationX:(CGFloat)rotation {}
 
--(void)_setRotation:(NSNumber *)rotation {
-    _rotation = [rotation floatValue];
-    [(id <C4LayerAnimation>)self.layer animateRotation:_rotation];
-}
+-(void)_setRotationX:(NSNumber *)rotation {}
 
--(void)setRotationX:(CGFloat)rotation {
-    if(self.animationDelay == 0.0f) [self _setRotationX:@(rotation)];
-    else [self performSelector:@selector(_setRotationX:)
-                    withObject:@(rotation)
-                    afterDelay:self.animationDelay];
-}
+-(void)setRotationY:(CGFloat)rotation {}
 
--(void)_setRotationX:(NSNumber *)rotation {
-    _rotationX = [rotation floatValue];
-    [(id <C4LayerAnimation>)self.layer animateRotationX:_rotationX];
-}
+-(void)_setRotationY:(NSNumber *)rotation {}
 
--(void)setRotationY:(CGFloat)rotation {
-    if(self.animationDelay == 0.0f) [self _setRotationY:@(rotation)];
-    else [self performSelector:@selector(_setRotationY:)
-                    withObject:@(rotation)
-                    afterDelay:self.animationDelay];
-}
+-(void)rotationDidFinish:(CGFloat)rotation {}
 
--(void)_setRotationY:(NSNumber *)rotation {
-    _rotationY = [rotation floatValue];
-    [(id <C4LayerAnimation>)self.layer animateRotationY:_rotationY];
-}
+-(void)setLayerTransform:(CATransform3D)transform {}
 
--(void)rotationDidFinish:(CGFloat)rotation {
-    [super setTransform:CGAffineTransformMakeRotation(rotation)];
-}
+-(void)setAnchorPoint:(CGPoint)anchorPoint {}
 
--(void)setLayerTransform:(CATransform3D)_transform {
-    _layerTransform = _transform;
-    [(id <C4LayerAnimation>)self.layer animateLayerTransform:_transform];
-}
+-(void)setPerspectiveDistance:(CGFloat)distance {}
 
--(void)setAnchorPoint:(CGPoint)anchorPoint {
-    _anchorPoint = anchorPoint;
-    CGRect oldFrame = self.frame;
-    self.layer.anchorPoint = anchorPoint;
-    super.frame = oldFrame;
-}
+#pragma mark Alpha & Background Color
+-(void)setAlpha:(CGFloat)alpha {}
 
--(void)setPerspectiveDistance:(CGFloat)distance {
-    _perspectiveDistance = distance;
-    [(id <C4LayerAnimation>)self.layer setPerspectiveDistance:distance];
-}
+-(void)setBackgroundColor:(UIColor *)backgroundColor {}
 
-#pragma mark Animation methods
--(void)animateWithBlock:(void (^)(void))animationBlock {
-    [self animateWithBlock:animationBlock completion:nil];
-}
+#pragma mark Masking
+-(void)setMask:(C4Control *)maskObject {}
 
--(void)animateWithBlock:(void (^)(void))animationBlock completion:(void (^)(BOOL))completionBlock {
-    C4AnimationOptions autoReverseOptions = self.animationOptions;
-    
-    //we insert the autoreverse options here, only if it should repeat and autoreverse
-    if(self.shouldAutoreverse && (self.animationOptions & REPEAT) == REPEAT) {
-        autoReverseOptions |= AUTOREVERSE;
-    }
-    
-    [UIView animateWithDuration:self.animationDuration
-                          delay:(NSTimeInterval)self.animationDelay
-                        options:(UIViewAnimationOptions)autoReverseOptions
-                     animations:animationBlock
-                     completion:completionBlock];
-}
+-(void)setMasksToBounds:(BOOL)masksToBounds {}
 
--(void)autoreverseAnimation:(void (^)(void))animationBlock {
-    C4AnimationOptions autoreverseOptions = BEGINCURRENT;
-    if((self.animationOptions & LINEAR) == LINEAR) autoreverseOptions |= LINEAR;
-    else if((self.animationOptions & EASEIN) == EASEIN) autoreverseOptions |= EASEOUT;
-    else if((self.animationOptions & EASEOUT) == EASEOUT) autoreverseOptions |= EASEIN;
-    
-    [UIView animateWithDuration:self.animationDuration
-                          delay:0
-                        options:(UIViewAnimationOptions)autoreverseOptions
-                     animations:animationBlock
-                     completion:nil];
-}
+-(BOOL)masksToBounds { return NO; }
 
--(void)setAnimationDuration:(CGFloat)duration {
-    if (duration < 0.0f) duration = 0.0f;
-    _animationDuration = duration;
-    ((id <C4LayerAnimation>)self.layer).animationDuration = duration;
-}
+#pragma mark Shadow
+-(void)setShadowColor:(UIColor *)shadowColor {}
 
--(void)setAnimationOptions:(NSUInteger)animationOptions {
-    /*
-     important: we have to intercept the setting of AUTOREVERSE for the case of reversing 1 time
-     i.e. reversing without having set REPEAT
-     
-     UIView animation will flicker if we don't do this...
-     */
-    ((id <C4LayerAnimation>)self.layer).animationOptions = animationOptions;
-    
-    if ((animationOptions & AUTOREVERSE) == AUTOREVERSE) {
-        self.shouldAutoreverse = YES;
-        animationOptions &= ~AUTOREVERSE;
-    }
-    
-    _animationOptions = animationOptions | BEGINCURRENT;
-}
+-(void)_setShadowColor:(UIColor *)shadowColor {}
 
-#pragma mark Gesture Methods
+-(UIColor *)shadowColor { return nil; }
+
+-(void)setShadowOffset:(CGSize)shadowOffset {}
+
+-(void)_setShadowOffSet:(NSValue *)shadowOffset {}
+
+-(CGSize)shadowOffset { return CGSizeZero; }
+
+-(void)setShadowOpacity:(CGFloat)shadowOpacity {}
+
+-(void)_setShadowOpacity:(NSNumber *)shadowOpacity {}
+
+-(CGFloat)shadowOpacity { return 0.0f; }
+
+-(void)setShadowPath:(CGPathRef)shadowPath {}
+
+-(void)_setShadowPath:(id)shadowPath {}
+
+-(CGPathRef)shadowPath { return nil; }
+
+-(void)setShadowRadius:(CGFloat)shadowRadius {}
+
+-(void)_setShadowRadius:(NSNumber *)shadowRadius {}
+
+-(CGFloat)shadowRadius { return 0.0f; }
+
+#pragma mark Border
+-(void)setBorderColor:(UIColor *)borderColor {}
+
+-(UIColor *)borderColor { return nil;}
+
+-(void)setBorderWidth:(CGFloat)borderWidth {}
+
+-(CGFloat)borderWidth { return 0.0f; }
+
+-(void)setCornerRadius:(CGFloat)cornerRadius {}
+
+-(CGFloat)cornerRadius { return 0.0f; }
+
+#pragma mark View Animation
+-(void)animateWithBlock:(void (^)(void))animationBlock {}
+
+-(void)animateWithBlock:(void (^)(void))animationBlock completion:(void (^)(BOOL))completionBlock {}
+
+-(void)autoreverseAnimation:(void (^)(void))animationBlock {}
+
+-(void)setAnimationDuration:(CGFloat)duration {}
+
+-(void)setAnimationOptions:(NSUInteger)animationOptions {}
+
+#pragma mark - C4Gesture
 
 -(void)addGesture:(C4GestureType)type name:(NSString *)gestureName action:(NSString *)methodName {}
 
--(UIGestureRecognizer *)gestureForName:(NSString *)gestureName {
-    return nil;
-}
+-(UIGestureRecognizer *)gestureForName:(NSString *)gestureName { return nil; }
 
--(NSDictionary *)allGestures {
-    return nil;
-}
+-(NSDictionary *)allGestures { return nil; }
 
 -(void)numberOfTapsRequired:(NSInteger)tapCount forGesture:(NSString *)gestureName {}
 
@@ -438,7 +283,7 @@
 
 -(void)move:(id)sender {}
 
-#pragma mark Notification Methods
+#pragma mark - C4Notification
 -(void)listenFor:(NSString *)notification andRunMethod:(NSString *)methodName {}
 
 -(void)listenFor:(NSString *)notification
@@ -457,9 +302,7 @@
 
 -(void)postNotification:(NSString *)notification {}
 
-#pragma mark C4AddSubview
-+(void)copyMethods {}
-
+#pragma mark - C4AddSubview
 -(void)addCamera:(C4Camera *)camera{}
 
 -(void)addGL:(C4GL *)gl{}
@@ -480,138 +323,100 @@
 
 -(void)removeObjects:(NSArray *)array{}
 
-#pragma mark Masking
--(void)setMask:(C4Control *)maskObject {
-    self.layer.mask = maskObject.layer;
-}
+#pragma mark - Basic Methods
++(Class)layerClass { return [C4Layer class]; }
 
--(void)setMasksToBounds:(BOOL)masksToBounds {
-    self.layer.masksToBounds = masksToBounds;
-}
--(BOOL)masksToBounds {
-    return self.layer.masksToBounds;
-}
-
-#pragma mark Shadow
--(void)setShadowColor:(UIColor *)_shadowColor {
-    if(self.animationDelay == 0) [self _setShadowColor:_shadowColor];
-    else [self performSelector:@selector(_setShadowColor:)
-                    withObject:_shadowColor
-                    afterDelay:self.animationDelay];
-}
--(void)_setShadowColor:(UIColor *)_shadowColor {
-    [(id <C4LayerAnimation>)self.layer animateShadowColor:_shadowColor.CGColor];
-}
--(UIColor *)shadowColor {
-    return [UIColor colorWithCGColor:self.layer.shadowColor];
-}
-
--(void)setShadowOffset:(CGSize)_shadowOffset {
-    if(self.animationDelay == 0) [self _setShadowOffSet:[NSValue valueWithCGSize:_shadowOffset]];
-    else [self performSelector:@selector(_setShadowOffSet:)
-                    withObject:[NSValue valueWithCGSize:_shadowOffset]
-                    afterDelay:self.animationDelay];
-}
--(void)_setShadowOffSet:(NSValue *)_shadowOffset {
-    [(id <C4LayerAnimation>)self.layer animateShadowOffset:[_shadowOffset CGSizeValue]];
-}
-
--(CGSize)shadowOffset {
-    return self.layer.shadowOffset;
-}
-
--(void)setShadowOpacity:(CGFloat)_shadowOpacity {
-    if(self.animationDelay == 0) [self _setShadowOpacity:@(_shadowOpacity)];
-    else [self performSelector:@selector(_setShadowOpacity:)
-                    withObject:@(_shadowOpacity)
-                    afterDelay:self.animationDelay];
-}
--(void)_setShadowOpacity:(NSNumber *)_shadowOpacity {
-    [(id <C4LayerAnimation>)self.layer animateShadowOpacity:[_shadowOpacity floatValue]];
-}
-
--(CGFloat)shadowOpacity {
-    return self.layer.shadowOpacity;
-}
-
--(void)setShadowPath:(CGPathRef)_shadowPath {
-    if(self.animationDelay == 0) [self _setShadowPath:(__bridge id)_shadowPath];
-    else [self performSelector:@selector(_setShadowPath:)
-                    withObject:(__bridge id)_shadowPath
-                    afterDelay:self.animationDelay];
-}
--(void)_setShadowPath:(id)_shadowPath {
-    [(id <C4LayerAnimation>)self.layer animateShadowPath:(__bridge CGPathRef)_shadowPath];
-}
--(CGPathRef)shadowPath {
-    return self.layer.shadowPath;
-}
-
--(void)setShadowRadius:(CGFloat)_shadowRadius {
-    if(self.animationDelay == 0) [self _setShadowRadius:@(_shadowRadius)];
-    [self performSelector:@selector(_setShadowRadius:)
-               withObject:@(_shadowRadius)
-               afterDelay:self.animationDelay];
-}
--(void)_setShadowRadius:(NSNumber *)_shadowRadius {
-    [(id <C4LayerAnimation>)self.layer animateShadowRadius:[_shadowRadius floatValue]];
-}
--(CGFloat)shadowRadius {
-    return self.layer.shadowRadius;
-}
-
-#pragma mark Border
--(void)setBorderColor:(UIColor *)borderColor {
-    [(id <C4LayerAnimation>)self.layer animateBorderColor:borderColor.CGColor];
-}
--(UIColor *)borderColor {
-    return [UIColor colorWithCGColor:self.layer.borderColor];
-}
-
--(void)setBorderWidth:(CGFloat)_borderWidth {
-    [(id <C4LayerAnimation>)self.layer animateBorderWidth:_borderWidth];
-}
--(CGFloat)borderWidth {
-    return self.layer.borderWidth;
-}
-
--(void)setCornerRadius:(CGFloat)_cornerRadius {
-    [(id <C4LayerAnimation>)self.layer animateCornerRadius:_cornerRadius];
-}
--(CGFloat)cornerRadius {
-    return self.layer.cornerRadius;
-}
-
-#pragma mark Basic Methods
--(id)copyWithZone:(NSZone *)zone {
-    zone = zone;
-    return self;
-}
-
-+(Class)layerClass {
-    return [C4Layer class];
-}
-
-+(C4Window *)defaultStyle {
-    return (C4Window *)[C4Window appearance];
-}
-
--(void)renderInContext:(CGContextRef)context {
-    if(self.backgroundColor != nil || self.backgroundColor != [UIColor clearColor]) {
-        CGFloat components[4];
-        [self.backgroundColor getRed:&components[0]
-                               green:&components[1]
-                                blue:&components[2]
-                               alpha:&components[3]];
-        CGContextSetFillColor(context, components);
-        CGContextFillRect(context, self.frame);
+#pragma mark - Style
+-(NSDictionary *)style {
+    //FIXME: Will never transfer nil for some properties
+    //(let's deal with it later rather than solve a "potential" problem)
+    NSMutableDictionary *controlStyle = [NSMutableDictionary dictionaryWithDictionary:
+                                         @{
+                                           @"alpha":@(self.alpha),
+                                           @"borderColor":self.borderColor,
+                                           @"borderWidth":@(self.borderWidth),
+                                           @"cornerRadius":@(self.cornerRadius),
+                                           @"masksToBounds":@(self.masksToBounds),
+                                           @"shadowOpacity":@(self.shadowOpacity),
+                                           @"shadowOffset":[NSValue valueWithCGSize:self.shadowOffset],
+                                           @"shadowRadius":@(self.shadowRadius)
+                                           }];
+    if (self.backgroundColor != nil) [controlStyle setObject:self.backgroundColor
+                                                      forKey:@"backgroundColor"];
+    if (self.shadowColor != nil) [controlStyle setObject:self.shadowColor
+                                                  forKey:@"shadowColor"];
+    if(self.shadowPath == nil) {
+        [controlStyle setObject:[NSNull null] forKey:@"shadowPath"];
+    } else {
+        [controlStyle setObject:(__bridge UIBezierPath *)self.shadowPath forKey:@"shadowPath"];
     }
-    [self.layer renderInContext:context];
+    
+    return (NSDictionary *)controlStyle;
 }
 
-#pragma mark C4MethodDelay
+-(void)setStyle:(NSDictionary *)style {
+    NSArray *styleKeys = [style allKeys];
+    NSString *key;
+    
+    //Control Style Values
+    key = @"alpha";
+    if([styleKeys containsObject:key]) self.alpha = [[style objectForKey:key] floatValue];
+    
+    key = @"backgroundColor";
+    if([styleKeys containsObject:key]) self.backgroundColor = [style objectForKey:key];
+    
+    key = @"borderColor";
+    if([styleKeys containsObject:key]) self.borderColor = [style objectForKey:key];
+    
+    key = @"borderWidth";
+    if([styleKeys containsObject:key]) self.borderWidth = [[style objectForKey:key] floatValue];
+    
+    key = @"cornerRadius";
+    if([styleKeys containsObject:key]) self.cornerRadius = [[style objectForKey:key] floatValue];
+    
+    key = @"masksToBounds";
+    if([styleKeys containsObject:key]) self.masksToBounds = [[style objectForKey:key] boolValue];
+    
+    key = @"shadowColor";
+    if([styleKeys containsObject:key]) self.shadowColor = [style objectForKey:key];
+    
+    key = @"shadowOpacity";
+    if([styleKeys containsObject:key]) self.shadowOpacity = [[style objectForKey:key] floatValue];
+    
+    key = @"shadowOffset";
+    if([styleKeys containsObject:key]) self.shadowOffset = [[style objectForKey:key] CGSizeValue];
+    
+    key = @"shadowPath";
+    if([styleKeys containsObject:key]) {
+        id object = [style objectForKey:key];
+        
+        if(object == [NSNull null]) {
+            self.shadowPath = nil;
+        } else {
+            self.shadowPath = (__bridge CGPathRef)[style objectForKey:key];
+        }
+    }
+    
+    key = @"shadowRadius";
+    if([styleKeys containsObject:key]) self.shadowRadius = [[style objectForKey:key] floatValue];
+}
+
++(C4Control *)defaultStyle {
+    return (C4Control *)[C4Control appearance];
+}
+
+#pragma mark - Render
+-(void)renderInContext:(CGContextRef)context {}
+
+#pragma mark - C4MethodDelay
 -(void)runMethod:(NSString *)methodName afterDelay:(CGFloat)seconds {}
 
 -(void)runMethod:(NSString *)methodName withObject:(id)object afterDelay:(CGFloat)seconds {}
 
+#pragma mark - Copying
+-(C4Control *)copyWithZone:(NSZone *)zone {
+    C4Control *control = [[C4Control allocWithZone:zone] initWithFrame:self.frame];
+    control.style = self.style;
+    return control;
+}
 @end

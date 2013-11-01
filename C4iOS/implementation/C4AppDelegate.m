@@ -35,12 +35,13 @@
     self.window = [[C4Window alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.workspace = [[C4WorkSpace alloc] init];
     
-    _window.rootViewController = self.workspace;
+    self.window.rootViewController = self.workspace;
     /* don't ever do the following !
      self.canvasController.view = self.window;
      */
     
     [self.window makeKeyAndVisible];
+//    self.workspace.view.userInteractionEnabled = NO;
     
     //strangely, if the following call to set the background color isn't made
     //then the view doesn't receive touch events...

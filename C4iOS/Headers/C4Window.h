@@ -46,6 +46,22 @@
  */
 -(void)test;
 
+/** A method to remove another object from its view.
+ 
+ For the object in question, use this method to remove any visible object that was previously added to it as a subview.
+ 
+ @param visualObject the visible object to remove from its parent view
+ */
+-(void)removeObject:(id)visualObject;
+
+/** A method to remove an array of objects from their view.
+ 
+ This will run the removeObject: method on each object in an array.
+ 
+ @param array the array of visible objects to remove from their parent view
+ */
+-(void)removeObjects:(NSArray *)array;
+
 /** A convenience method used for handling the rotation of a visual object's view after its z-rotation has changed.
  
  You shouldn't use this method, it will be deprecated in future versions.
@@ -54,18 +70,40 @@
  */
 -(void)rotationDidFinish:(CGFloat)rotation;
 
-/// @name Setting A Control's Origin Point
-/** The origin point of the view.
+///**This method returns an NSNull object if the current object is nil, otherwise it returns the given object as-is.
+//
+// Use this method to check a given object is equal to nil. If so, this method returns an NSNull object.
+//
+// This method is used for reading out NSNull values from the style dictionaries that are passed as properties.
+//
+// @param object An object to test if its value is nil
+// @return NSNull or the object being passed.
+// */
+//-(id)nullForNilObject:(id)object;
+//
+///**This method returns nil if the current object is NSNull, otherwise it returns the given object as-is.
+//
+// Use this method to check a given object is equal to NSNull. If so, this method returns nil.
+//
+// This method is used when creating style dictionaries that cannot take nil as object values.
+//
+// @param object An object to test if its value is NSNull
+// @return nil or the object being passed.
+// */
+//-(id)nilForNullObject:(id)object;
+
+/**Renders the receiver and its sublayers into the specified context.
  
- Takes a CGPoint and animates the view's origin position from its current point to the new point.
+ This method renders the contents of a C4Control directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
  
- This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
+ This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
+ 
+ @param context The graphics context to use to render the layer.
  */
-@property (nonatomic) CGPoint origin;
+-(void)renderInContext:(CGContextRef)context;
 
 #pragma mark Animation Properties
-/// @name Animation Properties
-
+///@name Animation Properties
 /** The duration of the view's animations, measured in seconds.
  
  All animations that occur will use this value as their duration.
@@ -174,6 +212,14 @@
  */
 @property (nonatomic, assign) C4Control *mask;
 
+/** The origin point of the view.
+ 
+ Takes a CGPoint and animates the view's origin position from its current point to the new point.
+ 
+ This method positions the origin point of the current view by calculating the difference between this point and what the view's new center point will be. It then initiates the animation by setting the displaced new center point.
+ */
+@property (nonatomic) CGPoint origin;
+
 /** The width of the receiver's frame.
  */
 @property (nonatomic, readonly) CGFloat width;
@@ -182,6 +228,11 @@
  */
 @property (nonatomic, readonly) CGFloat height;
 
+/** The size of the receiver's frame.
+ */
+@property (nonatomic, readonly) CGSize size;
+
+#pragma mark Style Properties
 /**Specifies the width of the receiver’s border. Animatable.
  
  The border is drawn inset from the receiver’s bounds by borderWidth. It is composited above the receiver’s contents and sublayers and includes the effects of the cornerRadius property. The default is 0.0.
@@ -247,24 +298,36 @@
  */
 @property (nonatomic, weak) UIColor *borderColor;
 
-#pragma mark - Rendering into a Context
-/**Renders the receiver and its sublayers into the specified context.
+/**The style for the receiver.
  
- This method renders the contents of a C4Window directly from the layer tree, ignoring any animations added to the render tree. It essentially binds to the `renderInContext` method of the underlying C4Layer.
+ This property returns an NSDictionary of objects used to define the visual style for the receiver. The objects contained in this dictionary are those that pertain directly to C4Control:
  
- This method is used for rendering objects into a graphics context before either creating an image or saving drawing to external files.
+ -alpha
+ -borderColor
+ -borderWidth
+ -cornerRadius
+ -masksToBounds
+ -shadowOpacity
+ -shadowOffset
+ -shadowRadius
  
- @param context The graphics context to use to render the layer.
+ When appropriate, this property will also contain the following:
+ 
+ -backgroundColor
+ -shadowColor
+ -shadowPath
+ 
+ All visual objects should return their own unique style combined with a call to this basic property set of style objects.
  */
--(void)renderInContext:(CGContextRef)context;
+@property (nonatomic) NSDictionary *style;
 
 #pragma mark - Default Style
 ///@name Default Style
-/**Returns the appearance proxy for the object, cast as a C4Window rather than the standard (id) cast provided by UIAppearance.
+/**Returns the appearance proxy for the object, cast as a C4Control rather than the standard (id) cast provided by UIAppearance.
  
- You use this method to grab the appearance object that allows you to change the default style for C4Window objects.
+ You use this method to grab the appearance object that allows you to change the default style for C4Control objects.
  
- @return The appearance proxy for the receiver, cast as a C4Window.
+ @return The appearance proxy for the receiver, cast as a C4Control.
  */
-+(C4Window *)defaultStyle;
++(C4Control *)defaultStyle;
 @end

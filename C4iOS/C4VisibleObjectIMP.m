@@ -13,7 +13,6 @@
 @property (nonatomic, strong) NSString *longPressMethodName;
 @property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
 @property (nonatomic, readonly) NSArray *stylePropertyNames;
-@property (nonatomic) CGPoint firstPositionForMove;
 @end
 
 static C4VisibleObjectIMP *sharedC4VisualObjectIMP = nil;
@@ -55,9 +54,11 @@ static C4VisibleObjectIMP *sharedC4VisualObjectIMP = nil;
         if(![selectorName isEqualToString:@".cxx_destruct"] &&
            ![selectorName isEqualToString:@"setAnimationDuration"] &&
            ![selectorName isEqualToString:@"setAnimationOptions"]) {
+            
             //if the selector name is NOT .cxx_destruct
             //replace the implmentation of the method m in the current class
             //with the current method's implementation
+            //FIXME: there's something wrong with the view in the canvas receiving touches twice
             class_replaceMethod([self class], name, implementation, types);
         }
     }
@@ -463,6 +464,34 @@ static C4VisibleObjectIMP *sharedC4VisualObjectIMP = nil;
 -(CGFloat)cornerRadius {
     return self.layer.cornerRadius;
 }
+
+-(void)postNotification:(NSString *)string{}
+
+#pragma mark Touches
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    [self postNotification:@"touchesBegan"];
+    [self touchesBegan];
+    C4Log(@"%@",[self class]);
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    [self postNotification:@"touchesMoved"];
+    [self touchesMoved];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    [self postNotification:@"touchesEnded"];
+    [self touchesEnded];
+}
+
+-(void)touchesBegan {}
+
+-(void)touchesEnded {}
+
+-(void)touchesMoved {}
 
 #pragma mark Basic Methods
 +(Class)layerClass {

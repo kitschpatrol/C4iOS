@@ -40,9 +40,9 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
     NSArray *methodList = @[
     @"setLongPressMethodName:",
     @"pressedLong:",
-    @"touchesBegan",
-    @"touchesMoved",
-    @"touchesEnded",
+//    @"touchesBegan",
+//    @"touchesMoved",
+//    @"touchesEnded",
     @"swipedRight",
     @"swipedLeft",
     @"swipedUp",
@@ -64,10 +64,10 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
     @"move:",
     @"tapped:",
     @"gestureForName:",
-    @"allGestures",
-    @"touchesBegan:withEvent:",
-    @"touchesMoved:withEvent:",
-    @"touchesEnded:withEvent:"
+    @"allGestures"
+//    @"touchesBegan:withEvent:",
+//    @"touchesMoved:withEvent:",
+//    @"touchesEnded:withEvent:"
      ];
     
     for(int i = 0; i < methodList.count; i ++) {
@@ -211,47 +211,47 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
     ((UISwipeGestureRecognizer *) recognizer).direction = direction;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /*
-     Without the respondsToSelector checking in the next line...
-     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
-     [C4View shouldTrack]: Unrecognized Selector
-     */
-    SEL selector = NSSelectorFromString(@"shouldTrack");
-    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
-    [self postNotification:@"touchesBegan"];
-    [self touchesBegan];
-}
-
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    /*
-     Without the respondsToSelector checking in the next line...
-     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
-     [C4View isTracking]: Unrecognized Selector
-     */
-    SEL selector = NSSelectorFromString(@"isTracking");
-    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
-    [self postNotification:@"touchesMoved"];
-    [self touchesMoved];
-}
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    /*
-     Without the respondsToSelector checking in the next line...
-     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
-     [C4View isTracking]: Unrecognized Selector
-     */
-    SEL selector = NSSelectorFromString(@"isTracking");
-    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
-    [self postNotification:@"touchesEnded"];
-    [self touchesEnded];
-}
-
--(void)touchesBegan {}
-
--(void)touchesEnded {}
-
--(void)touchesMoved {}
+//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    /*
+//     Without the respondsToSelector checking in the next line...
+//     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
+//     [C4View shouldTrack]: Unrecognized Selector
+//     */
+//    SEL selector = NSSelectorFromString(@"shouldTrack");
+//    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
+//    [self postNotification:@"touchesBegan"];
+//    [self touchesBegan];
+//}
+//
+//-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+//    /*
+//     Without the respondsToSelector checking in the next line...
+//     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
+//     [C4View isTracking]: Unrecognized Selector
+//     */
+//    SEL selector = NSSelectorFromString(@"isTracking");
+//    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
+//    [self postNotification:@"touchesMoved"];
+//    [self touchesMoved];
+//}
+//
+//-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+//    /*
+//     Without the respondsToSelector checking in the next line...
+//     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
+//     [C4View isTracking]: Unrecognized Selector
+//     */
+//    SEL selector = NSSelectorFromString(@"isTracking");
+//    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
+//    [self postNotification:@"touchesEnded"];
+//    [self touchesEnded];
+//}
+//
+//-(void)touchesBegan {}
+//
+//-(void)touchesEnded {}
+//
+//-(void)touchesMoved {}
 
 -(void)swipedRight:(id)sender {
     sender = sender;

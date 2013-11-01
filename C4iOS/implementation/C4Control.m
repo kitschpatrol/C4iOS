@@ -25,7 +25,6 @@
 @property (nonatomic, strong) NSString *longPressMethodName;
 @property (nonatomic, strong) NSMutableDictionary *gestureDictionary;
 @property (nonatomic, readonly) NSArray *stylePropertyNames;
-@property (nonatomic) CGPoint firstPositionForMove;
 @end
 
 #pragma mark - Initialization & Dealloc
