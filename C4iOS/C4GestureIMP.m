@@ -212,19 +212,37 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
+    /*
+     Without the respondsToSelector checking in the next line...
+     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
+     [C4View shouldTrack]: Unrecognized Selector
+     */
+    SEL selector = NSSelectorFromString(@"shouldTrack");
+    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesBegan"];
     [self touchesBegan];
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesMoved:touches withEvent:event];
+    /*
+     Without the respondsToSelector checking in the next line...
+     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
+     [C4View isTracking]: Unrecognized Selector
+     */
+    SEL selector = NSSelectorFromString(@"isTracking");
+    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesMoved"];
     [self touchesMoved];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
+    /*
+     Without the respondsToSelector checking in the next line...
+     Calling [super touchesBegan:touches withEvent:event]; will cause an exception:
+     [C4View isTracking]: Unrecognized Selector
+     */
+    SEL selector = NSSelectorFromString(@"isTracking");
+    if([super respondsToSelector:selector]) [super touchesBegan:touches withEvent:event];
     [self postNotification:@"touchesEnded"];
     [self touchesEnded];
 }
@@ -266,7 +284,6 @@ static C4GestureIMP *sharedC4GestureIMP = nil;
 }
 
 -(void)tapped {}
-
 
 -(void)swipedUp {}
 

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface C4VisibleObjectIMP : UIView
-
+@interface C4VisibleObjectIMP : UIView <C4VisibleObject>
++(C4VisibleObjectIMP *)sharedManager;
 @end

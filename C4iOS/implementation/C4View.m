@@ -28,66 +28,33 @@
 +(void)initialize {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Method copy;
-        Method local;
-        //METHOD DELAY
-        //grabs a class method from C4AddSubviewIMP
-        //method being copied contains boilerplate code
-        //for copying all other protocol methods
-        copy = class_getClassMethod([C4MethodDelayIMP class], @selector(copyMethods));
+        void (^classCopyBlock)(Class) = ^(Class classToCopy) {
+            //grabs a class method from classToCopy
+            //method being copied contains boilerplate code
+            //for copying all other protocol methods
+            Method copy = class_getClassMethod(classToCopy, @selector(copyMethods));
+            
+            //local method into which we will set the implementation of "copy"
+            Method local = class_getClassMethod([self class], @selector(copyMethods));
+            
+            //sets the implementation of "local" with that of "copy"
+            method_setImplementation(local, method_getImplementation(copy));
+            
+            //implements, at a class level, the copy method for this class
+            [[self class] copyMethods];
+        };
         
-        //local method into which we will set the implementation of "copy"
-        local = class_getClassMethod([self class], @selector(copyMethods));
-        
-        //sets the implementation of "local" with that of "copy"
-        method_setImplementation(local, method_getImplementation(copy));
-        
-        //implements, at a class level, the copy method for this class
-        [[self class] copyMethods];
+        //Copies method implementations from C4MethodDelayIMP
+        classCopyBlock([C4MethodDelayIMP class]);
 
-        //GESTURE
-        //grabs a class method from C4AddSubviewIMP
-        //method being copied contains boilerplate code
-        //for copying all other protocol methods
-        copy = class_getClassMethod([C4GestureIMP class], @selector(copyMethods));
-        
-        //local method into which we will set the implementation of "copy"
-        local = class_getClassMethod([self class], @selector(copyMethods));
-        
-        //sets the implementation of "local" with that of "copy"
-        method_setImplementation(local, method_getImplementation(copy));
-        
-        //implements, at a class level, the copy method for this class
-        [[self class] copyMethods];
+        //Copies method implementations from C4GestureIMP
+        classCopyBlock([C4GestureIMP class]);
 
-        //NOTIFICATION
-        //grabs a class method from C4NotificationIMP
-        //method being copied contains boilerplate code
-        //for copying all other protocol methods
-        copy = class_getClassMethod([C4NotificationIMP class], @selector(copyMethods));
-        
-        //local method into which we will set the implementation of "copy"
-        local = class_getClassMethod([self class], @selector(copyMethods));
-        
-        //sets the implementation of "local" with that of "copy"
-        method_setImplementation(local, method_getImplementation(copy));
-        
-        //implements, at a class level, the copy method for this class
-        [[self class] copyMethods];
+        //Copies method implementations from C4NotificationIMP
+        classCopyBlock([C4NotificationIMP class]);
 
-        //grabs a class method from C4AddSubviewIMP
-        //method being copied contains boilerplate code
-        //for copying all other protocol methods
-        copy = class_getClassMethod([C4AddSubviewIMP class], @selector(copyMethods));
-        
-        //local method into which we will set the implementation of "copy"
-        local = class_getClassMethod([self class], @selector(copyMethods));
-        
-        //sets the implementation of "local" with that of "copy"
-        method_setImplementation(local, method_getImplementation(copy));
-        
-        //implements, at a class level, the copy method for this class
-        [[self class] copyMethods];
+        //Copies method implementations from C4MethodDelayIMP
+        classCopyBlock([C4AddSubviewIMP class]);
     });
 }
 

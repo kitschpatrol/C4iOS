@@ -175,4 +175,5 @@ CGRect CGRectMakeFromWedgeComponents(CGPoint centerPoint,
     uname(&systemInfo);
     return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
+
 @end

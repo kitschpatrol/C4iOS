@@ -95,27 +95,27 @@
  */
 -(void)rotationDidFinish:(CGFloat)rotation;
 
-/**This method returns an NSNull object if the current object is nil, otherwise it returns the given object as-is.
- 
- Use this method to check a given object is equal to nil. If so, this method returns an NSNull object.
- 
- This method is used for reading out NSNull values from the style dictionaries that are passed as properties.
- 
- @param object An object to test if its value is nil
- @return NSNull or the object being passed.
- */
--(id)nullForNilObject:(id)object;
-
-/**This method returns nil if the current object is NSNull, otherwise it returns the given object as-is.
- 
- Use this method to check a given object is equal to NSNull. If so, this method returns nil.
- 
- This method is used when creating style dictionaries that cannot take nil as object values.
- 
- @param object An object to test if its value is NSNull
- @return nil or the object being passed.
- */
--(id)nilForNullObject:(id)object;
+///**This method returns an NSNull object if the current object is nil, otherwise it returns the given object as-is.
+// 
+// Use this method to check a given object is equal to nil. If so, this method returns an NSNull object.
+// 
+// This method is used for reading out NSNull values from the style dictionaries that are passed as properties.
+// 
+// @param object An object to test if its value is nil
+// @return NSNull or the object being passed.
+// */
+//-(id)nullForNilObject:(id)object;
+//
+///**This method returns nil if the current object is NSNull, otherwise it returns the given object as-is.
+// 
+// Use this method to check a given object is equal to NSNull. If so, this method returns nil.
+// 
+// This method is used when creating style dictionaries that cannot take nil as object values.
+// 
+// @param object An object to test if its value is NSNull
+// @return nil or the object being passed.
+// */
+//-(id)nilForNullObject:(id)object;
 
 /**Renders the receiver and its sublayers into the specified context.
  

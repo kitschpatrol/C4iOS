@@ -33,23 +33,24 @@
 +(void)initialize {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Method copy;
-        Method local;
-        //LAYER ANIMATION
-        //grabs a class method from C4LayerAnimationImp
-        //method being copied contains boilerplate code
-        //for copying all other protocol methods
-        copy = class_getClassMethod([C4LayerAnimationImp class], @selector(copyMethods));
+        void (^classCopyBlock)(Class) = ^(Class classToCopy) {
+            //grabs a class method from classToCopy
+            //method being copied contains boilerplate code
+            //for copying all other protocol methods
+            Method copy = class_getClassMethod(classToCopy, @selector(copyMethods));
+            
+            //local method into which we will set the implementation of "copy"
+            Method local = class_getClassMethod([self class], @selector(copyMethods));
+            
+            //sets the implementation of "local" with that of "copy"
+            method_setImplementation(local, method_getImplementation(copy));
+            
+            //implements, at a class level, the copy method for this class
+            [[self class] copyMethods];
+        };
         
-        //local method into which we will set the implementation of "copy"
-        local = class_getClassMethod([self class], @selector(copyMethods));
-        
-        //sets the implementation of "local" with that of "copy"
-        method_setImplementation(local, method_getImplementation(copy));
-        
-        //implements, at a class level, the copy method for this class
-        [[self class] copyMethods];
-        
+        //Copies method implementations from C4LayerAnimationImp
+        classCopyBlock([C4LayerAnimationImp class]);
     });
 }
 

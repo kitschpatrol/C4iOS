@@ -106,7 +106,7 @@
         _filterIndicator = [C4ActivityIndicator indicatorWithStyle:WHITE];
         _filterIndicator.center = CGPointMake(self.width/2,self.height/2);
         [_filterIndicator stopAnimating];
-        [self addUIElement:_filterIndicator];
+//        [self addUIElement:_filterIndicator];
     }
     return self;
 }

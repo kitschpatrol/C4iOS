@@ -102,7 +102,7 @@ allowsInteraction = _allowsInteraction, repeats = _repeats;
     }
     
     if((animationOptions & AUTOREVERSE) == AUTOREVERSE) self.autoreverses = YES;
-    else self.autoreverses = NO;
+    else ((CALayer *)self).autoreverses = NO;
     
     if((animationOptions & REPEAT) == REPEAT) _repeats = YES;
     else _repeats = NO;

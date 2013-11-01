@@ -120,7 +120,7 @@ minimumTrackTintColor = _minimumTrackTintColor, thumbTintColor = _thumbTintColor
 
 -(void)setThumbTintColor:(UIColor *)color {
     _thumbTintColor = color;
-    self.UISlider.thumbTintColor = [self nilForNullObject:color];
+    self.UISlider.thumbTintColor = ((id)color == [NSNull null] ? nil : color);
 }
 
 -(UIColor *)maximumTrackTintColor {
@@ -129,7 +129,7 @@ minimumTrackTintColor = _minimumTrackTintColor, thumbTintColor = _thumbTintColor
 
 -(void)setMaximumTrackTintColor:(UIColor *)color {
     _maximumTrackTintColor = color;
-    self.UISlider.maximumTrackTintColor = [self nilForNullObject:color];
+    self.UISlider.maximumTrackTintColor = ((id)color == [NSNull null] ? nil : color);
 }
 
 -(UIColor *)minimumTrackTintColor {
@@ -138,7 +138,7 @@ minimumTrackTintColor = _minimumTrackTintColor, thumbTintColor = _thumbTintColor
 
 -(void)setMinimumTrackTintColor:(UIColor *)color {
     _minimumTrackTintColor = color;
-    self.UISlider.minimumTrackTintColor = [self nilForNullObject:color];
+    self.UISlider.minimumTrackTintColor = ((id)color == [NSNull null] ? nil : color);
 }
 
 -(C4Image *)maximumValueImage {
