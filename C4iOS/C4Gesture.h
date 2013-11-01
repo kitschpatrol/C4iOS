@@ -123,31 +123,31 @@ typedef enum C4SwipeDirection {
 -(void)minimumPressDuration:(CGFloat)duration forGesture:(NSString *)gestureName;
 
 #pragma mark Basic Touch Methods
-/// @name Basic Touch Methods
-
-/** Method which is called each time an object is touched
- 
- This method is a simplified version of touchesBegan:withEvent: which can be called to trigger other custom actions or events.
- 
- @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesBegan:withEvent: making sure to call _super touchesBegan:withEvent:_
- */
--(void)touchesBegan;
-
-/** Method which is called each time an object is finished being touched
- 
- This method is a simplified version of touchesEnded:withEvent: which can be called to trigger other custom actions or events.
- 
- @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesEnded:withEvent:_
- */
--(void)touchesEnded;
-
-/** Method which is called each time touches associated with an object are moved
- 
- This method is a simplified version of touchesMoved:withEvent: which can be overridden to trigger other custom actions or events.
- 
- @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesMoved:withEvent:_
- */
--(void)touchesMoved;
+///// @name Basic Touch Methods
+//
+///** Method which is called each time an object is touched
+// 
+// This method is a simplified version of touchesBegan:withEvent: which can be called to trigger other custom actions or events.
+// 
+// @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesBegan:withEvent: making sure to call _super touchesBegan:withEvent:_
+// */
+//-(void)touchesBegan;
+//
+///** Method which is called each time an object is finished being touched
+// 
+// This method is a simplified version of touchesEnded:withEvent: which can be called to trigger other custom actions or events.
+// 
+// @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesEnded:withEvent:_
+// */
+//-(void)touchesEnded;
+//
+///** Method which is called each time touches associated with an object are moved
+// 
+// This method is a simplified version of touchesMoved:withEvent: which can be overridden to trigger other custom actions or events.
+// 
+// @warning *Note:* If direct access to the event and set of touches is needed, it is possible to override touchesEnded:withEvent: making sure to call _super touchesMoved:withEvent:_
+// */
+//-(void)touchesMoved;
 
 /** Default method which is called each time an object receives a long press
  

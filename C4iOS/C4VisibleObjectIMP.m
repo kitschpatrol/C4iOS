@@ -26,7 +26,6 @@ static C4VisibleObjectIMP *sharedC4VisualObjectIMP = nil;
         });
     }
     return sharedC4VisualObjectIMP;
-
 }
 
 //This method should only ever be copied by another class
@@ -101,6 +100,13 @@ static C4VisibleObjectIMP *sharedC4VisualObjectIMP = nil;
 
 -(CGPoint)origin {
     return self.frame.origin;
+}
+
+-(CGPoint)center {
+    CGPoint currentCenter = self.origin;
+    currentCenter.x += self.width / 2.0f;
+    currentCenter.y += self.height / 2.0f;
+    return currentCenter;
 }
 
 -(void)setOrigin:(CGPoint)origin {

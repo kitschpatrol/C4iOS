@@ -20,43 +20,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "C4iOS/C4WorkSpace.m"
-            timestampString = "404966188.901479"
+            timestampString = "405031921.663651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-touchesBegan"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[C4WorkSpace touchesBegan]"
-                  moduleName = "C4iOS"
-                  urlString = "file://localhost/Users/slantMini/Development/C4iOS/C4iOS/C4WorkSpace.m"
-                  timestampString = "404966207.508929"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "42">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[C4WorkSpace touchesBegan]"
-                  moduleName = "C4iOS"
-                  urlString = "file://localhost/Users/slantMini/Development/C4iOS/C4iOS/C4WorkSpace.m"
-                  timestampString = "404966207.509128"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "87"
-                  endingLineNumber = "87"
-                  offsetFromSymbolStart = "320">
-               </Location>
-            </Locations>
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "@implementation C4WorkSpace"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

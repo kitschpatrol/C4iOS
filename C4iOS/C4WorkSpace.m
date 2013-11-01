@@ -22,16 +22,13 @@
 @implementation C4WorkSpace
 
 -(void)setup {
-//    [self.canvas addGesture:TAP name:@"hi" action:@"test"];
-}
-
--(void)test {
-    C4Log(@"test");
+    C4Shape *s = [C4Shape ellipse:CGRectMake(0, 0, 100, 100)];
+    s.center = self.canvas.center;
+    [self.canvas addShape:s];
 }
 
 -(void)touchesBegan {
-    C4Log(@"%@",[self class]);
-    [self test];
+    C4Log(@"%@ (TEST)\n",[self class]);
 }
 
 @end

@@ -46,7 +46,7 @@
     //strangely, if the following call to set the background color isn't made
     //then the view doesn't receive touch events...
     self.workspace.view.backgroundColor = [UIColor whiteColor];
-    
+
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategorySoloAmbient error: nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
     [self.workspace setup];
