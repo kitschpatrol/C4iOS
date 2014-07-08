@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /** This document describes the C4Font class which provides basic font construction and manipulation throughout the C4 framework.
  

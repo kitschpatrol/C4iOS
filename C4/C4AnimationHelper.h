@@ -17,8 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-
+@import Foundation;
 
 /** C4AnimationHelper stores animation properties and has helper methods to create CAAnimations. You shouldn't need to use this class directly, instead use the animation features of C4Control.
  */

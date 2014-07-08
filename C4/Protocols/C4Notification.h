@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /** C4Notification protocol groups methods that are fundamental to basic ability for all C4 objects, visible or otherwise, to post, listen and stop listening for notifications.
  

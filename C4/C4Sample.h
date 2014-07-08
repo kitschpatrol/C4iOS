@@ -18,8 +18,8 @@
 // IN THE SOFTWARE.
 
 #import "C4Object.h"
-#import <AudioToolbox/AudioToolbox.h>
-#import <AVFoundation/AVFoundation.h>
+@import AudioToolbox;
+@import AVFoundation;
 
 /**This document describes C4Sample a simple class for loading and playing individual audio files.
  

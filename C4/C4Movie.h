@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /**This document describes the C4Movie class. You use an C4Movie object to implement the playback of video files, it encapulates an [AVPlayer](AVPlayer) object which handles the loading and control of assets.
  

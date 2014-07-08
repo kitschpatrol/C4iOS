@@ -10,16 +10,12 @@
 #warning "This project uses features only available in iOS SDK 7.0 and later."
 #endif
 
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-#endif
+@import UIKit;
+@import Foundation;
+@import CoreText;
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import <CoreText/CoreText.h>
-#import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
-#import <AVFoundation/AVFoundation.h>
+@import QuartzCore;
+@import AVFoundation;
 #import <math.h>
 
 #import "C4.h"

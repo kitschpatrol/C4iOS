@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /** C4Object is the root class of any object in the C4 framework that does not have a visual representation. For example, a C4Font cannot be represented visually so it is a C4Object, whereas a C4Label is something to be seen on screen so it is instead a C4Control.
  

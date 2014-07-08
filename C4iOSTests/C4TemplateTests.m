@@ -19,7 +19,7 @@
 
 #import "C4Template.h"
 #import "C4Button.h"
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface C4TemplateTests : XCTestCase
 

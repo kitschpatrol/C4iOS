@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 /** This document describes the basic C4AppDelegate, a subclass of UIResponder which conforms to the UIApplicationDelegate protocol.
  

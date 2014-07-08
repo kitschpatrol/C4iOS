@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /**
  The C4Template stores style and other properties of a target object. When you apply a template to its target object, the target object takes all the values stored in the template.

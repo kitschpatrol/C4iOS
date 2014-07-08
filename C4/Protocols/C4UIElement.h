@@ -17,7 +17,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 /** C4UIElement protocol groups methods that are fundamental to basic interaction user interface objects in C4.
  
  If an object conforms to this protocol that object can trigger methods associated with various control events.

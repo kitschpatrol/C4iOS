@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Slant. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class C4Control;
 @interface UIView (C4AddControl)
