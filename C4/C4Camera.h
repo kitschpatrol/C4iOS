@@ -19,8 +19,9 @@
 
 #import "C4Control.h"
 
-@class C4Image;
+@import AVFoundation;
 
+@class C4Image;
 
 /** The C4Camera class provides easy access to a devices cameras.
  
