@@ -4,3 +4,18 @@
 *.mode2v3
 *.pbxuser
 xcuserdata/
+build/
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xccheckout
+profile
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+
+# Mac OS X
+*.DS_Store
