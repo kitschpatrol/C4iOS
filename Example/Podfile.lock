@@ -1,0 +1,14 @@
+PODS:
+  - C4iOS (0.1.0)
+
+DEPENDENCIES:
+  - C4iOS (from `../`)
+
+EXTERNAL SOURCES:
+  C4iOS:
+    :path: ../
+
+SPEC CHECKSUMS:
+  C4iOS: 5fdea32eb3be475c24d8151e8fd9e9a5c7fb1610
+
+COCOAPODS: 0.33.1
